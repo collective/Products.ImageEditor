@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="optilux.theme">
+
+  <genericsetup:registerProfile
+      name="default"
+      title="uwosh.ATImageEditor"
+      directory="profiles/default"
+      description='Extension profile ATImageEditor.'
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+</configure>

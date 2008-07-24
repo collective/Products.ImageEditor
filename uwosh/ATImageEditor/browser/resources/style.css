@@ -1,0 +1,41 @@
+div.imageEditor{
+	
+}
+div.imageButtons{
+	margin-bottom:5px;
+}
+
+div.imageButtons input{
+    background-repeat: no-repeat;
+	padding: 1px 1px 1px 16px;
+	cursor:pointer;
+	border: 2px solid gray;
+	background-color: #f1f1f1;
+}
+div.imageButtons input.editing{
+    border-color:black;
+    background-color:gray;
+    color:white;
+    cursor:pointer;
+}
+div.imageButtons input.crop{
+	background-image: url(icons/stock-selection-intersect-16.png);
+}
+div.imageButtons input.resize{
+	background-image: url(icons/stock-resize-16.png);
+}
+div.imageButtons input.rotate-left{
+	background-image: url(icons/stock-rotate-270-16.png);
+}
+div.imageButtons input.rotate-right{
+	background-image: url(icons/stock-rotate-90-16.png);
+}
+div.imageButtons input.save{
+	background-image: url(icons/apply.png);
+}
+div.imageButtons input.flipOnVerticalAxis{
+	background-image: url(icons/stock-tool-rotate-16.png);
+}
+div.imageButtons input.flipOnHorizontalAxis{
+	background-image: url(icons/stock-tool-flip-16.png);
+}

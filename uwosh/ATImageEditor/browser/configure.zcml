@@ -1,0 +1,78 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:kss="http://namespaces.zope.org/kss"
+    xmlns:plone="http://namespaces.plone.org/plone">
+
+	<browser:page
+	      for="Products.ATContentTypes.interface.image.IATImage"
+	      name="editor"
+	      class=".atimage.Edit"
+	      permission="cmf.ModifyPortalContent"
+	      />
+	
+    <browser:resourceDirectory
+        name="ATImageEditor.resources"
+        directory="resources"
+        />
+	
+	<browser:resource
+		name="atimage.kss"
+		file="atimage.kss"
+		/>
+		
+	<browser:page
+         for="Products.ATContentTypes.interface.image.IATImage"
+         name="rotateImageRight"
+         class=".atimage.ATImageKSS"
+         attribute="rotateImageRight"
+         permission="cmf.ModifyPortalContent"
+         />
+	<browser:page
+         for="Products.ATContentTypes.interface.image.IATImage"
+         name="rotateImageLeft"
+         class=".atimage.ATImageKSS"
+         attribute="rotateImageLeft"
+         permission="cmf.ModifyPortalContent"
+         />
+	<browser:page
+         for="Products.ATContentTypes.interface.image.IATImage"
+         name="imageResizeSave"
+         class=".atimage.ATImageKSS"
+         attribute="imageResizeSave"
+         permission="cmf.ModifyPortalContent"
+         />
+	<browser:page
+         for="Products.ATContentTypes.interface.image.IATImage"
+         name="imageCropSave"
+         class=".atimage.ATImageKSS"
+         attribute="imageCropSave"
+         permission="cmf.ModifyPortalContent"
+         />
+	<browser:page
+         for="Products.ATContentTypes.interface.image.IATImage"
+         name="imageFlipOnVerticalAxis"
+         class=".atimage.ATImageKSS"
+         attribute="imageFlipOnVerticalAxis"
+         permission="cmf.ModifyPortalContent"
+         />
+	<browser:page
+         for="Products.ATContentTypes.interface.image.IATImage"
+         name="imageFlipOnHorizontalAxis"
+         class=".atimage.ATImageKSS"
+         attribute="imageFlipOnHorizontalAxis"
+         permission="cmf.ModifyPortalContent"
+         />
+
+    <kss:action
+        name="reloadImage"
+        jsfile="atimage.js"
+        command_factory="selector"
+        />
+	<kss:commandset
+         name="atimage"
+         for="kss.core.interfaces.IKSSView"
+         class=".commands.ATImageCommands"
+         provides=".commands.IATImageCommands"
+         />
+</configure>

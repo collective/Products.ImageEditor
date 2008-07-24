@@ -1,0 +1,37 @@
+
+input.rotate-right:click{
+	evt-click-allowbubbling: true;
+	evt-click-preventdefault: true;
+	action-server: rotateImageRight;
+}
+input.rotate-left:click{
+	evt-click-allowbubbling: true;
+	evt-click-preventdefault: true;
+	action-server: rotateImageLeft;
+}
+input#serverResizeSaveButton:click{
+	evt-click-allowbubbling: true;
+	evt-click-preventdefault: true;
+	action-server: imageResizeSave;
+	imageResizeSave-width: kssAttr(width);
+	imageResizeSave-height: kssAttr(height);
+}
+input#serverCropSaveButton:click{
+	evt-click-allowbubbling: true;
+	evt-click-preventdefault: true;
+	action-server: imageCropSave;
+	imageCropSave-topLeftX: kssAttr(tlx);
+	imageCropSave-topLeftY: kssAttr(tly);
+	imageCropSave-bottomRightX: kssAttr(brx);
+	imageCropSave-bottomRightY: kssAttr(bry);
+}
+input.flipOnVerticalAxis:click{
+	evt-click-allowbubbling: true;
+	evt-click-preventdefault: true;
+	action-server: imageFlipOnVerticalAxis;
+}
+input.flipOnHorizontalAxis:click{
+	evt-click-allowbubbling: true;
+	evt-click-preventdefault: true;
+	action-server: imageFlipOnHorizontalAxis;
+}

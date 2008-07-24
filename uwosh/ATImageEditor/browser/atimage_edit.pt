@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="collective.plonetruegallery">
+<metal:js fill-slot="javascript_head_slot">
+<script type="text/javascript" 
+		tal:attributes="src string:${context/++resource++ATImageEditor.resources}/jquery.ui-1.5.2/jquery-1.2.6.js">
+</script>
+	<script type="text/javascript" 
+			tal:attributes="src string:${context/++resource++ATImageEditor.resources}/jquery.ui-1.5.2/ui/ui.core.js">
+	</script>
+	<script type="text/javascript" 
+			tal:attributes="src string:${context/++resource++ATImageEditor.resources}/jquery.ui-1.5.2/ui/ui.draggable.js">
+	</script>
+	<script type="text/javascript" 
+			tal:attributes="src string:${context/++resource++ATImageEditor.resources}/jquery.ui-1.5.2/ui/ui.resizable.js">
+	</script>
+	<script type="text/javascript" 
+			tal:attributes="src string:${context/++resource++ATImageEditor.resources}/jquery.ui-1.5.2/ui/effects.core.js">
+	</script>
+	<script type="text/javascript" 
+			tal:attributes="src string:${context/++resource++ATImageEditor.resources}/jquery.ui-1.5.2/ui/effects.bounce.js">
+	</script>
+	<script type="text/javascript" 
+			tal:attributes="src string:${context/++resource++ATImageEditor.resources}/imgareaselect-0.4.2/jquery.imgareaselect-0.4.2.min.js">
+	</script>
+	<script type="text/javascript" 
+			tal:attributes="src string:${context/++resource++ATImageEditor.resources}/atimageeditor.js">
+	</script>
+</metal:js>
+<metal:css fill-slot="css_slot">
+<link 	rel="stylesheet" 
+	tal:attributes="href string:${context/++resource++ATImageEditor.resources}/style.css" 	
+	media="screen" 
+	charset="utf-8" />
+</metal:css>
+<body>
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main">		
+		<div 	class="imageEditor" 
+				tal:define="width python: here.getSize()[0];
+							height python: here.getSize()[1];">
+			<input type="hidden" class="imageWidth" tal:attributes="value python: here.getSize()[0]" />
+			<input type="hidden" class="imageHeight" tal:attributes="value python: here.getSize()[1]" />
+			<div class="imageButtons">
+				<input 	id="serverResizeSaveButton" 
+						type="button" 
+						value="nothing" 
+						style="display:none"
+						tal:attributes="class string:kssattr-width-${width} kssattr-height-${height}"/>
+				<input 	id="serverCropSaveButton" 
+						type="button" 
+						value="nothing" 
+						style="display:none"
+						tal:attributes="class string:kssattr-tlx-200 kssattr-tly-200 kssattr-brx-500 kssattr-bry-500"/>
+				<input class="flipOnVerticalAxis" type="button" value="flip vertically" />
+				<input class="flipOnHorizontalAxis" type="button" value="flip horizontally" />
+				<input class="rotate-left" type="button" value="rotate left" />
+				<input class="rotate-right" type="button" value="rotate right" />
+				<input class="resize" type="button" value="resize" />
+				<input class="crop" type="button" value="crop" />
+				<input class="save" type="button" value="save" />
+			</div>
+			<div class="imageContainer">
+				<img class="sourceImage" tal:attributes="src here/absolute_url" />
+			</div>
+		</div>
+    </tal:main-macro>
+</metal:main>
+</body>
+</html>
+
