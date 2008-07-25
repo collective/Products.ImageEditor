@@ -4,7 +4,7 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
       metal:use-macro="context/main_template/macros/master"
-      i18n:domain="collective.plonetruegallery">
+      i18n:domain="uwosh.ATImageEditor">
 <metal:js fill-slot="javascript_head_slot">
 <script type="text/javascript" 
 		tal:attributes="src string:${context/++resource++ATImageEditor.resources}/jquery.ui-1.5.2/jquery-1.2.6.js">
@@ -19,10 +19,7 @@
 			tal:attributes="src string:${context/++resource++ATImageEditor.resources}/jquery.ui-1.5.2/ui/ui.resizable.js">
 	</script>
 	<script type="text/javascript" 
-			tal:attributes="src string:${context/++resource++ATImageEditor.resources}/jquery.ui-1.5.2/ui/effects.core.js">
-	</script>
-	<script type="text/javascript" 
-			tal:attributes="src string:${context/++resource++ATImageEditor.resources}/jquery.ui-1.5.2/ui/effects.bounce.js">
+			tal:attributes="src string:${context/++resource++ATImageEditor.resources}/jquery.ui-1.5.2/ui/ui.slider.js">
 	</script>
 	<script type="text/javascript" 
 			tal:attributes="src string:${context/++resource++ATImageEditor.resources}/imgareaselect-0.4.2/jquery.imgareaselect-0.4.2.min.js">
@@ -36,6 +33,9 @@
 	tal:attributes="href string:${context/++resource++ATImageEditor.resources}/style.css" 	
 	media="screen" 
 	charset="utf-8" />
+<link rel="stylesheet" 
+	tal:attributes="href string:${context/++resource++ATImageEditor.resources}/jquery.ui-1.5.2/themes/flora/flora.slider.css"
+	type="text/css" media="screen" title="Flora (Default)" />
 </metal:css>
 <body>
 <metal:main fill-slot="main">
@@ -63,9 +63,11 @@
 				<input class="resize" type="button" value="resize" />
 				<input class="crop" type="button" value="crop" />
 				<input class="save" type="button" value="save" />
+				<div id="slider" class="ui-slider-1"><p>100%</p><div class="ui-slider-handle"></div></div>
 			</div>
+			<br />
 			<div class="imageContainer">
-				<img class="sourceImage" tal:attributes="src here/absolute_url" />
+				<img class="sourceImage" tal:attributes="src view/image_url" />
 			</div>
 		</div>
     </tal:main-macro>

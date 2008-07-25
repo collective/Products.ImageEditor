@@ -4,12 +4,14 @@ kukit.actionsGlobalRegistry.register('reloadImage', function(oper) {
     image.fadeOut('def', function(){
         document.imageEditor.removeCropper();
         document.imageEditor.removeResizable();
-        $(this).remove();
+        $(this).parent().children().remove();
         //do this to force browser to reload image
         document.imageEditor.image = $("<img class='sourceImage' style='display:none' src='" + 
                                         image.attr('src') + "?" + Math.floor(Math.random()*900) + "' />");
         document.imageEditor.imageContainer.append(document.imageEditor.image);
         document.imageEditor.image.fadeIn('slow');
+        
+        document.imageEditor.reset();
     });
 });
 

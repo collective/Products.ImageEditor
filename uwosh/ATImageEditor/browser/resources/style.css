@@ -3,6 +3,11 @@ div.imageEditor{
 }
 div.imageButtons{
 	margin-bottom:5px;
+	height:20px;
+}
+
+div.imageContainer{
+    width:100%;
 }
 
 div.imageButtons input{
@@ -11,6 +16,8 @@ div.imageButtons input{
 	cursor:pointer;
 	border: 2px solid gray;
 	background-color: #f1f1f1;
+	float:left;
+	margin:1px 5px 3px 0px;
 }
 div.imageButtons input.editing{
     border-color:black;
@@ -38,4 +45,12 @@ div.imageButtons input.flipOnVerticalAxis{
 }
 div.imageButtons input.flipOnHorizontalAxis{
 	background-image: url(icons/stock-tool-flip-16.png);
+}
+div.ui-slider-1{
+    float:left;
+}
+div.ui-slider-1 p{
+    padding-left:45%;
+    position:relative;
+    top:-10px;
 }

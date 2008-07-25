@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.1rc2
+----------------
+
+*Added scaling capabilities
+*fixed a few bugs
+
 0.1rc1 - Initial Release
 ----------------
 

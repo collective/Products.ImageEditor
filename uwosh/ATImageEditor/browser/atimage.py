@@ -9,6 +9,7 @@ from plone.app.kss.plonekssview import PloneKSSView
 from kss.core import kssaction
 from PIL import Image
 from cStringIO import StringIO
+import random
 
 class Edit(BrowserView):
 
@@ -17,6 +18,11 @@ class Edit(BrowserView):
     def __call__(self):
         return self.template()
         
+    def image_url(self):
+        """
+        This is used because sometimes browsers cache images that may have been edited
+        """
+        return self.context.absolute_url() + "?" + str(random.randint(0, 1000))
         
         
 class ATImageKSS(PloneKSSView):

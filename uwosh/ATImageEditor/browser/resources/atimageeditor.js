@@ -18,13 +18,60 @@ ImageEditor = function(){
     imageEditor.cropSelection = null;
     imageEditor.cropperBorderSize = 2;
     imageEditor.imageContainer = $('div.imageEditor div.imageContainer');
+    imageEditor.slider = $('div.imageButtons div#slider');
+    imageEditor.sliderPercentage = $('div.imageButtons div#slider p');
     
     imageEditor.initialize = function(){
-        
+        imageEditor.setInitialSizes();
         imageEditor.setupResizeButton();
         imageEditor.setupCropButton();
         imageEditor.setupSaveButton();
         imageEditor.setupRotates();
+        imageEditor.setupSlider();
+    };
+    
+    imageEditor.reset = function(){
+        imageEditor.setInitialSizes();
+        imageEditor.slider.slider('destroy');
+        imageEditor.setupSlider();
+        imageEditor.sliderPercentage.html("100%");
+    }
+    
+    imageEditor.setInitialSizes = function(){
+        imageEditor.imageWidth = imageEditor.image.width();
+        imageEditor.imageHeight = imageEditor.image.height();
+    };
+    
+    imageEditor.getPct = function(value){
+        value = value + "";
+        if(value.length == 3){
+            return parseFloat(value[0] + '.' + value[1] + value[2]);
+        }else if(value.length == 2){
+            return parseFloat('.' + value);
+        }else{
+            return parseFloat('.0' + value);
+        }
+    };
+    
+    imageEditor.setupSlider = function(){        
+        imageEditor.slider.slider({
+            minValue:0,
+            maxValue:100,
+            steps:100,
+            startValue:100,
+            change: function(e, ui){
+                var width = imageEditor.imageWidth;
+                var height = imageEditor.imageHeight;
+                if(ui.value != 100){
+                    imageEditor.image.width(Math.round(width*imageEditor.getPct(ui.value)));
+                    imageEditor.image.height(Math.round(height*imageEditor.getPct(ui.value)));
+                }else{
+                    imageEditor.image.width(width);
+                    imageEditor.image.height(height);
+                }
+                imageEditor.sliderPercentage.html(ui.value + '%');
+            }
+        });
     };
     
     imageEditor.setupRotates = function(){
@@ -108,12 +155,40 @@ ImageEditor = function(){
         });
     };
     
+    imageEditor.getZoom = function(){
+        var pc = imageEditor.sliderPercentage.html()
+        return parseInt(pc.substr(0, pc.length-1));
+    }
+    
     imageEditor.getResize = function(){
-        return {
-            width: imageEditor.image.width(),
-            height: imageEditor.image.height()
+        var zoom = imageEditor.getZoom();
+        if(zoom == 100){
+            return {
+                width: imageEditor.image.width(),
+                height: imageEditor.image.height()
+            }
+        }else{
+            return{
+                width: Math.round(imageEditor.image.width()/imageEditor.getPct(zoom)),
+                height: Math.round(imageEditor.image.height()/imageEditor.getPct(zoom)),
+            }
         }
     };
+    
+    imageEditor.getCropSelection = function(){
+        var zoom = imageEditor.getZoom();
+        var zoomPct = imageEditor.getPct(zoom);
+        if(zoom == 100){
+            return imageEditor.cropSelection;
+        }else{
+            var cs = imageEditor.cropSelection;
+            cs.x1 = Math.round(cs.x1/zoomPct);
+            cs.x2 = Math.round(cs.x2/zoomPct);
+            cs.y1 = Math.round(cs.y1/zoomPct);
+            cs.y2 = Math.round(cs.y2/zoomPct);
+            return cs
+        }
+    }
     
     imageEditor.setupSaveButton = function(){
         imageEditor.saveButton.click(function(){
@@ -124,10 +199,11 @@ ImageEditor = function(){
 
                 imageEditor.serverResizeSaveButton.trigger('click');
             }else if(imageEditor.cropButton.attr('value').substring(0, 6) == "Cancel"){
-                kukit.dom.setKssAttribute(imageEditor.serverCropSaveButton[0], 'tlx', imageEditor.cropSelection.x1);
-                kukit.dom.setKssAttribute(imageEditor.serverCropSaveButton[0], 'tly', imageEditor.cropSelection.y1);
-                kukit.dom.setKssAttribute(imageEditor.serverCropSaveButton[0], 'brx', imageEditor.cropSelection.x2);
-                kukit.dom.setKssAttribute(imageEditor.serverCropSaveButton[0], 'bry', imageEditor.cropSelection.y2);
+                var cs = imageEditor.getCropSelection();
+                kukit.dom.setKssAttribute(imageEditor.serverCropSaveButton[0], 'tlx', cs.x1);
+                kukit.dom.setKssAttribute(imageEditor.serverCropSaveButton[0], 'tly', cs.y1);
+                kukit.dom.setKssAttribute(imageEditor.serverCropSaveButton[0], 'brx', cs.x2);
+                kukit.dom.setKssAttribute(imageEditor.serverCropSaveButton[0], 'bry', cs.y2);
 
                 imageEditor.serverCropSaveButton.trigger('click');
             }
