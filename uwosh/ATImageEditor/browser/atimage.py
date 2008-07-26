@@ -62,7 +62,7 @@ class ATImageKSS(PloneKSSView):
     @kssaction
     def imageFlipOnVerticalAxis(self):
         original = Image.open(self.getImageData())
-        image = original.transpose(1)
+        image = original.transpose(Image.FLIP_TOP_BOTTOM)
         
         output = StringIO()
         image.save(output, original.format)
@@ -73,7 +73,7 @@ class ATImageKSS(PloneKSSView):
     @kssaction
     def imageFlipOnHorizontalAxis(self):
         original = Image.open(self.getImageData())
-        image = original.transpose(0)
+        image = original.transpose(Image.FLIP_LEFT_RIGHT)
         
         output = StringIO()
         image.save(output, original.format)
@@ -86,14 +86,12 @@ class ATImageKSS(PloneKSSView):
         image = Image.open(self.getImageData())
         format = image.format
         size=( int(width), int(height) )
-        image = image.resize(size=size)
+        image = image.resize(size, Image.ANTIALIAS)
         data = StringIO()
         image.save(data, format)
-        image.format = format
         data.seek(0)
         
         self.context.setImage(data)
-        
         self.reloadImage()
     
     @kssaction
@@ -110,5 +108,32 @@ class ATImageKSS(PloneKSSView):
         cropped_output.seek(0)
         
         self.context.setImage(cropped_output)
+        self.reloadImage()
         
+    @kssaction
+    def cropAndResize(self, topLeftX, topLeftY, bottomRightX, bottomRightY, width, height):
+        #resize
+        image = Image.open(self.getImageData())
+        format = image.format
+        size=( int(width), int(height) )
+        image = image.resize(size,Image.ANTIALIAS)
+        data = StringIO()
+        image.save(data, format)
+
+        data.seek(0)
+        
+        self.context.setImage(data)
+        
+        #crop
+        image = Image.open(self.getImageData())
+        format = image.format
+        box = (int(topLeftX), int(topLeftY), int(bottomRightX), int(bottomRightY))
+        new_image = image.crop(box=box)
+        new_image.load()
+        cropped_output = StringIO()
+        format = format and format or default_format
+        new_image.save(cropped_output, format)
+        cropped_output.seek(0)
+        
+        self.context.setImage(cropped_output)
         self.reloadImage()

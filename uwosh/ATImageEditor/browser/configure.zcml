@@ -63,7 +63,13 @@
          attribute="imageFlipOnHorizontalAxis"
          permission="cmf.ModifyPortalContent"
          />
-
+ 	<browser:page
+          for="Products.ATContentTypes.interface.image.IATImage"
+          name="cropAndResize"
+          class=".atimage.ATImageKSS"
+          attribute="cropAndResize"
+          permission="cmf.ModifyPortalContent"
+          />
     <kss:action
         name="reloadImage"
         jsfile="atimage.js"

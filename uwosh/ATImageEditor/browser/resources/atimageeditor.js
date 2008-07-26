@@ -11,15 +11,15 @@ ImageEditor = function(){
     imageEditor.flipVerticallyButton = $('div.imageButtons input.flipOnVerticalAxis');
     imageEditor.serverResizeSaveButton = $('input#serverResizeSaveButton');
     imageEditor.serverCropSaveButton = $('input#serverCropSaveButton');
+    imageEditor.serverCropAndResize = $('div.imageButtons input#cropAndResize');
 
     imageEditor.image = $('div.imageEditor div.imageContainer img.sourceImage');
-    imageEditor.imageWidth = $('div.imageEditor input.imageWidth').attr('value');
-    imageEditor.imageHeight = $('div.imageEditor input.imageHeight').attr('value');
     imageEditor.cropSelection = null;
     imageEditor.cropperBorderSize = 2;
     imageEditor.imageContainer = $('div.imageEditor div.imageContainer');
     imageEditor.slider = $('div.imageButtons div#slider');
     imageEditor.sliderPercentage = $('div.imageButtons div#slider p');
+    imageEditor.useZoomInput = $('div.imageButtons div.useZoom input.useZoom');
     
     imageEditor.initialize = function(){
         imageEditor.setInitialSizes();
@@ -60,16 +60,30 @@ ImageEditor = function(){
             steps:100,
             startValue:100,
             change: function(e, ui){
+                if(imageEditor.imageWidth == 0){
+                    imageEditor.imageWidth = imageEditor.image.width();
+                    imageEditor.imageHeight = imageEditor.image.height();
+                }
                 var width = imageEditor.imageWidth;
                 var height = imageEditor.imageHeight;
+                imageEditor.resizedImageWidth = Math.round(width*imageEditor.getPct(ui.value));
+                imageEditor.resizedImageHeight = Math.round(height*imageEditor.getPct(ui.value));
                 if(ui.value != 100){
-                    imageEditor.image.width(Math.round(width*imageEditor.getPct(ui.value)));
-                    imageEditor.image.height(Math.round(height*imageEditor.getPct(ui.value)));
+                    imageEditor.image.width(imageEditor.resizedImageWidth);
+                    imageEditor.image.height(imageEditor.resizedImageHeight);
                 }else{
                     imageEditor.image.width(width);
                     imageEditor.image.height(height);
                 }
                 imageEditor.sliderPercentage.html(ui.value + '%');
+                
+                if(imageEditor.cropButton.attr('value').substring(0, 6) == "Cancel"){
+                    imageEditor.removeCropper();
+                    imageEditor.addCropper();
+                }else if(imageEditor.resizeButton.attr('value').substring(0, 6) == "Cancel"){
+                    imageEditor.removeResizable();
+            		imageEditor.addResizable();
+            	}
             }
         });
     };
@@ -86,10 +100,7 @@ ImageEditor = function(){
     
     imageEditor.addResizable = function(){
         imageEditor.image.resizable({
-            animate: true,
-            animateDuration: 'fast',
-            animateEasing: 'swing',
-            ghost: true
+            aspectRatio: true
         });
 		imageEditor.resizeButton.attr('value', 'Cancel Resize');
 		imageEditor.resizeButton.addClass('editing');
@@ -98,9 +109,14 @@ ImageEditor = function(){
         imageEditor.image.resizable('destroy');
 		imageEditor.resizeButton.attr('value', 'resize');
 		imageEditor.image.attr('style', "");
-		imageEditor.image.attr('width', imageEditor.imageWidth);
-		imageEditor.image.attr('height', imageEditor.imageHeight);
 		imageEditor.resizeButton.removeClass('editing');
+		if(imageEditor.getZoom() != 100){
+		    imageEditor.image.width(imageEditor.resizedImageWidth);
+    		imageEditor.image.height(imageEditor.resizedImageHeight);
+		}else{
+		    imageEditor.image.width(imageEditor.imageWidth);
+    		imageEditor.image.height(imageEditor.imageHeight);
+		}
     };
     
     imageEditor.setupResizeButton = function(){
@@ -154,7 +170,9 @@ ImageEditor = function(){
         	}
         });
     };
-    
+    imageEditor.useZoom = function(){
+        return imageEditor.useZoomInput[0].checked;
+    };
     imageEditor.getZoom = function(){
         var pc = imageEditor.sliderPercentage.html()
         return parseInt(pc.substr(0, pc.length-1));
@@ -162,7 +180,7 @@ ImageEditor = function(){
     
     imageEditor.getResize = function(){
         var zoom = imageEditor.getZoom();
-        if(zoom == 100){
+        if(zoom == 100 || imageEditor.useZoom()){
             return {
                 width: imageEditor.image.width(),
                 height: imageEditor.image.height()
@@ -178,7 +196,7 @@ ImageEditor = function(){
     imageEditor.getCropSelection = function(){
         var zoom = imageEditor.getZoom();
         var zoomPct = imageEditor.getPct(zoom);
-        if(zoom == 100){
+        if(zoom == 100  || imageEditor.useZoom()){
             return imageEditor.cropSelection;
         }else{
             var cs = imageEditor.cropSelection;
@@ -200,12 +218,22 @@ ImageEditor = function(){
                 imageEditor.serverResizeSaveButton.trigger('click');
             }else if(imageEditor.cropButton.attr('value').substring(0, 6) == "Cancel"){
                 var cs = imageEditor.getCropSelection();
-                kukit.dom.setKssAttribute(imageEditor.serverCropSaveButton[0], 'tlx', cs.x1);
-                kukit.dom.setKssAttribute(imageEditor.serverCropSaveButton[0], 'tly', cs.y1);
-                kukit.dom.setKssAttribute(imageEditor.serverCropSaveButton[0], 'brx', cs.x2);
-                kukit.dom.setKssAttribute(imageEditor.serverCropSaveButton[0], 'bry', cs.y2);
+                
+                var action = null;
+                if(imageEditor.useZoom()){//must resize and then crop
+                    action = imageEditor.serverCropAndResize;
+                    kukit.dom.setKssAttribute(action[0], 'width', imageEditor.image.width());
+                    kukit.dom.setKssAttribute(action[0], 'height', imageEditor.image.height());
+                }else{
+                    action = imageEditor.serverCropSaveButton;
+                }
+                
+                kukit.dom.setKssAttribute(action[0], 'tlx', cs.x1);
+                kukit.dom.setKssAttribute(action[0], 'tly', cs.y1);
+                kukit.dom.setKssAttribute(action[0], 'brx', cs.x2);
+                kukit.dom.setKssAttribute(action[0], 'bry', cs.y2);
 
-                imageEditor.serverCropSaveButton.trigger('click');
+                action.trigger('click');
             }
         });
     };

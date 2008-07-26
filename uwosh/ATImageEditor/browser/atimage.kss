@@ -35,3 +35,14 @@ input.flipOnHorizontalAxis:click{
 	evt-click-preventdefault: true;
 	action-server: imageFlipOnHorizontalAxis;
 }
+input#cropAndResize:click{
+	evt-click-allowbubbling: true;
+	evt-click-preventdefault: true;
+	action-server: cropAndResize;
+	cropAndResize-topLeftX: kssAttr(tlx);
+	cropAndResize-topLeftY: kssAttr(tly);
+	cropAndResize-bottomRightX: kssAttr(brx);
+	cropAndResize-bottomRightY: kssAttr(bry);
+	cropAndResize-width: kssAttr(width);
+	cropAndResize-height: kssAttr(height);
+}

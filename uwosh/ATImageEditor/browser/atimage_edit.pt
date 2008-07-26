@@ -56,6 +56,11 @@
 						value="nothing" 
 						style="display:none"
 						tal:attributes="class string:kssattr-tlx-200 kssattr-tly-200 kssattr-brx-500 kssattr-bry-500"/>
+				<input 	id="cropAndResize" 
+						type="button" 
+						value="nothing" 
+						style="display:none"
+						tal:attributes="class string:kssattr-tlx-200 kssattr-tly-200 kssattr-brx-500 kssattr-bry-500 kssattr-width-${width} kssattr-height-${height}"/>
 				<input class="flipOnVerticalAxis" type="button" value="flip vertically" />
 				<input class="flipOnHorizontalAxis" type="button" value="flip horizontally" />
 				<input class="rotate-left" type="button" value="rotate left" />
@@ -64,6 +69,7 @@
 				<input class="crop" type="button" value="crop" />
 				<input class="save" type="button" value="save" />
 				<div id="slider" class="ui-slider-1"><p>100%</p><div class="ui-slider-handle"></div></div>
+				<div class="useZoom"><input class="useZoom" type="checkbox" /><p>use zoom in calculations?</p></div>
 			</div>
 			<br />
 			<div class="imageContainer">

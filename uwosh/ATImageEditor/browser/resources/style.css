@@ -48,9 +48,19 @@ div.imageButtons input.flipOnHorizontalAxis{
 }
 div.ui-slider-1{
     float:left;
+    margin-right:13px;
 }
 div.ui-slider-1 p{
     padding-left:45%;
     position:relative;
     top:-10px;
+}
+div.imageButtons div.useZoom{
+
+}
+div.imageButtons div p{
+
+}
+div.imageButtons div input.useZoom{
+
 }
