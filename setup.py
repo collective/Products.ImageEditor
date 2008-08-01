@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.1rc2'
+version = '0.1rc2.1'
 
 setup(name='uwosh.ATImageEditor',
       version=version,
@@ -17,7 +17,7 @@ setup(name='uwosh.ATImageEditor',
       keywords='atimage image resize scrop rotate',
       author='Nathan Van Gheem',
       author_email='vangheem@gmail.com',
-      url='http://svn.plone.org/svn/plone/plone.example',
+      url='http://plone.org/products/atimageeditor',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['uwosh'],
