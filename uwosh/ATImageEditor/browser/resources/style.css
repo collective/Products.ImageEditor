@@ -1,16 +1,54 @@
-div.imageEditor{
+div#imageEditor{
 	
 }
-div.imageButtons{
+
+div#manageButtons{
 	margin-bottom:5px;
-	height:20px;
+	height:25px;
 }
 
-div.imageContainer{
+div#imageContainer{
     width:100%;
 }
 
-div.imageButtons input{
+div#actionButtons div#menuHandle{
+    background-color:black;
+    width:100%;
+    height:18px;
+    margin-bottom:5px;
+    cursor:move;
+}
+
+div#actionButtons{
+    background-color:#f9f9f9;
+    border: 2px solid black;
+    width:125px;
+    z-index:999999;
+    padding:3px;
+    float:left;
+    position:absolute;
+    margin: auto;
+}
+
+div#actionButtons input{
+    background-repeat: no-repeat;
+	padding: 1px 1px 1px 16px;
+	cursor:pointer;
+	border: 2px solid gray;
+	background-color: #f1f1f1;
+	margin:1px 5px 3px 0px;
+	width:100%;  
+}
+
+div#actionButtons input#undo, div#actionButtons input#redo{
+    width:46%;
+    padding-left:0px;
+    padding-right:0px;
+    margin-left:0px;
+    margin-right:0px;
+} 
+
+div#manageButtons input{
     background-repeat: no-repeat;
 	padding: 1px 1px 1px 16px;
 	cursor:pointer;
@@ -19,31 +57,34 @@ div.imageButtons input{
 	float:left;
 	margin:1px 5px 3px 0px;
 }
-div.imageButtons input.editing{
+div#actionButtons input.editing{
     border-color:black;
     background-color:gray;
     color:white;
     cursor:pointer;
 }
-div.imageButtons input.crop{
+div#actionButtons input#crop{
 	background-image: url(icons/stock-selection-intersect-16.png);
 }
-div.imageButtons input.resize{
+div#actionButtons input#resize{
 	background-image: url(icons/stock-resize-16.png);
 }
-div.imageButtons input.rotate-left{
+div#actionButtons input#rotate-left{
 	background-image: url(icons/stock-rotate-270-16.png);
 }
-div.imageButtons input.rotate-right{
+div#actionButtons input#rotate-right{
 	background-image: url(icons/stock-rotate-90-16.png);
 }
-div.imageButtons input.save{
+div#actionButtons input#apply{
 	background-image: url(icons/apply.png);
 }
-div.imageButtons input.flipOnVerticalAxis{
+div#manageButtons input#save{
+	background-image: url(icons/apply.png);
+}
+div#actionButtons input#flipOnVerticalAxis{
 	background-image: url(icons/stock-tool-rotate-16.png);
 }
-div.imageButtons input.flipOnHorizontalAxis{
+div#actionButtons input#flipOnHorizontalAxis{
 	background-image: url(icons/stock-tool-flip-16.png);
 }
 div.ui-slider-1{
@@ -54,13 +95,4 @@ div.ui-slider-1 p{
     padding-left:45%;
     position:relative;
     top:-10px;
-}
-div.imageButtons div.useZoom{
-
-}
-div.imageButtons div p{
-
-}
-div.imageButtons div input.useZoom{
-
 }

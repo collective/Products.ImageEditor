@@ -2,32 +2,40 @@ ImageEditor = function(){
     
     imageEditor = this;
     
-    imageEditor.resizeButton = $('div.imageButtons input.resize');
-    imageEditor.cropButton = $('div.imageButtons input.crop');
-    imageEditor.saveButton = $('div.imageButtons input.save');
-    imageEditor.rotateRightButton = $('div.imageButtons input.rotate-right');
-    imageEditor.rotateLeftButton = $('div.imageButtons input.rotate-left');
-    imageEditor.flipHorizontallyButton = $('div.imageButtons input.flipOnHorizontalAxis');
-    imageEditor.flipVerticallyButton = $('div.imageButtons input.flipOnVerticalAxis');
+    imageEditor.resizeButton = $('div#actionButtons input#resize');
+    imageEditor.cropButton = $('div#actionButtons input#crop');
+    imageEditor.saveButton = $('div#manageButtons input#save');
+    imageEditor.cancelButton = $('div#manageButtons input#cancel');
+    imageEditor.rotateRightButton = $('div#actionButtons input#rotate-right');
+    imageEditor.rotateLeftButton = $('div#actionButtons input#rotate-left');
+    imageEditor.flipHorizontallyButton = $('div#actionButtons input#flipOnHorizontalAxis');
+    imageEditor.flipVerticallyButton = $('div#actionButtons input#flipOnVerticalAxis');
     imageEditor.serverResizeSaveButton = $('input#serverResizeSaveButton');
     imageEditor.serverCropSaveButton = $('input#serverCropSaveButton');
-    imageEditor.serverCropAndResize = $('div.imageButtons input#cropAndResize');
+    imageEditor.serverCropAndResize = $('div#actionButtons input#cropAndResize');
+    imageEditor.applyButton = $('div#actionButtons input#apply');
+    imageEditor.undo = $('div#actionButtons input#undo');
+    imageEditor.redo = $('div#actionButtons input#redo');
 
-    imageEditor.image = $('div.imageEditor div.imageContainer img.sourceImage');
+    imageEditor.actionButtons = $('div#actionButtons');
+
+    imageEditor.image = $('div#imageEditor div#imageContainer img#sourceImage');
     imageEditor.cropSelection = null;
     imageEditor.cropperBorderSize = 2;
-    imageEditor.imageContainer = $('div.imageEditor div.imageContainer');
-    imageEditor.slider = $('div.imageButtons div#slider');
-    imageEditor.sliderPercentage = $('div.imageButtons div#slider p');
-    imageEditor.useZoomInput = $('div.imageButtons div.useZoom input.useZoom');
+    imageEditor.imageContainer = $('div#imageEditor div#imageContainer');
+    imageEditor.slider = $('div#manageButtons div#slider');
+    imageEditor.sliderPercentage = $('div#manageButtons div#slider p');
+    imageEditor.useZoomInput = $('div#manageButtons div.useZoom input#useZoom');
     
     imageEditor.initialize = function(){
         imageEditor.setInitialSizes();
         imageEditor.setupResizeButton();
         imageEditor.setupCropButton();
-        imageEditor.setupSaveButton();
+        imageEditor.setupApplyButton();
         imageEditor.setupRotates();
         imageEditor.setupSlider();
+        
+        imageEditor.actionButtons.draggable();
     };
     
     imageEditor.reset = function(){
@@ -174,7 +182,7 @@ ImageEditor = function(){
         return imageEditor.useZoomInput[0].checked;
     };
     imageEditor.getZoom = function(){
-        var pc = imageEditor.sliderPercentage.html()
+        var pc = imageEditor.sliderPercentage.html();
         return parseInt(pc.substr(0, pc.length-1));
     }
     
@@ -188,7 +196,7 @@ ImageEditor = function(){
         }else{
             return{
                 width: Math.round(imageEditor.image.width()/imageEditor.getPct(zoom)),
-                height: Math.round(imageEditor.image.height()/imageEditor.getPct(zoom)),
+                height: Math.round(imageEditor.image.height()/imageEditor.getPct(zoom))
             }
         }
     };
@@ -208,8 +216,8 @@ ImageEditor = function(){
         }
     }
     
-    imageEditor.setupSaveButton = function(){
-        imageEditor.saveButton.click(function(){
+    imageEditor.setupApplyButton = function(){
+        imageEditor.applyButton.click(function(){
             if(imageEditor.resizeButton.attr('value').substring(0, 6) == "Cancel"){
                 var size = imageEditor.getResize();
                 kukit.dom.setKssAttribute(imageEditor.serverResizeSaveButton[0], 'width', size.width);

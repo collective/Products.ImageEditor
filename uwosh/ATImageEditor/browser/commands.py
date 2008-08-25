@@ -28,8 +28,8 @@ class IImageEditorCommands(Interface):
         """
 
 class ImageEditorCommands(CommandSet):
-    implements(IATImageCommands)
+    implements(IImageEditorCommands)
         
-    def reloadImage(self, selector):
+    def setImage(self, selector):
         """ see interfaces.py """
-        command = self.commands.addCommand('reloadImage', selector)
+        command = self.commands.addCommand('setImage', selector)
