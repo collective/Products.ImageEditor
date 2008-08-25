@@ -7,78 +7,78 @@
 	<browser:page
 	      for="Products.ATContentTypes.interface.image.IATImage"
 	      name="editor"
-	      class=".atimage.Edit"
+	      class=".imageeditor.Edit"
 	      permission="cmf.ModifyPortalContent"
 	      />
 	
     <browser:resourceDirectory
-        name="ATImageEditor.resources"
+        name="ImageEditor.resources"
         directory="resources"
         />
 	
 	<browser:resource
-		name="atimage.kss"
-		file="atimage.kss"
+		name="imageeditor.kss"
+		file="imageeditor.kss"
 		/>
 		
 	<browser:page
          for="Products.ATContentTypes.interface.image.IATImage"
          name="rotateImageRight"
-         class=".atimage.ATImageKSS"
+         class=".imageeditor.ImageEditorKSS"
          attribute="rotateImageRight"
          permission="cmf.ModifyPortalContent"
          />
 	<browser:page
          for="Products.ATContentTypes.interface.image.IATImage"
          name="rotateImageLeft"
-         class=".atimage.ATImageKSS"
+         class=".imageeditor.ImageEditorKSS"
          attribute="rotateImageLeft"
          permission="cmf.ModifyPortalContent"
          />
 	<browser:page
          for="Products.ATContentTypes.interface.image.IATImage"
          name="imageResizeSave"
-         class=".atimage.ATImageKSS"
+         class=".imageeditor.ImageEditorKSS"
          attribute="imageResizeSave"
          permission="cmf.ModifyPortalContent"
          />
 	<browser:page
          for="Products.ATContentTypes.interface.image.IATImage"
          name="imageCropSave"
-         class=".atimage.ATImageKSS"
+         class=".imageeditor.ImageEditorKSS"
          attribute="imageCropSave"
          permission="cmf.ModifyPortalContent"
          />
 	<browser:page
          for="Products.ATContentTypes.interface.image.IATImage"
          name="imageFlipOnVerticalAxis"
-         class=".atimage.ATImageKSS"
+         class=".imageeditor.ImageEditorKSS"
          attribute="imageFlipOnVerticalAxis"
          permission="cmf.ModifyPortalContent"
          />
 	<browser:page
          for="Products.ATContentTypes.interface.image.IATImage"
          name="imageFlipOnHorizontalAxis"
-         class=".atimage.ATImageKSS"
+         class=".imageeditor.ImageEditorKSS"
          attribute="imageFlipOnHorizontalAxis"
          permission="cmf.ModifyPortalContent"
          />
  	<browser:page
           for="Products.ATContentTypes.interface.image.IATImage"
           name="cropAndResize"
-          class=".atimage.ATImageKSS"
+          class=".imageeditor.ImageEditorKSS"
           attribute="cropAndResize"
           permission="cmf.ModifyPortalContent"
           />
     <kss:action
         name="reloadImage"
-        jsfile="atimage.js"
+        jsfile="imageeditor.js"
         command_factory="selector"
         />
 	<kss:commandset
          name="atimage"
          for="kss.core.interfaces.IKSSView"
-         class=".commands.ATImageCommands"
-         provides=".commands.IATImageCommands"
+         class=".commands.ImageEditorCommands"
+         provides=".commands.IImageEditorCommands"
          />
 </configure>

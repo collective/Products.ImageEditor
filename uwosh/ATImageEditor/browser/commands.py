@@ -20,14 +20,14 @@ from zope.interface import implements
 
 from zope.interface import Interface
 
-class IATImageCommands(Interface):
+class IImageEditorCommands(Interface):
     """The commands"""
 
     def reloadImage():
         """
         """
 
-class ATImageCommands(CommandSet):
+class ImageEditorCommands(CommandSet):
     implements(IATImageCommands)
         
     def reloadImage(self, selector):

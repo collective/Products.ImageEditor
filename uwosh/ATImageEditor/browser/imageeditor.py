@@ -25,7 +25,7 @@ class Edit(BrowserView):
         return self.context.absolute_url() + "?" + str(random.randint(0, 1000))
         
         
-class ATImageKSS(PloneKSSView):
+class ImageEditorKSS(PloneKSSView):
     implements(IPloneKSSView)
 
     def getImageData(self):
