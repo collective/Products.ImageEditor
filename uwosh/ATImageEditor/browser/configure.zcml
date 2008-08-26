@@ -78,6 +78,41 @@
           />
 	<browser:page
           for="Products.ATContentTypes.interface.image.IATImage"
+          name="blur"
+          class=".imageeditor.ImageEditorKSS"
+          attribute="blur"
+          permission="cmf.ModifyPortalContent"
+          />
+	<browser:page
+          for="Products.ATContentTypes.interface.image.IATImage"
+          name="compress"
+          class=".imageeditor.ImageEditorKSS"
+          attribute="compress"
+          permission="cmf.ModifyPortalContent"
+          />
+	<browser:page
+          for="Products.ATContentTypes.interface.image.IATImage"
+          name="contrast"
+          class=".imageeditor.ImageEditorKSS"
+          attribute="contrast"
+          permission="cmf.ModifyPortalContent"
+          />
+	<browser:page
+          for="Products.ATContentTypes.interface.image.IATImage"
+          name="brightness"
+          class=".imageeditor.ImageEditorKSS"
+          attribute="brightness"
+          permission="cmf.ModifyPortalContent"
+          />
+	<browser:page
+          for="Products.ATContentTypes.interface.image.IATImage"
+          name="sharpen"
+          class=".imageeditor.ImageEditorKSS"
+          attribute="sharpen"
+          permission="cmf.ModifyPortalContent"
+          />
+	<browser:page
+          for="Products.ATContentTypes.interface.image.IATImage"
           name="saveImageEdit"
           class=".imageeditor.ImageEditorKSS"
           attribute="saveImageEdit"

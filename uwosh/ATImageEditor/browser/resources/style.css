@@ -23,12 +23,21 @@ div#actionButtons{
     background-color:#f9f9f9;
     border: 2px solid black;
     width:125px;
-    z-index:999999;
+    z-index:1001;
     padding:3px;
     float:left;
     position:absolute;
     margin: auto;
     opacity:.9;
+    left:700px;
+    top:140px;
+}
+
+div#cropAndResizeButtonContainer{
+    background-color:#F0EBEE;
+    border:2px solid #696473;
+    margin-bottom:2px;
+    padding:2px 2px 0px 2px;
 }
 
 div#actionButtons input{
@@ -39,6 +48,19 @@ div#actionButtons input{
 	background-color: #f1f1f1;
 	margin:1px 5px 3px 0px;
 	width:100%;
+}
+div.imageeditor-dialog input{
+    background-repeat: no-repeat;
+    background-image: url(icons/apply.png);
+	padding: 1px 1px 1px 16px;
+	cursor:pointer;
+	border: 2px solid gray;
+	background-color: #f1f1f1;
+	margin:1px 5px 3px 0px;
+}
+div#actionButtons input:hover, div.imageeditor-dialog input:hover{
+    background-color:white;
+    border: 2px solid black;
 }
 
 div#actionButtons input#undo, div#actionButtons input#redo{
@@ -109,12 +131,63 @@ div#actionButtons input#redo{
 div#actionButtons input#undo{
 	background-image: url(icons/edit-undo.png);
 }
-div.ui-slider-1{
+div#actionButtons input#blur{
+	background-image: url(icons/stock-tool-blur-16.png);
+}
+div#actionButtons input#compression{
+    background-image: url(icons/stock-template-16.png);
+}
+div#actionButtons input#brightness{
+	background-image: url(icons/stock-tool-brightness-16.png);
+}
+div#actionButtons input#contrast{
+    background-image: url(icons/stock-tool-contrast-16.png);
+}
+
+div#actionButtons input#sharpen{
+    background-image: url(icons/stock-tool-colorize-16.png);
+}
+
+div.imageeditor-dialog p{
+    margin-bottom:15px;
+    font-weight:bold;
+}
+
+.ui-slider {
+    background-color: #E1D9F5;
+    width:200px;
+    margin-top:6px;
+}
+
+.ui-resizable-handle{
+    z-index: 1000;
+}
+
+.ui-slider-handle {
+    background-color: #f9f9f9;
+    border-color:gray;
+}
+
+.ui-slider-handle:hover{
+    border-color:gray;
+}
+
+.imageeditor-slider{
     float:left;
     margin-right:13px;
 }
-div.ui-slider-1 p{
+
+.imageeditor-slider p{
     padding-left:45%;
     position:relative;
-    top:-10px;
+    top:-20px;
+}
+div.imageeditor-dialog .imageeditor-slider p{
+    padding-left:45%;
+    top:-20px;
+    font-weight:normal;
+}
+
+.ui-dialog-content {
+    padding:10px;
 }

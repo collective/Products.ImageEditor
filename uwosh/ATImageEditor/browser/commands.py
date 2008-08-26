@@ -30,10 +30,11 @@ class IImageEditorCommands(Interface):
 class ImageEditorCommands(CommandSet):
     implements(IImageEditorCommands)
         
-    def setImage(self, selector, url, canUndo, canRedo, canSave):
+    def setImage(self, selector, url, canUndo, canRedo, canSave, size):
         """ see interfaces.py """
         command = self.commands.addCommand('setImage', selector)
         command.addParam('url', url)
         command.addParam('canUndo', canUndo)
         command.addParam('canRedo', canRedo)
         command.addParam('canSave', canSave)
+        command.addParam('size', size)

@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.1rc2.1'
+version = '0.2b1'
 
 setup(name='uwosh.ATImageEditor',
       version=version,

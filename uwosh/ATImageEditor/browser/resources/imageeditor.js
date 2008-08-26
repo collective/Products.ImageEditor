@@ -1,11 +1,23 @@
 ImageEditor = function(){
     
     imageEditor = this;
-    
-    imageEditor.resizeButton = $('div#actionButtons input#resize');
-    imageEditor.cropButton = $('div#actionButtons input#crop');
+
+    //Manage elements
+    imageEditor.manageButtons = $('div#manageButtons');
+
     imageEditor.saveButton = $('div#manageButtons input#save');
     imageEditor.cancelButton = $('div#manageButtons input#cancel');
+    imageEditor.slider = $('div#manageButtons div#slider');
+    imageEditor.sliderPercentage = $('div#manageButtons div#slider p');
+    imageEditor.useZoomInput = $('div#manageButtons div.useZoom input#useZoom');
+    
+    //Action elements
+    imageEditor.actionButtons = $('div#actionButtons');
+
+    imageEditor.resizeButton = $('div#actionButtons div#cropAndResizeButtonContainer input#resize');
+    imageEditor.cropButton = $('div#actionButtons div#cropAndResizeButtonContainer input#crop');
+    imageEditor.applyButton = $('div#actionButtons div#cropAndResizeButtonContainer input#apply');
+
     imageEditor.rotateRightButton = $('div#actionButtons input#rotate-right');
     imageEditor.rotateLeftButton = $('div#actionButtons input#rotate-left');
     imageEditor.flipHorizontallyButton = $('div#actionButtons input#flipOnHorizontalAxis');
@@ -13,22 +25,64 @@ ImageEditor = function(){
     imageEditor.serverResizeSaveButton = $('input#serverResizeSaveButton');
     imageEditor.serverCropSaveButton = $('input#serverCropSaveButton');
     imageEditor.serverCropAndResize = $('div#actionButtons input#cropAndResize');
-    imageEditor.applyButton = $('div#actionButtons input#apply');
     imageEditor.undoButton = $('div#actionButtons input#undo');
     imageEditor.redoButton = $('div#actionButtons input#redo');
+    
+    imageEditor.blur = {
+        perform: $('div#actionButtons div#blurdialog input#performBlur'),
+        button: $('div#actionButtons input#blur'),
+        dialog: $('div#blurdialog'),
+        slider: $('div#blurslider'),
+        percentage: $('div#blurslider p')
+    }
+    imageEditor.compression = {
+        perform: $('div#actionButtons div#compressiondialog input#performCompression'),
+        button: $('div#actionButtons input#compression'),
+        dialog: $('div#actionButtons div#compressiondialog'),
+        slider: $('div#compressionslider'),
+        percentage: $('div#compressionslider p')
+    }
+    imageEditor.contrast = {
+        perform: $('div#actionButtons div#contrastdialog input#performContrast'),
+        button: $('div#actionButtons input#contrast'),
+        dialog: $('div#actionButtons div#contrastdialog'),
+        slider: $('div#contrastslider'),
+        percentage: $('div#contrastslider p')
+    }
+    imageEditor.brightness = {
+        perform: $('div#actionButtons div#brightnessdialog input#performBrightness'),
+        button: $('div#actionButtons input#brightness'),
+        dialog: $('div#actionButtons div#brightnessdialog'),
+        slider: $('div#brightnessslider'),
+        percentage: $('div#brightnessslider p')
+    }
+    imageEditor.sharpen = {
+        perform: $('div#actionButtons div#sharpendialog input#performSharpen'),
+        button: $('div#actionButtons input#sharpen'),
+        dialog: $('div#actionButtons div#sharpendialog'),
+        slider: $('div#sharpenslider'),
+        percentage: $('div#sharpenslider p')
+    }
 
-    imageEditor.manageButton = $('div#manageButtons');
-    imageEditor.actionButtons = $('div#actionButtons');
+    imageEditor.imagePixels = $('span#imagePixels');
 
     imageEditor.image = $('div#imageEditor div#imageContainer img#sourceImage');
     imageEditor.imageContainer = $('div#imageEditor div#imageContainer');
-    
-    imageEditor.slider = $('div#manageButtons div#slider');
-    imageEditor.sliderPercentage = $('div#manageButtons div#slider p');
-    imageEditor.useZoomInput = $('div#manageButtons div.useZoom input#useZoom');
 
     imageEditor.cropSelection = null;
     imageEditor.cropperBorderSize = 2;
+    
+    imageEditor.dialogSettings = {
+        autoOpen: false,
+        modal: true,
+        resizable:false,
+        overlay: {
+            opacity: 0.7,
+            background: 'black'
+        },
+        width: 225,
+        height: 115
+    };
     
     imageEditor.initialize = function(){
         imageEditor.setInitialSizes();
@@ -38,10 +92,125 @@ ImageEditor = function(){
         imageEditor.setupRotates();
         imageEditor.setupSlider();
         imageEditor.setupUserWarning();
-        
+        imageEditor.setupBlur();
+        imageEditor.setupCompression();
+        imageEditor.setupContrast();
+        imageEditor.setupBrightness();
+        imageEditor.setupSharpen();
         imageEditor.actionButtons.draggable();
-        
+        imageEditor.calculateWidthAndHeight();
     };
+    
+    imageEditor.calculateWidthAndHeight = function(){
+        imageEditor.imagePixels.html(imageEditor.image.width() + "x" + imageEditor.image.height());
+    }
+    
+    imageEditor.setupBlur = function(){
+        imageEditor.blur.slider.slider({
+            minValue:0,
+            maxValue:8,
+            steps:8,
+            startValue:4,
+            change: function(e, ui){
+                imageEditor.blur.percentage.html(Math.round(ui.value/12.5));
+                kukit.dom.setKssAttribute(imageEditor.blur.perform[0], 'amount', String(Math.round(ui.value/12.5)));
+            }
+        });
+        imageEditor.blur.dialog.show();//hidden at first...
+        imageEditor.blur.perform.click(function(){
+            imageEditor.blur.dialog.dialog('close');
+        });
+        
+        imageEditor.blur.dialog.dialog(imageEditor.dialogSettings);
+        imageEditor.blur.button.click(function(){
+            imageEditor.blur.dialog.dialog('open');
+        });
+    }
+    
+    imageEditor.setupCompression = function(){
+        imageEditor.compression.slider.slider({
+            minValue:0,
+            maxValue:100,
+            steps:100,
+            startValue:100,
+            change: function(e, ui){
+                imageEditor.compression.percentage.html(ui.value + "%");
+                kukit.dom.setKssAttribute(imageEditor.compression.perform[0], 'amount', ui.value);
+            }
+        });
+        imageEditor.compression.dialog.show();//hidden at first...
+        imageEditor.compression.perform.click(function(){
+            imageEditor.compression.dialog.dialog('close');
+        });
+        
+        imageEditor.compression.dialog.dialog(imageEditor.dialogSettings);
+        imageEditor.compression.button.click(function(){
+            imageEditor.compression.dialog.dialog('open');
+        });
+    }
+    imageEditor.setupContrast = function(){
+        imageEditor.contrast.slider.slider({
+            minValue:0,
+            maxValue:100,
+            steps:100,
+            startValue:100,
+            change: function(e, ui){
+                imageEditor.contrast.percentage.html(ui.value + "%");
+                kukit.dom.setKssAttribute(imageEditor.contrast.perform[0], 'amount', ui.value);
+            }
+        });
+        imageEditor.contrast.dialog.show();//hidden at first...
+        imageEditor.contrast.perform.click(function(){
+            imageEditor.contrast.dialog.dialog('close');
+        });
+        
+        imageEditor.contrast.dialog.dialog(imageEditor.dialogSettings);
+        imageEditor.contrast.button.click(function(){
+            imageEditor.contrast.dialog.dialog('open');
+        });
+    }
+    imageEditor.setupBrightness = function(){
+        imageEditor.brightness.slider.slider({
+            minValue:0,
+            maxValue:100,
+            steps:100,
+            startValue:100,
+            change: function(e, ui){
+                imageEditor.brightness.percentage.html(ui.value + "%");
+                kukit.dom.setKssAttribute(imageEditor.brightness.perform[0], 'amount', ui.value);
+            }
+        });
+        imageEditor.brightness.dialog.show();//hidden at first...
+        imageEditor.brightness.perform.click(function(){
+            imageEditor.brightness.dialog.dialog('close');
+        });
+        
+        imageEditor.brightness.dialog.dialog(imageEditor.dialogSettings);
+        imageEditor.brightness.button.click(function(){
+            imageEditor.brightness.dialog.dialog('open');
+        });
+    }
+    imageEditor.setupSharpen = function(){
+        imageEditor.sharpen.slider.slider({
+            minValue:0,
+            maxValue:2,
+            steps:100,
+            startValue:0,
+            change: function(e, ui){
+                imageEditor.sharpen.percentage.html(ui.value/50);
+                kukit.dom.setKssAttribute(imageEditor.sharpen.perform[0], 'amount', ui.value/50);
+            }
+        });
+        imageEditor.sharpen.dialog.show();//hidden at first...
+        imageEditor.sharpen.perform.click(function(){
+            imageEditor.sharpen.dialog.dialog('close');
+        });
+        
+        imageEditor.sharpen.dialog.dialog(imageEditor.dialogSettings);
+        imageEditor.sharpen.button.click(function(){
+            imageEditor.sharpen.dialog.dialog('open');
+        });
+    }
     
     imageEditor.reset = function(){
         imageEditor.setInitialSizes();
@@ -149,7 +318,10 @@ ImageEditor = function(){
     
     imageEditor.addResizable = function(){
         imageEditor.image.resizable({
-            aspectRatio: true
+            handles: 'se,e,s',
+            resize: function(e, ui){
+                imageEditor.calculateWidthAndHeight();
+            }
         });
 		imageEditor.resizeButton.attr('value', 'Cancel Resize');
 		imageEditor.resizeButton.addClass('editing');
@@ -161,13 +333,14 @@ ImageEditor = function(){
 		imageEditor.image.attr('style', "");
 		imageEditor.resizeButton.removeClass('editing');
 		imageEditor.canApply(false);
+		imageEditor.calculateWidthAndHeight();
 		
 		if(imageEditor.getZoom() != 100){
 		    imageEditor.image.width(imageEditor.resizedImageWidth);
     		imageEditor.image.height(imageEditor.resizedImageHeight);
 		}else{
-		    imageEditor.image.width(imageEditor.imageWidth);
-    		imageEditor.image.height(imageEditor.imageHeight);
+		    imageEditor.image.css('width', '');
+    		imageEditor.image.css('height', '');
 		}
     };
     
@@ -176,28 +349,38 @@ ImageEditor = function(){
             if(imageEditor.cropButton.attr('value').substring(0, 6) == "Cancel"){
                 imageEditor.removeCropper();
                 imageEditor.addResizable();
-            }else if($(this).attr('value').substring(0, 6) != "Cancel"){
-        		imageEditor.addResizable();
+            }else if($(this).attr('value').substring(0, 6) == "Cancel"){
+                imageEditor.removeResizable();
         	}else{
-        		imageEditor.removeResizable();
+        		imageEditor.addResizable();
         	}
         });
     };
     
     imageEditor.addCropper = function(){
+        var w = imageEditor.image.width();
+        var h = imageEditor.image.height();
+        imageEditor.cropSelection = {
+            x1: w/4,
+            y1: h/4,
+            x2: w-w/4,
+            y2: h-h/4
+        };
         imageEditor.image.imgAreaSelect({
             onSelectChange: function(image, selection){
                 imageEditor.cropSelection = selection;
+                imageEditor.imagePixels.html((selection.x2-selection.x1) + "x" + (selection.y2-selection.y1));
             },
             selectionColor: 'blue',
             enable: true,
             border: 2,
             show: true,
-            x1: 0,
-            y1: 0,
-            x2: 90,
-            y2: 90
+            x1: imageEditor.cropSelection.x1,
+            y1: imageEditor.cropSelection.y1,
+            x2: imageEditor.cropSelection.x2,
+            y2: imageEditor.cropSelection.y2
         });
+        imageEditor.imagePixels.html((imageEditor.cropSelection.x2-imageEditor.cropSelection.x1) + "x" + (imageEditor.cropSelection.y2-imageEditor.cropSelection.y1));
         imageEditor.cropButton.attr('value', 'Cancel Cropping');
         imageEditor.cropButton.addClass('editing');
         imageEditor.canApply(true);
@@ -210,6 +393,7 @@ ImageEditor = function(){
         imageEditor.cropButton.attr('value', 'crop');
         imageEditor.cropButton.removeClass('editing');
         imageEditor.canApply(false);
+        imageEditor.calculateWidthAndHeight();
     }
     
     imageEditor.setupCropButton = function(){
@@ -217,10 +401,10 @@ ImageEditor = function(){
             if(imageEditor.resizeButton.attr('value').substring(0, 6) == "Cancel"){
                 imageEditor.removeResizable();
                 imageEditor.addCropper();
-            }else if($(this).attr('value').substring(0, 6) != "Cancel"){
-                imageEditor.addCropper();
+            }else if($(this).attr('value').substring(0, 6) == "Cancel"){
+                imageEditor.removeCropper();
         	}else{
-        		imageEditor.removeCropper();
+                imageEditor.addCropper();
         	}
         });
     };

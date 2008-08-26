@@ -7,41 +7,11 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.kss.interfaces import IPloneKSSView
 from plone.app.kss.plonekssview import PloneKSSView
 from kss.core import kssaction
-from PIL import Image
+from PIL import Image, ImageFilter, ImageEnhance
 from cStringIO import StringIO
 import random
 from Products.ATContentTypes.content.image import ATImage
 from time import gmtime, strftime
-
-class UnredoStack:
-    
-    def __init__(self, bottom):
-        self.pos = 0
-        self.stack = [bottom]
-    
-    def do(self, value):
-        if self.canRedo():
-            #clear top
-            for item in self.stack[(self.pos+1):len(self.stack)]:
-                self.stack.remove(item)
-            
-        self.stack.append(value)
-        self.pos = self.pos + 1
-        
-    def getCurrent(self):
-        return self.stack[self.pos]
-        
-    def undo(self):
-        self.pos = self.pos - 1
-        
-    def canUndo(self):
-        return self.pos > 0
-        
-    def redo(self):
-        self.pos = self.pos + 1
-
-    def canRedo(self):
-        return self.pos + 1 < len(self.stack)
 
 class Edit(BrowserView):
 
@@ -57,6 +27,10 @@ class Edit(BrowserView):
         This is used because sometimes browsers cache images that may have been edited
         """
         return self.context.absolute_url() + "?" + str(random.randint(0, 1000000))
+
+    def getSize(self):
+        return GetSize(self.context.unredo.getCurrent())
+        
 
 class ShowCurrentEdit(BrowserView):
 
@@ -84,7 +58,8 @@ class ImageEditorKSS(PloneKSSView):
             self.context.absolute_url() + "/showcurrentedit?" + str(random.randint(0, 1000000)),
             str(int(self.context.unredo.canUndo())),
             str(int(self.context.unredo.canRedo())),
-            str(int(self.context.unredo.pos > 0))
+            str(int(self.context.unredo.pos > 0)),
+            GetSize(self.context.unredo.getCurrent())            
         )
         
     def setImage(self, value):
@@ -146,13 +121,61 @@ class ImageEditorKSS(PloneKSSView):
         self.setImage(output)
         
     @kssaction
+    def blur(self, amount):
+        image = Image.open(self.getImageData())
+        fmt = image.format
+        for x in range(0, int(amount)):
+            image = image.filter(ImageFilter.BLUR)
+            
+        output = StringIO()
+        image.save(output, fmt)
+        self.setImage(output)
+        
+    @kssaction
+    def compress(self, amount):
+        image = Image.open(self.getImageData())
+
+        output = StringIO()
+        image.save(output, image.format, quality=int(amount))
+        self.setImage(output)
+        
+    @kssaction
+    def contrast(self, amount):
+        image = Image.open(self.getImageData())
+        enhancer = ImageEnhance.Contrast(image)
+        newImage = enhancer.enhance(float(amount)/100.0)
+
+        output = StringIO()
+        newImage.save(output, image.format)
+        self.setImage(output)
+
+    @kssaction
+    def brightness(self, amount):
+        image = Image.open(self.getImageData())
+        enhancer = ImageEnhance.Brightness(image)
+        newImage = enhancer.enhance(float(amount)/100.0)
+
+        output = StringIO()
+        newImage.save(output, image.format)
+        self.setImage(output)
+
+    @kssaction
+    def sharpen(self, amount):
+        image = Image.open(self.getImageData())
+        enhancer = ImageEnhance.Sharpness(image)
+        newImage = enhancer.enhance(float(amount))
+
+        output = StringIO()
+        newImage.save(output, image.format)
+        self.setImage(output)
+
+    @kssaction
     def imageFlipOnHorizontalAxis(self):
         original = Image.open(self.getImageData())
         image = original.transpose(Image.FLIP_LEFT_RIGHT)
         
         output = StringIO()
         image.save(output, original.format)
-        
         self.setImage(output)
 
     @kssaction
@@ -188,7 +211,7 @@ class ImageEditorKSS(PloneKSSView):
         image = Image.open(self.getImageData())
         format = image.format
         size=( int(width), int(height) )
-        image = image.resize(size,Image.ANTIALIAS)
+        image = image.resize(size, Image.ANTIALIAS)
         data = StringIO()
         image.save(data, format)
 
@@ -206,3 +229,43 @@ class ImageEditorKSS(PloneKSSView):
         cropped_output.seek(0)
         
         self.setImage(cropped_output)
+        
+class UnredoStack:
+
+    def __init__(self, bottom):
+        self.pos = 0
+        self.stack = [bottom]
+
+    def do(self, value):
+        if self.canRedo():
+            #clear top
+            for item in self.stack[(self.pos+1):len(self.stack)]:
+                self.stack.remove(item)
+
+        self.stack.append(value)
+        self.pos = self.pos + 1
+
+    def getCurrent(self):
+        return self.stack[self.pos]
+
+    def undo(self):
+        self.pos = self.pos - 1
+
+    def canUndo(self):
+        return self.pos > 0
+
+    def redo(self):
+        self.pos = self.pos + 1
+
+    def canRedo(self):
+        return self.pos + 1 < len(self.stack)
+        
+def GetSize(data):
+    size = len(data)
+
+    size = size/1024
+
+    if size > 1024:
+        return str(size/1024)[0:4] + 'mb'
+    else:
+        return "Size: " + str(size)[0:4] + 'kb'

@@ -46,6 +46,37 @@ div#actionButtons input#cropAndResize:click{
 	cropAndResize-height: kssAttr(height);
 }
 
+div#actionButtons input#performBlur:click{
+	evt-click-allowbubbling: true;
+	evt-click-preventdefault: true;
+	action-server: blur;
+	blur-amount: kssAttr(amount);
+}
+div#actionButtons div#compressiondialog input#performCompression:click{
+	evt-click-allowbubbling: true;
+	evt-click-preventdefault: true;
+	action-server: compress;
+	compress-amount: kssAttr(amount);
+}
+div#actionButtons div#brightnessdialog input#performBrightness:click{
+	evt-click-allowbubbling: true;
+	evt-click-preventdefault: true;
+	action-server: brightness;
+	brightness-amount: kssAttr(amount);
+}
+div#actionButtons div#contrastdialog input#performContrast:click{
+	evt-click-allowbubbling: true;
+	evt-click-preventdefault: true;
+	action-server: contrast;
+	contrast-amount: kssAttr(amount);
+}
+div#actionButtons div#sharpendialog input#performSharpen:click{
+	evt-click-allowbubbling: true;
+	evt-click-preventdefault: true;
+	action-server: sharpen;
+	sharpen-amount: kssAttr(amount);
+}
+
 div#manageButtons input#save:click{
 	evt-click-preventdefault: true;
 	action-server: saveImageEdit;

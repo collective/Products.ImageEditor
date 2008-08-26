@@ -13,6 +13,9 @@ kukit.actionsGlobalRegistry.register('setImage', function(oper) {
     oper.parms.canRedo == '1' ? ie.canRedo(true) : ie.canRedo(false);
     oper.parms.canUndo == '1' ? ie.canUndo(true) : ie.canUndo(false);
     oper.parms.canSave == '1' ? ie.canSave(true) : ie.canSave(false);
+    
+    $('span#imageSize').html(oper.parms.size);
+    ie.calculateWidthAndHeight();
 });
 
 kukit.commandsGlobalRegistry.registerFromAction('setImage', kukit.cr.makeSelectorCommand);

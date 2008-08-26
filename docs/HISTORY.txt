@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.2b1
+----------------
+*mobile actions window
+*undo/redo
+*blur, compression, brightness, contrast
+*shows image size and pixel count
+*warning if user has unsaved changes
+
 0.1rc2
 ----------------
 

@@ -22,6 +22,9 @@
 			tal:attributes="src string:${context/++resource++ImageEditor.resources}/jquery.ui-1.5.2/ui/ui.slider.js">
 	</script>
 	<script type="text/javascript" 
+			tal:attributes="src string:${context/++resource++ImageEditor.resources}/jquery.ui-1.5.2/ui/ui.dialog.js">
+	</script>
+	<script type="text/javascript" 
 			tal:attributes="src string:${context/++resource++ImageEditor.resources}/imgareaselect-0.4.2/jquery.imgareaselect-0.4.2.min.js">
 	</script>
 	<script type="text/javascript" 
@@ -29,13 +32,13 @@
 	</script>
 </metal:js>
 <metal:css fill-slot="css_slot">
+<link rel="stylesheet" 
+	tal:attributes="href string:${context/++resource++ImageEditor.resources}/jquery.ui-1.5.2/themes/default/ui.all.css"
+	type="text/css" media="screen" />
 <link 	rel="stylesheet" 
 	tal:attributes="href string:${context/++resource++ImageEditor.resources}/style.css" 	
 	media="screen" 
 	charset="utf-8" />
-<link rel="stylesheet" 
-	tal:attributes="href string:${context/++resource++ImageEditor.resources}/jquery.ui-1.5.2/themes/flora/flora.slider.css"
-	type="text/css" media="screen" title="Flora (Default)" />
 </metal:css>
 <body>
 <metal:main fill-slot="main">
@@ -47,20 +50,23 @@
 			<input type="hidden" class="imageHeight" tal:attributes="value python: here.getSize()[1]" />
 			
 			<div id="manageButtons">
-				<input id="save" class="disabled" type="button" value="save" />
-				<input id="cancel" class="disabled" type="button" value="cancel" />
-				<div id="slider" class="ui-slider-1">
+				<input id="save" class="disabled" disabled="true" type="button" value="save" />
+				<input id="cancel" class="disabled" disabled="true" type="button" value="cancel" />
+				<div id="slider" class="imageeditor-slider">
 					<p>100%</p>
 					<div class="ui-slider-handle"></div>
 				</div>
 				
 				<div class="useZoom">
-					<input id="useZoom" type="checkbox" /><p>use zoom apparent size</p>
+					<input id="useZoom" type="checkbox" /><p>use zoomed view for crop/resize</p>
 				</div>
 			</div>
 			<div id="actionButtons">
-				<div id="menuHandle">
-				
+				<div id="menuHandle"></div>
+				<div id="cropAndResizeButtonContainer">
+					<input id="resize" type="button" value="resize" />
+					<input id="crop" type="button" value="crop" />
+					<input id="apply" class="disabled" type="button" value="apply" />
 				</div>
 				
 				<input 	id="serverResizeSaveButton" 
@@ -82,11 +88,79 @@
 				<input id="flipOnHorizontalAxis" type="button" value="flip horizontally" />
 				<input id="rotate-left" type="button" value="rotate left" />
 				<input id="rotate-right" type="button" value="rotate right" />
-				<input id="resize" type="button" value="resize" />
-				<input id="crop" type="button" value="crop" />
-				<input id="apply" class="disabled" type="button" value="apply" />
+				
+				<input id="blur" type="button" value="blur" />
+				<div id="blurdialog" class="imageeditor-dialog" style="display:none">
+					<p>Choose the level to blur to...</p>
+					<div id="blurslider" class="imageeditor-slider">
+						<p>0</p>
+						<div class="ui-slider-handle"></div>
+					</div><br /><br />
+					<input 	id="performBlur" 
+							type="button" 
+							value="Apply" 
+							tal:attributes="class string:kssattr-amount-0"/>
+				</div>
+				
+				<input id="compression" type="button" value="compression" />
+				<div id="compressiondialog" class="imageeditor-dialog" style="display:none">
+					<p>Choose the level of compression</p>
+					<div id="compressionslider" class="imageeditor-slider">
+						<p>0%</p>
+						<div class="ui-slider-handle"></div>
+					</div><br /><br />
+					<input 	id="performCompression" 
+							type="button" 
+							value="Apply"
+							tal:attributes="class string:kssattr-amount-0" />
+				</div>
+				
+				
+				<input id="brightness" type="button" value="brightness" />
+				<div id="brightnessdialog" class="imageeditor-dialog" style="display:none">
+					<p>Choose the level of brightness</p>
+					<div id="brightnessslider" class="imageeditor-slider">
+						<p>0%</p>
+						<div class="ui-slider-handle"></div>
+					</div><br /><br />
+					<input 	id="performBrightness" 
+							type="button" 
+							value="Apply"
+							tal:attributes="class string:kssattr-amount-0" />
+				</div>
+				
+				<input id="contrast" type="button" value="contrast" />
+				<div id="contrastdialog" class="imageeditor-dialog" style="display:none">
+					<p>Choose the level of contrast</p>
+					<div id="contrastslider" class="imageeditor-slider">
+						<p>0%</p>
+						<div class="ui-slider-handle"></div>
+					</div><br /><br />
+					<input 	id="performContrast" 
+							type="button" 
+							value="Apply"
+							tal:attributes="class string:kssattr-amount-0" />
+				</div>
+				
+				<input id="sharpen" type="button" value="sharpen" />
+				<div id="sharpendialog" class="imageeditor-dialog" style="display:none">
+					<p>Choose the level of sharpening</p>
+					<div id="sharpenslider" class="imageeditor-slider">
+						<p>0</p>
+						<div class="ui-slider-handle"></div>
+					</div><br /><br />
+					<input 	id="performSharpen" 
+							type="button" 
+							value="Apply"
+							tal:attributes="class string:kssattr-amount-0" />
+				</div>
 				<input id="undo" class="disabled" disabled="true" type="button" value="undo" />
 				<input id="redo" class="disabled" disabled="true" type="button" value="redo" />
+				
+				<p class="discreet" style="font-size:10px; text-align:center; margin: auto">
+					<span id="imageSize" tal:content="view/getSize" /> 
+					<span id="imagePixels" />
+				</p>
 			</div>
 			<div id="imageContainer">
 				<img id="sourceImage" tal:attributes="src view/image_url" />
