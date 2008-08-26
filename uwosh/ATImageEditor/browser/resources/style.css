@@ -28,6 +28,7 @@ div#actionButtons{
     float:left;
     position:absolute;
     margin: auto;
+    opacity:.9;
 }
 
 div#actionButtons input{
@@ -37,7 +38,7 @@ div#actionButtons input{
 	border: 2px solid gray;
 	background-color: #f1f1f1;
 	margin:1px 5px 3px 0px;
-	width:100%;  
+	width:100%;
 }
 
 div#actionButtons input#undo, div#actionButtons input#redo{

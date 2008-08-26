@@ -85,8 +85,8 @@
 				<input id="resize" type="button" value="resize" />
 				<input id="crop" type="button" value="crop" />
 				<input id="apply" class="disabled" type="button" value="apply" />
-				<input id="undo" type="button" value="undo" />
-				<input id="redo" type="button" value="redo" />
+				<input id="undo" class="disabled" disabled="true" type="button" value="undo" />
+				<input id="redo" class="disabled" disabled="true" type="button" value="redo" />
 			</div>
 			<div id="imageContainer">
 				<img id="sourceImage" tal:attributes="src view/image_url" />
