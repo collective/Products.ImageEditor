@@ -10,10 +10,9 @@ kukit.actionsGlobalRegistry.register('setImage', function(oper) {
     ie.image = ie.imageContainer.children();
     ie.reset();
     
-    oper.parms.canRedo == '1' ? ie.redoButton.removeClass('disabled') : ie.redoButton.addClass('disabled');
-    oper.parms.canUndo == '1' ? ie.undoButton.removeClass('disabled') : ie.undoButton.addClass('disabled');
-    oper.parms.canSave == '1' ? ie.saveButton.removeClass('disabled') : ie.saveButton.addClass('disabled');
-    oper.parms.canSave == '1' ? ie.cancelButton.removeClass('disabled') : ie.cancelButton.addClass('disabled');
+    oper.parms.canRedo == '1' ? ie.canRedo(true) : ie.canRedo(false);
+    oper.parms.canUndo == '1' ? ie.canUndo(true) : ie.canUndo(false);
+    oper.parms.canSave == '1' ? ie.canSave(true) : ie.canSave(false);
 });
 
 kukit.commandsGlobalRegistry.registerFromAction('setImage', kukit.cr.makeSelectorCommand);

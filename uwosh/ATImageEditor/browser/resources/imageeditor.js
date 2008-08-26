@@ -120,15 +120,31 @@ ImageEditor = function(){
     };
     
     imageEditor.canApply = function(v){
+        imageEditor.can(v, imageEditor.applyButton);
         if(v){
-            imageEditor.applyButton.removeClass('disabled');
             imageEditor.applyButton.addClass('enabled');
-            imageEditor.applyButton[0].disabled = false;
         }else{
-            imageEditor.applyButton.addClass('disabled');
             imageEditor.applyButton.removeClass('enabled');
-            imageEditor.applyButton[0].disabled = true;
         }
+    }
+    imageEditor.can = function(v, button){
+        if(v){
+            button.removeClass('disabled');
+            button[0].disabled = false;
+        }else{
+            button.addClass('disabled');
+            button[0].disabled = true;
+        }
+    }
+    imageEditor.canUndo = function(v){
+        imageEditor.can(v, imageEditor.undoButton);
+    }
+    imageEditor.canRedo = function(v){
+        imageEditor.can(v, imageEditor.redoButton);
+    }
+    imageEditor.canSave = function(v){
+        imageEditor.can(v, imageEditor.saveButton);
+        imageEditor.can(v, imageEditor.cancelButton);
     }
     
     imageEditor.addResizable = function(){
