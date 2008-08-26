@@ -14,18 +14,21 @@ ImageEditor = function(){
     imageEditor.serverCropSaveButton = $('input#serverCropSaveButton');
     imageEditor.serverCropAndResize = $('div#actionButtons input#cropAndResize');
     imageEditor.applyButton = $('div#actionButtons input#apply');
-    imageEditor.undo = $('div#actionButtons input#undo');
-    imageEditor.redo = $('div#actionButtons input#redo');
+    imageEditor.undoButton = $('div#actionButtons input#undo');
+    imageEditor.redoButton = $('div#actionButtons input#redo');
 
+    imageEditor.manageButton = $('div#manageButtons');
     imageEditor.actionButtons = $('div#actionButtons');
 
     imageEditor.image = $('div#imageEditor div#imageContainer img#sourceImage');
-    imageEditor.cropSelection = null;
-    imageEditor.cropperBorderSize = 2;
     imageEditor.imageContainer = $('div#imageEditor div#imageContainer');
+    
     imageEditor.slider = $('div#manageButtons div#slider');
     imageEditor.sliderPercentage = $('div#manageButtons div#slider p');
     imageEditor.useZoomInput = $('div#manageButtons div.useZoom input#useZoom');
+
+    imageEditor.cropSelection = null;
+    imageEditor.cropperBorderSize = 2;
     
     imageEditor.initialize = function(){
         imageEditor.setInitialSizes();
@@ -34,8 +37,10 @@ ImageEditor = function(){
         imageEditor.setupApplyButton();
         imageEditor.setupRotates();
         imageEditor.setupSlider();
+        imageEditor.setupUserWarning();
         
         imageEditor.actionButtons.draggable();
+        
     };
     
     imageEditor.reset = function(){
@@ -96,6 +101,14 @@ ImageEditor = function(){
         });
     };
     
+    imageEditor.setupUserWarning = function(){
+        window.onbeforeunload = function(){
+            if(!imageEditor.saveButton.hasClass('disabled')){
+                return 'You have unsaved changes to this image that will be lost.';
+            }
+        }
+    }
+    
     imageEditor.setupRotates = function(){
         $([imageEditor.rotateLeftButton, imageEditor.rotateRightButton, 
             imageEditor.flipHorizontallyButton, imageEditor.flipVerticallyButton]).each(function(){
@@ -106,18 +119,33 @@ ImageEditor = function(){
         });
     };
     
+    imageEditor.canApply = function(v){
+        if(v){
+            imageEditor.applyButton.removeClass('disabled');
+            imageEditor.applyButton.addClass('enabled');
+            imageEditor.applyButton[0].disabled = false;
+        }else{
+            imageEditor.applyButton.addClass('disabled');
+            imageEditor.applyButton.removeClass('enabled');
+            imageEditor.applyButton[0].disabled = true;
+        }
+    }
+    
     imageEditor.addResizable = function(){
         imageEditor.image.resizable({
             aspectRatio: true
         });
 		imageEditor.resizeButton.attr('value', 'Cancel Resize');
 		imageEditor.resizeButton.addClass('editing');
+		imageEditor.canApply(true);
     };
     imageEditor.removeResizable = function(){
         imageEditor.image.resizable('destroy');
 		imageEditor.resizeButton.attr('value', 'resize');
 		imageEditor.image.attr('style', "");
 		imageEditor.resizeButton.removeClass('editing');
+		imageEditor.canApply(false);
+		
 		if(imageEditor.getZoom() != 100){
 		    imageEditor.image.width(imageEditor.resizedImageWidth);
     		imageEditor.image.height(imageEditor.resizedImageHeight);
@@ -156,6 +184,7 @@ ImageEditor = function(){
         });
         imageEditor.cropButton.attr('value', 'Cancel Cropping');
         imageEditor.cropButton.addClass('editing');
+        imageEditor.canApply(true);
     };
     imageEditor.removeCropper = function(){
         imageEditor.image.imgAreaSelect({ 
@@ -164,6 +193,7 @@ ImageEditor = function(){
         });
         imageEditor.cropButton.attr('value', 'crop');
         imageEditor.cropButton.removeClass('editing');
+        imageEditor.canApply(false);
     }
     
     imageEditor.setupCropButton = function(){

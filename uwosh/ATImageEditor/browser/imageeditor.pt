@@ -47,8 +47,8 @@
 			<input type="hidden" class="imageHeight" tal:attributes="value python: here.getSize()[1]" />
 			
 			<div id="manageButtons">
-				<input id="save" type="button" value="save" />
-				<input id="cancel" type="button" value="discard changes" />
+				<input id="save" class="disabled" type="button" value="save" />
+				<input id="cancel" class="disabled" type="button" value="cancel" />
 				<div id="slider" class="ui-slider-1">
 					<p>100%</p>
 					<div class="ui-slider-handle"></div>
@@ -84,9 +84,9 @@
 				<input id="rotate-right" type="button" value="rotate right" />
 				<input id="resize" type="button" value="resize" />
 				<input id="crop" type="button" value="crop" />
+				<input id="apply" class="disabled" type="button" value="apply" />
 				<input id="undo" type="button" value="undo" />
 				<input id="redo" type="button" value="redo" />
-				<input id="apply" type="button" value="apply" />
 			</div>
 			<div id="imageContainer">
 				<img id="sourceImage" tal:attributes="src view/image_url" />

@@ -23,13 +23,17 @@ from zope.interface import Interface
 class IImageEditorCommands(Interface):
     """The commands"""
 
-    def reloadImage():
+    def setImage():
         """
         """
 
 class ImageEditorCommands(CommandSet):
     implements(IImageEditorCommands)
         
-    def setImage(self, selector):
+    def setImage(self, selector, url, canUndo, canRedo, canSave):
         """ see interfaces.py """
         command = self.commands.addCommand('setImage', selector)
+        command.addParam('url', url)
+        command.addParam('canUndo', canUndo)
+        command.addParam('canRedo', canRedo)
+        command.addParam('canSave', canSave)

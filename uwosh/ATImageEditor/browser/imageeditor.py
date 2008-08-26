@@ -11,6 +11,7 @@ from PIL import Image
 from cStringIO import StringIO
 import random
 from Products.ATContentTypes.content.image import ATImage
+from time import gmtime, strftime
 
 class UnredoStack:
     
@@ -32,14 +33,12 @@ class UnredoStack:
         
     def undo(self):
         self.pos = self.pos - 1
-        return self.stack[self.pos]
         
     def canUndo(self):
         return self.pos > 0
         
     def redo(self):
         self.pos = self.pos + 1
-        return self.stack[self.pos]
 
     def canRedo(self):
         return self.pos + 1 < len(self.stack)
@@ -49,33 +48,26 @@ class Edit(BrowserView):
     template = ViewPageTemplateFile('imageeditor.pt')
 
     def __call__(self):
+        #reset on each visit to page
+        self.context.unredo = UnredoStack(self.context.data)
         return self.template()
         
     def image_url(self):
         """
         This is used because sometimes browsers cache images that may have been edited
         """
-        return self.context.absolute_url() + "/showcurrentedit?" + str(random.randint(0, 1000))
+        return self.context.absolute_url() + "?" + str(random.randint(0, 1000000))
 
 class ShowCurrentEdit(BrowserView):
 
     def __call__(self):
         
-        data = None
-        try:
-            data = self.context.unredo.getCurrent()
-        except:
-            self.context.unredo = UnredoStack(self.context.data)
-            data = self.context.unredo.getCurrent()
-        
         RESPONSE = self.request.response
         REQUEST = self.request
-        RESPONSE.setHeader('Content-Disposition',
-                               'attachment; filename=%s' % self.context.getId())
-        RESPONSE.setHeader('Content-Type', 'image/jpg')
-        RESPONSE.setHeader('Content-Length', len(data))
-
-        RESPONSE.write(data)
+        RESPONSE.setHeader('Content-Type', 'image/jpeg')
+        RESPONSE.setHeader('Content-Length', len(self.context.unredo.getCurrent()))
+        RESPONSE.setHeader('Last-Modified', strftime('%a, %d %b %Y %H:%M:%S +0000', gmtime()))
+        RESPONSE.write(self.context.unredo.getCurrent())
         return ''
         
 class ImageEditorKSS(PloneKSSView):
@@ -84,38 +76,44 @@ class ImageEditorKSS(PloneKSSView):
     def getImageData(self):
         return StringIO(self.context.unredo.getCurrent())
 
+    def callSetImageCommand(self):
+        imageCommands = self.getCommandSet('imageeditor')
+        ksscore = self.getCommandSet('core')
+        imageCommands.setImage(
+            ksscore.getSameNodeSelector(), 
+            self.context.absolute_url() + "/showcurrentedit?" + str(random.randint(0, 1000000)),
+            str(int(self.context.unredo.canUndo())),
+            str(int(self.context.unredo.canRedo())),
+            str(int(self.context.unredo.pos > 0))
+        )
+        
     def setImage(self, value):
         value.seek(0)
         self.context.unredo.do(value.read())
         
-        atimageCommands = self.getCommandSet('imageeditor')
-        ksscore = self.getCommandSet('core')
-        atimageCommands.setImage(ksscore.getSameNodeSelector())
+        self.callSetImageCommand()
 
     @kssaction
     def saveImageEdit(self):
-        self.context.setImage(self.context.unredo.getCurrent())
+        current = self.context.unredo.getCurrent()
+        self.context.setImage(current)
+        self.context.unredo = UnredoStack(current)
+        self.callSetImageCommand()
     
     @kssaction 
     def cancelImageEdit(self):
-        self.context.do(self.context.data)
-        atimageCommands = self.getCommandSet('imageeditor')
-        ksscore = self.getCommandSet('core')
-        atimageCommands.setImage(ksscore.getSameNodeSelector())
+        self.context.unredo = UnredoStack(self.context.data)
+        self.callSetImageCommand()
         
     @kssaction
     def redoImageEdit(self):
         self.context.unredo.redo()
-        atimageCommands = self.getCommandSet('imageeditor')
-        ksscore = self.getCommandSet('core')
-        atimageCommands.setImage(ksscore.getSameNodeSelector())
+        self.callSetImageCommand()
 
     @kssaction 
     def undoImageEdit(self):
         self.context.unredo.undo()
-        atimageCommands = self.getCommandSet('imageeditor')
-        ksscore = self.getCommandSet('core')
-        atimageCommands.setImage(ksscore.getSameNodeSelector())
+        self.callSetImageCommand()
 
     @kssaction
     def rotateImageLeft(self):
@@ -196,10 +194,8 @@ class ImageEditorKSS(PloneKSSView):
 
         data.seek(0)
         
-        self.context.setImage(data)
-        
         #crop
-        image = Image.open(self.getImageData())
+        image = Image.open(StringIO(data.read()))
         format = image.format
         box = (int(topLeftX), int(topLeftY), int(bottomRightX), int(bottomRightY))
         new_image = image.crop(box=box)
