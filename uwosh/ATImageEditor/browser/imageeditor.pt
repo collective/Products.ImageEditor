@@ -6,23 +6,12 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="uwosh.ImageEditor">
 <metal:js fill-slot="javascript_head_slot">
+
 	<script type="text/javascript" 
 			tal:attributes="src string:${context/++resource++ImageEditor.resources}/jquery.ui-1.5.2/jquery-1.2.6.js">
 	</script>
 	<script type="text/javascript" 
-			tal:attributes="src string:${context/++resource++ImageEditor.resources}/jquery.ui-1.5.2/ui/ui.core.js">
-	</script>
-	<script type="text/javascript" 
-			tal:attributes="src string:${context/++resource++ImageEditor.resources}/jquery.ui-1.5.2/ui/ui.draggable.js">
-	</script>
-	<script type="text/javascript" 
-			tal:attributes="src string:${context/++resource++ImageEditor.resources}/jquery.ui-1.5.2/ui/ui.resizable.js">
-	</script>
-	<script type="text/javascript" 
-			tal:attributes="src string:${context/++resource++ImageEditor.resources}/jquery.ui-1.5.2/ui/ui.slider.js">
-	</script>
-	<script type="text/javascript" 
-			tal:attributes="src string:${context/++resource++ImageEditor.resources}/jquery.ui-1.5.2/ui/ui.dialog.js">
+			tal:attributes="src string:${context/++resource++ImageEditor.resources}/jquery-ui-personalized-1.6b.min.js">
 	</script>
 	<script type="text/javascript" 
 			tal:attributes="src string:${context/++resource++ImageEditor.resources}/imgareaselect-0.4.2/jquery.imgareaselect-0.4.2.min.js">
@@ -48,10 +37,11 @@
 							height python: here.getSize()[1];">
 			<input type="hidden" class="imageWidth" tal:attributes="value python: here.getSize()[0]" />
 			<input type="hidden" class="imageHeight" tal:attributes="value python: here.getSize()[1]" />
+			<input type="hidden" class="canCompress" tal:attributes="value view/canCompress">
 			
 			<div id="manageButtons">
-				<input id="save" class="disabled" disabled="true" type="button" value="save" />
-				<input id="cancel" class="disabled" disabled="true" type="button" value="cancel" />
+				<input id="save" class="disabled context" disabled="true" type="button" value="save" />
+				<input id="cancel" class="disabled standalone" disabled="true" type="button" value="cancel" />
 				<div id="slider" class="imageeditor-slider">
 					<p>100%</p>
 					<div class="ui-slider-handle"></div>
@@ -63,12 +53,6 @@
 			</div>
 			<div id="actionButtons">
 				<div id="menuHandle"></div>
-				<div id="cropAndResizeButtonContainer">
-					<input id="resize" type="button" value="resize" />
-					<input id="crop" type="button" value="crop" />
-					<input id="apply" class="disabled" type="button" value="apply" />
-				</div>
-				
 				<input 	id="serverResizeSaveButton" 
 						type="button" 
 						value="nothing" 
@@ -84,6 +68,21 @@
 						value="nothing" 
 						style="display:none"
 						tal:attributes="class string:kssattr-tlx-200 kssattr-tly-200 kssattr-brx-500 kssattr-bry-500 kssattr-width-${width} kssattr-height-${height}"/>
+						
+						
+						
+				<input id="compression" type="button" value="quality" />
+				<div id="compressiondialog" class="imageeditor-dialog" style="display:none">
+					<p>Choose the level of compression</p>
+					<div id="compressionslider" class="imageeditor-slider">
+						<p>75%</p>
+						<div class="ui-slider-handle"></div>
+					</div><br /><br />
+					<input 	id="performCompression" 
+							type="button" 
+							value="Apply"
+							tal:attributes="class string:kssattr-amount-0" />
+				</div>
 				<input id="flipOnVerticalAxis" type="button" value="flip vertically" />
 				<input id="flipOnHorizontalAxis" type="button" value="flip horizontally" />
 				<input id="rotate-left" type="button" value="rotate left" />
@@ -93,34 +92,20 @@
 				<div id="blurdialog" class="imageeditor-dialog" style="display:none">
 					<p>Choose the level to blur to...</p>
 					<div id="blurslider" class="imageeditor-slider">
-						<p>0</p>
+						<p>1</p>
 						<div class="ui-slider-handle"></div>
 					</div><br /><br />
 					<input 	id="performBlur" 
 							type="button" 
 							value="Apply" 
 							tal:attributes="class string:kssattr-amount-0"/>
-				</div>
-				
-				<input id="compression" type="button" value="compression" />
-				<div id="compressiondialog" class="imageeditor-dialog" style="display:none">
-					<p>Choose the level of compression</p>
-					<div id="compressionslider" class="imageeditor-slider">
-						<p>0%</p>
-						<div class="ui-slider-handle"></div>
-					</div><br /><br />
-					<input 	id="performCompression" 
-							type="button" 
-							value="Apply"
-							tal:attributes="class string:kssattr-amount-0" />
-				</div>
-				
+				</div>				
 				
 				<input id="brightness" type="button" value="brightness" />
 				<div id="brightnessdialog" class="imageeditor-dialog" style="display:none">
 					<p>Choose the level of brightness</p>
 					<div id="brightnessslider" class="imageeditor-slider">
-						<p>0%</p>
+						<p>50%</p>
 						<div class="ui-slider-handle"></div>
 					</div><br /><br />
 					<input 	id="performBrightness" 
@@ -133,7 +118,7 @@
 				<div id="contrastdialog" class="imageeditor-dialog" style="display:none">
 					<p>Choose the level of contrast</p>
 					<div id="contrastslider" class="imageeditor-slider">
-						<p>0%</p>
+						<p>50%</p>
 						<div class="ui-slider-handle"></div>
 					</div><br /><br />
 					<input 	id="performContrast" 
@@ -146,7 +131,7 @@
 				<div id="sharpendialog" class="imageeditor-dialog" style="display:none">
 					<p>Choose the level of sharpening</p>
 					<div id="sharpenslider" class="imageeditor-slider">
-						<p>0</p>
+						<p>1.0</p>
 						<div class="ui-slider-handle"></div>
 					</div><br /><br />
 					<input 	id="performSharpen" 
@@ -154,6 +139,13 @@
 							value="Apply"
 							tal:attributes="class string:kssattr-amount-0" />
 				</div>
+				
+				<div id="cropAndResizeButtonContainer">
+					<input id="resize" type="button" value="resize" />
+					<input id="crop" type="button" value="crop" />
+					<input id="apply" class="disabled" type="button" value="apply" />
+				</div>
+				
 				<input id="undo" class="disabled" disabled="true" type="button" value="undo" />
 				<input id="redo" class="disabled" disabled="true" type="button" value="redo" />
 				

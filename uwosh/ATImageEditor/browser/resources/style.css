@@ -22,12 +22,12 @@ div#actionButtons div#menuHandle{
 div#actionButtons{
     background-color:#f9f9f9;
     border: 2px solid black;
-    width:125px;
+    width:135px;
     z-index:1001;
     padding:3px;
-    float:left;
     position:absolute;
     margin: auto;
+    text-align:center;
     opacity:.9;
     left:700px;
     top:140px;
@@ -35,7 +35,7 @@ div#actionButtons{
 
 div#cropAndResizeButtonContainer{
     background-color:#F0EBEE;
-    border:2px solid #696473;
+    border:2px solid black;
     margin-bottom:2px;
     padding:2px 2px 0px 2px;
 }
@@ -76,17 +76,17 @@ div#manageButtons input{
     background-repeat: no-repeat;
 	padding: 1px 1px 1px 16px;
 	cursor:pointer;
-	border: 2px solid gray;
-	background-color: #f1f1f1;
 	float:left;
 	margin:1px 5px 3px 0px;
 }
+
 div#actionButtons input.editing{
     border-color:black;
     background-color:gray;
     color:white;
     cursor:pointer;
 }
+
 div#actionButtons input.enabled{
     background-color:white;
     border-color:black;
@@ -96,8 +96,9 @@ div#actionButtons input.disabled{
     border-color:black;
     background-color:gray;
     color:black;
-    cursor:auto;
+    cursor:default;
 }
+
 div#actionButtons input#crop{
 	background-image: url(icons/stock-selection-intersect-16.png);
 }
@@ -113,12 +114,7 @@ div#actionButtons input#rotate-right{
 div#actionButtons input#apply{
 	background-image: url(icons/apply.png);
 }
-div#manageButtons input#save{
-	background-image: url(icons/apply.png);
-}
-div#manageButtons input#cancel{
-	background-image: url(icons/process-stop.png);
-}
+
 div#actionButtons input#flipOnVerticalAxis{
 	background-image: url(icons/stock-tool-rotate-16.png);
 }

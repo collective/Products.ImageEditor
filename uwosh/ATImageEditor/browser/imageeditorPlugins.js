@@ -1,12 +1,14 @@
 kukit.actionsGlobalRegistry.register('setImage', function(oper) {
 ;;; oper.componentName = '[setImage] action';
-    var image = document.imageEditor.image;
+    var oldImage = document.imageEditor.image;
+    var newImage = jq('<img style="display:none" id="sourceImage" src="' + oper.parms.url + '" />');
     var ie = document.imageEditor;
     
+    ie.imageContainer.css('height', oper.parms.height + "px");
     ie.removeCropper();
     ie.removeResizable();
-    image.remove();
-    jq('<img id="sourceImage" src="' + oper.parms.url + '" />').appendTo(ie.imageContainer).show();
+    oldImage.remove();
+    newImage.appendTo(ie.imageContainer).fadeIn('slow');
     ie.image = ie.imageContainer.children();
     ie.reset();
     
@@ -15,7 +17,7 @@ kukit.actionsGlobalRegistry.register('setImage', function(oper) {
     oper.parms.canSave == '1' ? ie.canSave(true) : ie.canSave(false);
     
     $('span#imageSize').html(oper.parms.size);
-    ie.calculateWidthAndHeight();
+    ie.imagePixels.html(oper.parms.width + "x" + oper.parms.height);
 });
 
 kukit.commandsGlobalRegistry.registerFromAction('setImage', kukit.cr.makeSelectorCommand);

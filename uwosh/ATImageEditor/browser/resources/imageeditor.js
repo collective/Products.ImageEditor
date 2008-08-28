@@ -1,6 +1,6 @@
 ImageEditor = function(){
     
-    imageEditor = this;
+    var imageEditor = this;
 
     //Manage elements
     imageEditor.manageButtons = $('div#manageButtons');
@@ -28,41 +28,108 @@ ImageEditor = function(){
     imageEditor.undoButton = $('div#actionButtons input#undo');
     imageEditor.redoButton = $('div#actionButtons input#redo');
     
-    imageEditor.blur = {
-        perform: $('div#actionButtons div#blurdialog input#performBlur'),
-        button: $('div#actionButtons input#blur'),
-        dialog: $('div#blurdialog'),
-        slider: $('div#blurslider'),
-        percentage: $('div#blurslider p')
-    }
-    imageEditor.compression = {
-        perform: $('div#actionButtons div#compressiondialog input#performCompression'),
-        button: $('div#actionButtons input#compression'),
-        dialog: $('div#actionButtons div#compressiondialog'),
-        slider: $('div#compressionslider'),
-        percentage: $('div#compressionslider p')
-    }
-    imageEditor.contrast = {
-        perform: $('div#actionButtons div#contrastdialog input#performContrast'),
-        button: $('div#actionButtons input#contrast'),
-        dialog: $('div#actionButtons div#contrastdialog'),
-        slider: $('div#contrastslider'),
-        percentage: $('div#contrastslider p')
-    }
-    imageEditor.brightness = {
-        perform: $('div#actionButtons div#brightnessdialog input#performBrightness'),
-        button: $('div#actionButtons input#brightness'),
-        dialog: $('div#actionButtons div#brightnessdialog'),
-        slider: $('div#brightnessslider'),
-        percentage: $('div#brightnessslider p')
-    }
-    imageEditor.sharpen = {
-        perform: $('div#actionButtons div#sharpendialog input#performSharpen'),
-        button: $('div#actionButtons input#sharpen'),
-        dialog: $('div#actionButtons div#sharpendialog'),
-        slider: $('div#sharpenslider'),
-        percentage: $('div#sharpenslider p')
-    }
+    imageEditor.actions = {
+        list: ['sharpen', 'blur', 'compression', 'contrast', 'brightness'],
+        blur: {
+            perform: $('div#actionButtons div#blurdialog input#performBlur'),
+            performClick: function(){ imageEditor.actions.blur.dialog.dialog('close'); },
+            button: $('div#actionButtons input#blur'),
+            buttonClick: function(){ imageEditor.actions.blur.dialog.dialog('open'); },
+            dialog: $('div#blurdialog'),
+            slider: {
+                element: $('div#blurslider'),
+                min:0,
+                max:8,
+                steps:8,
+                startValue: 1,
+                change: function(e, ui){
+                    imageEditor.actions.blur.percentage.html(String(ui.value));
+                    kukit.dom.setKssAttribute(imageEditor.actions.blur.perform[0], 'amount', String(ui.value));
+                }
+            },
+            percentage: $('div#blurslider p')
+        },
+        compression: {
+            perform: $('div#actionButtons div#compressiondialog input#performCompression'),
+            performClick: function(){ imageEditor.actions.compression.dialog.dialog('close'); },
+            button: $('div#actionButtons input#compression'),
+            buttonClick: function(){ imageEditor.actions.compression.dialog.dialog('open'); },
+            dialog: $('div#actionButtons div#compressiondialog'),
+            slider: {
+                element: $('div#compressionslider'),
+                min:0,
+                max:100,
+                steps:100,
+                startValue: 75,
+                change: function(e, ui){
+                    imageEditor.actions.compression.percentage.html(ui.value + "%");
+                    kukit.dom.setKssAttribute(imageEditor.actions.compression.perform[0], 'amount', ui.value);
+                }
+            },
+            percentage: $('div#compressionslider p')
+        },
+        contrast: {
+            perform: $('div#actionButtons div#contrastdialog input#performContrast'),
+            performClick: function(){ imageEditor.actions.contrast.dialog.dialog('close'); },
+            button: $('div#actionButtons input#contrast'),
+            buttonClick: function(){ imageEditor.actions.contrast.dialog.dialog('open'); },
+            dialog: $('div#actionButtons div#contrastdialog'),
+            slider: {
+                element: $('div#contrastslider'),
+                min:0,
+                max:100,
+                steps:100,
+                startValue: 50,
+                change: function(e, ui){
+                    imageEditor.actions.contrast.percentage.html(ui.value + "%");
+                    kukit.dom.setKssAttribute(imageEditor.actions.contrast.perform[0], 'amount', ui.value);
+                }
+            },
+            percentage: $('div#contrastslider p')
+        },
+        brightness: {
+            perform: $('div#actionButtons div#brightnessdialog input#performBrightness'),
+            performClick: function(){ imageEditor.actions.brightness.dialog.dialog('close'); },
+            button: $('div#actionButtons input#brightness'),
+            buttonClick: function(){ imageEditor.actions.brightness.dialog.dialog('open'); },
+            dialog: $('div#actionButtons div#brightnessdialog'),
+            slider: {
+                element: $('div#brightnessslider'),
+                min:0,
+                max:100,
+                steps:100,
+                startValue: 50,
+                change: function(e, ui){
+                    imageEditor.actions.brightness.percentage.html(ui.value + "%");
+                    kukit.dom.setKssAttribute(imageEditor.actions.brightness.perform[0], 'amount', ui.value);
+                }
+            },
+            percentage: $('div#brightnessslider p')
+        },
+        sharpen: {
+            perform: $('div#actionButtons div#sharpendialog input#performSharpen'),
+            performClick: function(){ imageEditor.actions.sharpen.dialog.dialog('close'); },
+            button: $('div#actionButtons input#sharpen'),
+            buttonClick: function(){ imageEditor.actions.sharpen.dialog.dialog('open'); },
+            dialog: $('div#actionButtons div#sharpendialog'),
+            slider: {
+                element: $('div#sharpenslider'),
+                min:0,
+                max:80,
+                steps:80,
+                startValue: 10,
+                change: function(e, ui){
+                    var value = "0";
+                    if(ui.value != 0){
+                        value = String(ui.value/10);
+                    }
+                    imageEditor.actions.sharpen.percentage.html(value);
+                    kukit.dom.setKssAttribute(imageEditor.actions.sharpen.perform[0], 'amount', value);
+                }
+            },
+            percentage: $('div#sharpenslider p')
+        }
+    };
 
     imageEditor.imagePixels = $('span#imagePixels');
 
@@ -92,136 +159,58 @@ ImageEditor = function(){
         imageEditor.setupRotates();
         imageEditor.setupSlider();
         imageEditor.setupUserWarning();
-        imageEditor.setupBlur();
-        imageEditor.setupCompression();
-        imageEditor.setupContrast();
-        imageEditor.setupBrightness();
-        imageEditor.setupSharpen();
+        imageEditor.setupActions();
         imageEditor.actionButtons.draggable();
         imageEditor.calculateWidthAndHeight();
+        
+        if($('input.canCompress').attr('value') == "False"){
+            imageEditor.actions.compression.button.addClass('disabled');
+        }
+        
+    };
+    
+    imageEditor.setInitialSizes = function(){
+        imageEditor.imageWidth = imageEditor.image.width();
+        imageEditor.imageHeight = imageEditor.image.height();
     };
     
     imageEditor.calculateWidthAndHeight = function(){
         imageEditor.imagePixels.html(imageEditor.image.width() + "x" + imageEditor.image.height());
+    };
+    
+    imageEditor.setupActions = function(){
+        
+        var actions = imageEditor.actions.list;
+        
+        for(var i = 0; i < actions.length; i++){            
+            imageEditor.actions[actions[i]].dialog.show();//hidden at first...
+            imageEditor.actions[actions[i]].slider.element.slider({
+                min: imageEditor.actions[actions[i]].slider.min,
+                max: imageEditor.actions[actions[i]].slider.max,
+                steps: imageEditor.actions[actions[i]].slider.steps,
+                startValue: imageEditor.actions[actions[i]].slider.startValue,
+                change: imageEditor.actions[actions[i]].slider.change
+            });
+            imageEditor.actions[actions[i]].dialog.dialog(imageEditor.dialogSettings);
+            imageEditor.actions[actions[i]].perform.click(imageEditor.actions[actions[i]].performClick);
+            imageEditor.actions[actions[i]].button.click(imageEditor.actions[actions[i]].buttonClick);
+        }
     }
     
-    imageEditor.setupBlur = function(){
-        imageEditor.blur.slider.slider({
-            minValue:0,
-            maxValue:8,
-            steps:8,
-            startValue:4,
-            change: function(e, ui){
-                imageEditor.blur.percentage.html(Math.round(ui.value/12.5));
-                kukit.dom.setKssAttribute(imageEditor.blur.perform[0], 'amount', String(Math.round(ui.value/12.5)));
-            }
-        });
-        imageEditor.blur.dialog.show();//hidden at first...
-        imageEditor.blur.perform.click(function(){
-            imageEditor.blur.dialog.dialog('close');
-        });
+    imageEditor.setDefaultSliderPositions = function(){
+        var actions = imageEditor.actions.list;
         
-        imageEditor.blur.dialog.dialog(imageEditor.dialogSettings);
-        imageEditor.blur.button.click(function(){
-            imageEditor.blur.dialog.dialog('open');
-        });
-    }
-    
-    imageEditor.setupCompression = function(){
-        imageEditor.compression.slider.slider({
-            minValue:0,
-            maxValue:100,
-            steps:100,
-            startValue:100,
-            change: function(e, ui){
-                imageEditor.compression.percentage.html(ui.value + "%");
-                kukit.dom.setKssAttribute(imageEditor.compression.perform[0], 'amount', ui.value);
-            }
-        });
-        imageEditor.compression.dialog.show();//hidden at first...
-        imageEditor.compression.perform.click(function(){
-            imageEditor.compression.dialog.dialog('close');
-        });
-        
-        imageEditor.compression.dialog.dialog(imageEditor.dialogSettings);
-        imageEditor.compression.button.click(function(){
-            imageEditor.compression.dialog.dialog('open');
-        });
-    }
-    imageEditor.setupContrast = function(){
-        imageEditor.contrast.slider.slider({
-            minValue:0,
-            maxValue:100,
-            steps:100,
-            startValue:100,
-            change: function(e, ui){
-                imageEditor.contrast.percentage.html(ui.value + "%");
-                kukit.dom.setKssAttribute(imageEditor.contrast.perform[0], 'amount', ui.value);
-            }
-        });
-        imageEditor.contrast.dialog.show();//hidden at first...
-        imageEditor.contrast.perform.click(function(){
-            imageEditor.contrast.dialog.dialog('close');
-        });
-        
-        imageEditor.contrast.dialog.dialog(imageEditor.dialogSettings);
-        imageEditor.contrast.button.click(function(){
-            imageEditor.contrast.dialog.dialog('open');
-        });
-    }
-    imageEditor.setupBrightness = function(){
-        imageEditor.brightness.slider.slider({
-            minValue:0,
-            maxValue:100,
-            steps:100,
-            startValue:100,
-            change: function(e, ui){
-                imageEditor.brightness.percentage.html(ui.value + "%");
-                kukit.dom.setKssAttribute(imageEditor.brightness.perform[0], 'amount', ui.value);
-            }
-        });
-        imageEditor.brightness.dialog.show();//hidden at first...
-        imageEditor.brightness.perform.click(function(){
-            imageEditor.brightness.dialog.dialog('close');
-        });
-        
-        imageEditor.brightness.dialog.dialog(imageEditor.dialogSettings);
-        imageEditor.brightness.button.click(function(){
-            imageEditor.brightness.dialog.dialog('open');
-        });
-    }
-    imageEditor.setupSharpen = function(){
-        imageEditor.sharpen.slider.slider({
-            minValue:0,
-            maxValue:2,
-            steps:100,
-            startValue:0,
-            change: function(e, ui){
-                imageEditor.sharpen.percentage.html(ui.value/50);
-                kukit.dom.setKssAttribute(imageEditor.sharpen.perform[0], 'amount', ui.value/50);
-            }
-        });
-        imageEditor.sharpen.dialog.show();//hidden at first...
-        imageEditor.sharpen.perform.click(function(){
-            imageEditor.sharpen.dialog.dialog('close');
-        });
-        
-        imageEditor.sharpen.dialog.dialog(imageEditor.dialogSettings);
-        imageEditor.sharpen.button.click(function(){
-            imageEditor.sharpen.dialog.dialog('open');
-        });
-    }
+        for(var i = 0; i < actions.length; i++){
+            imageEditor.actions[actions[i]].slider.element.slider('moveTo', imageEditor.actions[actions[i]].slider.startValue);
+        }
+    };
     
     imageEditor.reset = function(){
         imageEditor.setInitialSizes();
         imageEditor.slider.slider('destroy');
         imageEditor.setupSlider();
         imageEditor.sliderPercentage.html("100%");
-    }
-    
-    imageEditor.setInitialSizes = function(){
-        imageEditor.imageWidth = imageEditor.image.width();
-        imageEditor.imageHeight = imageEditor.image.height();
+        //imageEditor.setDefaultSliderPositions();
     };
     
     imageEditor.getPct = function(value){
@@ -237,8 +226,8 @@ ImageEditor = function(){
     
     imageEditor.setupSlider = function(){        
         imageEditor.slider.slider({
-            minValue:0,
-            maxValue:100,
+            min:0,
+            max:100,
             steps:100,
             startValue:100,
             change: function(e, ui){
@@ -276,7 +265,7 @@ ImageEditor = function(){
                 return 'You have unsaved changes to this image that will be lost.';
             }
         }
-    }
+    };
     
     imageEditor.setupRotates = function(){
         $([imageEditor.rotateLeftButton, imageEditor.rotateRightButton, 
@@ -295,7 +284,8 @@ ImageEditor = function(){
         }else{
             imageEditor.applyButton.removeClass('enabled');
         }
-    }
+    };
+    
     imageEditor.can = function(v, button){
         if(v){
             button.removeClass('disabled');
@@ -304,17 +294,20 @@ ImageEditor = function(){
             button.addClass('disabled');
             button[0].disabled = true;
         }
-    }
+    };
+    
     imageEditor.canUndo = function(v){
         imageEditor.can(v, imageEditor.undoButton);
-    }
+    };
+    
     imageEditor.canRedo = function(v){
         imageEditor.can(v, imageEditor.redoButton);
-    }
+    };
+    
     imageEditor.canSave = function(v){
         imageEditor.can(v, imageEditor.saveButton);
         imageEditor.can(v, imageEditor.cancelButton);
-    }
+    };
     
     imageEditor.addResizable = function(){
         imageEditor.image.resizable({
@@ -327,6 +320,7 @@ ImageEditor = function(){
 		imageEditor.resizeButton.addClass('editing');
 		imageEditor.canApply(true);
     };
+    
     imageEditor.removeResizable = function(){
         imageEditor.image.resizable('destroy');
 		imageEditor.resizeButton.attr('value', 'resize');
@@ -369,7 +363,7 @@ ImageEditor = function(){
         imageEditor.image.imgAreaSelect({
             onSelectChange: function(image, selection){
                 imageEditor.cropSelection = selection;
-                imageEditor.imagePixels.html((selection.x2-selection.x1) + "x" + (selection.y2-selection.y1));
+                imageEditor.imagePixels.html(Math.round(selection.x2-selection.x1) + "x" + Math.round(selection.y2-selection.y1));
             },
             selectionColor: 'blue',
             enable: true,
@@ -385,6 +379,7 @@ ImageEditor = function(){
         imageEditor.cropButton.addClass('editing');
         imageEditor.canApply(true);
     };
+    
     imageEditor.removeCropper = function(){
         imageEditor.image.imgAreaSelect({ 
             enable: false,
@@ -394,7 +389,7 @@ ImageEditor = function(){
         imageEditor.cropButton.removeClass('editing');
         imageEditor.canApply(false);
         imageEditor.calculateWidthAndHeight();
-    }
+    };
     
     imageEditor.setupCropButton = function(){
         imageEditor.cropButton.click(function(){
@@ -408,13 +403,15 @@ ImageEditor = function(){
         	}
         });
     };
+    
     imageEditor.useZoom = function(){
         return imageEditor.useZoomInput[0].checked;
     };
+    
     imageEditor.getZoom = function(){
         var pc = imageEditor.sliderPercentage.html();
         return parseInt(pc.substr(0, pc.length-1));
-    }
+    };
     
     imageEditor.getResize = function(){
         var zoom = imageEditor.getZoom();
@@ -425,8 +422,8 @@ ImageEditor = function(){
             }
         }else{
             return{
-                width: Math.round(imageEditor.image.width()/imageEditor.getPct(zoom)),
-                height: Math.round(imageEditor.image.height()/imageEditor.getPct(zoom))
+                width: imageEditor.image.width()/imageEditor.getPct(zoom),
+                height: imageEditor.image.height()/imageEditor.getPct(zoom)
             }
         }
     };
@@ -438,13 +435,13 @@ ImageEditor = function(){
             return imageEditor.cropSelection;
         }else{
             var cs = imageEditor.cropSelection;
-            cs.x1 = Math.round(cs.x1/zoomPct);
-            cs.x2 = Math.round(cs.x2/zoomPct);
-            cs.y1 = Math.round(cs.y1/zoomPct);
-            cs.y2 = Math.round(cs.y2/zoomPct);
+            cs.x1 = cs.x1/zoomPct;
+            cs.x2 = cs.x2/zoomPct;
+            cs.y1 = cs.y1/zoomPct;
+            cs.y2 = cs.y2/zoomPct;
             return cs
         }
-    }
+    };
     
     imageEditor.setupApplyButton = function(){
         imageEditor.applyButton.click(function(){

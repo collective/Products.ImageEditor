@@ -5,6 +5,7 @@ docs/HISTORY.txt
 docs/INSTALL.txt
 docs/LICENSE.GPL
 docs/LICENSE.txt
+docs/TODO.txt
 uwosh/__init__.py
 uwosh.ATImageEditor.egg-info/PKG-INFO
 uwosh.ATImageEditor.egg-info/SOURCES.txt
@@ -30,6 +31,7 @@ uwosh/ATImageEditor/browser/imageeditor.pt
 uwosh/ATImageEditor/browser/imageeditor.py
 uwosh/ATImageEditor/browser/imageeditorPlugins.js
 uwosh/ATImageEditor/browser/resources/imageeditor.js
+uwosh/ATImageEditor/browser/resources/jquery-ui-personalized-1.6b.min.js
 uwosh/ATImageEditor/browser/resources/style.css
 uwosh/ATImageEditor/browser/resources/icons/apply.png
 uwosh/ATImageEditor/browser/resources/icons/edit-redo.png
