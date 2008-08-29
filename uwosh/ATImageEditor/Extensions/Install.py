@@ -9,6 +9,8 @@ def beforeUninstall(self, cascade, product, reinstall):
 def afterInstall(self, reinstall=False, **kwargs):
     out = StringIO()
     
+    #done with generic setup -- the way it should be done...
+    """
     pt = self.portal_types
     imct = pt.Image
 
@@ -25,5 +27,6 @@ def afterInstall(self, reinstall=False, **kwargs):
     
     transform_action = [action for action in imct._actions if action.id == 'transform'][0]
     transform_action.visible = False
-
+    """
+    
     return out.getvalue()

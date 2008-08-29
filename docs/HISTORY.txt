@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.2b2
+----------------
+*added versioning support
+
 0.2b1
 ----------------
 *mobile actions window

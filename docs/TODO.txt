@@ -1,6 +1,6 @@
-*add history support - unsure as to how I can do this
 *move javascripts into portal_javascripts
 *remove product jquery 1.2.6 file - might not be able to do since older versions of plone use a different version of the jquery library
 *rename product to Products.ImageEditor? - shouldn't be too much of a problem
 *maybe add PLIP?
 *viewing after editing caching....
+*Plone 3.0.* issue?

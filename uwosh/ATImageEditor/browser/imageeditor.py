@@ -23,7 +23,7 @@ class Edit(BrowserView):
 
     template = ViewPageTemplateFile('imageeditor.pt')
 
-    def __call__(self):
+    def __call__(self):        
         #reset on each visit to page
         self.context.unredo = UnredoStack(self.context.data)
         return self.template()
@@ -53,7 +53,7 @@ class ShowCurrentEdit(BrowserView):
         resp.setHeader('Last-Modified', strftime('%a, %d %b %Y %H:%M:%S +0000', gmtime()))
         resp.write(self.context.unredo.getCurrent())
         return ''
-        
+
 class ImageEditorKSS(PloneKSSView):
     implements(IPloneKSSView)
 
@@ -61,6 +61,9 @@ class ImageEditorKSS(PloneKSSView):
         return Image.open(StringIO(self.context.unredo.getCurrent()))
 
     def callSetImageCommand(self):
+        """
+        
+        """
         imageCommands = self.getCommandSet('imageeditor')
         ksscore = self.getCommandSet('core')
         
@@ -85,18 +88,36 @@ class ImageEditorKSS(PloneKSSView):
 
     @kssaction
     def saveImageEdit(self):
+        """
+        This method gets the current image in the unredo stack and saves it to the
+        object.  It then saves the history of it and gets the version_message so
+        the history has better info...
+        """
+          
+        #force versioning to kick in
+        portal_repository = getToolByName(self.context, 'portal_repository')
+        if portal_repository.isVersionable(self.context):
+            portal_repository.save(self.context, comment = "")
+
         current = self.context.unredo.getCurrent()
         self.context.setImage(current)
         self.context.unredo = UnredoStack(current)
+        
         self.callSetImageCommand()
     
     @kssaction 
     def cancelImageEdit(self):
+        """
+        Just create a new UnredoStack and remove all edits
+        """
         self.context.unredo = UnredoStack(self.context.data)
         self.callSetImageCommand()
         
     @kssaction
     def redoImageEdit(self):
+        """
+        ...
+        """
         self.context.unredo.redo()
         self.callSetImageCommand()
 

@@ -234,3 +234,5 @@ uwosh/ATImageEditor/browser/resources/jquery.ui-1.5.2/ui/packed/ui.slider.packed
 uwosh/ATImageEditor/browser/resources/jquery.ui-1.5.2/ui/packed/ui.sortable.packed.js
 uwosh/ATImageEditor/browser/resources/jquery.ui-1.5.2/ui/packed/ui.tabs.packed.js
 uwosh/ATImageEditor/profiles/default/kssregistry.xml
+uwosh/ATImageEditor/profiles/default/types.xml
+uwosh/ATImageEditor/profiles/default/types/Image.xml
