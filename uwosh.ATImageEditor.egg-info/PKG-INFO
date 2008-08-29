@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: uwosh.ATImageEditor
-Version: 0.2b2
+Version: 0.2b3beta-r70860
 Summary: A product that adds an editor tab to ATImage so you can crop and resize an image
 Home-page: http://plone.org/products/atimageeditor
 Author: Nathan Van Gheem
@@ -13,7 +13,7 @@ Description: Introduction
         Changelog
         =========
         
-        0.2b2
+        0.2b3
         ----------------
         *added versioning support
         

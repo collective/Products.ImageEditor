@@ -35,8 +35,6 @@
 		<div 	id="imageEditor" 
 				tal:define="width python: here.getSize()[0];
 							height python: here.getSize()[1];">
-			<input type="hidden" class="imageWidth" tal:attributes="value python: here.getSize()[0]" />
-			<input type="hidden" class="imageHeight" tal:attributes="value python: here.getSize()[1]" />
 			<input type="hidden" class="canCompress" tal:attributes="value view/canCompress">
 			
 			<div id="manageButtons">
@@ -146,12 +144,13 @@
 					<input id="apply" class="disabled" type="button" value="apply" />
 				</div>
 				
-				<input id="undo" class="disabled" disabled="true" type="button" value="undo" />
-				<input id="redo" class="disabled" disabled="true" type="button" value="redo" />
-				
+				<div id="undoRedoContainer">
+					<input id="undo" class="disabled" disabled="true" type="button" value="undo" />
+					<input id="redo" class="disabled" disabled="true" type="button" value="redo" />
+				</div>
 				<p class="discreet" style="font-size:10px; text-align:center; margin: auto">
 					<span id="imageSize" tal:content="view/getSize" /> 
-					<span id="imagePixels" />
+					<span id="imagePixels">0 x 0</span>
 				</p>
 			</div>
 			<div id="imageContainer">

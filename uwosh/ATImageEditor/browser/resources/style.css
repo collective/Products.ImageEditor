@@ -26,7 +26,7 @@ div#actionButtons{
     z-index:1001;
     padding:3px;
     position:absolute;
-    margin: auto;
+    margin: auto auto auto 5px;
     text-align:center;
     opacity:.9;
     left:700px;
@@ -63,7 +63,7 @@ div#actionButtons input:hover, div.imageeditor-dialog input:hover{
     border: 2px solid black;
 }
 
-div#actionButtons input#undo, div#actionButtons input#redo{
+div#undoRedoContainer input{
     width:48%;
     padding-left:0px;
     padding-right:0px;

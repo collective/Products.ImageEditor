@@ -224,7 +224,7 @@ class ImageEditorKSS(PloneKSSView):
     def imageResizeSave(self, width, height):
         image = self.getImageData()
         format = image.format
-        size=( _(width), _(height) )
+        size=( float(width), float(height) )
         image = image.resize(size, Image.ANTIALIAS)
         data = StringIO()
         image.save(data, format)
@@ -236,7 +236,7 @@ class ImageEditorKSS(PloneKSSView):
     def imageCropSave(self, topLeftX, topLeftY, bottomRightX, bottomRightY):
         image = self.getImageData()
         format = image.format
-        box = (_(topLeftX), _(topLeftY), _(bottomRightX), _(bottomRightY))
+        box = (float(topLeftX), float(topLeftY), float(bottomRightX), float(bottomRightY))
         new_image = image.crop(box=box)
         new_image.load()
         #image = new_image
@@ -252,7 +252,7 @@ class ImageEditorKSS(PloneKSSView):
         #resize
         image = self.getImageData()
         format = image.format
-        size=( _(width), _(height) )
+        size=( float(width), float(height) )
         image = image.resize(size, Image.ANTIALIAS)
         data = StringIO()
         image.save(data, format)
@@ -262,7 +262,7 @@ class ImageEditorKSS(PloneKSSView):
         #crop
         image = Image.open(StringIO(data.read()))
         format = image.format
-        box = (_(topLeftX), _(topLeftY), _(bottomRightX), _(bottomRightY))
+        box = (float(topLeftX), float(topLeftY), float(bottomRightX), float(bottomRightY))
         new_image = image.crop(box=box)
         new_image.load()
         cropped_output = StringIO()

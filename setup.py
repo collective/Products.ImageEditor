@@ -24,7 +24,7 @@ setup(name='uwosh.ATImageEditor',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'setuptools'
+          'setuptools',
           # -*- Extra requirements: -*-
       ],
       entry_points="""

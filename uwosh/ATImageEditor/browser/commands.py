@@ -23,20 +23,21 @@ from zope.interface import Interface
 class IImageEditorCommands(Interface):
     """The commands"""
 
-    def setImage():
+    def setImage(selector, url, canUndo, canRedo, canSave, size, width, height, withKssSetup='True'):
         """
         """
 
 class ImageEditorCommands(CommandSet):
     implements(IImageEditorCommands)
         
-    def setImage(self, selector, url, canUndo, canRedo, canSave, size, width, height):
+    def setImage(self, selector, url, canUndo, canRedo, canSave, size, width, height, withKssSetup='True'):
         """ see interfaces.py """
         command = self.commands.addCommand('setImage', selector)
-        command.addParam('url', url)
-        command.addParam('canUndo', canUndo)
-        command.addParam('canRedo', canRedo)
-        command.addParam('canSave', canSave)
-        command.addParam('size', size)
-        command.addParam('width', width)
-        command.addParam('height', height)
+        data = command.addParam('url', url)
+        data = command.addParam('canUndo', canUndo)
+        data = command.addParam('canRedo', canRedo)
+        data = command.addParam('canSave', canSave)
+        data = command.addParam('size', size)
+        data = command.addParam('width', width)
+        data = command.addParam('height', height)
+        data = command.addParam('withKssSetup', withKssSetup)

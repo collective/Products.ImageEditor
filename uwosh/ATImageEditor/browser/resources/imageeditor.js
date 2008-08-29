@@ -1,3 +1,4 @@
+
 ImageEditor = function(){
     
     var imageEditor = this;
@@ -14,8 +15,45 @@ ImageEditor = function(){
     //Action elements
     imageEditor.actionButtons = $('div#actionButtons');
 
-    imageEditor.resizeButton = $('div#actionButtons div#cropAndResizeButtonContainer input#resize');
-    imageEditor.cropButton = $('div#actionButtons div#cropAndResizeButtonContainer input#crop');
+    imageEditor.resize = {
+        button: $('div#actionButtons div#cropAndResizeButtonContainer input#resize'),
+        config: function(){
+            return {
+                handles: 'se,e,s',
+                resize: function(e, ui){
+                    imageEditor.calculateWidthAndHeight();
+                }
+            }
+        }
+    };
+    imageEditor.crop = {
+        button: $('div#actionButtons div#cropAndResizeButtonContainer input#crop'),
+        config: function(){
+            var w = imageEditor.image.width();
+            var h = imageEditor.image.height();
+            imageEditor.cropSelection = {
+                x1: w/4,
+                y1: h/4,
+                x2: w-w/4,
+                y2: h-h/4
+            };
+            
+            return {
+                onSelectChange: function(image, selection){
+                    imageEditor.cropSelection = selection;
+                    imageEditor.imagePixels.html(Math.round(selection.x2-selection.x1) + "x" + Math.round(selection.y2-selection.y1));
+                },
+                selectionColor: 'blue',
+                enable: true,
+                border: 2,
+                show: true,
+                x1: imageEditor.cropSelection.x1,
+                y1: imageEditor.cropSelection.y1,
+                x2: imageEditor.cropSelection.x2,
+                y2: imageEditor.cropSelection.y2
+            }
+        }
+    }
     imageEditor.applyButton = $('div#actionButtons div#cropAndResizeButtonContainer input#apply');
 
     imageEditor.rotateRightButton = $('div#actionButtons input#rotate-right');
@@ -25,8 +63,8 @@ ImageEditor = function(){
     imageEditor.serverResizeSaveButton = $('input#serverResizeSaveButton');
     imageEditor.serverCropSaveButton = $('input#serverCropSaveButton');
     imageEditor.serverCropAndResize = $('div#actionButtons input#cropAndResize');
-    imageEditor.undoButton = $('div#actionButtons input#undo');
-    imageEditor.redoButton = $('div#actionButtons input#redo');
+    imageEditor.undoButton = $('input#undo');
+    imageEditor.redoButton = $('input#redo');
     
     imageEditor.actions = {
         list: ['sharpen', 'blur', 'compression', 'contrast', 'brightness'],
@@ -152,7 +190,6 @@ ImageEditor = function(){
     };
     
     imageEditor.initialize = function(){
-        imageEditor.setInitialSizes();
         imageEditor.setupResizeButton();
         imageEditor.setupCropButton();
         imageEditor.setupApplyButton();
@@ -167,11 +204,6 @@ ImageEditor = function(){
             imageEditor.actions.compression.button.addClass('disabled');
         }
         
-    };
-    
-    imageEditor.setInitialSizes = function(){
-        imageEditor.imageWidth = imageEditor.image.width();
-        imageEditor.imageHeight = imageEditor.image.height();
     };
     
     imageEditor.calculateWidthAndHeight = function(){
@@ -206,7 +238,6 @@ ImageEditor = function(){
     };
     
     imageEditor.reset = function(){
-        imageEditor.setInitialSizes();
         imageEditor.slider.slider('destroy');
         imageEditor.setupSlider();
         imageEditor.sliderPercentage.html("100%");
@@ -214,15 +245,77 @@ ImageEditor = function(){
     };
     
     imageEditor.getPct = function(value){
-        value = value + "";
-        if(value.length == 3){
-            return parseFloat(value[0] + '.' + value[1] + value[2]);
-        }else if(value.length == 2){
+        if(value == 100){
+            return 1;
+        }else if(value > 9){
             return parseFloat('.' + value);
         }else{
             return parseFloat('.0' + value);
         }
     };
+    
+    imageEditor.resetImageSize = function(){
+        var currentZoom = imageEditor.getCurrentImageZoomPct();
+        var w = Math.round(imageEditor.image[0].naturalWidth*currentZoom);
+        var h = Math.round(imageEditor.image[0].naturalHeight*currentZoom);
+
+        imageEditor.image.width(w);
+        imageEditor.image.height(h);
+    }
+    
+    /*
+     * @param pct: should be integer
+    */
+    imageEditor.setImagePercentSize = function(pct){
+        var w = imageEditor.image[0].naturalWidth;
+        var h = imageEditor.image[0].naturalHeight;
+        
+        var ic = imageEditor.isCropping();
+        var ir = imageEditor.isResizing();
+        var newPct = imageEditor.getPct(pct);
+        
+        w = Math.round(w*newPct);
+        h = Math.round(h*newPct);
+        
+        //cannot resize or crop while changing image size
+        if(ic){
+            imageEditor.image.imgAreaSelect({ enable: false, hide: true });
+        }else if(ir){
+            w = imageEditor.image.width();
+            h = imageEditor.image.height();
+            var currentZoom = imageEditor.getCurrentImageZoomPct();
+            w = Math.round((w/currentZoom)*newPct);
+            h = Math.round((h/currentZoom)*newPct);
+            
+            imageEditor.image.resizable('destroy');
+    	}
+        
+        imageEditor.image.width(w);
+        imageEditor.image.height(h);
+        
+        if(ic){
+            imageEditor.image.imgAreaSelect(imageEditor.crop.config());
+        }else if(ir){
+    		imageEditor.image.resizable(imageEditor.resize.config());
+    	}
+    };
+    
+    imageEditor.setImageZoomTitle = function(value){
+        imageEditor.sliderPercentage.html(value + '%');
+    };
+    imageEditor.getCurrentImageZoomPct = function(){
+        var html = imageEditor.sliderPercentage.html();
+        var v = parseInt(html.substr(0, html.length-1));
+        return imageEditor.getPct(v);
+    }
+    
+    imageEditor.isCropping = function(){
+        return imageEditor.crop.button.hasClass('editing');
+    };
+    
+    imageEditor.isResizing = function(){
+        return imageEditor.resize.button.hasClass('editing');
+    }
     
     imageEditor.setupSlider = function(){        
         imageEditor.slider.slider({
@@ -231,39 +324,19 @@ ImageEditor = function(){
             steps:100,
             startValue:100,
             change: function(e, ui){
-                if(imageEditor.imageWidth == 0){
-                    imageEditor.imageWidth = imageEditor.image.width();
-                    imageEditor.imageHeight = imageEditor.image.height();
-                }
-                var width = imageEditor.imageWidth;
-                var height = imageEditor.imageHeight;
-                imageEditor.resizedImageWidth = Math.round(width*imageEditor.getPct(ui.value));
-                imageEditor.resizedImageHeight = Math.round(height*imageEditor.getPct(ui.value));
-                if(ui.value != 100){
-                    imageEditor.image.width(imageEditor.resizedImageWidth);
-                    imageEditor.image.height(imageEditor.resizedImageHeight);
-                }else{
-                    imageEditor.image.width(width);
-                    imageEditor.image.height(height);
-                }
-                imageEditor.sliderPercentage.html(ui.value + '%');
-                
-                if(imageEditor.cropButton.attr('value').substring(0, 6) == "Cancel"){
-                    imageEditor.removeCropper();
-                    imageEditor.addCropper();
-                }else if(imageEditor.resizeButton.attr('value').substring(0, 6) == "Cancel"){
-                    imageEditor.removeResizable();
-            		imageEditor.addResizable();
-            	}
+                imageEditor.setImagePercentSize(ui.value);
+                imageEditor.setImageZoomTitle(ui.value);
             }
         });
     };
     
     imageEditor.setupUserWarning = function(){
-        window.onbeforeunload = function(){
-            if(!imageEditor.saveButton.hasClass('disabled')){
-                return 'You have unsaved changes to this image that will be lost.';
-            }
+        if($.browser.mozilla || $.browser.safari){
+            $(window).unload(function(){
+                if(!imageEditor.saveButton.hasClass('disabled')){
+                    return 'You have unsaved changes to this image that will be lost.';
+                }
+            });
         }
     };
     
@@ -271,8 +344,8 @@ ImageEditor = function(){
         $([imageEditor.rotateLeftButton, imageEditor.rotateRightButton, 
             imageEditor.flipHorizontallyButton, imageEditor.flipVerticallyButton]).each(function(){
             $(this).click(function(){
-                imageEditor.removeCropper();
-                imageEditor.removeResizable();
+                imageEditor.removeResizableUnintrusive();
+                imageEditor.removeCropperUnintrusive();
             });
         });
     };
@@ -310,40 +383,31 @@ ImageEditor = function(){
     };
     
     imageEditor.addResizable = function(){
-        imageEditor.image.resizable({
-            handles: 'se,e,s',
-            resize: function(e, ui){
-                imageEditor.calculateWidthAndHeight();
-            }
-        });
-		imageEditor.resizeButton.attr('value', 'Cancel Resize');
-		imageEditor.resizeButton.addClass('editing');
+        imageEditor.image.resizable(imageEditor.resize.config());
+		imageEditor.resize.button.attr('value', 'Cancel Resize');
+		imageEditor.resize.button.addClass('editing');
 		imageEditor.canApply(true);
     };
     
-    imageEditor.removeResizable = function(){
+    imageEditor.removeResizableUnintrusive = function(){
         imageEditor.image.resizable('destroy');
-		imageEditor.resizeButton.attr('value', 'resize');
+		imageEditor.resize.button.attr('value', 'resize');
 		imageEditor.image.attr('style', "");
-		imageEditor.resizeButton.removeClass('editing');
+		imageEditor.resize.button.removeClass('editing');
 		imageEditor.canApply(false);
+    };
+    
+    imageEditor.removeResizable = function(){
 		imageEditor.calculateWidthAndHeight();
-		
-		if(imageEditor.getZoom() != 100){
-		    imageEditor.image.width(imageEditor.resizedImageWidth);
-    		imageEditor.image.height(imageEditor.resizedImageHeight);
-		}else{
-		    imageEditor.image.css('width', '');
-    		imageEditor.image.css('height', '');
-		}
+		imageEditor.resetImageSize();
     };
     
     imageEditor.setupResizeButton = function(){
-        imageEditor.resizeButton.click(function(){
-            if(imageEditor.cropButton.attr('value').substring(0, 6) == "Cancel"){
+        imageEditor.resize.button.click(function(){
+            if(imageEditor.isCropping()){
                 imageEditor.removeCropper();
                 imageEditor.addResizable();
-            }else if($(this).attr('value').substring(0, 6) == "Cancel"){
+            }else if(imageEditor.isResizing()){
                 imageEditor.removeResizable();
         	}else{
         		imageEditor.addResizable();
@@ -352,51 +416,31 @@ ImageEditor = function(){
     };
     
     imageEditor.addCropper = function(){
-        var w = imageEditor.image.width();
-        var h = imageEditor.image.height();
-        imageEditor.cropSelection = {
-            x1: w/4,
-            y1: h/4,
-            x2: w-w/4,
-            y2: h-h/4
-        };
-        imageEditor.image.imgAreaSelect({
-            onSelectChange: function(image, selection){
-                imageEditor.cropSelection = selection;
-                imageEditor.imagePixels.html(Math.round(selection.x2-selection.x1) + "x" + Math.round(selection.y2-selection.y1));
-            },
-            selectionColor: 'blue',
-            enable: true,
-            border: 2,
-            show: true,
-            x1: imageEditor.cropSelection.x1,
-            y1: imageEditor.cropSelection.y1,
-            x2: imageEditor.cropSelection.x2,
-            y2: imageEditor.cropSelection.y2
-        });
+        imageEditor.image.imgAreaSelect(imageEditor.crop.config());
         imageEditor.imagePixels.html((imageEditor.cropSelection.x2-imageEditor.cropSelection.x1) + "x" + (imageEditor.cropSelection.y2-imageEditor.cropSelection.y1));
-        imageEditor.cropButton.attr('value', 'Cancel Cropping');
-        imageEditor.cropButton.addClass('editing');
+        imageEditor.crop.button.attr('value', 'Cancel Cropping');
+        imageEditor.crop.button.addClass('editing');
         imageEditor.canApply(true);
     };
     
-    imageEditor.removeCropper = function(){
-        imageEditor.image.imgAreaSelect({ 
-            enable: false,
-            hide: true
-        });
-        imageEditor.cropButton.attr('value', 'crop');
-        imageEditor.cropButton.removeClass('editing');
+    imageEditor.removeCropperUnintrusive = function(){
+        imageEditor.image.imgAreaSelect({ enable: false, hide: true });
+        imageEditor.crop.button.attr('value', 'crop');
+        imageEditor.crop.button.removeClass('editing');
         imageEditor.canApply(false);
+    }
+    
+    imageEditor.removeCropper = function(){
+        imageEditor.removeCropperUnintrusive()
         imageEditor.calculateWidthAndHeight();
     };
     
     imageEditor.setupCropButton = function(){
-        imageEditor.cropButton.click(function(){
-            if(imageEditor.resizeButton.attr('value').substring(0, 6) == "Cancel"){
+        imageEditor.crop.button.click(function(){
+            if(imageEditor.isResizing()){
                 imageEditor.removeResizable();
                 imageEditor.addCropper();
-            }else if($(this).attr('value').substring(0, 6) == "Cancel"){
+            }else if(imageEditor.isCropping()){
                 imageEditor.removeCropper();
         	}else{
                 imageEditor.addCropper();
@@ -445,28 +489,28 @@ ImageEditor = function(){
     
     imageEditor.setupApplyButton = function(){
         imageEditor.applyButton.click(function(){
-            if(imageEditor.resizeButton.attr('value').substring(0, 6) == "Cancel"){
+            if(imageEditor.resize.button.attr('value').substring(0, 6) == "Cancel"){
                 var size = imageEditor.getResize();
-                kukit.dom.setKssAttribute(imageEditor.serverResizeSaveButton[0], 'width', size.width);
-                kukit.dom.setKssAttribute(imageEditor.serverResizeSaveButton[0], 'height', size.height);
+                kukit.dom.setKssAttribute(imageEditor.serverResizeSaveButton[0], 'width', Math.round(size.width));
+                kukit.dom.setKssAttribute(imageEditor.serverResizeSaveButton[0], 'height', Math.round(size.height));
 
                 imageEditor.serverResizeSaveButton.trigger('click');
-            }else if(imageEditor.cropButton.attr('value').substring(0, 6) == "Cancel"){
+            }else if(imageEditor.crop.button.attr('value').substring(0, 6) == "Cancel"){
                 var cs = imageEditor.getCropSelection();
                 
                 var action = null;
                 if(imageEditor.useZoom()){//must resize and then crop
                     action = imageEditor.serverCropAndResize;
-                    kukit.dom.setKssAttribute(action[0], 'width', imageEditor.image.width());
-                    kukit.dom.setKssAttribute(action[0], 'height', imageEditor.image.height());
+                    kukit.dom.setKssAttribute(action[0], 'width', Math.round(imageEditor.image.width()));
+                    kukit.dom.setKssAttribute(action[0], 'height', Math.round(imageEditor.image.height()));
                 }else{
                     action = imageEditor.serverCropSaveButton;
                 }
                 
-                kukit.dom.setKssAttribute(action[0], 'tlx', cs.x1);
-                kukit.dom.setKssAttribute(action[0], 'tly', cs.y1);
-                kukit.dom.setKssAttribute(action[0], 'brx', cs.x2);
-                kukit.dom.setKssAttribute(action[0], 'bry', cs.y2);
+                kukit.dom.setKssAttribute(action[0], 'tlx', Math.round(cs.x1));
+                kukit.dom.setKssAttribute(action[0], 'tly', Math.round(cs.y1));
+                kukit.dom.setKssAttribute(action[0], 'brx', Math.round(cs.x2));
+                kukit.dom.setKssAttribute(action[0], 'bry', Math.round(cs.y2));
 
                 action.trigger('click');
             }
