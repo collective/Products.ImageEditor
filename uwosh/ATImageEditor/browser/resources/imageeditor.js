@@ -1,3 +1,21 @@
+var setKssAttr = function(element, key, value){
+    element = $(element);
+    var classes = element[0].className.split(' ');
+    
+    var startsplit = 'kssattr-'.length;
+    var endsplit = startsplit + key.length;
+    
+    for(var i = 0; i < classes.length; i++){
+        if(classes[i].substring(0, startsplit) == 'kssattr-'){
+            if(classes[i].substring(startsplit, endsplit) == key){
+                element.removeClass(classes[i]);
+                classes[i] = 'kssattr-' + key + '-' + value;
+                element.addClass(classes[i]);
+                return;
+            }
+        }
+    }
+};
 
 ImageEditor = function(){
     
@@ -82,7 +100,7 @@ ImageEditor = function(){
                 startValue: 1,
                 change: function(e, ui){
                     imageEditor.actions.blur.percentage.html(String(ui.value));
-                    kukit.dom.setKssAttribute(imageEditor.actions.blur.perform[0], 'amount', String(ui.value));
+                    setKssAttr(imageEditor.actions.blur.perform[0], 'amount', String(ui.value));
                 }
             },
             percentage: $('div#blurslider p')
@@ -101,7 +119,7 @@ ImageEditor = function(){
                 startValue: 75,
                 change: function(e, ui){
                     imageEditor.actions.compression.percentage.html(ui.value + "%");
-                    kukit.dom.setKssAttribute(imageEditor.actions.compression.perform[0], 'amount', ui.value);
+                    setKssAttr(imageEditor.actions.compression.perform[0], 'amount', ui.value);
                 }
             },
             percentage: $('div#compressionslider p')
@@ -120,7 +138,7 @@ ImageEditor = function(){
                 startValue: 50,
                 change: function(e, ui){
                     imageEditor.actions.contrast.percentage.html(ui.value + "%");
-                    kukit.dom.setKssAttribute(imageEditor.actions.contrast.perform[0], 'amount', ui.value);
+                    setKssAttr(imageEditor.actions.contrast.perform[0], 'amount', ui.value);
                 }
             },
             percentage: $('div#contrastslider p')
@@ -139,7 +157,7 @@ ImageEditor = function(){
                 startValue: 50,
                 change: function(e, ui){
                     imageEditor.actions.brightness.percentage.html(ui.value + "%");
-                    kukit.dom.setKssAttribute(imageEditor.actions.brightness.perform[0], 'amount', ui.value);
+                    setKssAttr(imageEditor.actions.brightness.perform[0], 'amount', ui.value);
                 }
             },
             percentage: $('div#brightnessslider p')
@@ -162,7 +180,7 @@ ImageEditor = function(){
                         value = String(ui.value/10);
                     }
                     imageEditor.actions.sharpen.percentage.html(value);
-                    kukit.dom.setKssAttribute(imageEditor.actions.sharpen.perform[0], 'amount', value);
+                    setKssAttr(imageEditor.actions.sharpen.perform[0], 'amount', value);
                 }
             },
             percentage: $('div#sharpenslider p')
@@ -203,7 +221,8 @@ ImageEditor = function(){
         if($('input.canCompress').attr('value') == "False"){
             imageEditor.actions.compression.button.addClass('disabled');
         }
-        
+        imageEditor.image.naturalWidth = parseInt($('input.imageWidth').attr('value'));
+        imageEditor.image.naturalHeight = parseInt($('input.imageHeight').attr('value'));
     };
     
     imageEditor.calculateWidthAndHeight = function(){
@@ -256,8 +275,8 @@ ImageEditor = function(){
     
     imageEditor.resetImageSize = function(){
         var currentZoom = imageEditor.getCurrentImageZoomPct();
-        var w = Math.round(imageEditor.image[0].naturalWidth*currentZoom);
-        var h = Math.round(imageEditor.image[0].naturalHeight*currentZoom);
+        var w = Math.round(imageEditor.image.naturalWidth*currentZoom);
+        var h = Math.round(imageEditor.image.naturalHeight*currentZoom);
 
         imageEditor.image.width(w);
         imageEditor.image.height(h);
@@ -267,8 +286,8 @@ ImageEditor = function(){
      * @param pct: should be integer
     */
     imageEditor.setImagePercentSize = function(pct){
-        var w = imageEditor.image[0].naturalWidth;
-        var h = imageEditor.image[0].naturalHeight;
+        var w = imageEditor.image.naturalWidth;
+        var h = imageEditor.image.naturalHeight;
         
         var ic = imageEditor.isCropping();
         var ir = imageEditor.isResizing();
@@ -489,28 +508,28 @@ ImageEditor = function(){
     
     imageEditor.setupApplyButton = function(){
         imageEditor.applyButton.click(function(){
-            if(imageEditor.resize.button.attr('value').substring(0, 6) == "Cancel"){
+            if(imageEditor.isResizing()){
                 var size = imageEditor.getResize();
-                kukit.dom.setKssAttribute(imageEditor.serverResizeSaveButton[0], 'width', Math.round(size.width));
-                kukit.dom.setKssAttribute(imageEditor.serverResizeSaveButton[0], 'height', Math.round(size.height));
+                setKssAttr(imageEditor.serverResizeSaveButton[0], 'width', Math.round(size.width));
+                setKssAttr(imageEditor.serverResizeSaveButton[0], 'height', Math.round(size.height));
 
                 imageEditor.serverResizeSaveButton.trigger('click');
-            }else if(imageEditor.crop.button.attr('value').substring(0, 6) == "Cancel"){
+            }else if(imageEditor.isCropping()){
                 var cs = imageEditor.getCropSelection();
                 
                 var action = null;
                 if(imageEditor.useZoom()){//must resize and then crop
                     action = imageEditor.serverCropAndResize;
-                    kukit.dom.setKssAttribute(action[0], 'width', Math.round(imageEditor.image.width()));
-                    kukit.dom.setKssAttribute(action[0], 'height', Math.round(imageEditor.image.height()));
+                    setKssAttr(action[0], 'width', Math.round(imageEditor.image.width()));
+                    setKssAttr(action[0], 'height', Math.round(imageEditor.image.height()));
                 }else{
                     action = imageEditor.serverCropSaveButton;
                 }
                 
-                kukit.dom.setKssAttribute(action[0], 'tlx', Math.round(cs.x1));
-                kukit.dom.setKssAttribute(action[0], 'tly', Math.round(cs.y1));
-                kukit.dom.setKssAttribute(action[0], 'brx', Math.round(cs.x2));
-                kukit.dom.setKssAttribute(action[0], 'bry', Math.round(cs.y2));
+                setKssAttr(action[0], 'tlx', Math.round(cs.x1));
+                setKssAttr(action[0], 'tly', Math.round(cs.y1));
+                setKssAttr(action[0], 'brx', Math.round(cs.x2));
+                setKssAttr(action[0], 'bry', Math.round(cs.y2));
 
                 action.trigger('click');
             }

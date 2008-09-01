@@ -12,17 +12,17 @@ input#serverResizeSaveButton:click{
 	evt-click-allowbubbling: true;
 	evt-click-preventdefault: true;
 	action-server: imageResizeSave;
-	imageResizeSave-width: kssAttr(width);
-	imageResizeSave-height: kssAttr(height);
+	imageResizeSave-width: kssAttr('width', True);
+	imageResizeSave-height: kssAttr('height', True);
 }
 input#serverCropSaveButton:click{
 	evt-click-allowbubbling: true;
 	evt-click-preventdefault: true;
 	action-server: imageCropSave;
-	imageCropSave-topLeftX: kssAttr(tlx);
-	imageCropSave-topLeftY: kssAttr(tly);
-	imageCropSave-bottomRightX: kssAttr(brx);
-	imageCropSave-bottomRightY: kssAttr(bry);
+	imageCropSave-topLeftX: kssAttr('tlx', True);
+	imageCropSave-topLeftY: kssAttr('tly', True);
+	imageCropSave-bottomRightX: kssAttr('brx', True);
+	imageCropSave-bottomRightY: kssAttr('bry', True);
 }
 input#flipOnVerticalAxis:click{
 	evt-click-allowbubbling: true;
@@ -38,38 +38,38 @@ input#cropAndResize:click{
 	evt-click-allowbubbling: true;
 	evt-click-preventdefault: true;
 	action-server: cropAndResize;
-	cropAndResize-topLeftX: kssAttr(tlx);
-	cropAndResize-topLeftY: kssAttr(tly);
-	cropAndResize-bottomRightX: kssAttr(brx);
-	cropAndResize-bottomRightY: kssAttr(bry);
-	cropAndResize-width: kssAttr(width);
-	cropAndResize-height: kssAttr(height);
+	cropAndResize-topLeftX: kssAttr('tlx', True);
+	cropAndResize-topLeftY: kssAttr('tly', True);
+	cropAndResize-bottomRightX: kssAttr('brx', True);
+	cropAndResize-bottomRightY: kssAttr('bry', True);
+	cropAndResize-width: kssAttr('width', True);
+	cropAndResize-height: kssAttr('height', True);
 }
 
 input#performBlur:click{
 	evt-click-preventdefault: true;
 	action-server: blur;
-	blur-amount: kssAttr(amount);
+	blur-amount: kssAttr('amount', True);
 }
 input#performCompression:click{
 	evt-click-preventdefault: true;
 	action-server: compress;
-	compress-amount: kssAttr(amount);
+	compress-amount: kssAttr('amount', True);
 }
 input#performBrightness:click{
 	evt-click-preventdefault: true;
 	action-server: brightness;
-	brightness-amount: kssAttr(amount);
+	brightness-amount: kssAttr('amount', True);
 }
 input#performContrast:click{
 	evt-click-preventdefault: true;
 	action-server: contrast;
-	contrast-amount: kssAttr(amount);
+	contrast-amount: kssAttr('amount', True);
 }
 input#performSharpen:click{
 	evt-click-preventdefault: true;
 	action-server: sharpen;
-	sharpen-amount: kssAttr(amount);
+	sharpen-amount: kssAttr('amount', True);
 }
 
 div#manageButtons input#save:click{

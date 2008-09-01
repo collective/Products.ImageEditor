@@ -36,7 +36,8 @@
 				tal:define="width python: here.getSize()[0];
 							height python: here.getSize()[1];">
 			<input type="hidden" class="canCompress" tal:attributes="value view/canCompress">
-			
+			<input type="hidden" class="imageWidth" tal:attributes="value python: view.context.getSize()[0]">
+			<input type="hidden" class="imageHeight" tal:attributes="value python: view.context.getSize()[1]">
 			<div id="manageButtons">
 				<input id="save" class="disabled context" disabled="true" type="button" value="save" />
 				<input id="cancel" class="disabled standalone" disabled="true" type="button" value="cancel" />
