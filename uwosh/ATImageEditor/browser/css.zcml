@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:kss="http://namespaces.zope.org/kss"
+    xmlns:plone="http://namespaces.plone.org/plone">
+	
+	<browser:resource
+		name="imageeditor-style.css"
+		file="resources/style.css"
+		/>
+	<browser:resource
+		name="jquery.ui.all.css"
+		file="resources/jquery.ui-1.5.2/themes/default/ui.all.css"
+		/>		
+</configure>

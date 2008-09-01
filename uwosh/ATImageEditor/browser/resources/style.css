@@ -51,7 +51,7 @@ div#actionButtons input{
 }
 div.imageeditor-dialog input{
     background-repeat: no-repeat;
-    background-image: url(icons/apply.png);
+    background-image: url(++resource++ImageEditor.resources/icons/apply.png);
 	padding: 1px 1px 1px 16px;
 	cursor:pointer;
 	border: 2px solid gray;
@@ -100,48 +100,48 @@ div#actionButtons input.disabled{
 }
 
 div#actionButtons input#crop{
-	background-image: url(icons/stock-selection-intersect-16.png);
+	background-image: url(++resource++ImageEditor.resources/icons/stock-selection-intersect-16.png);
 }
 div#actionButtons input#resize{
-	background-image: url(icons/stock-resize-16.png);
+	background-image: url(++resource++ImageEditor.resources/icons/stock-resize-16.png);
 }
 div#actionButtons input#rotate-left{
-	background-image: url(icons/stock-rotate-270-16.png);
+	background-image: url(++resource++ImageEditor.resources/icons/stock-rotate-270-16.png);
 }
 div#actionButtons input#rotate-right{
-	background-image: url(icons/stock-rotate-90-16.png);
+	background-image: url(++resource++ImageEditor.resources/icons/stock-rotate-90-16.png);
 }
 div#actionButtons input#apply{
-	background-image: url(icons/apply.png);
+	background-image: url(++resource++ImageEditor.resources/icons/apply.png);
 }
 
 div#actionButtons input#flipOnVerticalAxis{
-	background-image: url(icons/stock-tool-rotate-16.png);
+	background-image: url(++resource++ImageEditor.resources/icons/stock-tool-rotate-16.png);
 }
 div#actionButtons input#flipOnHorizontalAxis{
-	background-image: url(icons/stock-tool-flip-16.png);
+	background-image: url(++resource++ImageEditor.resources/icons/stock-tool-flip-16.png);
 }
 div#actionButtons input#redo{
-	background-image: url(icons/edit-redo.png);
+	background-image: url(++resource++ImageEditor.resources/icons/edit-redo.png);
 }
 div#actionButtons input#undo{
-	background-image: url(icons/edit-undo.png);
+	background-image: url(++resource++ImageEditor.resources/icons/edit-undo.png);
 }
 div#actionButtons input#blur{
-	background-image: url(icons/stock-tool-blur-16.png);
+	background-image: url(++resource++ImageEditor.resources/icons/stock-tool-blur-16.png);
 }
 div#actionButtons input#compression{
-    background-image: url(icons/stock-template-16.png);
+    background-image: url(++resource++ImageEditor.resources/icons/stock-template-16.png);
 }
 div#actionButtons input#brightness{
-	background-image: url(icons/stock-tool-brightness-16.png);
+	background-image: url(++resource++ImageEditor.resources/icons/stock-tool-brightness-16.png);
 }
 div#actionButtons input#contrast{
-    background-image: url(icons/stock-tool-contrast-16.png);
+    background-image: url(++resource++ImageEditor.resources/icons/stock-tool-contrast-16.png);
 }
 
 div#actionButtons input#sharpen{
-    background-image: url(icons/stock-tool-colorize-16.png);
+    background-image: url(++resource++ImageEditor.resources/icons/stock-tool-colorize-16.png);
 }
 
 div.imageeditor-dialog p{

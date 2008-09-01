@@ -103,6 +103,8 @@ class ImageEditorKSS(PloneKSSView):
         self.context.setImage(current)
         self.context.unredo = UnredoStack(current)
         
+        self.context.reindexObject() #stop image caching on browser
+        
         self.callSetImageCommand()
     
     @kssaction 
@@ -224,7 +226,7 @@ class ImageEditorKSS(PloneKSSView):
     def imageResizeSave(self, width, height):
         image = self.getImageData()
         format = image.format
-        size=( float(width), float(height) )
+        size=( _(width), _(height) )
         image = image.resize(size, Image.ANTIALIAS)
         data = StringIO()
         image.save(data, format)
@@ -236,7 +238,7 @@ class ImageEditorKSS(PloneKSSView):
     def imageCropSave(self, topLeftX, topLeftY, bottomRightX, bottomRightY):
         image = self.getImageData()
         format = image.format
-        box = (float(topLeftX), float(topLeftY), float(bottomRightX), float(bottomRightY))
+        box = (_(topLeftX), _(topLeftY), _(bottomRightX), _(bottomRightY))
         new_image = image.crop(box=box)
         new_image.load()
         #image = new_image
@@ -252,7 +254,7 @@ class ImageEditorKSS(PloneKSSView):
         #resize
         image = self.getImageData()
         format = image.format
-        size=( float(width), float(height) )
+        size=( _(width), _(height) )
         image = image.resize(size, Image.ANTIALIAS)
         data = StringIO()
         image.save(data, format)
@@ -262,7 +264,7 @@ class ImageEditorKSS(PloneKSSView):
         #crop
         image = Image.open(StringIO(data.read()))
         format = image.format
-        box = (float(topLeftX), float(topLeftY), float(bottomRightX), float(bottomRightY))
+        box = (_(topLeftX), _(topLeftY), _(bottomRightX), _(bottomRightY))
         new_image = image.crop(box=box)
         new_image.load()
         cropped_output = StringIO()

@@ -4,30 +4,14 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
       metal:use-macro="context/main_template/macros/master"
-      i18n:domain="uwosh.ImageEditor">
-<metal:js fill-slot="javascript_head_slot">
-
-	<script type="text/javascript" 
-			tal:attributes="src string:${context/++resource++ImageEditor.resources}/jquery.ui-1.5.2/jquery-1.2.6.js">
-	</script>
-	<script type="text/javascript" 
-			tal:attributes="src string:${context/++resource++ImageEditor.resources}/jquery-ui-personalized-1.6b.min.js">
-	</script>
-	<script type="text/javascript" 
-			tal:attributes="src string:${context/++resource++ImageEditor.resources}/imgareaselect-0.4.2/jquery.imgareaselect-0.4.2.min.js">
-	</script>
-	<script type="text/javascript" 
-			tal:attributes="src string:${context/++resource++ImageEditor.resources}/imageeditor.js">
-	</script>
-</metal:js>
+      i18n:domain="uwosh.ATImageEditor">
 <metal:css fill-slot="css_slot">
-<link rel="stylesheet" 
-	tal:attributes="href string:${context/++resource++ImageEditor.resources}/jquery.ui-1.5.2/themes/default/ui.all.css"
-	type="text/css" media="screen" />
-<link 	rel="stylesheet" 
-	tal:attributes="href string:${context/++resource++ImageEditor.resources}/style.css" 	
-	media="screen" 
-	charset="utf-8" />
+    <link rel="stylesheet" 
+    	tal:attributes="href string:${context/++resource++ImageEditor.resources}/jquery.ui-1.5.2/themes/default/ui.all.css"
+    	type="text/css" media="screen" />
+	<link rel="stylesheet" 
+    	tal:attributes="href string:${context/++resource++imageeditor-style.css}"
+    	type="text/css" media="screen" />
 </metal:css>
 <body>
 <metal:main fill-slot="main">
@@ -35,9 +19,11 @@
 		<div 	id="imageEditor" 
 				tal:define="width python: here.getSize()[0];
 							height python: here.getSize()[1];">
+							
 			<input type="hidden" class="canCompress" tal:attributes="value view/canCompress">
-			<input type="hidden" class="imageWidth" tal:attributes="value python: view.context.getSize()[0]">
-			<input type="hidden" class="imageHeight" tal:attributes="value python: view.context.getSize()[1]">
+			<input type="hidden" class="imageWidth" tal:attributes="value width">
+			<input type="hidden" class="imageHeight" tal:attributes="value height">
+			
 			<div id="manageButtons">
 				<input id="save" class="disabled context" disabled="true" type="button" value="save" />
 				<input id="cancel" class="disabled standalone" disabled="true" type="button" value="cancel" />

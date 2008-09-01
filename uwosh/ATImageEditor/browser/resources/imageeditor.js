@@ -417,6 +417,7 @@ ImageEditor = function(){
     };
     
     imageEditor.removeResizable = function(){
+        imageEditor.removeResizableUnintrusive();
 		imageEditor.calculateWidthAndHeight();
 		imageEditor.resetImageSize();
     };
@@ -430,6 +431,19 @@ ImageEditor = function(){
                 imageEditor.removeResizable();
         	}else{
         		imageEditor.addResizable();
+        	}
+        });
+    };
+    
+    imageEditor.setupCropButton = function(){
+        imageEditor.crop.button.click(function(){
+            if(imageEditor.isResizing()){
+                imageEditor.removeResizable();
+                imageEditor.addCropper();
+            }else if(imageEditor.isCropping()){
+                imageEditor.removeCropper();
+        	}else{
+                imageEditor.addCropper();
         	}
         });
     };
@@ -452,19 +466,6 @@ ImageEditor = function(){
     imageEditor.removeCropper = function(){
         imageEditor.removeCropperUnintrusive()
         imageEditor.calculateWidthAndHeight();
-    };
-    
-    imageEditor.setupCropButton = function(){
-        imageEditor.crop.button.click(function(){
-            if(imageEditor.isResizing()){
-                imageEditor.removeResizable();
-                imageEditor.addCropper();
-            }else if(imageEditor.isCropping()){
-                imageEditor.removeCropper();
-        	}else{
-                imageEditor.addCropper();
-        	}
-        });
     };
     
     imageEditor.useZoom = function(){

@@ -1,6 +1,7 @@
 kukit.actionsGlobalRegistry.register('setImage', function(oper) {
 ;;; oper.componentName = '[setImage] action';
 ;;; oper.evaluateParameters(['canRedo', 'canUndo', 'canSave', 'width', 'height', 'size', 'url'], {'withKssSetup':true});
+
     var oldImage = document.imageEditor.image;
     var newImage = jq('<img style="display:none" id="sourceImage" src="' + oper.parms.url + '" />');
     var ie = document.imageEditor;
