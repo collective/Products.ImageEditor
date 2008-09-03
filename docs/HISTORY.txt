@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.2rc1.1
+----------------
+*fixed IE critical bug for cropping image that is zoomed
+
+0.2rc1
+----------------
+*fixed IE bugs and tightened support for advanced features
+
 0.2b3
 ----------------
 *added versioning support

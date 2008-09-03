@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: uwosh.ATImageEditor
-Version: 0.2rc1beta-r70962
+Version: 0.2rc1.1
 Summary: A product that adds an editor tab to ATImage so you can crop and resize an image
 Home-page: http://plone.org/products/atimageeditor
 Author: Nathan Van Gheem
@@ -12,6 +12,14 @@ Description: Introduction
         With this you can rotate, flip, resize and crop all ajax enabled.
         Changelog
         =========
+        
+        0.2rc1.1
+        ----------------
+        *fixed IE critical bug for cropping image that is zoomed
+        
+        0.2rc1
+        ----------------
+        *fixed IE bugs and tightened support for advanced features
         
         0.2b3
         ----------------
