@@ -211,7 +211,6 @@ ImageEditor = function(){
         imageEditor.setupResizeButton();
         imageEditor.setupCropButton();
         imageEditor.setupApplyButton();
-        imageEditor.setupRotates();
         imageEditor.setupSlider();
         imageEditor.setupUserWarning();
         imageEditor.setupActions();
@@ -254,13 +253,6 @@ ImageEditor = function(){
         for(var i = 0; i < actions.length; i++){
             imageEditor.actions[actions[i]].slider.element.slider('moveTo', imageEditor.actions[actions[i]].slider.startValue);
         }
-    };
-    
-    imageEditor.reset = function(){
-        imageEditor.slider.slider('destroy');
-        imageEditor.setupSlider();
-        imageEditor.sliderPercentage.html("100%");
-        //imageEditor.setDefaultSliderPositions();
     };
     
     imageEditor.getPct = function(value){
@@ -359,16 +351,6 @@ ImageEditor = function(){
         }
     };
     
-    imageEditor.setupRotates = function(){
-        $([imageEditor.rotateLeftButton, imageEditor.rotateRightButton, 
-            imageEditor.flipHorizontallyButton, imageEditor.flipVerticallyButton]).each(function(){
-            $(this).click(function(){
-                imageEditor.removeResizableUnintrusive();
-                imageEditor.removeCropperUnintrusive();
-            });
-        });
-    };
-    
     imageEditor.canApply = function(v){
         imageEditor.can(v, imageEditor.applyButton);
         if(v){
@@ -457,7 +439,7 @@ ImageEditor = function(){
     };
     
     imageEditor.removeCropperUnintrusive = function(){
-        imageEditor.image.imgAreaSelect({ enable: false, hide: true });
+        imageEditor.image.imgAreaSelect({ hide: true });
         imageEditor.crop.button.attr('value', 'crop');
         imageEditor.crop.button.removeClass('editing');
         imageEditor.canApply(false);
@@ -535,6 +517,44 @@ ImageEditor = function(){
                 action.trigger('click');
             }
         });
+    };
+    
+    imageEditor.setImage = function(parms){
+        var newImage = jq('<img style="display:none" id="sourceImage" src="' + parms.url + '" />');
+        
+        //For some reason IE chokes if you don't reset the width and height
+        imageEditor.image.css('height', '');
+        imageEditor.image.css('width', '');
+        
+        //remove potential cropper and resizer
+        imageEditor.removeCropperUnintrusive();
+        imageEditor.removeResizableUnintrusive();
+        
+        //set image height so there is no flickr when image reloads
+        imageEditor.imageContainer.css('height', parms.height + "px");
+
+        //remove old, add new image
+        imageEditor.imageContainer.children().remove();
+        newImage.appendTo(imageEditor.imageContainer).fadeIn('fast');
+
+        imageEditor.image = imageEditor.imageContainer.children();
+        imageEditor.image.naturalWidth = parseInt(parms.width);
+        imageEditor.image.naturalHeight = parseInt(parms.height);
+
+        imageEditor.slider.slider('destroy');
+        imageEditor.setupSlider();
+        imageEditor.sliderPercentage.html("100%");
+
+        var cr = parseInt(parms.canRedo);
+        var cu = parseInt(parms.canUndo);
+        var cs = parseInt(parms.canSave);
+
+        parms.canRedo == 1 ? imageEditor.canRedo(true) : imageEditor.canRedo(false);
+        parms.canUndo == 1 ? imageEditor.canUndo(true) : imageEditor.canUndo(false);
+        parms.canSave == 1 ? imageEditor.canSave(true) : imageEditor.canSave(false);
+
+        $('span#imageSize').html(parms.size + "");
+        imageEditor.imagePixels.html(parms.width + "x" + parms.height);
     };
     
     imageEditor.initialize();

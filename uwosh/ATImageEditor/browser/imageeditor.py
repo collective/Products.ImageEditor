@@ -241,9 +241,8 @@ class ImageEditorKSS(PloneKSSView):
         box = (_(topLeftX), _(topLeftY), _(bottomRightX), _(bottomRightY))
         new_image = image.crop(box=box)
         new_image.load()
-        #image = new_image
+
         cropped_output = StringIO()
-        format = format and format or default_format
         new_image.save(cropped_output, format)
         cropped_output.seek(0)
         
