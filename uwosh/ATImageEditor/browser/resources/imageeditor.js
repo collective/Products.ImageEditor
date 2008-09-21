@@ -233,7 +233,8 @@ ImageEditor = function(){
             autoOpen: false,
             resizable:false,
             width: 225,
-            height: 180
+            height: 180,
+            position: [450, 30]
         });
         
         imageEditor.aspectRatioButtons.click(function(){
@@ -304,6 +305,7 @@ ImageEditor = function(){
      * @param pct: should be integer
     */
     imageEditor.setImagePercentSize = function(pct){
+        //natural width set on image so it still works with browsers that don't support it
         var w = imageEditor.image.naturalWidth;
         var h = imageEditor.image.naturalHeight;
         
