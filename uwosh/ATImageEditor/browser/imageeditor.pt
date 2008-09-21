@@ -146,10 +146,15 @@
 			</div>
 			
 			<div id="image-cropper-aspect-selector" style="display:none">
-			    <input class="aspect-ratio" value="manual" />
-			    <input class="aspect-ratio" value="4:3" />
-			    <input class="aspect-ratio" id="4:6">
-			    <input class="aspect-ratio" id="1:1">
+			    <h3>Aspect Ratio</h3>
+			    <input type="button" class="selected" value="manual" />
+			    <input type="button" value="1:1" />
+			    <input type="button" value="4:3" />
+			    <input type="button" value="6:5" />
+			    <input type="button" value="7:5" />
+			    <input type="button" value="10:8" />
+			    <input type="button" value="11:9" />
+			    <input type="button" value="16:9" />
 			</div>
 		</div>
     </tal:main-macro>

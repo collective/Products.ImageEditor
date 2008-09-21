@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.2rc1.2
+----------------
+*added drop shadow support
+*added aspect ratio support
+
 0.2rc1.1
 ----------------
 *fixed IE critical bug for cropping image that is zoomed

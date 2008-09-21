@@ -29,6 +29,8 @@ ImageEditor = function(){
     imageEditor.slider = $('div#manageButtons div#slider');
     imageEditor.sliderPercentage = $('div#manageButtons div#slider p');
     imageEditor.useZoomInput = $('div#manageButtons div.useZoom input#useZoom');
+    imageEditor.aspectRatioDialog = $('div#image-cropper-aspect-selector');
+    imageEditor.aspectRatioButtons = $('div#image-cropper-aspect-selector input');
     
     //Action elements
     imageEditor.actionButtons = $('div#actionButtons');
@@ -216,6 +218,7 @@ ImageEditor = function(){
         imageEditor.setupActions();
         imageEditor.actionButtons.draggable();
         imageEditor.calculateWidthAndHeight();
+        imageEditor.setupAspectRatio();
         
         if($('input.canCompress').attr('value') == "False"){
             imageEditor.actions.compression.button.addClass('disabled');
@@ -223,6 +226,29 @@ ImageEditor = function(){
         imageEditor.image.naturalWidth = parseInt($('input.imageWidth').attr('value'));
         imageEditor.image.naturalHeight = parseInt($('input.imageHeight').attr('value'));
     };
+    
+    imageEditor.setupAspectRatio = function(){
+        imageEditor.aspectRatioDialog.show();
+        imageEditor.aspectRatioDialog.dialog({
+            autoOpen: false,
+            resizable:false,
+            width: 225,
+            height: 180
+        });
+        
+        imageEditor.aspectRatioButtons.click(function(){
+            var ratio = $(this).attr('value');
+            
+            imageEditor.aspectRatioButtons.removeClass('selected');
+            $(this).addClass('selected');
+            
+            if(ratio != "manual"){
+                imageEditor.image.imgAreaSelect({aspectRatio:ratio});
+            }else{
+                imageEditor.image.imgAreaSelect({aspectRatio:"0"});
+            }
+        })
+    }
     
     imageEditor.calculateWidthAndHeight = function(){
         imageEditor.imagePixels.html(imageEditor.image.width() + "x" + imageEditor.image.height());
@@ -436,6 +462,7 @@ ImageEditor = function(){
         imageEditor.crop.button.attr('value', 'Cancel Cropping');
         imageEditor.crop.button.addClass('editing');
         imageEditor.canApply(true);
+        imageEditor.aspectRatioDialog.dialog('open');
     };
     
     imageEditor.removeCropperUnintrusive = function(){
@@ -443,6 +470,7 @@ ImageEditor = function(){
         imageEditor.crop.button.attr('value', 'crop');
         imageEditor.crop.button.removeClass('editing');
         imageEditor.canApply(false);
+        imageEditor.aspectRatioDialog.dialog('close');
     }
     
     imageEditor.removeCropper = function(){

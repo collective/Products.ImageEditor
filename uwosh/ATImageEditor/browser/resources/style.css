@@ -190,3 +190,20 @@ div.imageeditor-dialog .imageeditor-slider p{
 .ui-dialog-content {
     padding:10px;
 }
+
+div#image-cropper-aspect-selector{
+    position:relative;
+    left:16px;
+}
+div#image-cropper-aspect-selector input{
+    float:left;
+    width:75px;
+    height:20px;
+    margin:5px;
+    cursor:pointer;
+}
+div#image-cropper-aspect-selector input.selected{
+    border: 2px solid orange;
+    color:black;
+    cursor:default;
+}
