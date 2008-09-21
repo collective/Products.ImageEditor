@@ -72,6 +72,7 @@
 				<input id="flipOnHorizontalAxis" type="button" value="flip horizontally" />
 				<input id="rotate-left" type="button" value="rotate left" />
 				<input id="rotate-right" type="button" value="rotate right" />
+				<input id="addDropShadow" type="button" value="add drop shadow" />
 				
 				<input id="blur" type="button" value="blur" />
 				<div id="blurdialog" class="imageeditor-dialog" style="display:none">
@@ -142,6 +143,13 @@
 			</div>
 			<div id="imageContainer">
 				<img id="sourceImage" tal:attributes="src view/image_url" />
+			</div>
+			
+			<div id="image-cropper-aspect-selector" style="display:none">
+			    <input class="aspect-ratio" value="manual" />
+			    <input class="aspect-ratio" value="4:3" />
+			    <input class="aspect-ratio" id="4:6">
+			    <input class="aspect-ratio" id="1:1">
 			</div>
 		</div>
     </tal:main-macro>

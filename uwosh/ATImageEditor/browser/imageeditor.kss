@@ -71,6 +71,10 @@ input#performSharpen:click{
 	action-server: sharpen;
 	sharpen-amount: kssAttr('amount', True);
 }
+input#addDropShadow:click{
+    evt-click-preventdefault: true;
+    action-server: addDropShadow;
+}
 
 div#manageButtons input#save:click{
 	evt-click-preventdefault: true;

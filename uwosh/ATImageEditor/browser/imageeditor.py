@@ -273,6 +273,49 @@ class ImageEditorKSS(PloneKSSView):
         
         self.setImage(cropped_output)
         
+    @kssaction
+    def addDropShadow(self):
+        """
+        Code taken from http://code.activestate.com/recipes/474116/
+        """
+        image = self.getImageData()
+        offset = (5,5)
+        background=0xffffff
+        shadow=0x444444
+        border=8
+        iterations=3
+        format = image.format
+        
+        # Create the backdrop image -- a box in the background colour with a 
+        # shadow on it.
+        totalWidth = image.size[0] + abs(offset[0]) + 2*border
+        totalHeight = image.size[1] + abs(offset[1]) + 2*border
+        back = Image.new(image.mode, (totalWidth, totalHeight), background)
+
+        # Place the shadow, taking into account the offset from the image
+        shadowLeft = border + max(offset[0], 0)
+        shadowTop = border + max(offset[1], 0)
+        back.paste(shadow, [shadowLeft, shadowTop, shadowLeft + image.size[0], 
+        shadowTop + image.size[1]] )
+
+        # Apply the filter to blur the edges of the shadow.  Since a small kernel
+        # is used, the filter must be applied repeatedly to get a decent blur.
+        n = 0
+        while n < iterations:
+            back = back.filter(ImageFilter.BLUR)
+            n += 1
+
+        # Paste the input image onto the shadow backdrop  
+        imageLeft = border - min(offset[0], 0)
+        imageTop = border - min(offset[1], 0)
+        back.paste(image, (imageLeft, imageTop))
+
+        output = StringIO()
+        back.save(output, format)
+        output.seek(0)
+        
+        self.setImage(output)
+        
 class UnredoStack:
     """
     stack that handles undo and redo for image data

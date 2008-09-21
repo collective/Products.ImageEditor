@@ -121,6 +121,13 @@
           attribute="undoImageEdit"
           permission="cmf.ModifyPortalContent"
           />
+    <browser:page
+        for="Products.ATContentTypes.interface.image.IATImage"
+        name="addDropShadow"
+        class=".imageeditor.ImageEditorKSS"
+        attribute="addDropShadow"
+        permission="cmf.ModifyPortalContent"
+        />
     <kss:action
         name="setImage"
         jsfile="imageeditorPlugins.js"

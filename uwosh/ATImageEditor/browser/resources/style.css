@@ -143,6 +143,9 @@ div#actionButtons input#contrast{
 div#actionButtons input#sharpen{
     background-image: url(++resource++ImageEditor.resources/icons/stock-tool-colorize-16.png);
 }
+div#actionButtons input#addDropShadow{
+    background-image: url(++resource++ImageEditor.resources/icons/stock-transparency-16.png);
+}
 
 div.imageeditor-dialog p{
     margin-bottom:15px;
