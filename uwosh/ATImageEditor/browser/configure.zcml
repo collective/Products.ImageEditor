@@ -24,5 +24,4 @@
         
     <include file="css.zcml" />
     <include file="js.zcml" />
-    <include file="kss.zcml" />
 </configure>

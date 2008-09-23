@@ -1,5 +1,5 @@
+from uwosh.ATImageEditor.interfaces.unredostack import IUnredoStack
 from zope.interface import implements
-from uwosh.ATImageEditor.interfaces import IUnredoStack
 from zope.component import adapts
 from Products.ATContentTypes.interface.image import IATImage
 
@@ -10,24 +10,24 @@ class UnredoStack(object):
     implements(IUnredoStack)
     adapts(IATImage)
 
-    def __init__(self, context):
-        self.context = context
+    def __init__(self, image):
+        self.image = image
         
-        if not hasattr(context, 'stack_pos'):
+        if not hasattr(image, 'stack_pos'):
             self.pos = 0
-        if not hasattr(context, 'unredostack'):
-            self.stack = [self.context.data]
+        if not hasattr(image, 'unredostack'):
+            self.stack = [self.image.data]
         
     def get_pos(self):
-        return self.context.stack_pos        
+        return self.image.stack_pos        
     def set_pos(self, value):
-        self.context.stack_pos = value
+        self.image.stack_pos = value
     pos = property(get_pos, set_pos)
 
     def get_stack(self):
-        return self.context.unredostack
+        return self.image.unredostack
     def set_stack(self, value):
-        self.context.unredostack = value
+        self.image.unredostack = value
     stack = property(get_stack, set_stack)
 
     def do(self, value):
@@ -55,4 +55,5 @@ class UnredoStack(object):
         return self.pos + 1 < len(self.stack)
         
     def clearStack(self):
-        UnredoStack.__init__(self, self.context)
+        self.pos = 0
+        self.stack = [self.image.data]

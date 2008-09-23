@@ -4,5 +4,6 @@
     i18n_domain="uwosh.ATImageEditor">
 
 	<zope:adapter factory=".unredostack.UnredoStack" />
+	<zope:adapter factory=".imageeditor.ImageEditorAdapter" />
 
 </configure>

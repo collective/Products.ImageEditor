@@ -7,6 +7,7 @@
 
    	<include package=".browser" />
 	<include package=".adapters" />
+	<include package=".kss" />
 	
    	<include file="profiles.zcml" />
 
