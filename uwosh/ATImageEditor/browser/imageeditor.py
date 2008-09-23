@@ -12,6 +12,7 @@ from cStringIO import StringIO
 import random
 from Products.ATContentTypes.content.image import ATImage
 from time import gmtime, strftime
+from uwosh.ATImageEditor.interfaces import IUnredoStack
 
 def _(s):
     """
@@ -23,9 +24,18 @@ class Edit(BrowserView):
 
     template = ViewPageTemplateFile('imageeditor.pt')
 
+    def __init__(self, *args, **kwargs):
+        BrowserView.__init__(self, *args, **kwargs)
+        
+        self.unredo = IUnredoStack(self.context)
+        
+        # always start with new image
+        # not sure if this is desired or not 
+        # this way old edits are removed
+        self.unredo.clearStack()
+
     def __call__(self):        
         #reset on each visit to page
-        self.context.unredo = UnredoStack(self.context.data)
         return self.template()
         
     def image_url(self):
@@ -36,29 +46,38 @@ class Edit(BrowserView):
 
     def canCompress(self):
         #cannot compress png files
-        return str(Image.open(StringIO(self.context.data)).format != "PNG")
+        return str(Image.open(StringIO(self.unredo.getCurrent())).format != "PNG")
 
     def getSize(self):
-        return GetImageInfo(self.context.unredo.getCurrent())['size']
+        return GetImageInfo(self.unredo.getCurrent())['size']
         
 
 class ShowCurrentEdit(BrowserView):
+
+    def __init__(self, *args, **kwargs):
+        BrowserView.__init__(self, *args, **kwargs)
+        self.unredo = IUnredoStack(self.context)
 
     def __call__(self):
         
         resp = self.request.response
         
         resp.setHeader('Content-Type', 'image/jpeg')
-        resp.setHeader('Content-Length', len(self.context.unredo.getCurrent()))
+        resp.setHeader('Content-Length', len(self.unredo.getCurrent()))
         resp.setHeader('Last-Modified', strftime('%a, %d %b %Y %H:%M:%S +0000', gmtime()))
-        resp.write(self.context.unredo.getCurrent())
+        resp.write(self.unredo.getCurrent())
         return ''
 
 class ImageEditorKSS(PloneKSSView):
     implements(IPloneKSSView)
 
+    def __init__(self, *args, **kwargs):
+        super(PloneKSSView, self).__init__(*args, **kwargs)
+        
+        self.unredo = IUnredoStack(self.context)
+
     def getImageData(self):
-        return Image.open(StringIO(self.context.unredo.getCurrent()))
+        return Image.open(StringIO(self.unredo.getCurrent()))
 
     def callSetImageCommand(self):
         """
@@ -67,14 +86,14 @@ class ImageEditorKSS(PloneKSSView):
         imageCommands = self.getCommandSet('imageeditor')
         ksscore = self.getCommandSet('core')
         
-        imageInfo = GetImageInfo(self.context.unredo.getCurrent())
+        imageInfo = GetImageInfo(self.unredo.getCurrent())
         
         imageCommands.setImage(
             ksscore.getSameNodeSelector(), 
             self.context.absolute_url() + "/showcurrentedit?" + str(random.randint(0, 1000000)),
-            str(int(self.context.unredo.canUndo())),
-            str(int(self.context.unredo.canRedo())),
-            str(int(self.context.unredo.pos > 0)),
+            str(int(self.unredo.canUndo())),
+            str(int(self.unredo.canRedo())),
+            str(int(self.unredo.pos > 0)),
             imageInfo['size'],
             imageInfo['width'],
             imageInfo['height']
@@ -82,7 +101,7 @@ class ImageEditorKSS(PloneKSSView):
         
     def setImage(self, value):
         value.seek(0)
-        self.context.unredo.do(value.read())
+        self.unredo.do(value.read())
         
         self.callSetImageCommand()
 
@@ -99,9 +118,9 @@ class ImageEditorKSS(PloneKSSView):
         if portal_repository.isVersionable(self.context):
             portal_repository.save(self.context, comment = "")
 
-        current = self.context.unredo.getCurrent()
+        current = self.unredo.getCurrent()
         self.context.setImage(current)
-        self.context.unredo = UnredoStack(current)
+        self.unredo.clearStack()
         
         self.context.reindexObject() #stop image caching on browser
         
@@ -112,7 +131,7 @@ class ImageEditorKSS(PloneKSSView):
         """
         Just create a new UnredoStack and remove all edits
         """
-        self.context.unredo = UnredoStack(self.context.data)
+        self.unredo.clearStack()
         self.callSetImageCommand()
         
     @kssaction
@@ -120,12 +139,12 @@ class ImageEditorKSS(PloneKSSView):
         """
         ...
         """
-        self.context.unredo.redo()
+        self.unredo.redo()
         self.callSetImageCommand()
 
     @kssaction 
     def undoImageEdit(self):
-        self.context.unredo.undo()
+        self.unredo.undo()
         self.callSetImageCommand()
 
     @kssaction
@@ -315,49 +334,6 @@ class ImageEditorKSS(PloneKSSView):
         output.seek(0)
         
         self.setImage(output)
-        
-class UnredoStack:
-    """
-    stack that handles undo and redo for image data
-    """
-
-    def __init__(self, bottom):
-        """
-        @param bottom: first element on the stack
-        """
-        self.pos = 0
-        self.stack = [bottom]
-
-    def do(self, value):
-        """
-        performing an action
-        @param value: image data
-        """
-        if self.canRedo():
-            #clear top
-            for item in self.stack[(self.pos+1):len(self.stack)]:
-                self.stack.remove(item)
-
-        self.stack.append(value)
-        self.pos = self.pos + 1
-
-    def getCurrent(self):
-        """
-        gets the current element in the undo/redo stack
-        """
-        return self.stack[self.pos]
-
-    def undo(self):
-        self.pos = self.pos - 1
-
-    def canUndo(self):
-        return self.pos > 0
-
-    def redo(self):
-        self.pos = self.pos + 1
-
-    def canRedo(self):
-        return self.pos + 1 < len(self.stack)
         
 def GetImageInfo(data):
     """
