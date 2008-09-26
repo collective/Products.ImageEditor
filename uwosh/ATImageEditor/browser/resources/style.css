@@ -22,7 +22,7 @@ div#actionButtons div#menuHandle{
 div#actionButtons{
     background-color:#f9f9f9;
     border: 2px solid black;
-    width:135px;
+    width:150px;
     z-index:1001;
     padding:3px;
     position:absolute;

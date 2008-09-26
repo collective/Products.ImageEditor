@@ -25,8 +25,6 @@
 			<input type="hidden" class="imageHeight" tal:attributes="value height">
 			
 			<div id="manageButtons">
-				<input id="save" class="disabled context" disabled="true" type="button" value="save" />
-				<input id="cancel" class="disabled standalone" disabled="true" type="button" value="cancel" />
 				<div id="slider" class="imageeditor-slider">
 					<p>100%</p>
 					<div class="ui-slider-handle"></div>
@@ -136,6 +134,10 @@
 				<div id="undoRedoContainer">
 					<input id="undo" class="disabled" disabled="true" type="button" value="undo" />
 					<input id="redo" class="disabled" disabled="true" type="button" value="redo" />
+				</div>
+				<div id="undoRedoContainer">
+					<input id="save" class="disabled context" disabled="true" type="button" value="save" />
+					<input id="cancel" class="disabled standalone" disabled="true" type="button" value="cancel" />
 				</div>
 				<p class="discreet" style="font-size:10px; text-align:center; margin: auto">
 					<span id="imageSize" tal:content="view/getSize" /> 

@@ -22,13 +22,11 @@ ImageEditor = function(){
     var imageEditor = this;
 
     //Manage elements
-    imageEditor.manageButtons = $('div#manageButtons');
-
-    imageEditor.saveButton = $('div#manageButtons input#save');
-    imageEditor.cancelButton = $('div#manageButtons input#cancel');
+    imageEditor.saveButton = $('input#save');
+    imageEditor.cancelButton = $('input#cancel');
     imageEditor.slider = $('div#manageButtons div#slider');
-    imageEditor.sliderPercentage = $('div#manageButtons div#slider p');
-    imageEditor.useZoomInput = $('div#manageButtons div.useZoom input#useZoom');
+    imageEditor.sliderPercentage = $('div#slider p');
+    imageEditor.useZoomInput = $('div.useZoom input#useZoom');
     imageEditor.aspectRatioDialog = $('div#image-cropper-aspect-selector');
     imageEditor.aspectRatioButtons = $('div#image-cropper-aspect-selector input');
     

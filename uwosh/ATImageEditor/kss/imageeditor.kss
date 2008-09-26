@@ -76,11 +76,11 @@ input#addDropShadow:click{
     action-server: addDropShadow;
 }
 
-div#manageButtons input#save:click{
+input#save:click{
 	evt-click-preventdefault: true;
 	action-server: saveImageEdit;
 }
-div#manageButtons input#cancel:click{
+input#cancel:click{
 	evt-click-preventdefault: true;
 	action-server: cancelImageEdit;
 }
