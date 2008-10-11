@@ -25,6 +25,10 @@ class IImageEditorAdapter(Interface):
         object.  It then saves the history of it and gets the version_message so
         the history has better info...
         """
+    def getOriginalImage(self):
+        """
+        
+        """
 
     def getImageData(self):
         """

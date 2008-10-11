@@ -32,13 +32,13 @@ class ImageEditorKSS(PloneKSSView):
         
         imageCommands.setImage(
             ksscore.getSameNodeSelector(), 
-            self.context.absolute_url() + "/showcurrentedit?" + str(random.randint(0, 1000000)),
+            self.context.absolute_url() + "/currenteditedimage.jpg?" + str(random.randint(0, 1000000)),
             str(int(self.imageeditor.unredo.canUndo())),
             str(int(self.imageeditor.unredo.canRedo())),
             str(int(self.imageeditor.unredo.pos > 0)),
-            imageInfo['size'],
-            imageInfo['width'],
-            imageInfo['height']
+            imageInfo['sizeformatted'],
+            str(imageInfo['width']),
+            str(imageInfo['height'])
         )
         
     @kssaction
@@ -55,9 +55,6 @@ class ImageEditorKSS(PloneKSSView):
     
     @kssaction 
     def cancelImageEdit(self):
-        """
-        Just create a new UnredoStack and remove all edits
-        """
         self.imageeditor.clearEdits()
         self.callSetImageCommand()
         

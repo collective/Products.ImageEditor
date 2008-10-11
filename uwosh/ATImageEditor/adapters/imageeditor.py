@@ -5,6 +5,7 @@ from uwosh.ATImageEditor.interfaces.imageeditor import IImageEditorAdapter
 from uwosh.ATImageEditor.interfaces.unredostack import IUnredoStack
 from PIL import Image, ImageFilter, ImageEnhance
 from cStringIO import StringIO
+from uwosh.ATImageEditor.utils.conditions import precondition, between
 
 class ImageEditorAdapter(object):
     implements(IImageEditorAdapter)
@@ -25,76 +26,86 @@ class ImageEditorAdapter(object):
         self.unredo.clearStack()
 
     def saveEdit(self):
-        current = self.unredo.getCurrent()
-        self.image.setImage(current)
-        self.unredo.clearStack()
+        image_data = self.unredo.getCurrent()
+        
+        field = self.image.getField('image')
+        mimetype = field.getContentType(self.image)
+        filename = field.getFilename(self.image)
+        
+        # because AT tries to get mimetype and filename from a file like
+        # object by attribute access I'm passing a string along
+        self.image.setImage(
+            image_data, 
+            mimetype=mimetype,
+            filename=filename, 
+            refresh_exif=False
+        )
+        
+        #should I clear???  Maybe you should still be able to undo...              
+        self.unredo.clearStack(image_data)
+        
+    def getOriginalImage(self):
+        return Image.open(StringIO(self.unredo.stack[0]))
         
     def getCurrentImage(self):
-        return Image.open(StringIO(self.getCurrentImageData()))
+        return Image.open(StringIO(self.unredo.getCurrent()))
        
-    def setImage(self, value):
-        value.seek(0)
-        self.unredo.do(value.read())
-       
+    def setImage(self, image, format="JPEG"):
+        """
+        Setting the image just adds to the unredo stack...
+        """
+        image_data = StringIO()
+        image.save(image_data, format)
+        self.unredo.do(image_data.getvalue())
        
     def getCurrentImageData(self):
         return self.unredo.getCurrent()
        
     def getCurrentImageInfo(self):
-        data = self.unredo.getCurrent()
+        data = self.getCurrentImageData()
         bsize = len(data)
         bsize = bsize/1024
 
+        size_descriptor = 'kb'
         if bsize > 1024:
-            bsize = "Size: " + str(bsize/1024)[0:4] + 'mb'
-        else:
-            bsize = "Size: " + str(bsize)[0:4] + 'kb'
+            bsize = bsize/1024.0
+            size_descriptor = 'mb'
 
-        size = Image.open(StringIO(data)).size
+        size = self.getCurrentImage().size
 
         width = size[0]
         height = size[1]
 
         return {
             'size': bsize,
-            'width': str(width),
-            'height': str(height)
+            'width': width,
+            'height': height,
+            'sizeformatted': "Size: %s%s" % (bsize, size_descriptor)
         }
        
     def rotateLeft(self):
         original = self.getCurrentImage()
         image = original.rotate(90)
-        
-        output = StringIO()
-        image.save(output, original.format)
-        
-        self.setImage(output)
+
+        self.setImage(image, original.format)
         
     def rotateRight(self):
         original = self.getCurrentImage()
         image = original.rotate(270)
-        
-        output = StringIO()
-        image.save(output, original.format)
-        
-        self.setImage(output)
+
+        self.setImage(image, original.format)
         
     def flipOnVerticalAxis(self):
         original = self.getCurrentImage()
         image = original.transpose(Image.FLIP_TOP_BOTTOM)
-        
-        output = StringIO()
-        image.save(output, original.format)
-        
-        self.setImage(output)
+
+        self.setImage(image, original.format)
         
     def flipOnHorizontalAxis(self):
         original = self.getCurrentImage()
         image = original.transpose(Image.FLIP_LEFT_RIGHT)
-        
-        output = StringIO()
-        image.save(output, original.format)
-        self.setImage(output)
+
+        self.setImage(image, original.format)
         
     def blur(self, amount):
         image = self.getCurrentImage()
@@ -102,54 +113,47 @@ class ImageEditorAdapter(object):
         for x in range(0, amount):
             image = image.filter(ImageFilter.BLUR)
             
-        output = StringIO()
-        image.save(output, fmt)
-        self.setImage(output)
+        self.setImage(image, fmt)
         
+#    @precondition(between(0, 100))
     def compress(self, amount):
-        output = StringIO()
-        self.getCurrentImage().convert('RGB').save(output, 'JPEG', quality=amount)
-        self.setImage(output)
+        self.setImage(self.getCurrentImage().convert('RGB'), "JPEG")
         
+#    @precondition(between(0.0, 2.0))
     def contrast(self, amount):
         image = self.getCurrentImage()
         enhancer = ImageEnhance.Contrast(image)
-        #can enhance from 0.0-2.0, 1.0 being original image
         newImage = enhancer.enhance(amount)
 
-        output = StringIO()
-        newImage.save(output, image.format)
-        self.setImage(output)
+        self.setImage(newImage, image.format)
         
+#    @precondition(between(0.0, 2.0))
     def brightness(self, amount):
+        """
+        amount should be between 0.0 and 2.0
+        1.0 being the original image
+        """
         image = self.getCurrentImage()
         enhancer = ImageEnhance.Brightness(image)
         #can enhance from 0.0-2.0, 1.0 being original image
         newImage = enhancer.enhance(amount)
 
-        output = StringIO()
-        newImage.save(output, image.format)
-        self.setImage(output)
+        self.setImage(newImage, image.format)
         
     def sharpen(self, amount):
         image = self.getCurrentImage()
         enhancer = ImageEnhance.Sharpness(image)
         newImage = enhancer.enhance(amount)
 
-        output = StringIO()
-        newImage.save(output, image.format)
-        self.setImage(output)
+        self.setImage(newImage, image.format)
     
     def resize(self, width, height):
         image = self.getCurrentImage()
         format = image.format
         size=(width, height)
-        image = image.resize(size, Image.ANTIALIAS)
-        data = StringIO()
-        image.save(data, format)
-        data.seek(0)
+        new_image = image.resize(size, Image.ANTIALIAS)
         
-        self.setImage(data)
+        self.setImage(new_image, image.format)
         
     def crop(self, tlx, tly, brx, bry):
         image = self.getCurrentImage()
@@ -157,12 +161,8 @@ class ImageEditorAdapter(object):
         box = (tlx, tly, brx, bry)
         new_image = image.crop(box=box)
         new_image.load()
-
-        cropped_output = StringIO()
-        new_image.save(cropped_output, format)
-        cropped_output.seek(0)
         
-        self.setImage(cropped_output)
+        self.setImage(new_image, image.format)
         
     def dropshadow(self):
         """
@@ -199,11 +199,7 @@ class ImageEditorAdapter(object):
         imageLeft = border - min(offset[0], 0)
         imageTop = border - min(offset[1], 0)
         back.paste(image, (imageLeft, imageTop))
-
-        output = StringIO()
-        back.save(output, format)
-        output.seek(0)
         
-        self.setImage(output)
+        self.setImage(back, format)
         
         

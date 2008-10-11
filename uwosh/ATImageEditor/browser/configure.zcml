@@ -12,7 +12,7 @@
 	      />
 	<browser:page
 	      for="Products.ATContentTypes.interface.image.IATImage"
-	      name="showcurrentedit"
+	      name="currenteditedimage.jpg"
 	      class=".imageeditor.ShowCurrentEdit"
 	      permission="cmf.ModifyPortalContent"
 	      />

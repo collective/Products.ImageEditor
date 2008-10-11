@@ -566,6 +566,8 @@ ImageEditor = function(){
         newImage.appendTo(imageEditor.imageContainer).fadeIn('fast');
 
         imageEditor.image = imageEditor.imageContainer.children();
+        
+        //Set natural width and height since some browsers do not natively support it
         imageEditor.image.naturalWidth = parseInt(parms.width);
         imageEditor.image.naturalHeight = parseInt(parms.height);
 

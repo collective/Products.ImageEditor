@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.2rc1.3
+----------------
+*moved edit actions to adapter
+*moved save and cancel buttons to action menu
+
 0.2rc1.2
 ----------------
 *added drop shadow support

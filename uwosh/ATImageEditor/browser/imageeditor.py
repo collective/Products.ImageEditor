@@ -4,6 +4,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 import random
 from time import gmtime, strftime
 from uwosh.ATImageEditor.interfaces.imageeditor import IImageEditorAdapter
+from PIL import Image
 
 class Edit(BrowserView):
 
@@ -16,8 +17,7 @@ class Edit(BrowserView):
         
         # always start with new image
         # not sure if this is desired or not 
-        # this way old edits are removed
-        # could change 
+        # this way, old edits are removed
         self.imageeditor.clearEdits()
 
     def __call__(self):        
@@ -35,11 +35,12 @@ class Edit(BrowserView):
         return str(self.imageeditor.getCurrentImage().format != "PNG")
 
     def getSize(self):
-        return self.imageeditor.getCurrentImageInfo()['size']
-        
+        return self.imageeditor.getCurrentImageInfo()['sizeformatted']
 
 class ShowCurrentEdit(BrowserView):
-
+    """
+    Just a browser view to get latest edited image
+    """
     def __init__(self, *args, **kwargs):
         super(BrowserView, self).__init__(*args, **kwargs)
         self.imageeditor = IImageEditorAdapter(self.context)

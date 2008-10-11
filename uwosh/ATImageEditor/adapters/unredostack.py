@@ -2,6 +2,8 @@ from uwosh.ATImageEditor.interfaces.unredostack import IUnredoStack
 from zope.interface import implements
 from zope.component import adapts
 from Products.ATContentTypes.interface.image import IATImage
+from PIL import Image
+from cStringIO import StringIO
 
 class UnredoStack(object):
     """
@@ -16,10 +18,10 @@ class UnredoStack(object):
         if not hasattr(image, 'stack_pos'):
             self.pos = 0
         if not hasattr(image, 'unredostack'):
-            self.stack = [self.image.data]
+            self.stack = [image.data]
         
     def get_pos(self):
-        return self.image.stack_pos        
+        return self.image.stack_pos
     def set_pos(self, value):
         self.image.stack_pos = value
     pos = property(get_pos, set_pos)
@@ -54,6 +56,10 @@ class UnredoStack(object):
     def canRedo(self):
         return self.pos + 1 < len(self.stack)
         
-    def clearStack(self):
+    def clearStack(self, bottom=None):
         self.pos = 0
-        self.stack = [self.image.data]
+        
+        if bottom is None:
+            bottom = self.image.data
+        
+        self.stack = [bottom]
