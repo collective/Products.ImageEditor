@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.0
+=================
+*changed name of product to Products.ImageEditor
+
 0.2rc1.3
 ----------------
 *moved edit actions to adapter
