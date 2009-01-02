@@ -2,7 +2,7 @@ from plone.app.kss.interfaces import IPloneKSSView
 from plone.app.kss.plonekssview import PloneKSSView
 from kss.core import kssaction
 from zope.interface import implements
-from uwosh.ATImageEditor.interfaces.imageeditor import IImageEditorAdapter
+from Products.ImageEditor.interfaces.imageeditor import IImageEditorAdapter
 import random
 from Products.CMFCore.utils import getToolByName
 

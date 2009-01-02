@@ -231,7 +231,7 @@ ImageEditor = function(){
             autoOpen: false,
             resizable:false,
             width: 225,
-            height: 180,
+            height: 210,
             position: [450, 30]
         });
         

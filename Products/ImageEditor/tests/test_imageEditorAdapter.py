@@ -2,14 +2,14 @@ from Products.PloneTestCase.PloneTestCase import PloneTestCase
 from zope.testing import doctestunit
 from zope.component import testing
 from Testing import ZopeTestCase as ztc
-from uwosh.ATImageEditor.tests.base import UWOshATImageEditorTestCase
+from Products.ImageEditor.tests.base import ImageEditorTestCase
 from cStringIO import StringIO
 import zope.app.publisher.browser
 from Products.Five.testbrowser import Browser
 from PIL import Image, ImageFilter, ImageEnhance
 from cStringIO import StringIO
 
-class TestImageEdits(UWOshATImageEditorTestCase):
+class TestImageEdits(ImageEditorTestCase):
     """
     Test the edit actions on images
     """
@@ -70,7 +70,7 @@ class TestImageEdits(UWOshATImageEditorTestCase):
         imageEditor.rotateRight()
         self.imagesEqual('rotateright.jpg', imageEditor)        
         
-class TestAdapter(UWOshATImageEditorTestCase):
+class TestAdapter(ImageEditorTestCase):
     """
     Test the edit actions on images
     """

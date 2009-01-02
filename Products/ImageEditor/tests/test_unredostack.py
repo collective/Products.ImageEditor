@@ -1,12 +1,12 @@
 import unittest
-from uwosh.ATImageEditor.tests.base import UWOshATImageEditorTestCase
+from Products.ImageEditor.tests.base import ImageEditorTestCase
 from Products.CMFCore.utils import getToolByName
 from plone.app.viewletmanager.interfaces import IViewletSettingsStorage
 from zope.component import getUtility
-from uwosh.ATImageEditor.adapters.unredostack import UnredoStack
+from Products.ImageEditor.adapters.unredostack import UnredoStack
 from cStringIO import StringIO
 
-class TestUnredoStack(UWOshATImageEditorTestCase):
+class TestUnredoStack(ImageEditorTestCase):
     """
     
     """

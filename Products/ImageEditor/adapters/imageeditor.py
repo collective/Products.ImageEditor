@@ -1,11 +1,11 @@
 from zope.interface import implements
 from zope.component import adapts
 from Products.ATContentTypes.interface.image import IATImage
-from uwosh.ATImageEditor.interfaces.imageeditor import IImageEditorAdapter
-from uwosh.ATImageEditor.interfaces.unredostack import IUnredoStack
+from Products.ImageEditor.interfaces.imageeditor import IImageEditorAdapter
+from Products.ImageEditor.interfaces.unredostack import IUnredoStack
 from PIL import Image, ImageFilter, ImageEnhance
 from cStringIO import StringIO
-from uwosh.ATImageEditor.utils.conditions import precondition, between
+from Products.ImageEditor.utils.conditions import precondition, between
 
 class ImageEditorAdapter(object):
     implements(IImageEditorAdapter)
@@ -50,12 +50,17 @@ class ImageEditorAdapter(object):
     def getCurrentImage(self):
         return Image.open(StringIO(self.unredo.getCurrent()))
        
-    def setImage(self, image, format="JPEG"):
+    def setImage(self, image, format="JPEG", quality=None):
         """
         Setting the image just adds to the unredo stack...
         """
         image_data = StringIO()
-        image.save(image_data, format)
+        
+        if quality:
+            image.save(image_data, format, quality=quality)
+        else:
+            image.save(image_data, format)
+        
         self.unredo.do(image_data.getvalue())
        
     def getCurrentImageData(self):
@@ -117,7 +122,8 @@ class ImageEditorAdapter(object):
         
 #    @precondition(between(0, 100))
     def compress(self, amount):
-        self.setImage(self.getCurrentImage().convert('RGB'), "JPEG")
+        image = self.getCurrentImage().convert('RGB') # if it is a png, convert it...
+        self.setImage(image, quality=amount)
         
 #    @precondition(between(0.0, 2.0))
     def contrast(self, amount):

@@ -1,31 +1,31 @@
-uwosh.ATImageEditor Installation
+Products.ImageEditor Installation
 ==========================
 
-To install uwosh.ATImageEditor into the global Python environment (or a workingenv),
+To install Products.ImageEditor into the global Python environment (or a workingenv),
 using a traditional Zope 2 instance, you can do this:
 
  * When you're reading this you have probably already run 
-   ``easy_install uwosh.ATImageEditor``. Find out how to install setuptools
+   ``easy_install Products.ImageEditor``. Find out how to install setuptools
    (and EasyInstall) here:
    http://peak.telecommunity.com/DevCenter/EasyInstall
 
- * Create a file called ``uwosh.ATImageEditor-configure.zcml`` in the
+ * Create a file called ``Products.ImageEditor-configure.zcml`` in the
    ``/path/to/instance/etc/package-includes`` directory.  The file
    should only contain this::
 
-       <include package="uwosh.ATImageEditor" />
+       <include package="Products.ImageEditor" />
 
 
 Alternatively, if you are using zc.buildout and the plone.recipe.zope2instance
 recipe to manage your project, you can do this:
 
- * Add ``uwosh.ATImageEditor`` to the list of eggs to install, e.g.:
+ * Add ``Products.ImageEditor`` to the list of eggs to install, e.g.:
  
     [buildout]
     ...
     eggs =
         ...
-        uwosh.ATImageEditor
+        Products.ImageEditor
         
   * Tell the plone.recipe.zope2instance recipe to install a ZCML slug:
   
@@ -33,7 +33,7 @@ recipe to manage your project, you can do this:
     recipe = plone.recipe.zope2instance
     ...
     zcml =
-        uwosh.ATImageEditor
+        Products.ImageEditor
         
   * Re-run buildout, e.g. with:
   

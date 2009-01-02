@@ -1,9 +1,7 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
-    i18n_domain="uwosh.ATImageEditor">
-
-   	<five:registerPackage package="." initialize=".initialize" />
+    i18n_domain="Products.ImageEditor">
 
    	<include package=".browser" />
 	<include package=".adapters" />

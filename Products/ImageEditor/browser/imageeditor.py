@@ -3,7 +3,7 @@ from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 import random
 from time import gmtime, strftime
-from uwosh.ATImageEditor.interfaces.imageeditor import IImageEditorAdapter
+from Products.ImageEditor.interfaces.imageeditor import IImageEditorAdapter
 from PIL import Image
 
 class Edit(BrowserView):

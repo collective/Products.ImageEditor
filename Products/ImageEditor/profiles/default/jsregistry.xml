@@ -6,7 +6,7 @@
         compression ="none" 
         cookable    ="True"
         enabled     ="True" 
-        expression  ="python: here.portal_type == 'Image'" 
+        expression  ="python: here.portal_type == 'Image' and not portal.portal_membership.isAnonymousUser()" 
         id          ="++resource++jquery-1.2.6.js" 
         inline      ="False"
         />
@@ -15,7 +15,7 @@
         compression ="none" 
         cookable    ="True"
         enabled     ="True" 
-        expression  ="python: here.portal_type == 'Image'" 
+        expression  ="python: here.portal_type == 'Image' and not portal.portal_membership.isAnonymousUser()" 
         id          ="++resource++jquery-ui-imageeditor.min.js" 
         inline  ="False"
         />
@@ -24,7 +24,7 @@
         compression ="none" 
         cookable    ="True"
         enabled     ="True" 
-        expression  ="python: here.portal_type == 'Image'" 
+        expression  ="python: here.portal_type == 'Image' and not portal.portal_membership.isAnonymousUser()" 
         id          ="++resource++jquery.imgareaselect-0.4.2.min.js"
         inline      ="False"
         />
@@ -33,9 +33,9 @@
         compression ="none" 
         cookable    ="True"
         enabled     ="True" 
-        expression  ="python: here.portal_type == 'Image'" 
+        expression  ="python: here.portal_type == 'Image' and not portal.portal_membership.isAnonymousUser()" 
         id          ="++resource++imageeditor.js" 
         inline      ="False"
         />
-      
+
 </object>

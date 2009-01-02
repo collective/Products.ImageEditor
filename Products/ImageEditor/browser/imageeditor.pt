@@ -4,7 +4,7 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
       metal:use-macro="context/main_template/macros/master"
-      i18n:domain="uwosh.ATImageEditor">
+      i18n:domain="Products.ImageEditor">
 <metal:css fill-slot="css_slot">
     <link rel="stylesheet" 
     	tal:attributes="href string:${context/++resource++ImageEditor.resources}/jquery.ui-1.5.2/themes/default/ui.all.css"
@@ -153,12 +153,14 @@
 			    <h3>Aspect Ratio</h3>
 			    <input type="button" class="selected" value="manual" />
 			    <input type="button" value="1:1" />
-			    <input type="button" value="4:3" />
-			    <input type="button" value="6:5" />
+			    <input type="button" value="3:5" />
+			    <input type="button" value="5:3" />
+			    <input type="button" value="4:6" />
+			    <input type="button" value="6:4" />
+			    <input type="button" value="5:7" />
 			    <input type="button" value="7:5" />
+			    <input type="button" value="8:10" />
 			    <input type="button" value="10:8" />
-			    <input type="button" value="11:9" />
-			    <input type="button" value="16:9" />
 			</div>
 		</div>
 

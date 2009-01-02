@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.3'
+version = '1.0rc1'
 
-setup(name='uwosh.ATImageEditor',
+setup(name='Products.ImageEditor',
       version=version,
       description="A product that adds an editor tab to ATImage so you can crop and resize an image",
       long_description=open("README.txt").read() + "\n" +
@@ -20,7 +20,7 @@ setup(name='uwosh.ATImageEditor',
       url='http://plone.org/products/atimageeditor',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
-      namespace_packages=['uwosh'],
+      namespace_packages=['Products'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[

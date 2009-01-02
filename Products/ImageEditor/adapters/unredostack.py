@@ -1,4 +1,4 @@
-from uwosh.ATImageEditor.interfaces.unredostack import IUnredoStack
+from Products.ImageEditor.interfaces.unredostack import IUnredoStack
 from zope.interface import implements
 from zope.component import adapts
 from Products.ATContentTypes.interface.image import IATImage

@@ -12,8 +12,7 @@ from Products.PloneTestCase.layer import onsetup
 
 from zope.app import zapi
 from zope.configuration import xmlconfig
-from uwosh.core.utils.remoteservice import RemoteService
-from uwosh.ATImageEditor.adapters.imageeditor import ImageEditorAdapter
+from Products.ImageEditor.adapters.imageeditor import ImageEditorAdapter
 
 from PIL import Image, ImageFilter, ImageEnhance
 from cStringIO import StringIO
@@ -24,13 +23,13 @@ from PIL import ImageChops
 BASE_DIR = ""
 
 for path in sys.path:
-    if 'uwosh.ATImageEditor' in path:
+    if 'Products.ImageEditor' in path:
         BASE_DIR = path
 
-ztc.installProduct('uwosh.ATImageEditor')
-ptc.setupPloneSite(products=('uwosh.ATImageEditor',))
+ztc.installProduct('Products.ImageEditor')
+ptc.setupPloneSite(products=('Products.ImageEditor',))
 
-class UWOshATImageEditorTestCase(ptc.PloneTestCase):
+class ImageEditorTestCase(ptc.PloneTestCase):
     """
     """
     
@@ -66,7 +65,7 @@ class UWOshATImageEditorTestCase(ptc.PloneTestCase):
         return self.getImage('original.jpg')
         
     def getImagePath(self, name):
-        return '%s/uwosh/ATImageEditor/tests/testimages/%s' % (BASE_DIR, name)
+        return '%s/Products/ImageEditor/tests/testimages/%s' % (BASE_DIR, name)
         
     def getImage(self, name):
         return Image.open(self.getImagePath(name))
