@@ -24,4 +24,6 @@
         
     <include file="css.zcml" />
     <include file="js.zcml" />
+    <include file="ajax.zcml" />
+    
 </configure>

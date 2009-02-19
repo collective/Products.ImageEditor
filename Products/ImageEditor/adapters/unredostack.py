@@ -63,3 +63,9 @@ class UnredoStack(object):
             bottom = self.image.data
         
         self.stack = [bottom]
+        
+        if hasattr(self.image, 'stack_pos'):
+            delattr(self.image, 'stack_pos')
+            
+        if hasattr(self.image, 'unredostack'):
+            delattr(self.image, 'unredostack')

@@ -207,3 +207,6 @@ div#image-cropper-aspect-selector input.selected{
     color:black;
     cursor:default;
 }
+#portal-column-two, #portal-column-one{
+    display:none;
+}

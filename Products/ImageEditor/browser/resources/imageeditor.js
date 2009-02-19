@@ -1,21 +1,3 @@
-var setKssAttr = function(element, key, value){
-    element = $(element);
-    var classes = element[0].className.split(' ');
-    
-    var startsplit = 'kssattr-'.length;
-    var endsplit = startsplit + key.length;
-    
-    for(var i = 0; i < classes.length; i++){
-        if(classes[i].substring(0, startsplit) == 'kssattr-'){
-            if(classes[i].substring(startsplit, endsplit) == key){
-                element.removeClass(classes[i]);
-                classes[i] = 'kssattr-' + key + '-' + value;
-                element.addClass(classes[i]);
-                return;
-            }
-        }
-    }
-};
 
 ImageEditor = function(){
     
@@ -74,13 +56,13 @@ ImageEditor = function(){
     }
     imageEditor.applyButton = $('div#actionButtons div#cropAndResizeButtonContainer input#apply');
 
-    imageEditor.rotateRightButton = $('div#actionButtons input#rotate-right');
-    imageEditor.rotateLeftButton = $('div#actionButtons input#rotate-left');
+    imageEditor.rotateRightButton = 'div#actionButtons input#rotate-right';
+    imageEditor.rotateLeftButton = 'div#actionButtons input#rotate-left';
     imageEditor.flipHorizontallyButton = $('div#actionButtons input#flipOnHorizontalAxis');
     imageEditor.flipVerticallyButton = $('div#actionButtons input#flipOnVerticalAxis');
-    imageEditor.serverResizeSaveButton = $('input#serverResizeSaveButton');
-    imageEditor.serverCropSaveButton = $('input#serverCropSaveButton');
-    imageEditor.serverCropAndResize = $('div#actionButtons input#cropAndResize');
+    imageEditor.serverResizeSaveButton = 'input#serverResizeSaveButton';
+    imageEditor.serverCropSaveButton = 'input#serverCropSaveButton';
+    imageEditor.serverCropAndResize = 'div#actionButtons input#cropAndResize';
     imageEditor.undoButton = $('input#undo');
     imageEditor.redoButton = $('input#redo');
     
@@ -100,7 +82,7 @@ ImageEditor = function(){
                 startValue: 1,
                 change: function(e, ui){
                     imageEditor.actions.blur.percentage.html(String(ui.value));
-                    setKssAttr(imageEditor.actions.blur.perform[0], 'amount', String(ui.value));
+                    imageEditor.blur_amount = ui.value;
                 }
             },
             percentage: $('div#blurslider p')
@@ -119,7 +101,7 @@ ImageEditor = function(){
                 startValue: 75,
                 change: function(e, ui){
                     imageEditor.actions.compression.percentage.html(ui.value + "%");
-                    setKssAttr(imageEditor.actions.compression.perform[0], 'amount', ui.value);
+                    imageEditor.compression_amount = ui.value;
                 }
             },
             percentage: $('div#compressionslider p')
@@ -138,7 +120,7 @@ ImageEditor = function(){
                 startValue: 50,
                 change: function(e, ui){
                     imageEditor.actions.contrast.percentage.html(ui.value + "%");
-                    setKssAttr(imageEditor.actions.contrast.perform[0], 'amount', ui.value);
+                    imageEditor.contrast_amount = ui.value;
                 }
             },
             percentage: $('div#contrastslider p')
@@ -157,7 +139,7 @@ ImageEditor = function(){
                 startValue: 50,
                 change: function(e, ui){
                     imageEditor.actions.brightness.percentage.html(ui.value + "%");
-                    setKssAttr(imageEditor.actions.brightness.perform[0], 'amount', ui.value);
+                    imageEditor.brightness_amount = ui.value;
                 }
             },
             percentage: $('div#brightnessslider p')
@@ -180,13 +162,18 @@ ImageEditor = function(){
                         value = String(ui.value/10);
                     }
                     imageEditor.actions.sharpen.percentage.html(value);
-                    setKssAttr(imageEditor.actions.sharpen.perform[0], 'amount', value);
+                    imageEditor.sharpen_amount = value;
                 }
             },
             percentage: $('div#sharpenslider p')
         }
     };
-
+    imageEditor.compression_amount = 0;
+    imageEditor.blur_amount = 0;
+    imageEditor.brightness_amount = 0;
+    imageEditor.contrast_amount = 0;
+    imageEditor.sharpen_amount = 0;
+    
     imageEditor.imagePixels = $('span#imagePixels');
 
     imageEditor.image = $('div#imageEditor div#imageContainer img#sourceImage');
@@ -217,12 +204,195 @@ ImageEditor = function(){
         imageEditor.actionButtons.draggable();
         imageEditor.calculateWidthAndHeight();
         imageEditor.setupAspectRatio();
+        imageEditor.setupEvents();
         
         if($('input.canCompress').attr('value') == "False"){
             imageEditor.actions.compression.button.addClass('disabled');
         }
         imageEditor.image.naturalWidth = parseInt($('input.imageWidth').attr('value'));
         imageEditor.image.naturalHeight = parseInt($('input.imageHeight').attr('value'));
+    };
+    
+    imageEditor.setupEvents = function(){
+        function error(XMLHttpRequest, textStatus, errorThrown) {
+            alert( 'Error: ' + textStatus );
+        };
+        function complete(res, status){
+            imageEditor.setImage(eval("(" + res.responseText + ")"));
+        }
+        $(imageEditor.rotateRightButton).click(function(){
+            $.ajax({
+                type: "POST",
+                url : $("#context_url").val() + "/" + 'rotateImageRight',
+                dataType: 'json',
+                data: {},
+                error: error,
+                complete: complete
+            });
+        });
+        $(imageEditor.rotateLeftButton).click(function(){
+            $.ajax({
+                type: "POST",
+                url : $("#context_url").val() + "/" + 'rotateImageLeft',
+                dataType: 'json',
+                data: {},
+                error: error,
+                complete: complete
+            });
+        });
+        $(imageEditor.serverResizeSaveButton).click(function(){
+            $.ajax({
+                type: "POST",
+                url : $("#context_url").val() + "/" + 'imageResizeSave',
+                dataType: 'json',
+                data: imageEditor.getResize(),
+                error: error,
+                complete: complete
+            });
+        });
+        $(imageEditor.serverCropSaveButton).click(function(){
+            $.ajax({
+                type: "POST",
+                url : $("#context_url").val() + "/" + 'imageCropSave',
+                dataType: 'json',
+                data: imageEditor.getCropSelection(),
+                error: error,
+                complete: complete
+            });
+        });
+        $(imageEditor.serverCropAndResize).click(function(){
+            $.ajax({
+                type: "POST",
+                url : $("#context_url").val() + "/" + 'cropAndResize',
+                dataType: 'json',
+                data: imageEditor.getResizeAndCropSelection(),
+                error: error,
+                complete: complete
+            });
+        });
+        
+        $("input#addDropShadow").click(function(){
+            $.ajax({
+                type: "POST",
+                url : $("#context_url").val() + "/" + 'addDropShadow',
+                dataType: 'json',
+                data: {},
+                error: error,
+                complete: complete
+            });
+        });
+
+        $("input#save").click(function(){
+            $.ajax({
+                type: "POST",
+                url : $("#context_url").val() + "/" + 'saveImageEdit',
+                dataType: 'json',
+                data: {},
+                error: error,
+                complete: complete
+            });
+        });
+        $("input#cancel").click(function(){
+            $.ajax({
+                type: "POST",
+                url : $("#context_url").val() + "/" + 'cancelImageEdit',
+                dataType: 'json',
+                data: {},
+                error: error,
+                complete: complete
+            });
+        });
+        $("input#undo").click(function(){
+            $.ajax({
+                type: "POST",
+                url : $("#context_url").val() + "/" + 'undoImageEdit',
+                dataType: 'json',
+                data: {},
+                error: error,
+                complete: complete
+            });
+        });
+        $("input#redo").click(function(){
+            $.ajax({
+                type: "POST",
+                url : $("#context_url").val() + "/" + 'redoImageEdit',
+                dataType: 'json',
+                data: {},
+                error: error,
+                complete: complete
+            });
+        });
+        $("input#flipOnVerticalAxis").click(function(){
+            $.ajax({
+                type: "POST",
+                url : $("#context_url").val() + "/" + 'imageFlipOnVerticalAxis',
+                dataType: 'json',
+                data: {},
+                error: error,
+                complete: complete
+            });
+        });
+        $("input#flipOnHorizontalAxis").click(function(){
+            $.ajax({
+                type: "POST",
+                url : $("#context_url").val() + "/" + 'imageFlipOnHorizontalAxis',
+                dataType: 'json',
+                data: {},
+                error: error,
+                complete: complete
+            });
+        });
+        $("input#performBlur").click(function(){
+            $.ajax({
+                type: "POST",
+                url : $("#context_url").val() + "/" + 'blur',
+                dataType: 'json',
+                data: {amount : imageEditor.blur_amount},
+                error: error,
+                complete: complete
+            });
+        });
+        $("input#performCompression").click(function(){
+            $.ajax({
+                type: "POST",
+                url : $("#context_url").val() + "/" + 'compress',
+                dataType: 'json',
+                data: {amount : imageEditor.compression_amount},
+                error: error,
+                complete: complete
+            });
+        });
+        $("input#performBrightness").click(function(){
+            $.ajax({
+                type: "POST",
+                url : $("#context_url").val() + "/" + 'brightness',
+                dataType: 'json',
+                data: {amount : imageEditor.brightness_amount},
+                error: error,
+                complete: complete
+            });
+        });
+        $("input#performContrast").click(function(){
+            $.ajax({
+                type: "POST",
+                url : $("#context_url").val() + "/" + 'contrast',
+                dataType: 'json',
+                data: {amount : imageEditor.contrast_amount},
+                error: error,
+                complete: complete
+            });
+        });
+        $("input#performSharpen").click(function(){
+            $.ajax({
+                type: "POST",
+                url : $("#context_url").val() + "/" + 'sharpen',
+                dataType: 'json',
+                data: {amount : imageEditor.sharpen_amount},
+                error: error,
+                complete: complete
+            });
+        });
+        
     };
     
     imageEditor.setupAspectRatio = function(){
@@ -517,30 +687,25 @@ ImageEditor = function(){
         }
     };
     
+    imageEditor.getResizeAndCropSelection = function(){
+        var cs = imageEditor.getCropSelection();
+        var rs = imageEditor.getResize();
+        cs.width = rs.width;
+        cs.height = rs.height;
+        return cs;
+    };
+    
     imageEditor.setupApplyButton = function(){
         imageEditor.applyButton.click(function(){
             if(imageEditor.isResizing()){
-                var size = imageEditor.getResize();
-                setKssAttr(imageEditor.serverResizeSaveButton[0], 'width', Math.round(size.width));
-                setKssAttr(imageEditor.serverResizeSaveButton[0], 'height', Math.round(size.height));
-
-                imageEditor.serverResizeSaveButton.trigger('click');
+                $(imageEditor.serverResizeSaveButton).trigger('click');
             }else if(imageEditor.isCropping()){
-                var cs = imageEditor.getCropSelection();
-                
                 var action = null;
                 if(imageEditor.useZoom()){//must resize and then crop
-                    action = imageEditor.serverCropAndResize;
-                    setKssAttr(action[0], 'width', Math.round(imageEditor.image.width()));
-                    setKssAttr(action[0], 'height', Math.round(imageEditor.image.height()));
+                    action = $(imageEditor.serverCropAndResize);
                 }else{
-                    action = imageEditor.serverCropSaveButton;
+                    action = $(imageEditor.serverCropSaveButton);
                 }
-                
-                setKssAttr(action[0], 'tlx', Math.round(cs.x1));
-                setKssAttr(action[0], 'tly', Math.round(cs.y1));
-                setKssAttr(action[0], 'brx', Math.round(cs.x2));
-                setKssAttr(action[0], 'bry', Math.round(cs.y2));
 
                 action.trigger('click');
             }
@@ -548,7 +713,7 @@ ImageEditor = function(){
     };
     
     imageEditor.setImage = function(parms){
-        var newImage = jq('<img style="display:none" id="sourceImage" src="' + parms.url + '" />');
+        var newImage = $('<img style="display:none" id="sourceImage" src="' + parms.url + '" />');
         
         //For some reason IE chokes if you don't reset the width and height
         imageEditor.image.css('height', '');

@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.0rc2
+=================
+*removed all traces of kss
+*removes portlets from editor view
+*added uninstall step incase there are leftovers on the Image object
+from editing it.
+
 1.0rc1
 =================
 *changed name of product to Products.ImageEditor
