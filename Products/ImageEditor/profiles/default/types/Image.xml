@@ -8,7 +8,7 @@
     i18n:attributes="title">
   <permission value="Modify portal content"/>
  </action>
- <action title="Visual Transform" action_id="editor" category="object"
+ <action title="Image Editor" action_id="editor" category="object"
     condition_expr="object/hasPIL" url_expr="string:${object_url}/editor"
     visible="True" i18n:attributes="title">
   <permission value="Modify portal content"/>

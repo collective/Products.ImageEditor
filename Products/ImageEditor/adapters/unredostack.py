@@ -57,9 +57,16 @@ class UnredoStack(object):
         return self.pos + 1 < len(self.stack)
         
     def clearStack(self, bottom=None):
-        self.pos = 0
         
+        if hasattr(self.image, 'stack_pos'):
+            delattr(self.image, 'stack_pos')
+            
+        if hasattr(self.image, 'unredostack'):
+            delattr(self.image, 'unredostack')
+            
+        self.pos = 0
+
         if bottom is None:
             bottom = self.image.data
-        
+
         self.stack = [bottom]

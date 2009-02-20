@@ -3,7 +3,7 @@
 
     <javascript 
         cacheable   ="True" 
-        compression ="none" 
+        compression ="safe" 
         cookable    ="True"
         enabled     ="True" 
         expression  ="python: here.portal_type == 'Image' and not portal.portal_membership.isAnonymousUser()" 
@@ -12,7 +12,7 @@
         />
     <javascript 
         cacheable   ="True" 
-        compression ="none" 
+        compression ="safe" 
         cookable    ="True"
         enabled     ="True" 
         expression  ="python: here.portal_type == 'Image' and not portal.portal_membership.isAnonymousUser()" 
@@ -21,7 +21,7 @@
         />
     <javascript 
         cacheable   ="True" 
-        compression ="none" 
+        compression ="safe" 
         cookable    ="True"
         enabled     ="True" 
         expression  ="python: here.portal_type == 'Image' and not portal.portal_membership.isAnonymousUser()" 
@@ -30,7 +30,7 @@
         />
     <javascript 
         cacheable   ="True" 
-        compression ="none" 
+        compression ="safe" 
         cookable    ="True"
         enabled     ="True" 
         expression  ="python: here.portal_type == 'Image' and not portal.portal_membership.isAnonymousUser()" 

@@ -20,9 +20,10 @@
 				tal:define="width python: here.getSize()[0];
 							height python: here.getSize()[1];">
 							
-			<input type="hidden" class="canCompress" tal:attributes="value view/canCompress">
-			<input type="hidden" class="imageWidth" tal:attributes="value width">
-			<input type="hidden" class="imageHeight" tal:attributes="value height">
+			<input type="hidden" id="context_url" tal:attributes="value context/absolute_url" />
+			<input type="hidden" class="canCompress" tal:attributes="value view/canCompress" />
+			<input type="hidden" class="imageWidth" tal:attributes="value width" />
+			<input type="hidden" class="imageHeight" tal:attributes="value height" />
 			
 			<div id="manageButtons">
 				<div id="slider" class="imageeditor-slider">
@@ -40,18 +41,15 @@
 				<input 	id="serverResizeSaveButton" 
 						type="button" 
 						value="nothing" 
-						style="display:none"
-						tal:attributes="class string:kssattr-width-${width} kssattr-height-${height}"/>
+						style="display:none" />
 				<input 	id="serverCropSaveButton" 
 						type="button" 
 						value="nothing" 
-						style="display:none"
-						tal:attributes="class string:kssattr-tlx-200 kssattr-tly-200 kssattr-brx-500 kssattr-bry-500"/>
+						style="display:none" />
 				<input 	id="cropAndResize" 
 						type="button" 
 						value="nothing" 
-						style="display:none"
-						tal:attributes="class string:kssattr-tlx-200 kssattr-tly-200 kssattr-brx-500 kssattr-bry-500 kssattr-width-${width} kssattr-height-${height}"/>
+						style="display:none" />
 						
 						
 						
@@ -64,8 +62,7 @@
 					</div><br /><br />
 					<input 	id="performCompression" 
 							type="button" 
-							value="Apply"
-							tal:attributes="class string:kssattr-amount-0" />
+							value="Apply" />
 				</div>
 				<input id="flipOnVerticalAxis" type="button" value="flip vertically" />
 				<input id="flipOnHorizontalAxis" type="button" value="flip horizontally" />
@@ -82,8 +79,7 @@
 					</div><br /><br />
 					<input 	id="performBlur" 
 							type="button" 
-							value="Apply" 
-							tal:attributes="class string:kssattr-amount-0"/>
+							value="Apply" />
 				</div>				
 				
 				<input id="brightness" type="button" value="brightness" />
@@ -95,8 +91,7 @@
 					</div><br /><br />
 					<input 	id="performBrightness" 
 							type="button" 
-							value="Apply"
-							tal:attributes="class string:kssattr-amount-0" />
+							value="Apply" />
 				</div>
 				
 				<input id="contrast" type="button" value="contrast" />
@@ -108,8 +103,7 @@
 					</div><br /><br />
 					<input 	id="performContrast" 
 							type="button" 
-							value="Apply"
-							tal:attributes="class string:kssattr-amount-0" />
+							value="Apply" />
 				</div>
 				
 				<input id="sharpen" type="button" value="sharpen" />
@@ -121,8 +115,7 @@
 					</div><br /><br />
 					<input 	id="performSharpen" 
 							type="button" 
-							value="Apply"
-							tal:attributes="class string:kssattr-amount-0" />
+							value="Apply" />
 				</div>
 				
 				<div id="cropAndResizeButtonContainer">

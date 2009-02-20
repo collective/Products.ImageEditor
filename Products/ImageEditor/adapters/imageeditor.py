@@ -5,7 +5,6 @@ from Products.ImageEditor.interfaces.imageeditor import IImageEditorAdapter
 from Products.ImageEditor.interfaces.unredostack import IUnredoStack
 from PIL import Image, ImageFilter, ImageEnhance
 from cStringIO import StringIO
-from Products.ImageEditor.utils.conditions import precondition, between
 
 class ImageEditorAdapter(object):
     implements(IImageEditorAdapter)
@@ -85,7 +84,7 @@ class ImageEditorAdapter(object):
             'size': bsize,
             'width': width,
             'height': height,
-            'sizeformatted': "Size: %s%s" % (bsize, size_descriptor)
+            'sizeformatted': "Size: %s%s" % (str(bsize)[:4], size_descriptor)
         }
        
     def rotateLeft(self):
@@ -120,12 +119,10 @@ class ImageEditorAdapter(object):
             
         self.setImage(image, fmt)
         
-#    @precondition(between(0, 100))
     def compress(self, amount):
         image = self.getCurrentImage().convert('RGB') # if it is a png, convert it...
         self.setImage(image, quality=amount)
         
-#    @precondition(between(0.0, 2.0))
     def contrast(self, amount):
         image = self.getCurrentImage()
         enhancer = ImageEnhance.Contrast(image)
@@ -133,7 +130,6 @@ class ImageEditorAdapter(object):
 
         self.setImage(newImage, image.format)
         
-#    @precondition(between(0.0, 2.0))
     def brightness(self, amount):
         """
         amount should be between 0.0 and 2.0
