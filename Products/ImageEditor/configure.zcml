@@ -3,6 +3,8 @@
     xmlns:five="http://namespaces.zope.org/five"
     i18n_domain="Products.ImageEditor">
 
+    <five:registerPackage package="." initialize=".initialize" />
+
    	<include package=".browser" />
 	<include package=".adapters" />
 	
