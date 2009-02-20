@@ -5,7 +5,7 @@ version = '1.0rc2'
 
 setup(name='Products.ImageEditor',
       version=version,
-      description="A product that adds an editor tab to ATImage so you can crop and resize an image",
+      description="A product that adds an 'Image Editor' tab to ATImage. With this you can rotate, flip, resize, compress, add drop shadow, blur, change brightness, change contrast, sharpen and crop all with ajax.",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
@@ -14,10 +14,10 @@ setup(name='Products.ImageEditor',
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
-      keywords='atimage image resize scrop rotate',
+      keywords='atimage image editor resize scrop rotate compress blur sharpen',
       author='Nathan Van Gheem',
       author_email='vangheem@gmail.com',
-      url='http://plone.org/products/atimageeditor',
+      url='http://plone.org/products/imageeditor',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['Products'],
