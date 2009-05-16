@@ -1,0 +1,5 @@
+<layers>
+    <layer  remove="True"
+            name="Products.ImageEditor" 
+            interface="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer" />
+</layers>

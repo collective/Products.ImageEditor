@@ -23,6 +23,16 @@ def uninstall(portal, reinstall=False):
             if hasattr(image, 'unredostack'):
                 delattr(image, 'unredostack')
                 
-            image._p_changed
+            image._p_changed = 1
             
             
+        portal_actions = getToolByName(portal, 'portal_actions')
+        object_buttons = portal_actions.object
+
+        actions_to_remove = ('image_editor',)
+        for action in actions_to_remove:
+            if action in object_buttons.objectIds():
+                object_buttons.manage_delObjects([action])
+                
+    setup_tool = getToolByName(portal, 'portal_setup')
+    setup_tool.runAllImportStepsFromProfile('profile-Products.ImageEditor:uninstall')

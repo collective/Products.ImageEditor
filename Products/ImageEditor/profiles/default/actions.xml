@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="portal_actions" meta_type="Plone Actions Tool">
+ <action-provider name="portal_actions">
+
+  <action title="Image Editor" action_id="image_editor" category="object"
+     condition_expr="object/@@image-editor-utility/editable"
+     url_expr="string:${object_url}/@@editor" visible="True">
+  </action>
+
+</action-provider>
+</object>
