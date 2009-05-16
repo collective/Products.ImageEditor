@@ -1,0 +1,11 @@
+
+<div class="imageeditor-slider" tal:attributes="id string:${view/id}-slider">
+  <p tal:content="view/context/default"></p>
+  <div class="ui-slider-handle"></div>
+</div>
+<input type="hidden" 
+  tal:attributes="name python: view.name; 
+                  value python: view.context.default;
+                  id string:${view/id}-value">
+                  
+<script tal:content="structure view/js" />
