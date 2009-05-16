@@ -10,7 +10,7 @@ class IUnredoStack(Interface):
         performing the action
         """
         
-    def getCurrent(self):
+    def get_current(self):
         """
         Returns the current element in stack
         """
@@ -20,7 +20,7 @@ class IUnredoStack(Interface):
         Undo action
         """
         
-    def canUndo(self):
+    def can_undo(self):
         """
         Returns boolean if they can undo
         """
@@ -30,13 +30,13 @@ class IUnredoStack(Interface):
         redo last action
         """
         
-    def canRedo(self):
+    def can_redo(self):
         """
         Returns boolean if they can redo
         """
         
-    def clearStack(self):
+    def clear_stack(self):
         """
-        Clears the stack
+        Clears the stack and resets all image edits
         """
     

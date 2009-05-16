@@ -1,104 +1,67 @@
 from zope.interface import Interface, Attribute
 
 class IImageEditorAdapter(Interface):
-     
-    unredo = Attribute("""The unredo stack to handle undo and redo""")
         
-    def undo(self):
+    def undo():
         """
         undo last edit
         """
         
-    def redo(self):
+    def redo():
         """
         redo edit
         """
         
-    def clearEdits(self):
+    def clear_edits():
         """
         clear all edits from undo/redo
         """
 
-    def saveEdit(self):
+    def save_edit():
         """
         This method gets the current image in the unredo stack and saves it to the
         object.  It then saves the history of it and gets the version_message so
         the history has better info...
         """
-    def getOriginalImage(self):
+       
+    def set_image():
         """
-        
-        """
-
-    def getImageData(self):
-        """
-        get current image data from stack
+        Set new image on stack
         """
        
-    def setImage(self, value):
+    def get_current_image():
+        """
+        return the currently edited image
+        """
+        
+    def get_current_image_data():
        """
-       Set new image on stack
+       
        """
        
-    def imageInfo(self):
+    def get_current_image_info():
         """
-        return information on the current image
+        
         """
        
-    def rotateLeft(self):
-        """
-        rotate image left
-        """
-        
-    def rotateRight(self):
-        """
-        rotate image right
-        """
-        
-    def flipOnVerticalAxis(self):
-        """
-        """
-        
-    def flipOnHorizontalAxis(self):
-        """
-        """
-        
-    def blur(self, amount):
-        """
-        blur image by amount
-        """
-        
-    def compress(self, amount):
-        """
-        compress the image and convert it to jpg if necessary
-        """
-        
-    def contrast(self, amount):
-        """
-        set contrast on an image
-        """
-        
-    def brightness(self, amount):
-        """
-        set brightness on an image
-        """
-        
-    def sharpen(self, amount):
-        """
-        sharpen an image
-        """
+class IImageEditorUtility(Interface):
     
-    def resize(self, width, height):
+    def should_include(context):
         """
-        resize current image
-        """
-        
-    def crop(self, tlx, tly, brx, bry):
-        """
-        crop current image
+        will check if css and js files should be included
         """
         
-    def dropshadow(self):
-       """
-       add drop shadow to current image
-       """
+class IImageEditorLayer(Interface):
+    """
+    marker interface for image editor layer
+    """
+    
+class IImageEditorContext(Interface):
+    """
+    Just a context for image editor actions so they can be traversed.
+    """
+    
+class IImageEditorActionContext(Interface):
+    """
+    The actually traversable actions that allow ajax calls to be performed.
+    """
