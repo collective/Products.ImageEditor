@@ -1,39 +1,38 @@
 from Products.ImageEditor.interfaces.unredostack import IUnredoStack
 from zope.interface import implements
 from zope.component import adapts
-from Products.ATContentTypes.interface.image import IATImage
+from Products.ATContentTypes.interface.image import IImageContent
 from PIL import Image
-from cStringIO import StringIO
 
 class UnredoStack(object):
     """
     see interfaces.py for info
     """
     implements(IUnredoStack)
-    adapts(IATImage)
+    adapts(IImageContent)
 
-    def __init__(self, image):
-        self.image = image
+    def __init__(self, context):
+        self.context = context
         
-        if not hasattr(image, 'stack_pos'):
+        if not hasattr(context, 'stack_pos'):
             self.pos = 0
-        if not hasattr(image, 'unredostack'):
-            self.stack = [image.data]
+        if not hasattr(context, 'unredostack'):
+            self.stack = [context.getField('image').get(context).data.data]
         
     def get_pos(self):
-        return self.image.stack_pos
+        return self.context.stack_pos
     def set_pos(self, value):
-        self.image.stack_pos = value
+        self.context.stack_pos = value
     pos = property(get_pos, set_pos)
 
     def get_stack(self):
-        return self.image.unredostack
+        return self.context.unredostack
     def set_stack(self, value):
-        self.image.unredostack = value
+        self.context.unredostack = value
     stack = property(get_stack, set_stack)
 
     def do(self, value):
-        if self.canRedo():
+        if self.can_redo():
             #clear top
             for item in self.stack[(self.pos+1):len(self.stack)]:
                 self.stack.remove(item)
@@ -41,32 +40,32 @@ class UnredoStack(object):
         self.stack.append(value)
         self.pos = self.pos + 1
 
-    def getCurrent(self):
+    def get_current(self):
         return self.stack[self.pos]
 
     def undo(self):
         self.pos = self.pos - 1
 
-    def canUndo(self):
+    def can_undo(self):
         return self.pos > 0
 
     def redo(self):
         self.pos = self.pos + 1
 
-    def canRedo(self):
+    def can_redo(self):
         return self.pos + 1 < len(self.stack)
         
-    def clearStack(self, bottom=None):
+    def clear_stack(self, bottom=None):
         
-        if hasattr(self.image, 'stack_pos'):
-            delattr(self.image, 'stack_pos')
+        if hasattr(self.context, 'stack_pos'):
+            delattr(self.context, 'stack_pos')
             
-        if hasattr(self.image, 'unredostack'):
-            delattr(self.image, 'unredostack')
+        if hasattr(self.context, 'unredostack'):
+            delattr(self.context, 'unredostack')
             
         self.pos = 0
 
         if bottom is None:
-            bottom = self.image.data
+            bottom = self.context.getField('image').get(self.context).data.data
 
         self.stack = [bottom]

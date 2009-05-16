@@ -1,6 +1,6 @@
 from zope.interface import implements
 from zope.component import adapts
-from Products.ATContentTypes.interface.image import IATImage
+from Products.ATContentTypes.interface.image import IImageContent
 from Products.ImageEditor.interfaces.imageeditor import IImageEditorAdapter
 from Products.ImageEditor.interfaces.unredostack import IUnredoStack
 from PIL import Image, ImageFilter, ImageEnhance
@@ -8,12 +8,12 @@ from cStringIO import StringIO
 
 class ImageEditorAdapter(object):
     implements(IImageEditorAdapter)
-    adapts(IATImage)
+    adapts(IImageContent)
     
-    def __init__(self, image):
-        self.image = image
+    def __init__(self, context):
+        self.context = context
         #adapter to handle redo and undo
-        self.unredo = IUnredoStack(image)
+        self.unredo = IUnredoStack(context)
         
     def undo(self):
         self.unredo.undo()
@@ -21,19 +21,20 @@ class ImageEditorAdapter(object):
     def redo(self):
         self.unredo.redo()
         
-    def clearEdits(self):
-        self.unredo.clearStack()
+    def clear_edits(self):
+        self.unredo.clear_stack()
 
-    def saveEdit(self):
-        image_data = self.unredo.getCurrent()
+    def save_edit(self):
+        image_data = self.unredo.get_current()
         
-        field = self.image.getField('image')
-        mimetype = field.getContentType(self.image)
-        filename = field.getFilename(self.image)
+        field = self.context.getField('image')
+        mimetype = field.getContentType(self.context)
+        filename = field.getFilename(self.context)
         
         # because AT tries to get mimetype and filename from a file like
         # object by attribute access I'm passing a string along
-        self.image.setImage(
+        field.set(
+            self.context,
             image_data, 
             mimetype=mimetype,
             filename=filename, 
@@ -41,15 +42,12 @@ class ImageEditorAdapter(object):
         )
         
         #should I clear???  Maybe you should still be able to undo...              
-        self.unredo.clearStack(image_data)
+        #self.unredo.clear_stack(image_data)
         
-    def getOriginalImage(self):
-        return Image.open(StringIO(self.unredo.stack[0]))
-        
-    def getCurrentImage(self):
-        return Image.open(StringIO(self.unredo.getCurrent()))
+    def get_current_image(self):
+        return Image.open(StringIO(self.unredo.get_current()))
        
-    def setImage(self, image, format="JPEG", quality=None):
+    def set_image(self, image, format="JPEG", quality=None):
         """
         Setting the image just adds to the unredo stack...
         """
@@ -62,11 +60,11 @@ class ImageEditorAdapter(object):
         
         self.unredo.do(image_data.getvalue())
        
-    def getCurrentImageData(self):
-        return self.unredo.getCurrent()
+    def get_current_image_data(self):
+        return self.unredo.get_current()
        
-    def getCurrentImageInfo(self):
-        data = self.getCurrentImageData()
+    def get_current_image_info(self):
+        data = self.get_current_image_data()
         bsize = len(data)
         bsize = bsize/1024
 
@@ -75,7 +73,7 @@ class ImageEditorAdapter(object):
             bsize = bsize/1024.0
             size_descriptor = 'mb'
 
-        size = self.getCurrentImage().size
+        size = self.get_current_image().size
 
         width = size[0]
         height = size[1]
@@ -86,122 +84,4 @@ class ImageEditorAdapter(object):
             'height': height,
             'sizeformatted': "Size: %s%s" % (str(bsize)[:4], size_descriptor)
         }
-       
-    def rotateLeft(self):
-        original = self.getCurrentImage()
-        image = original.rotate(90)
-
-        self.setImage(image, original.format)
-        
-    def rotateRight(self):
-        original = self.getCurrentImage()
-        image = original.rotate(270)
-
-        self.setImage(image, original.format)
-        
-    def flipOnVerticalAxis(self):
-        original = self.getCurrentImage()
-        image = original.transpose(Image.FLIP_TOP_BOTTOM)
-
-        self.setImage(image, original.format)
-        
-    def flipOnHorizontalAxis(self):
-        original = self.getCurrentImage()
-        image = original.transpose(Image.FLIP_LEFT_RIGHT)
-
-        self.setImage(image, original.format)
-        
-    def blur(self, amount):
-        image = self.getCurrentImage()
-        fmt = image.format
-        for x in range(0, amount):
-            image = image.filter(ImageFilter.BLUR)
-            
-        self.setImage(image, fmt)
-        
-    def compress(self, amount):
-        image = self.getCurrentImage().convert('RGB') # if it is a png, convert it...
-        self.setImage(image, quality=amount)
-        
-    def contrast(self, amount):
-        image = self.getCurrentImage()
-        enhancer = ImageEnhance.Contrast(image)
-        newImage = enhancer.enhance(amount)
-
-        self.setImage(newImage, image.format)
-        
-    def brightness(self, amount):
-        """
-        amount should be between 0.0 and 2.0
-        1.0 being the original image
-        """
-        image = self.getCurrentImage()
-        enhancer = ImageEnhance.Brightness(image)
-        #can enhance from 0.0-2.0, 1.0 being original image
-        newImage = enhancer.enhance(amount)
-
-        self.setImage(newImage, image.format)
-        
-    def sharpen(self, amount):
-        image = self.getCurrentImage()
-        enhancer = ImageEnhance.Sharpness(image)
-        newImage = enhancer.enhance(amount)
-
-        self.setImage(newImage, image.format)
-    
-    def resize(self, width, height):
-        image = self.getCurrentImage()
-        format = image.format
-        size=(width, height)
-        new_image = image.resize(size, Image.ANTIALIAS)
-        
-        self.setImage(new_image, image.format)
-        
-    def crop(self, tlx, tly, brx, bry):
-        image = self.getCurrentImage()
-        format = image.format
-        box = (tlx, tly, brx, bry)
-        new_image = image.crop(box=box)
-        new_image.load()
-        
-        self.setImage(new_image, image.format)
-        
-    def dropshadow(self):
-        """
-        Code taken from http://code.activestate.com/recipes/474116/
-        """
-        image = self.getCurrentImage()
-        offset = (5,5)
-        background=0xffffff
-        shadow=0x444444
-        border=8
-        iterations=3
-        format = image.format
-        
-        # Create the backdrop image -- a box in the background colour with a 
-        # shadow on it.
-        totalWidth = image.size[0] + abs(offset[0]) + 2*border
-        totalHeight = image.size[1] + abs(offset[1]) + 2*border
-        back = Image.new(image.mode, (totalWidth, totalHeight), background)
-
-        # Place the shadow, taking into account the offset from the image
-        shadowLeft = border + max(offset[0], 0)
-        shadowTop = border + max(offset[1], 0)
-        back.paste(shadow, [shadowLeft, shadowTop, shadowLeft + image.size[0], 
-        shadowTop + image.size[1]] )
-
-        # Apply the filter to blur the edges of the shadow.  Since a small kernel
-        # is used, the filter must be applied repeatedly to get a decent blur.
-        n = 0
-        while n < iterations:
-            back = back.filter(ImageFilter.BLUR)
-            n += 1
-
-        # Paste the input image onto the shadow backdrop  
-        imageLeft = border - min(offset[0], 0)
-        imageTop = border - min(offset[1], 0)
-        back.paste(image, (imageLeft, imageTop))
-        
-        self.setImage(back, format)
-        
         
