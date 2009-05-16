@@ -1,4 +1,3 @@
 Introduction
 ============
-Once installed this product adds a "Image Editor" tab for the image content type.
-With this you can rotate, flip, resize, compress, add drop shadow, blur, change brightness, change contrast, sharpen and crop all with ajax.
+Once installed this product adds a "Image Editor" tab for the image content type and News Item content type.  With this you can rotate, flip, blur, compress, contrast, brightness, sharpen, add drop shadows, crop, resize all ajax enabled.

@@ -1,55 +1,62 @@
 Changelog
 =========
 
+1.1rc1
+------
+* major code revamp
+* plugin system for different types of editing actions so anyone can create edit actions
+* new interface design
+* now News Item images can be edited also
+* upgraded to newest version of jquery ui
+* added newest version of ImgAreaSelect
+
 1.0rc2
-=================
-*removed all traces of kss
-*removes portlets from editor view
-*added uninstall step incase there are leftovers on the Image object
-from editing it.
+------
+* removed all traces of kss
+* removes portlets from editor view
+* added uninstall step in case there are leftovers on the Image object from editing it.
 
 1.0rc1
-=================
-*changed name of product to Products.ImageEditor
+------
+* changed name of product to Products.ImageEditor
 
 0.2rc1.3
-----------------
-*moved edit actions to adapter
-*moved save and cancel buttons to action menu
+--------
+* moved edit actions to adapter
+* moved save and cancel buttons to action menu
 
 0.2rc1.2
-----------------
-*added drop shadow support
-*added aspect ratio support
+--------
+* added drop shadow support
+* added aspect ratio support
 
 0.2rc1.1
-----------------
-*fixed IE critical bug for cropping image that is zoomed
+--------
+* fixed IE critical bug for cropping image that is zoomed
 
 0.2rc1
-----------------
-*fixed IE bugs and tightened support for advanced features
+------
+* fixed IE bugs and tightened support for advanced features
 
 0.2b3
-----------------
-*added versioning support
+-----
+* added versioning support
 
 0.2b1
-----------------
-*mobile actions window
-*undo/redo
-*blur, compression, brightness, contrast
-*shows image size and pixel count
-*warning if user has unsaved changes
+-----
+* mobile actions window
+* undo/redo
+* blur, compression, brightness, contrast
+* shows image size and pixel count
+* warning if user has unsaved changes
 
 0.1rc2
-----------------
-
-*Added scaling capabilities
-*fixed a few bugs
+------
+* Added scaling capabilities
+* fixed a few bugs
 
 0.1rc1 - Initial Release
-----------------
+------------------------
 
 * Initial release
 
