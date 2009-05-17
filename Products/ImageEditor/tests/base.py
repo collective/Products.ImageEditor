@@ -49,12 +49,12 @@ class ImageEditorTestCase(ptc.PloneTestCase):
         return ImageEditorAdapter(image)
        
     def imagesEqual(self, comparedImageFileName, imageEditor):
-        imageEditor.saveEdit()
-        imageEditor.getCurrentImage().save(self.getImagePath(comparedImageFileName))
+        imageEditor.save_edit()
+        imageEditor.get_current_image().save(self.getImagePath(comparedImageFileName))
         
         imgfile = self.getImage(comparedImageFileName)
         
-        image_diff = ImageChops.difference(imgfile, imageEditor.getCurrentImage()).getbbox()
+        image_diff = ImageChops.difference(imgfile, imageEditor.get_current_image()).getbbox()
         
         #self.failUnless(image_diff[0] == 0 and image_diff[1] == 0)
         

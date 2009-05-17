@@ -1,157 +1,3 @@
-div#imageEditor{
-	
-}
-
-div#manageButtons{
-	margin-bottom:5px;
-	height:25px;
-}
-
-div#imageContainer{
-    width:100%;
-}
-
-div#actionButtons div#menuHandle{
-    background-color:black;
-    width:100%;
-    height:18px;
-    margin-bottom:5px;
-    cursor:move;
-}
-
-div#actionButtons{
-    background-color:#f9f9f9;
-    border: 2px solid black;
-    width:150px;
-    z-index:1001;
-    padding:3px;
-    position:absolute;
-    margin: auto auto auto 5px;
-    text-align:center;
-    opacity:.9;
-    left:55px;
-    top:220px;
-}
-
-div#cropAndResizeButtonContainer{
-    background-color:#F0EBEE;
-    border:2px solid black;
-    margin-bottom:2px;
-    padding:2px 2px 0px 2px;
-}
-
-div#actionButtons input{
-    background-repeat: no-repeat;
-	padding: 1px 1px 1px 16px;
-	cursor:pointer;
-	border: 2px solid gray;
-	background-color: #f1f1f1;
-	margin:1px 5px 3px 0px;
-	width:100%;
-}
-div.imageeditor-dialog input{
-    background-repeat: no-repeat;
-    background-image: url(++resource++ImageEditor.resources/icons/apply.png);
-	padding: 1px 1px 1px 16px;
-	cursor:pointer;
-	border: 2px solid gray;
-	background-color: #f1f1f1;
-	margin:1px 5px 3px 0px;
-}
-div#actionButtons input:hover, div.imageeditor-dialog input:hover{
-    background-color:white;
-    border: 2px solid black;
-}
-
-div#undoRedoContainer input{
-    width:48%;
-    padding-left:0px;
-    padding-right:0px;
-    margin-left:0px;
-    margin-right:0px;
-	padding: 1px 1px 1px 16px;
-} 
-
-div#manageButtons input{
-    background-repeat: no-repeat;
-	padding: 1px 1px 1px 16px;
-	cursor:pointer;
-	float:left;
-	margin:1px 5px 3px 0px;
-}
-
-div#actionButtons input.editing{
-    border-color:black;
-    background-color:gray;
-    color:white;
-    cursor:pointer;
-}
-
-div#actionButtons input.enabled{
-    background-color:white;
-    border-color:black;
-    cursor:pointer;
-}
-div#actionButtons input.disabled{
-    border-color:black;
-    background-color:gray;
-    color:black;
-    cursor:default;
-}
-
-div#actionButtons input#crop{
-	background-image: url(++resource++ImageEditor.resources/icons/stock-selection-intersect-16.png);
-}
-div#actionButtons input#resize{
-	background-image: url(++resource++ImageEditor.resources/icons/stock-resize-16.png);
-}
-div#actionButtons input#rotate-left{
-	background-image: url(++resource++ImageEditor.resources/icons/stock-rotate-270-16.png);
-}
-div#actionButtons input#rotate-right{
-	background-image: url(++resource++ImageEditor.resources/icons/stock-rotate-90-16.png);
-}
-div#actionButtons input#apply{
-	background-image: url(++resource++ImageEditor.resources/icons/apply.png);
-}
-
-div#actionButtons input#flipOnVerticalAxis{
-	background-image: url(++resource++ImageEditor.resources/icons/stock-tool-rotate-16.png);
-}
-div#actionButtons input#flipOnHorizontalAxis{
-	background-image: url(++resource++ImageEditor.resources/icons/stock-tool-flip-16.png);
-}
-div#actionButtons input#redo{
-	background-image: url(++resource++ImageEditor.resources/icons/edit-redo.png);
-}
-div#actionButtons input#undo{
-	background-image: url(++resource++ImageEditor.resources/icons/edit-undo.png);
-}
-div#actionButtons input#blur{
-	background-image: url(++resource++ImageEditor.resources/icons/stock-tool-blur-16.png);
-}
-div#actionButtons input#compression{
-    background-image: url(++resource++ImageEditor.resources/icons/stock-template-16.png);
-}
-div#actionButtons input#brightness{
-	background-image: url(++resource++ImageEditor.resources/icons/stock-tool-brightness-16.png);
-}
-div#actionButtons input#contrast{
-    background-image: url(++resource++ImageEditor.resources/icons/stock-tool-contrast-16.png);
-}
-
-div#actionButtons input#sharpen{
-    background-image: url(++resource++ImageEditor.resources/icons/stock-tool-colorize-16.png);
-}
-div#actionButtons input#addDropShadow{
-    background-image: url(++resource++ImageEditor.resources/icons/stock-transparency-16.png);
-}
-
-div.imageeditor-dialog p{
-    margin-bottom:15px;
-    font-weight:bold;
-}
-
 .ui-slider {
     background-color: #E1D9F5;
     width:200px;
@@ -172,8 +18,7 @@ div.imageeditor-dialog p{
 }
 
 .imageeditor-slider{
-    float:left;
-    margin-right:13px;
+    margin:20px 15px 10px 10px;
 }
 
 .imageeditor-slider p{
@@ -191,22 +36,149 @@ div.imageeditor-dialog .imageeditor-slider p{
     padding:10px;
 }
 
-div#image-cropper-aspect-selector{
-    position:relative;
-    left:16px;
+#portal-column-two, #portal-column-one{
+    display:none;
 }
-div#image-cropper-aspect-selector input{
-    float:left;
-    width:75px;
-    height:20px;
-    margin:5px;
+
+div.image-edit-action{
+    display:none;
+}
+
+.image-edit-apply-button{
+    background-repeat: no-repeat;
+    background-image: url(++resource++ImageEditor.resources/icons/apply.png);
+    padding: 1px 1px 1px 16px;
+	cursor:pointer;
+	border: 1px solid black;
+	background-color: #f1f1f1;
+	margin:1px 5px 3px 0px;
+	width:100%;
+}
+
+.image-edit-apply-button:hover{
+    border: 1px solid red;
+}
+
+div#options{
+    padding:5px;
+}
+
+div.edit-option{
+    padding:2px;
+    margin:0px;
+}
+div.edit-option{
+    font-size:10px;
+}    
+div.edit-option .formQuestion{
+    padding-right:5px;
+}
+    
+div#buttons input{
+    background-repeat: no-repeat;
+	cursor:pointer;
+	border: 1px solid gray;
+	background-color: #f1f1f1;
+    margin:1px 5px 0 0;
+    padding:0 1px 3px 16px;
+}
+
+div#buttons input:hover, .image-edit-apply-button:hover{
+    background-color:white;
+    border: 1px solid black;
+}
+
+input.edit-button{
+    background-repeat: no-repeat;
+	padding: 0 0 0 10px;
+	cursor:pointer;
+	float:left;
+	width:100%;
+	height:17px;
+	margin: 0 0 2px 0;
+}
+
+input.active{
+    border: 1px solid green;
+}
+
+input.enabled{
+    background-color:white;
+    border-color:black;
     cursor:pointer;
 }
-div#image-cropper-aspect-selector input.selected{
-    border: 2px solid orange;
+input.disabled{
+    border-color:black;
+    background-color:gray;
     color:black;
     cursor:default;
 }
-#portal-column-two, #portal-column-one{
-    display:none;
+#image-container{
+    margin:auto;
+}
+img#source-image{
+    margin:auto;
+    position:relative;
+    top:0px;
+    left:0px;
+}
+
+div#status-bar{
+    width: 100%;
+    height:20px;
+    background-color:gray;
+    border-top:1px solid black;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    text-align:center;
+    margin:auto;
+    padding-top:5px;
+}
+
+div#buttons{
+    width:100%;
+}
+
+div#menuHandle{
+    background-color:black;
+    width:100%;
+    height:18px;
+    margin-bottom:5px;
+    cursor:move;
+    text-align:center;
+    color:#f1f1f1;
+}
+
+div#image-editor-controls{
+    background-color:#f9f9f9;
+    border: 2px solid black;
+    width:150px;
+    z-index:1001;
+    padding:3px 3px 3px 30px;
+    position:fixed;
+    margin: auto auto auto 5px;
+    text-align:center;
+    opacity:.9;
+    right:-160px;
+    top:1px;
+    background-image: url(++resource++ImageEditor.resources/icons/actions_background.jpg);
+    background-repeat: no-repeat;
+    background-position: 0% 48%;
+}
+
+#zoom-slider-wrapper{
+    border:1px solid black;
+    padding: 0px 0px 0px 25px;
+    width: 225px;
+    height: 61px;
+    background-color:#f1f1f1;
+    opacity:.9;
+    position:fixed;
+    right:-215px;
+    bottom:0px;
+    z-index:100;
+    background-image: url(++resource++ImageEditor.resources/icons/zoom_background.jpg);
+    background-repeat: no-repeat;
+    background-position: 0% 0px;
 }

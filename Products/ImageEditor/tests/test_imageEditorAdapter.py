@@ -78,59 +78,59 @@ class TestAdapter(ImageEditorTestCase):
     def test_undo(self):
         editor = self.getImageEditorAdapter()
         
-        original_image = editor.getCurrentImageData()
+        original_image = editor.get_current_image_data()
         editor.dropshadow()
-        self.failUnless(original_image != editor.getCurrentImageData())
+        self.failUnless(original_image != editor.get_current_image_data())
         
         editor.undo()
-        self.failUnless(original_image == editor.getCurrentImageData())
+        self.failUnless(original_image == editor.get_current_image_data())
         
     def test_redo(self):
         editor = self.getImageEditorAdapter()
         
-        original_image = editor.getCurrentImageData()
+        original_image = editor.get_current_image_data()
         editor.dropshadow()
         
-        edited_image = editor.getCurrentImageData()
+        edited_image = editor.get_current_image_data()
         self.failUnless(original_image != edited_image)
         
         editor.undo()
-        self.failUnless(original_image == editor.getCurrentImageData())
+        self.failUnless(original_image == editor.get_current_image_data())
         
         editor.redo()
-        self.failUnless(edited_image == editor.getCurrentImageData())
+        self.failUnless(edited_image == editor.get_current_image_data())
         
-    def test_clearEdits(self):
+    def test_clear_edits(self):
         editor = self.getImageEditorAdapter()
         
-        original_image = editor.getCurrentImageData()
+        original_image = editor.get_current_image_data()
         
         editor.dropshadow()
         editor.rotateLeft()
         editor.rotateRight()
         
-        editor.clearEdits()
-        self.failUnless(original_image == editor.getCurrentImageData())
+        editor.clear_edits()
+        self.failUnless(original_image == editor.get_current_image_data())
         
-    def test_saveEdits(self):
+    def test_save_edits(self):
         editor = self.getImageEditorAdapter()
         
         editor.dropshadow()
         editor.rotateLeft()
         
-        current = editor.getCurrentImageData()
-        editor.saveEdit()
+        current = editor.get_current_image_data()
+        editor.save_edit()
         
         self.failUnless(len(editor.unredo.stack) == 1)
-        self.failUnless(current == editor.getCurrentImageData())
+        self.failUnless(current == editor.get_current_image_data())
         
-    def test_getCurrentImage(self):
+    def test_get_current_image(self):
         editor = self.getImageEditorAdapter()
         
         editor.dropshadow()
         editor.rotateLeft()
         
-        self.failUnless(editor.getCurrentImageData() == editor.unredo.getCurrent())
+        self.failUnless(editor.get_current_image_data() == editor.unredo.get_current())
     
     def test_setImage(self):
         editor = self.getImageEditorAdapter()
@@ -142,13 +142,13 @@ class TestAdapter(ImageEditorTestCase):
         
         self.failUnless(len(editor.unredo.stack) == 3)
         
-    def test_getCurrentImageData(self):
+    def test_get_current_image_data(self):
         # Not sure how to test this...
         pass
         
-    def test_getCurrentImageInfo(self):
+    def test_get_current_image_info(self):
         editor = self.getImageEditorAdapter()
-        info = editor.getCurrentImageInfo()
+        info = editor.get_current_image_info()
         
         self.failUnless(info['sizeformatted'] == "Size: 25kb")
         self.failUnless(info['width'] == 461)

@@ -4,8 +4,11 @@
     i18n_domain="Products.ImageEditor">
 
     <five:registerPackage package="." initialize=".initialize" />
-
-   	<include package=".browser" />
+	
+	<include package=".meta" />
+	<include package=".actions" />
+	
+	<include package=".browser" />
 	<include package=".adapters" />
 	
    	<include file="profiles.zcml" />

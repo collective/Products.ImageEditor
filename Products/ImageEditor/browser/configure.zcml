@@ -4,26 +4,52 @@
     xmlns:kss="http://namespaces.zope.org/kss"
     xmlns:plone="http://namespaces.plone.org/plone">
 
+  	<browser:page
+        for="Products.ATContentTypes.interface.image.IImageContent"
+        name="editor"
+        class=".imageeditor.NewEdit"
+        permission="cmf.ModifyPortalContent"
+        layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
+    />
+  	      
 	<browser:page
-	      for="Products.ATContentTypes.interface.image.IATImage"
-	      name="editor"
-	      class=".imageeditor.Edit"
-	      permission="cmf.ModifyPortalContent"
-	      />
-	<browser:page
-	      for="Products.ATContentTypes.interface.image.IATImage"
-	      name="currenteditedimage.jpg"
-	      class=".imageeditor.ShowCurrentEdit"
-	      permission="cmf.ModifyPortalContent"
-	      />
-	
+        for="Products.ATContentTypes.interface.image.IImageContent"
+        name="currenteditedimage.jpg"
+        class=".imageeditor.ShowCurrentEdit"
+        permission="cmf.ModifyPortalContent"
+        layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
+    />
+
+    <browser:page 
+        name="image-editor-utility"
+        for="*"
+        permission="cmf.ModifyPortalContent"
+        allowed_interface="Products.ImageEditor.interfaces.imageeditor.IImageEditorUtility"
+        layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
+        class=".imageeditor.ImageEditorUtility" 
+    />
+       
+    <browser:page 
+        name="image-editor"
+        for="Products.ATContentTypes.interface.image.IImageContent"
+        permission="cmf.ModifyPortalContent"
+        layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
+        class=".imageeditor.ImageEditorContext" 
+    />
+    <browser:page 
+        name="execute"
+        for="Products.ImageEditor.interfaces.imageeditor.IImageEditorActionContext"
+        permission="cmf.ModifyPortalContent"
+        layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
+        class=".imageeditor.ImageEditorActionExecute" 
+    />
+     
     <browser:resourceDirectory
         name="ImageEditor.resources"
         directory="resources"
-        />
-        
+    />
+
     <include file="css.zcml" />
     <include file="js.zcml" />
-    <include file="ajax.zcml" />
     
 </configure>

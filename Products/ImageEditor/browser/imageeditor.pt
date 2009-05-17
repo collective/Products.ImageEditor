@@ -6,159 +6,39 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="Products.ImageEditor">
 <metal:css fill-slot="css_slot">
-    <link rel="stylesheet" 
-    	tal:attributes="href string:${context/++resource++ImageEditor.resources}/jquery.ui-1.5.2/themes/default/ui.all.css"
-    	type="text/css" media="screen" />
-	<link rel="stylesheet" 
-    	tal:attributes="href string:${context/++resource++imageeditor-style.css}"
-    	type="text/css" media="screen" />
+  
 </metal:css>
+<metal:js fill-slot="javascript_head_slot">
+  <script tal:content="structure view/setup_js" />
+  <script tal:content="structure view/custom_action_parameters" />
+</metal:js>
 <body>
 <metal:main fill-slot="main">
-    <tal:main-macro metal:define-macro="main">		
-		<div 	id="imageEditor" 
-				tal:define="width python: here.getSize()[0];
-							height python: here.getSize()[1];">
-							
-			<input type="hidden" id="context_url" tal:attributes="value context/absolute_url" />
-			<input type="hidden" class="canCompress" tal:attributes="value view/canCompress" />
-			<input type="hidden" class="imageWidth" tal:attributes="value width" />
-			<input type="hidden" class="imageHeight" tal:attributes="value height" />
-			
-			<div id="manageButtons">
-				<div id="slider" class="imageeditor-slider">
-					<p>100%</p>
-					<div class="ui-slider-handle"></div>
-				</div>
-				
-				<div class="useZoom">
-					<input id="useZoom" type="checkbox" /><p>use zoomed view for crop/resize</p>
-				</div>
-			</div>
-			<div id="actionButtons">
-			    
-				<div id="menuHandle"></div>
-				<input 	id="serverResizeSaveButton" 
-						type="button" 
-						value="nothing" 
-						style="display:none" />
-				<input 	id="serverCropSaveButton" 
-						type="button" 
-						value="nothing" 
-						style="display:none" />
-				<input 	id="cropAndResize" 
-						type="button" 
-						value="nothing" 
-						style="display:none" />
-						
-						
-						
-				<input id="compression" type="button" value="quality" />
-				<div id="compressiondialog" class="imageeditor-dialog" style="display:none">
-					<p>Choose the level of compression</p>
-					<div id="compressionslider" class="imageeditor-slider">
-						<p>75%</p>
-						<div class="ui-slider-handle"></div>
-					</div><br /><br />
-					<input 	id="performCompression" 
-							type="button" 
-							value="Apply" />
-				</div>
-				<input id="flipOnVerticalAxis" type="button" value="flip vertically" />
-				<input id="flipOnHorizontalAxis" type="button" value="flip horizontally" />
-				<input id="rotate-left" type="button" value="rotate left" />
-				<input id="rotate-right" type="button" value="rotate right" />
-				<input id="addDropShadow" type="button" value="add drop shadow" />
-				
-				<input id="blur" type="button" value="blur" />
-				<div id="blurdialog" class="imageeditor-dialog" style="display:none">
-					<p>Choose the level to blur to...</p>
-					<div id="blurslider" class="imageeditor-slider">
-						<p>1</p>
-						<div class="ui-slider-handle"></div>
-					</div><br /><br />
-					<input 	id="performBlur" 
-							type="button" 
-							value="Apply" />
-				</div>				
-				
-				<input id="brightness" type="button" value="brightness" />
-				<div id="brightnessdialog" class="imageeditor-dialog" style="display:none">
-					<p>Choose the level of brightness</p>
-					<div id="brightnessslider" class="imageeditor-slider">
-						<p>50%</p>
-						<div class="ui-slider-handle"></div>
-					</div><br /><br />
-					<input 	id="performBrightness" 
-							type="button" 
-							value="Apply" />
-				</div>
-				
-				<input id="contrast" type="button" value="contrast" />
-				<div id="contrastdialog" class="imageeditor-dialog" style="display:none">
-					<p>Choose the level of contrast</p>
-					<div id="contrastslider" class="imageeditor-slider">
-						<p>50%</p>
-						<div class="ui-slider-handle"></div>
-					</div><br /><br />
-					<input 	id="performContrast" 
-							type="button" 
-							value="Apply" />
-				</div>
-				
-				<input id="sharpen" type="button" value="sharpen" />
-				<div id="sharpendialog" class="imageeditor-dialog" style="display:none">
-					<p>Choose the level of sharpening</p>
-					<div id="sharpenslider" class="imageeditor-slider">
-						<p>1.0</p>
-						<div class="ui-slider-handle"></div>
-					</div><br /><br />
-					<input 	id="performSharpen" 
-							type="button" 
-							value="Apply" />
-				</div>
-				
-				<div id="cropAndResizeButtonContainer">
-					<input id="resize" type="button" value="resize" />
-					<input id="crop" type="button" value="crop" />
-					<input id="apply" class="disabled" type="button" value="apply" />
-				</div>
-				
-				<div id="undoRedoContainer">
-					<input id="undo" class="disabled" disabled="true" type="button" value="undo" />
-					<input id="redo" class="disabled" disabled="true" type="button" value="redo" />
-				</div>
-				<div id="undoRedoContainer">
-					<input id="save" class="disabled context" disabled="true" type="button" value="save" />
-					<input id="cancel" class="disabled standalone" disabled="true" type="button" value="cancel" />
-				</div>
-				<p class="discreet" style="font-size:10px; text-align:center; margin: auto">
-					<span id="imageSize" tal:content="view/getSize" /> 
-					<span id="imagePixels">0 x 0</span>
-				</p>
-			</div>
-			
-			<div id="imageContainer">
-				<img id="sourceImage" tal:attributes="src view/image_url" />
-			</div>
-			
-			<div id="image-cropper-aspect-selector" style="display:none">
-			    <h3>Aspect Ratio</h3>
-			    <input type="button" class="selected" value="manual" />
-			    <input type="button" value="1:1" />
-			    <input type="button" value="3:5" />
-			    <input type="button" value="5:3" />
-			    <input type="button" value="4:6" />
-			    <input type="button" value="6:4" />
-			    <input type="button" value="5:7" />
-			    <input type="button" value="7:5" />
-			    <input type="button" value="8:10" />
-			    <input type="button" value="10:8" />
-			</div>
-		</div>
+    <tal:main-macro metal:define-macro="main">
 
+    <div id="zoom-slider-wrapper" class="slide-in">
+      <div class="imageeditor-slider" id="zoom-slider">
+        <p>zoom</p>
+        <div class="ui-slider-handle"></div>
+        <input type="hidden" id="zoom-slider-value" name="zoom-slider-value" value="1"/>
+      </div>
+    </div>
+    <div id="image-editor-controls" class="slide-in">
+      <div id="buttons" tal:content="structure view/get_buttons" />
+      <div id="options" tal:content="structure view/get_options" />
+      <div id="status-bar-information">
+      </div>
+    </div>
+    <div id="image-container">
+      <img id="source-image" tal:attributes="src view/image_url" />
+    </div>
+
+    <div id="kss-spinner">
+      <img tal:attributes="src string:${portal_url}/spinner.gif" alt="" />
+    </div>
     </tal:main-macro>
 </metal:main>
 </body>
 </html>
+
 
