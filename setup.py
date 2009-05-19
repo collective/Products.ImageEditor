@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 import os
 
 setup(name='Products.ImageEditor',
-      version=open(os.path.join("Products", "ImageEditor", "version.txt").read(),
+      version=open(os.path.join("Products", "ImageEditor", "version.txt")).read(),
       description="A product that adds an editor tab to ATImage and News Item so you can rotate, flip, blur, compress, contrast, brightness, sharpen, add drop shadows, crop, resize an image.",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
