@@ -27,7 +27,8 @@ for path in sys.path:
         BASE_DIR = path
 
 ztc.installProduct('Products.ImageEditor')
-ptc.setupPloneSite(products=('Products.ImageEditor',))
+ztc.installProduct('collective.js.jquery')
+ptc.setupPloneSite(products=('Products.ImageEditor','collective.js.jquery'))
 
 class ImageEditorTestCase(ptc.PloneTestCase):
     """

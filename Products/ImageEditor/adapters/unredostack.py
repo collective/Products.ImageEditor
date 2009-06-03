@@ -17,7 +17,7 @@ class UnredoStack(object):
         if not hasattr(context, 'stack_pos'):
             self.pos = 0
         if not hasattr(context, 'unredostack'):
-            self.stack = [context.getField('image').get(context).data.data]
+            self.stack = [context.getField('image').get(context).data]
         
     def get_pos(self):
         return self.context.stack_pos
@@ -66,6 +66,6 @@ class UnredoStack(object):
         self.pos = 0
 
         if bottom is None:
-            bottom = self.context.getField('image').get(self.context).data.data
+            bottom = self.context.getField('image').get(self.context).data
 
         self.stack = [bottom]

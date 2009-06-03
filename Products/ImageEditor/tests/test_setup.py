@@ -23,7 +23,8 @@ class TestSetup(ImageEditorTestCase):
         
     def test_js_added(self):
         pjavascripts = getToolByName(self.portal, 'portal_javascripts')
-        self.failUnless('++resource++jquery-1.2.6.js' in [js.getId() for js in pjavascripts.getResources()])
+        #jquery is now removed from ImageEditor
+        #self.failUnless('++resource++jquery-1.2.6.js' in [js.getId() for js in pjavascripts.getResources()])
         self.failUnless('++resource++jquery-ui-imageeditor.min.js' in [js.getId() for js in pjavascripts.getResources()])
         self.failUnless('++resource++jquery.imgareaselect-0.4.2.min.js' in [js.getId() for js in pjavascripts.getResources()])
         self.failUnless('++resource++imageeditor.js' in [js.getId() for js in pjavascripts.getResources()])
