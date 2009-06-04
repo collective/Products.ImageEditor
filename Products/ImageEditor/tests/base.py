@@ -10,7 +10,6 @@ from Products.ImageEditor.adapters.imageeditor import ImageEditorAdapter
 from Testing import ZopeTestCase as ztc
 
 
-
 BASE_DIR = ""
 
 for path in sys.path:
@@ -26,17 +25,26 @@ class ImageEditorTestCase(ptc.PloneTestCase):
     """
     def afterSetUp(self):
         self.setRoles(('Manager',))
-
-    def getImageEditorAdapter(self):
-        id = self.portal.invokeFactory(type_name="Image", id="testimage")
-        image = self.portal['testimage']
+        
+    def getImageContentType(self):
+        try:
+            id = self.portal.invokeFactory(type_name="Image", id="testimage")
+        except Exception:
+            id = 'testimage'
+        image = self.portal[id]
         image.setTitle('test')
         
         im = self.getOriginal()
         imageData = StringIO()
         im.save(imageData, im.format)
         image.setImage(imageData.getvalue())
-        
+        return image
+    
+    def getEditor(self, context):
+        return ImageEditorAdapter(context)
+    
+    def getImageEditorAdapter(self):
+        image = self.getImageContentType()
         return ImageEditorAdapter(image)
        
     def imagesEqual(self, comparedImageFileName, imageEditor):
