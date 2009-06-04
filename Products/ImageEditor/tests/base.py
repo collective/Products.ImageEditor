@@ -1,24 +1,15 @@
-import unittest
-
-from zope.testing import doctestunit
-from zope.component import testing
-from Testing import ZopeTestCase as ztc
-
-from Products.Five import zcml
-from Products.Five import fiveconfigure
-from Products.PloneTestCase import PloneTestCase as ptc
-from Products.PloneTestCase.layer import PloneSite
-from Products.PloneTestCase.layer import onsetup
-
-from zope.app import zapi
-from zope.configuration import xmlconfig
-from Products.ImageEditor.adapters.imageeditor import ImageEditorAdapter
-
-from PIL import Image, ImageFilter, ImageEnhance
+import sys
 from cStringIO import StringIO
 
-import sys
+from PIL import Image
 from PIL import ImageChops
+from PIL import ImageEnhance
+
+from Products.PloneTestCase import PloneTestCase as ptc
+from Products.ImageEditor.adapters.imageeditor import ImageEditorAdapter
+from Testing import ZopeTestCase as ztc
+
+
 
 BASE_DIR = ""
 
@@ -26,17 +17,16 @@ for path in sys.path:
     if 'Products.ImageEditor' in path:
         BASE_DIR = path
 
-ztc.installProduct('Products.ImageEditor')
-ztc.installProduct('collective.js.jquery')
+ztc.installPackage('Products.ImageEditor')
+ztc.installPackage('collective.js.jquery')
 ptc.setupPloneSite(products=('Products.ImageEditor','collective.js.jquery'))
 
 class ImageEditorTestCase(ptc.PloneTestCase):
     """
     """
-    
     def afterSetUp(self):
         self.setRoles(('Manager',))
-    
+
     def getImageEditorAdapter(self):
         id = self.portal.invokeFactory(type_name="Image", id="testimage")
         image = self.portal['testimage']

@@ -31,7 +31,7 @@ class TestUnredoStack(ImageEditorTestCase):
     def test_should_add_to_stack(self):
         editor = self.getImageEditorAdapter()
         
-        editor.dropshadow()
+#        editor.dropshadow()
         
         #starts from pos 0
         self.failUnless(editor.unredo.pos == 1)
@@ -39,7 +39,7 @@ class TestUnredoStack(ImageEditorTestCase):
     def test_should_be_able_to_undo(self):
         editor = self.getImageEditorAdapter()
         
-        editor.dropshadow()
+#        editor.dropshadow()
         
         self.failUnless(editor.unredo.can_undo())
         
@@ -50,13 +50,13 @@ class TestUnredoStack(ImageEditorTestCase):
         
     def test_undo_should_go_back_to_previous_edit(self):
         editor = self.getImageEditorAdapter()
-        editor.dropshadow()
+#        editor.dropshadow()
         editor.unredo.undo()
-        self.failUnless(editor.unredo.get_current() == editor.context.getField('image').get(unredo.context).data)
+        self.failUnless(editor.unredo.get_current() == editor.context.getField('image').get(editor.unredo.context).data)
         
     def test_should_redo(self):
         editor = self.getImageEditorAdapter()
-        editor.dropshadow()
+#        editor.dropshadow()
         current_data = editor.unredo.get_current()
         editor.unredo.undo()
         editor.unredo.redo()
@@ -64,25 +64,25 @@ class TestUnredoStack(ImageEditorTestCase):
         
     def test_can_redo_evaluates_correctly(self):
         editor = self.getImageEditorAdapter()
-        editor.dropshadow()
+#        editor.dropshadow()
         current_data = editor.unredo.get_current()
         editor.unredo.undo()
         self.failUnless(editor.unredo.can_redo())
         
     def test_can_redo_should_not_work(self):
         editor = self.getImageEditorAdapter()
-        editor.dropshadow()
+#        editor.dropshadow()
         current_data = editor.unredo.get_current()
         self.failUnless(not editor.unredo.can_redo())
         
     def test_clear_stack_should_go_back_to_original_image(self):
         editor = self.getImageEditorAdapter()
-        editor.dropshadow()
-        editor.dropshadow()
-        editor.dropshadow()
-        editor.dropshadow()
+#        editor.dropshadow()
+#        editor.dropshadow()
+#        editor.dropshadow()
+#        editor.dropshadow()
         editor.unredo.clear_stack()
-        self.failUnless(editor.unredo.get_current() == editor.context.getField('image').get(unredo.context).data)
+        self.failUnless(editor.unredo.get_current() == editor.context.getField('image').get(editor.unredo.context).data)
         
 def test_suite():
     suite = unittest.TestSuite()
