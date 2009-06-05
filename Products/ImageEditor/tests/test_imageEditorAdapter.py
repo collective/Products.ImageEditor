@@ -9,44 +9,6 @@ from Products.Five.testbrowser import Browser
 from PIL import Image, ImageFilter, ImageEnhance
 from cStringIO import StringIO
 
-class TestImageEdits(ImageEditorTestCase):
-    """
-    Test the edit actions on images
-    """
-        
-    def test_dropShadow(self):
-        pass
-
-    def test_sharpening(self):
-        pass
-
-    def test_quality(self):
-        pass
-
-    def test_brightness(self):
-        pass
-
-    def test_contrast(self):
-        pass
-
-    def test_horizontalFlip(self):
-        pass
-
-    def test_verticalFlip(self):
-        pass
-
-    def test_blur(self):
-        pass
-
-    def test_resize(self):
-        pass
-
-    def testRotateLeft(self):
-        pass
-
-    def test_rotateRight(self):
-        pass
-
 class TestAdapter(ImageEditorTestCase):
     """
     Test the edit actions on images
