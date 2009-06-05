@@ -91,7 +91,7 @@ class NewEdit(BrowserView):
             js = action.on_setup()
             if js:
                 setup_js.append(js)
-        
+
         return """
 var IMAGE_INFORMATION = %s;
 (function($){

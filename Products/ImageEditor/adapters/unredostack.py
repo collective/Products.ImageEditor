@@ -41,6 +41,9 @@ class UnredoStack(object):
         self.pos = self.pos + 1
 
     def get_current(self):
+        self.context.plone_log(self.pos)
+        self.context.plone_log(self.stack)
+        #TypeError: expected read buffer, ImplicitAcquirerWrapper found
         return self.stack[self.pos]
 
     def undo(self):

@@ -1,12 +1,30 @@
 from zope.interface import Interface, Attribute
 
 class IImageEditorAdapter(Interface):
-        
+
+    pos = Attribute("""Position of the stack""")
+    stack = Attribute("""Actual stack...""")
+
+    def do(self, value):
+        """
+        performing the action
+        """
+
+    def can_undo(self):
+        """
+        Returns boolean if they can undo
+        """
+
     def undo():
         """
         undo last edit
         """
-        
+
+    def can_redo(self):
+        """
+        Returns boolean if they can redo
+        """
+
     def redo():
         """
         redo edit
@@ -15,6 +33,11 @@ class IImageEditorAdapter(Interface):
     def clear_edits():
         """
         clear all edits from undo/redo
+        """
+
+    def get_current(self):
+        """
+        Returns the current element in stack
         """
 
     def save_edit():

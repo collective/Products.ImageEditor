@@ -17,6 +17,16 @@ class TestSetup(ImageEditorTestCase):
         actionInfo = actionTool.getActionInfo(['object/image_editor'])
         self.failUnless(actionInfo['url'] == "/@@editor")
 
+    def test_kss_added(self):
+        kcss = getToolByName(self.portal, 'portal_kss')
+        self.failUnless('++resource++imageeditor.kss' in [kss.getId() for kss in kcss.getResources()])
+        
+    def test_js_added(self):
+        pjavascripts = getToolByName(self.portal, 'portal_javascripts')
+        self.failUnless('++resource++jquery-ui-imageeditor.min.js' in [js.getId() for js in pjavascripts.getResources()])
+        self.failUnless('++resource++jquery.imgareaselect-0.4.2.min.js' in [js.getId() for js in pjavascripts.getResources()])
+        self.failUnless('++resource++imageeditor.js' in [js.getId() for js in pjavascripts.getResources()])
+
 def test_suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(TestSetup))
