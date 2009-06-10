@@ -9,14 +9,4 @@
 		file="resources/style.css"
 	/>
 	
-	<browser:resourceDirectory
-        name="jquery.ui.images"
-        directory="resources/jquery.ui/css/smoothness/images"
-    />
-	
-	<browser:resource
-		name="jquery.ui.all.css"
-		file="resources/jquery.ui/css/smoothness/jquery-ui-1.7.1.custom.css"
-	/>		
-	
 </configure>

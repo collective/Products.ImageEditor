@@ -25,6 +25,7 @@ setup(name='Products.ImageEditor',
       install_requires=[
           'setuptools',
           'collective.js.jquery',
+          'collective.js.jqueryui'
           # -*- Extra requirements: -*-
       ],
       entry_points="""
