@@ -16,9 +16,7 @@ for path in sys.path:
     if 'Products.ImageEditor' in path:
         BASE_DIR = path
 
-ztc.installPackage('Products.ImageEditor')
-ztc.installPackage('collective.js.jquery')
-ptc.setupPloneSite(products=('Products.ImageEditor','collective.js.jquery'))
+ptc.setupPloneSite(products=('Products.ImageEditor',))
 
 class ImageEditorTestCase(ptc.PloneTestCase):
     """
