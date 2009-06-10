@@ -2,11 +2,16 @@ from zope.interface import implements
 from zope.component import adapts
 from Products.ATContentTypes.interface.image import IImageContent
 from Products.ImageEditor.interfaces.imageeditor import IImageEditorAdapter
-from Products.ImageEditor.interfaces.unredostack import IUnredoStack
 from PIL import Image, ImageFilter, ImageEnhance
 from cStringIO import StringIO
 
 class ImageEditorAdapter(object):
+    """context.getField('image').get(context) -> Field Image
+    Field Image.data -> OFS Image
+    OFSImage.data    -> str
+    
+    stack = [str, ...]
+    """
     implements(IImageEditorAdapter)
     adapts(IImageContent)
     
@@ -17,7 +22,7 @@ class ImageEditorAdapter(object):
         if not hasattr(context, 'stack_pos'):
             self.pos = 0
         if not hasattr(context, 'unredostack'):
-            self.stack = [context.getField('image').get(context).data]
+            self.stack = [context.getField('image').get(context).data.data]
 
     #UNDO REDO STUFF
     def get_pos(self):
@@ -31,24 +36,22 @@ class ImageEditorAdapter(object):
     def set_stack(self, value):
         self.context.unredostack = value
     stack = property(get_stack, set_stack)
-    
 
     def undo(self):
-#        self.unredo.undo()
-        self.pos = self.pos - 1
+        if self.can_undo():
+            self.pos = self.pos - 1
 
     def can_undo(self):
         return self.pos > 0
 
     def redo(self):
-#        self.unredo.redo()
-        self.pos = self.pos + 1
+        if self.can_redo():
+            self.pos = self.pos + 1
 
     def can_redo(self):
         return self.pos + 1 < len(self.stack)
 
     def clear_edits(self):
-#        self.unredo.clear_stack()
         if hasattr(self.context, 'stack_pos'):
             delattr(self.context, 'stack_pos')
 
@@ -62,12 +65,9 @@ class ImageEditorAdapter(object):
 
         self.stack = [bottom]
 
-    def get_current(self):
-        return self.stack[self.pos]
 
     def do(self, value):
         if self.can_redo():
-            #clear top
             for item in self.stack[(self.pos+1):len(self.stack)]:
                 self.stack.remove(item)
 
@@ -93,26 +93,13 @@ class ImageEditorAdapter(object):
         
         #should I clear???  Maybe you should still be able to undo...              
         #self.unredo.clear_stack(image_data)
-        
+
     def get_current_image(self):
         return Image.open(StringIO(self.get_current_image_data()))
-       
-    def set_image(self, image, format="JPEG", quality=None):
-        """
-        Setting the image just adds to the unredo stack...
-        """
-        image_data = StringIO()
-        
-        if quality:
-            image.save(image_data, format, quality=quality)
-        else:
-            image.save(image_data, format)
-        
-        self.do(image_data.getvalue())
-       
+
     def get_current_image_data(self):
-        return self.get_current().data
-       
+        return self.stack[self.pos]
+
     def get_current_image_info(self):
         data = self.get_current_image_data()
         bsize = len(data)
@@ -134,4 +121,16 @@ class ImageEditorAdapter(object):
             'height': height,
             'sizeformatted': "Size: %s%s" % (str(bsize)[:4], size_descriptor)
         }
+
+
+    def set_image(self, image, format="JPEG", quality=None):
+        image_data = StringIO()
+        
+        if quality:
+            image.save(image_data, format, quality=quality)
+        else:
+            image.save(image_data, format)
+        
+        self.do(image_data.getvalue())
+
 

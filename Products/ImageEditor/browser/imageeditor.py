@@ -218,5 +218,6 @@ class ImageEditorUtility(BrowserView):
     def should_include(self, request):
         pm = getToolByName(self.context, 'portal_membership')
 
-        return IImageContent.providedBy(self.context) and not \
-                pm.isAnonymousUser() and request.get('ACTUAL_URL').endswith('@@editor')
+        return IImageContent.providedBy(self.context) and \
+                not pm.isAnonymousUser() and \
+                request.get('ACTUAL_URL').endswith('@@editor')

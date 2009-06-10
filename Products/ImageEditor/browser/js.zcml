@@ -3,17 +3,17 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:kss="http://namespaces.zope.org/kss"
     xmlns:plone="http://namespaces.plone.org/plone">
-	
+
 	<browser:resource
-		name="jquery-ui-imageeditor.min.js"
-		file="resources/jquery.ui/jquery-ui-1.7.1.custom.min.js"
+		name="jquery-ui-1.7.2.min.js"
+		file="resources/jquery.ui/jquery-ui-1.7.2.custom.min.js"
 	/>
-	
+
 	<browser:resource
-		name="jquery.imgareaselect-0.4.2.min.js"
+		name="jquery.imgareaselect-0.8.min.js"
 		file="resources/imgareaselect-0.8/jquery.imgareaselect-0.8.min.js"
 	/>
-	
+
 	<browser:resource
 		name="imageeditor.js"
 		file="resources/imageeditor.js"

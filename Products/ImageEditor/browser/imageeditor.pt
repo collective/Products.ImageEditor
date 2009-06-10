@@ -6,6 +6,7 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="Products.ImageEditor">
 <metal:js fill-slot="javascript_head_slot">
+  <script type="text/javascript">if (!$) {$=jq}</script>
   <script tal:content="structure view/setup_js" />
   <script tal:content="structure view/custom_action_parameters" />
 </metal:js>
