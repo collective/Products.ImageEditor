@@ -6,8 +6,8 @@
         compression ="safe" 
         cookable    ="True"
         enabled     ="True" 
-        expression  ="python: here.portal_type == 'Image' and not portal.portal_membership.isAnonymousUser()" 
-        id          ="++resource++jquery-ui-imageeditor.min.js" 
+        expression  ="python: here.restrictedTraverse('@@image-editor-utility').should_include(request)"
+        id          ="++resource++imageeditor.js" 
         inline  ="False"
         />
     <javascript 
@@ -15,8 +15,8 @@
         compression ="safe" 
         cookable    ="True"
         enabled     ="True" 
-        expression  ="python: here.portal_type == 'Image' and not portal.portal_membership.isAnonymousUser()" 
-        id          ="++resource++jquery.imgareaselect-0.4.2.min.js"
+        expression  ="python: here.restrictedTraverse('@@image-editor-utility').should_include(request)"
+        id          ="++resource++jquery.imgareaselect-0.8.min.js"
         inline      ="False"
         />
     <javascript 
@@ -24,8 +24,8 @@
         compression ="safe" 
         cookable    ="True"
         enabled     ="True" 
-        expression  ="python: here.portal_type == 'Image' and not portal.portal_membership.isAnonymousUser()" 
-        id          ="++resource++imageeditor.js" 
+        expression  ="python: here.restrictedTraverse('@@image-editor-utility').should_include(request)"
+        id          ="++resource++jquery-ui-1.7.2.min.js" 
         inline      ="False"
         />
 
