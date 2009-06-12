@@ -3,6 +3,9 @@
     xmlns:five="http://namespaces.zope.org/five"
     i18n_domain="Products.ImageEditor">
 
+    <include package="collective.js.jquery" />
+    <include package="collective.js.jqueryui" />
+    
 	<include package=".meta" />
 	<include package=".actions" />
 	

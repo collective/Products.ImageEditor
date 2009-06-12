@@ -1,8 +1,16 @@
 from Products.CMFCore.utils import getToolByName
+from Products.ImageEditor import dependencies
 
 def install(portal, reinstall=False):
     setup_tool = getToolByName(portal, 'portal_setup')
     setup_tool.runAllImportStepsFromProfile('profile-Products.ImageEditor:default')
+    
+    qi = getToolByName(portal, 'portal_quickinstaller')
+
+    for d in dependencies:
+        if qi.isProductInstallable(d) and not qi.isProductInstalled(d):
+            qi.installProduct(d)
+
 
 def uninstall(portal, reinstall=False):
     """
