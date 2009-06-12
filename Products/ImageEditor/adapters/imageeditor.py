@@ -51,7 +51,7 @@ class ImageEditorAdapter(object):
     def can_redo(self):
         return self.pos + 1 < len(self.stack)
 
-    def clear_edits(self):
+    def clear_edits(self, bottom=None):
         if hasattr(self.context, 'stack_pos'):
             delattr(self.context, 'stack_pos')
 
@@ -61,7 +61,7 @@ class ImageEditorAdapter(object):
         self.pos = 0
 
         if bottom is None:
-            bottom = self.context.getField('image').get(self.context).data
+            bottom = self.context.getField('image').get(self.context).data.data
 
         self.stack = [bottom]
 
