@@ -2,8 +2,15 @@ from setuptools import setup, find_packages
 import os
 from xml.dom import minidom
 
+dependencies = [
+    'setuptools'
+]
+
+#now get plone dependencies
+dependencies.extend([d.strip('\n').strip() for d in open(os.path.join('Products', 'ImageEditor', 'dependencies.txt')).readlines() ])
+
 setup(name='Products.ImageEditor',
-      version='1.1-nmd-b1',
+      version=open(os.path.join("Products", "ImageEditor", "version.txt")).read(),
       description="A product that adds an editor tab to ATImage and News Item so you can rotate, flip, blur, compress, contrast, brightness, sharpen, add drop shadows, crop, resize an image.",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
@@ -22,12 +29,7 @@ setup(name='Products.ImageEditor',
       namespace_packages=['Products'],
       include_package_data=True,
       zip_safe=False,
-      install_requires=[
-          'setuptools',
-          'collective.js.jquery',
-          'collective.js.jqueryui'
-          # -*- Extra requirements: -*-
-      ],
+      install_requires=dependencies,
       entry_points="""
       # -*- Entry points: -*-
       """,
