@@ -113,7 +113,7 @@ $(document).ready(function(){
         
         return """
 var ACTION_PARAMETERS = {};
-%s
+%s    
         """ % '\n'.join(params)
         
     @memoize

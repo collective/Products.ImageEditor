@@ -38,25 +38,27 @@ function fire(event, arg){
 }
 
 function set_status_bar_info(){
+    (function($){
     $('#status-bar-information').html(
         IMAGE_INFORMATION.size + " " + 
         IMAGE_INFORMATION.width + "x" + 
         IMAGE_INFORMATION.height
     );
+    })(jQuery);
 }
 
 function set_image_size_by_percentage(){
-    var percentage = parseFloat($("#zoom-slider-value").attr('value'));
+    var percentage = parseFloat(jQuery("#zoom-slider-value").attr('value'));
     
     var w = Math.round(IMAGE_INFORMATION.width*percentage);
     var h = Math.round(IMAGE_INFORMATION.height*percentage);
 
-    $('#source-image').width(w);
-    $('#source-image').height(h);
+    jQuery('#source-image').width(w);
+    jQuery('#source-image').height(h);
 }
 
 function set_image_zoom_labels(arg){
-    $("#zoom-slider p").html((parseFloat($("#zoom-slider-value").attr('value')) * 100) + "%");
+    jQuery("#zoom-slider p").html((parseFloat(jQuery("#zoom-slider-value").attr('value')) * 100) + "%");
 }
 
 (function($){

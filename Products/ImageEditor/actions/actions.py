@@ -77,17 +77,15 @@ on('after_image_zoom_change').do(function(params){
         """
     
     def action_parameters(self):
-        return """
-(function(){
+        return """(function(){
     var cs = {};
-    var zoom = parseFloat($("#zoom-slider-value").attr('value'));
+    var zoom = parseFloat(jQuery("#zoom-slider-value").attr('value'));
     cs['crop.x1'] = window.crop_selection.x1/zoom;
     cs['crop.x2'] = window.crop_selection.x2/zoom;
     cs['crop.y1'] = window.crop_selection.y1/zoom;
     cs['crop.y2'] = window.crop_selection.y2/zoom;
     return cs;
-})
-        """
+})"""
     
     def __call__(self, x1, y1, x2, y2):
         image = self.editor.get_current_image()
@@ -420,16 +418,14 @@ on('after_image_zoom_change').do(function(params){
             """
 
     def action_parameters(self):
-        return """
-(function(){
+        return """(function(){
     var res = {};
-    var zoom = parseFloat($("#zoom-slider-value").attr('value'));
+    var zoom = parseFloat(jQuery("#zoom-slider-value").attr('value'));
     
-    res['resize.width'] = $('#source-image').width()/zoom;
-    res['resize.height'] = $('#source-image').height()/zoom;
+    res['resize.width'] = jQuery('#source-image').width()/zoom;
+    res['resize.height'] = jQuery('#source-image').height()/zoom;
     return res;
-})
-            """
+})"""
     
     def __call__(self, width, height):
         image = self.editor.get_current_image()
@@ -450,8 +446,8 @@ class DropShadowAction(BaseImageEditorAction):
     def __call__(self, offset_x, offset_y, background_color, shadow_color, border, iterations):
         image = self.editor.get_current_image().convert('RGB') #convert to png if it isn't--shadow won't work without this.
         offset = (int(offset_x), int(offset_y))
-        background=eval("0x" + background_color)
-        shadow=eval("0x" + shadow_color)
+        background=eval("0x" + background_color[:6]) #precaution in case code is attempted to be injected
+        shadow=eval("0x" + shadow_color[:6]) #precaution in case code is attempted to be injected
         border=int(border)
         iterations=int(iterations)
         
