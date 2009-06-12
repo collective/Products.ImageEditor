@@ -31,11 +31,23 @@ class ImageEditorTestCase(ptc.PloneTestCase):
             id = 'testimage'
         image = self.portal[id]
         image.setTitle('test')
-        
+        #(Pdb) p context.getField('image').get(context)
+        #<Image at /plone/bug-mantis-01.png/image>
+        #(Pdb) p context.getField('image').get(context).data
+        #<OFS.Image.Pdata object at 0xb277db6c>
+        #(Pdb) p context.getField('image').get(context).data.data
+        #'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x04N\x00\x00...
+        #...
+        #
+        #In testcase:
+        #(Pdb) image.getField('image').get(image)                                                                         
+        #<Image at /plone/testimage/image>                                                                                
+        #(Pdb) image.getField('image').get(image).data                                                                    
+        #'\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01\...
         im = self.getOriginal()
         imageData = StringIO()
         im.save(imageData, im.format)
-        image.setImage(imageData.getvalue())
+        image.setImage(imageData)
         return image
     
     def getEditor(self, context):

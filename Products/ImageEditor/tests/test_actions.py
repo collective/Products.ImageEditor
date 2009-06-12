@@ -7,16 +7,8 @@ class TestActions(base.ImageEditorTestCase):
     """Test Actions"""
     def afterSetUp(self):
         self.setRoles(('Manager',))
-        id = "testimage"
-        id = self.portal.invokeFactory(type_name="Image", id=id)
-        image = self.portal[id]
-        self.image = [image]
-        image.setTitle('test')
-        imageData = StringIO()
-        im = self.getOriginal()
-        im.save(imageData, im.format)
-        image.setImage(imageData.getvalue())
-
+        self.image = [self.getImageContentType()]
+        
     def beforeTearDown(self):
         self.portal.manage_delObjects(['testimage'])
 

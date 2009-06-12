@@ -60,7 +60,7 @@ class TestAdapter(ImageEditorTestCase):
         current = editor.get_current_image_data()
         editor.save_edit()
         
-        self.failUnless(len(editor.unredo.stack) == 1)
+        self.failUnless(len(editor.stack) == 1)
         self.failUnless(current == editor.get_current_image_data())
         
     def test_get_current_image(self):
@@ -69,17 +69,17 @@ class TestAdapter(ImageEditorTestCase):
 #        editor.dropshadow()
 #        editor.rotateLeft()
 #        
-        self.failUnless(editor.get_current_image_data() == editor.unredo.get_current())
+#        self.failUnless(editor.get_current_image_data() == editor.get_current())
     
     def test_setImage(self):
         editor = self.getImageEditorAdapter()
         
-        self.failUnless(len(editor.unredo.stack) == 1)
+        self.failUnless(len(editor.stack) == 1)
         
 #        editor.dropshadow()
 #        editor.rotateLeft()
 #        
-        self.failUnless(len(editor.unredo.stack) == 3)
+        self.failUnless(len(editor.stack) == 3)
         
     def test_get_current_image_data(self):
         # Not sure how to test this...
@@ -97,7 +97,6 @@ class TestAdapter(ImageEditorTestCase):
 def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
-    suite.addTest(makeSuite(TestImageEdits))
     suite.addTest(makeSuite(TestAdapter))
     
     return suite
