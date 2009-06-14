@@ -10,9 +10,9 @@ def get_image_information(editor):
     image_info = editor.get_current_image_info()
     return {
         'url' : generate_random_url(editor.context),
-        'can_undo' : editor.unredo.can_undo(),
-        'can_redo' : editor.unredo.can_redo(),
-        'can_save' : editor.unredo.pos > 0,
+        'can_undo' : editor.can_undo(),
+        'can_redo' : editor.can_redo(),
+        'can_save' : editor.pos > 0,
         'size' : image_info['sizeformatted'],
         'width' : image_info['width'],
         'height' : image_info['height']

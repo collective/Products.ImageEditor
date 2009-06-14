@@ -91,7 +91,7 @@ class NewEdit(BrowserView):
             js = action.on_setup()
             if js:
                 setup_js.append(js)
-        
+
         return """
 var IMAGE_INFORMATION = %s;
 (function($){
@@ -113,7 +113,7 @@ $(document).ready(function(){
         
         return """
 var ACTION_PARAMETERS = {};
-%s
+%s    
         """ % '\n'.join(params)
         
     @memoize
@@ -218,5 +218,6 @@ class ImageEditorUtility(BrowserView):
     def should_include(self, request):
         pm = getToolByName(self.context, 'portal_membership')
 
-        return IImageContent.providedBy(self.context) and not \
-                pm.isAnonymousUser() and request.get('ACTUAL_URL').endswith('@@editor')
+        return IImageContent.providedBy(self.context) and \
+                not pm.isAnonymousUser() and \
+                request.get('ACTUAL_URL').endswith('@@editor')

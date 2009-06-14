@@ -1,31 +1,85 @@
 from zope.interface import implements
 from zope.component import adapts
 from Products.ATContentTypes.interface.image import IImageContent
-from Products.ImageEditor.interfaces.imageeditor import IImageEditorAdapter
-from Products.ImageEditor.interfaces.unredostack import IUnredoStack
+from Products.ImageEditor.interfaces import IImageEditorAdapter
 from PIL import Image, ImageFilter, ImageEnhance
 from cStringIO import StringIO
 
 class ImageEditorAdapter(object):
+    """context.getField('image').get(context) -> Field Image
+    Field Image.data -> OFS Image
+    OFSImage.data    -> str
+    
+    stack = [str, ...]
+    """
     implements(IImageEditorAdapter)
     adapts(IImageContent)
     
     def __init__(self, context):
         self.context = context
         #adapter to handle redo and undo
-        self.unredo = IUnredoStack(context)
-        
+#        self.unredo = IUnredoStack(context)
+        if not hasattr(context, 'stack_pos'):
+            self.pos = 0
+        if not hasattr(context, 'unredostack'):
+            self.stack = [self.get_image_data()]
+
+    def get_image_data(self):
+        return self.context.getImage().index_html(self.context.REQUEST, 
+                                                  self.context.REQUEST.RESPONSE)
+
+    #UNDO REDO STUFF
+    def get_pos(self):
+        return self.context.stack_pos
+    def set_pos(self, value):
+        self.context.stack_pos = value
+    pos = property(get_pos, set_pos)
+
+    def get_stack(self):
+        return self.context.unredostack
+    def set_stack(self, value):
+        self.context.unredostack = value
+    stack = property(get_stack, set_stack)
+
     def undo(self):
-        self.unredo.undo()
-        
+        if self.can_undo():
+            self.pos = self.pos - 1
+
+    def can_undo(self):
+        return self.pos > 0
+
     def redo(self):
-        self.unredo.redo()
-        
-    def clear_edits(self):
-        self.unredo.clear_stack()
+        if self.can_redo():
+            self.pos = self.pos + 1
+
+    def can_redo(self):
+        return self.pos + 1 < len(self.stack)
+
+    def clear_edits(self, bottom=None):
+        if hasattr(self.context, 'stack_pos'):
+            delattr(self.context, 'stack_pos')
+
+        if hasattr(self.context, 'unredostack'):
+            delattr(self.context, 'unredostack')
+
+        self.pos = 0
+
+        if bottom is None:
+            bottom = self.get_image_data()
+
+        self.stack = [bottom]
+
+
+    def do(self, value):
+        if self.can_redo():
+            for item in self.stack[(self.pos+1):len(self.stack)]:
+                self.stack.remove(item)
+
+        self.stack.append(value)
+        self.pos = self.pos + 1
 
     def save_edit(self):
-        image_data = self.unredo.get_current()
+        image_data = self.get_current_image_data()
         
         field = self.context.getField('image')
         mimetype = field.getContentType(self.context)
@@ -43,26 +97,13 @@ class ImageEditorAdapter(object):
         
         #should I clear???  Maybe you should still be able to undo...              
         #self.unredo.clear_stack(image_data)
-        
+
     def get_current_image(self):
-        return Image.open(StringIO(self.unredo.get_current()))
-       
-    def set_image(self, image, format="JPEG", quality=None):
-        """
-        Setting the image just adds to the unredo stack...
-        """
-        image_data = StringIO()
-        
-        if quality:
-            image.save(image_data, format, quality=quality)
-        else:
-            image.save(image_data, format)
-        
-        self.unredo.do(image_data.getvalue())
-       
+        return Image.open(StringIO(self.get_current_image_data()))
+
     def get_current_image_data(self):
-        return self.unredo.get_current()
-       
+        return self.stack[self.pos]
+
     def get_current_image_info(self):
         data = self.get_current_image_data()
         bsize = len(data)
@@ -84,4 +125,16 @@ class ImageEditorAdapter(object):
             'height': height,
             'sizeformatted': "Size: %s%s" % (str(bsize)[:4], size_descriptor)
         }
+
+
+    def set_image(self, image, format="JPEG", quality=None):
+        image_data = StringIO()
         
+        if quality:
+            image.save(image_data, format, quality=quality)
+        else:
+            image.save(image_data, format)
+        
+        self.do(image_data.getvalue())
+
+

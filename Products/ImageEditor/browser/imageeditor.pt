@@ -5,9 +5,6 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="Products.ImageEditor">
-<metal:css fill-slot="css_slot">
-  
-</metal:css>
 <metal:js fill-slot="javascript_head_slot">
   <script tal:content="structure view/setup_js" />
   <script tal:content="structure view/custom_action_parameters" />

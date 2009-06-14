@@ -1,6 +1,4 @@
-* remove product jquery 1.2.6 file 
-    - might not be able to do since older versions of 
-        plone use a different version of the jquery library and
-        for some of the effects, we need jquery 1.2.6
-        
-* create new editor interface...  toggle full screen and such...  make sure a lot cooler
+
+* work on editor interface
+
+* better grabber for resize operation

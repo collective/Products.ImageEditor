@@ -34,14 +34,13 @@ $(document).ready(function(){
         }
     });
     
+    on('action_button_clicked').do(function(btn){
+        if($(btn).attr('name') == '%(action_id)s'){
+            $('#%(id)s-slider').slider('moveTo', %(default)i);
+        }
+    });
 });
 })(jQuery);
-
-on('action_button_clicked').do(function(btn){
-    if($(btn).attr('name') == '%(action_id)s'){
-        $('#%(id)s-slider').slider('moveTo', %(default)i);
-    }
-});
 
         """ % {
             'id' : self.id(),

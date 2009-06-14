@@ -1,8 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:browser="http://namespaces.zope.org/browser"
-    xmlns:kss="http://namespaces.zope.org/kss"
-    xmlns:plone="http://namespaces.plone.org/plone">
+    xmlns:browser="http://namespaces.zope.org/browser">
 
   	<browser:page
         for="Products.ATContentTypes.interface.image.IImageContent"
@@ -23,7 +21,7 @@
     <browser:page 
         name="image-editor-utility"
         for="*"
-        permission="cmf.ModifyPortalContent"
+        permission="zope2.View"
         allowed_interface="Products.ImageEditor.interfaces.imageeditor.IImageEditorUtility"
         layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
         class=".imageeditor.ImageEditorUtility" 

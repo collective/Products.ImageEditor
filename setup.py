@@ -1,5 +1,13 @@
 from setuptools import setup, find_packages
 import os
+from xml.dom import minidom
+
+dependencies = [
+    'setuptools'
+]
+
+#now get plone dependencies
+dependencies.extend([d.strip('\n').strip() for d in open(os.path.join('Products', 'ImageEditor', 'dependencies.txt')).readlines() ])
 
 setup(name='Products.ImageEditor',
       version=open(os.path.join("Products", "ImageEditor", "version.txt")).read(),
@@ -21,10 +29,7 @@ setup(name='Products.ImageEditor',
       namespace_packages=['Products'],
       include_package_data=True,
       zip_safe=False,
-      install_requires=[
-          'setuptools',
-          # -*- Extra requirements: -*-
-      ],
+      install_requires=dependencies,
       entry_points="""
       # -*- Entry points: -*-
       """,

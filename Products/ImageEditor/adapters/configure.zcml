@@ -3,7 +3,6 @@
    	xmlns:zope="http://namespaces.zope.org/zope"
     i18n_domain="Products.ImageEditor">
 
-	<zope:adapter factory=".unredostack.UnredoStack" />
 	<zope:adapter factory=".imageeditor.ImageEditorAdapter" />
 
 </configure>
