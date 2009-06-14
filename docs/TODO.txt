@@ -1,2 +1,4 @@
+
 * work on editor interface
+
 * better grabber for resize operation
