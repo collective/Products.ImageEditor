@@ -125,7 +125,7 @@ class ImageEditorAdapter(object):
             'size': bsize,
             'width': width,
             'height': height,
-            'sizeformatted': "Size: %s%s" % (str(bsize)[:4], size_descriptor)
+            'sizeformatted': "Size: %.2f%s" % (bsize, size_descriptor)
         }
 
 
