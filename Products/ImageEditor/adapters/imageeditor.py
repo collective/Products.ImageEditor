@@ -98,7 +98,7 @@ class ImageEditorAdapter(object):
         )
         
         #should I clear???  Maybe you should still be able to undo...              
-        #self.unredo.clear_stack(image_data)
+        self.unredo.clear_stack(image_data)
 
     def get_current_image(self):
         return Image.open(StringIO(self.get_current_image_data()))
