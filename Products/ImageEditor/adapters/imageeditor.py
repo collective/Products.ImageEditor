@@ -17,16 +17,14 @@ class ImageEditorAdapter(object):
     
     def __init__(self, context):
         self.context = context
-        #adapter to handle redo and undo
-#        self.unredo = IUnredoStack(context)
+
         if not hasattr(context, 'stack_pos'):
             self.pos = 0
         if not hasattr(context, 'unredostack'):
             self.stack = [self.get_image_data()]
 
     def get_image_data(self):
-        return self.context.getImage().index_html(self.context.REQUEST, 
-                                                  self.context.REQUEST.RESPONSE)
+        return self.context.getField('image').get(self.context).data.data
 
     #UNDO REDO STUFF
     def get_pos(self):
