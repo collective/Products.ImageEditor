@@ -16,7 +16,7 @@ var EVENTS = {
 
 function on(events){
     return {
-        do : function(fn){
+        accomplish : function(fn){
             if(typeof(events) == "string"){
                 events = [events];
             }
@@ -24,8 +24,8 @@ function on(events){
                 EVENTS[events[i]].handlers.push(fn);   
             }
         }
-    }
-}
+    };
+};
 
 function fire(event, arg){
     for(var i = 0; i < EVENTS[event].handlers.length; i++){
@@ -202,10 +202,10 @@ $(document).ready(function(){
     $(".slide-in").mouseenter(function(){$(this).css('right', '-5px');});
     $(".slide-in").mouseleave(function(){$(this).css('right', (-$(this).width()) + "px");});
     
-    on(['after_image_reload', 'editor_loaded']).do(set_status_bar_info);
-    on(['after_image_zoom_change', 'after_image_reload']).do(set_image_size_by_percentage);
-    on(['editor_loaded', 'after_image_zoom_change']).do(set_image_zoom_labels);
-    on(['after_action_execute']).do(function(name){
+    on(['after_image_reload', 'editor_loaded']).accomplish(set_status_bar_info);
+    on(['after_image_zoom_change', 'after_image_reload']).accomplish(set_image_size_by_percentage);
+    on(['editor_loaded', 'after_image_zoom_change']).accomplish(set_image_zoom_labels);
+    on(['after_action_execute']).accomplish(function(name){
         var obj = $("#" + name + "-options");
         if(obj.children().size() > 1){
             obj.dialog('close');

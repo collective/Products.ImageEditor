@@ -48,7 +48,7 @@ function remove_crop(){
     $('#source-image').imgAreaSelect({ enable: false, hide: true });
 }
         
-on('action_button_clicked').do(function(btn){
+on('action_button_clicked').accomplish(function(btn){
 
 if($(btn).attr('id') == "crop-button"){
     add_crop();
@@ -58,17 +58,17 @@ if($(btn).attr('id') == "crop-button"){
 
 });
 
-on('before_image_reload').do(function(){
+on('before_image_reload').accomplish(function(){
     remove_crop();
 });
 
-on('before_image_zoom_change').do(function(params){
+on('before_image_zoom_change').accomplish(function(params){
     var active_btn = $('input.edit-button.active');
     if(active_btn.attr('id') == 'crop-button'){
         remove_crop();
     }
 });
-on('after_image_zoom_change').do(function(params){
+on('after_image_zoom_change').accomplish(function(params){
     var active_btn = $('input.edit-button.active');
     if(active_btn.attr('id') == 'crop-button'){
         add_crop();
@@ -153,7 +153,7 @@ function save_reload(data){
         btn.addClass('disabled');
     }
 }
-on('after_image_reload').do(save_reload);
+on('after_image_reload').accomplish(save_reload);
 save_reload(IMAGE_INFORMATION);
         """
     
@@ -190,7 +190,7 @@ function cancel_reload(data){
         btn.addClass('disabled');
     }
 }
-on('after_image_reload').do(cancel_reload);
+on('after_image_reload').accomplish(cancel_reload);
 cancel_reload(IMAGE_INFORMATION);
         """
     
@@ -221,7 +221,7 @@ function redo_reload(data){
     }
 }
         
-on('after_image_reload').do(redo_reload);
+on('after_image_reload').accomplish(redo_reload);
 redo_reload(IMAGE_INFORMATION)
         """
     
@@ -251,7 +251,7 @@ function undo_reload(data){
     }
 }
         
-on('after_image_reload').do(undo_reload);
+on('after_image_reload').accomplish(undo_reload);
 undo_reload(IMAGE_INFORMATION);
         """
 
@@ -389,7 +389,7 @@ function add_resize(){
 function remove_resize(){
     $('#source-image').resizable('destroy');
 }
-on('action_button_clicked').do(function(btn){
+on('action_button_clicked').accomplish(function(btn){
 
 if($(btn).attr('id') == "resize-button"){
     add_resize();
@@ -399,17 +399,17 @@ if($(btn).attr('id') == "resize-button"){
 
 });
 
-on('before_image_reload').do(function(){
+on('before_image_reload').accomplish(function(){
     remove_resize();
 });
 
-on('before_image_zoom_change').do(function(params){
+on('before_image_zoom_change').accomplish(function(params){
     var active_btn = $('input.edit-button.active');
     if(active_btn.attr('id') == 'resize-button'){
         remove_resize();
     }
 });
-on('after_image_zoom_change').do(function(params){
+on('after_image_zoom_change').accomplish(function(params){
     var active_btn = $('input.edit-button.active');
     if(active_btn.attr('id') == 'resize-button'){
         add_resize();

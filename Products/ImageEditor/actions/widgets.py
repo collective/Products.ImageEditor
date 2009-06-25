@@ -34,7 +34,7 @@ $(document).ready(function(){
         }
     });
     
-    on('action_button_clicked').do(function(btn){
+    on('action_button_clicked').accomplish(function(btn){
         if($(btn).attr('name') == '%(action_id)s'){
             $('#%(id)s-slider').slider('moveTo', %(default)i);
         }
