@@ -24,7 +24,11 @@ class ImageEditorAdapter(object):
             self.stack = [self.get_image_data()]
 
     def get_image_data(self):
-        return self.context.getField('image').get(self.context).data.data
+        data = self.context.getField('image').get(self.context).data
+        if type(data) == str:
+            return data
+        else:
+            return data.data
 
     #UNDO REDO STUFF
     def get_pos(self):
