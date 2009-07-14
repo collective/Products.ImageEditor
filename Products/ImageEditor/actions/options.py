@@ -109,3 +109,32 @@ class IDropShadowOptions(Interface):
             default=u"Affects how heavy the shadow appears."),
         default=3
     )
+    
+class ISepiaOptions(Interface):
+    
+    red = schema.Int(
+        title=_(u"label_sepia_red", default=u"Red"),
+        description=_(u"label_description_sepia_red", 
+            default=u"The level for red to apply for the sepia effect."),
+        min=0,
+        max=255,
+        default=255
+    )
+    
+    green = schema.Int(
+        title=_(u"label_sepia_green", default=u"Green"),
+        description=_(u"label_description_sepia_green", 
+            default=u"The level for green to apply for the sepia effect."),
+        min=0,
+        max=255,
+        default=240
+    )
+    
+    blue = schema.Int(
+        title=_(u"label_sepia_blue", default=u"Blue"),
+        description=_(u"label_description_sepia_blue", 
+            default=u"The level for blue to apply for the sepia effect."),
+        min=0,
+        max=255,
+        default=192
+    )

@@ -1,6 +1,5 @@
 from setuptools import setup, find_packages
 import os
-from xml.dom import minidom
 
 dependencies = [
     'setuptools'

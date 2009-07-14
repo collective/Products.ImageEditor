@@ -1,9 +1,10 @@
 from base import BaseImageEditorAction
 from zope.interface import implements
 from Products.ImageEditor.interfaces.actions import IImageEditorAction
-from options import *
+from options import INoOptions, IBlurOptions, ICompressOptions, IContrastOptions, \
+    IBrightnessOptions, ISharpenOptions, IDropShadowOptions, ISepiaOptions
 from zope.formlib import form
-from PIL import Image, ImageFilter, ImageEnhance
+from PIL import Image, ImageFilter, ImageEnhance, ImageOps
 from widgets import SliderWidget
 from Products.CMFCore.utils import getToolByName
 
@@ -476,3 +477,46 @@ class DropShadowAction(BaseImageEditorAction):
         back.paste(image, (imageLeft, imageTop))
         
         self.editor.set_image(back)
+
+class SepiaAction(BaseImageEditorAction):
+    implements(IImageEditorAction)
+    
+    options = form.FormFields(ISepiaOptions)
+    options['red'].custom_widget = SliderWidget
+    options['green'].custom_widget = SliderWidget
+    options['blue'].custom_widget = SliderWidget
+    
+    name = u"Sepia"
+    description = u"Applies the sepia effect to the image."
+    icon = None
+    
+    def make_linear_ramp(self, white):
+        # putpalette expects [r,g,b,r,g,b,...]
+        ramp = []
+        r, g, b = white
+        for i in range(255):
+            ramp.extend((r*i/255, g*i/255, b*i/255))
+        return ramp        
+    
+    def __call__(self, red, green, blue):
+        """
+        found at http://effbot.org/zone/pil-sepia.htm
+        """
+        sepia = self.make_linear_ramp((int(red), int(green), int(blue)))
+        image = self.editor.get_current_image()
+
+        # convert to grayscale
+        if image.mode != "L":
+            image = image.convert("L")
+
+        # optional: apply contrast enhancement here, e.g.
+        image = ImageOps.autocontrast(image)
+
+        # apply sepia palette
+        image.putpalette(sepia)
+
+        # convert back to RGB so we can save it as JPEG
+        # (alternatively, save it in PNG or similar)
+        image = image.convert("RGB")
+        
+        self.editor.set_image(image)

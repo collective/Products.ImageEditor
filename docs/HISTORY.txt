@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.1b2
+-----
+* added sepia effect
+
 1.1b1
 -----
 * major code revamp
