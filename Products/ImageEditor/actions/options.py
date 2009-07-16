@@ -145,5 +145,13 @@ class ISaveAsOptions(Interface):
         description=_(u"label_description_type_to_save_as",
             default=u"Content type to save image as."),
         default="Image",
+        required=True,
         vocabulary="plone.app.vocabularies.ImageContentTypes"
+    )
+    
+    title = schema.TextLine(
+        title=_(u"label_title_save_as", default=u"Title"),
+        description=_(u"label_description_title_save_as",
+            default=u"Title of the content type that is also used to generate its id."),
+        required=True
     )

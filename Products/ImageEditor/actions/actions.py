@@ -7,7 +7,8 @@ from zope.formlib import form
 from PIL import Image, ImageFilter, ImageEnhance, ImageOps
 from widgets import SliderWidget
 from Products.CMFCore.utils import getToolByName
-from OFS.interfaces import IFolder
+from zope.component import queryUtility
+from plone.i18n.normalizer.interfaces import IURLNormalizer
 
 class CropAction(BaseImageEditorAction):
     implements(IImageEditorAction)
@@ -187,27 +188,29 @@ function redirect(data){
 on('after_image_reload').accomplish(redirect);
 """
 
-    def __call__(self, type_to_save_as, *args, **kwargs):
+    def __call__(self, type_to_save_as, title, *args, **kwargs):
         """
         create the new type, pass along the url to the client and then
         the javascript will redirect the browser
         """
         context = self.editor.context
-        container = context.restrictedTraverse(context.getPhysicalPath()[:-1])
-        new_id = orig_id = context.getId() + "-copy"
+        portal = getToolByName(context, 'portal_url').getPortalObject()
+        
+        new_id = orig_id = queryUtility(IURLNormalizer).normalize(title)
         
         count = 1
-        while new_id in container.objectIds():
-            new_id += orig_id + '-' + str(count)
-            count += 1
+        while new_id in portal.objectIds():
+            new_id = orig_id + "-" + str(count)
+            count += count
         
-        container.invokeFactory(
+        portal.invokeFactory(
             type_to_save_as,
             new_id,
+            title = title,
             image = self.editor.get_current_image_data()
         )
         
-        return {'new_type_location' : container.absolute_url() + "/" + new_id + "/edit"}
+        return {'new_type_location' : portal.absolute_url() + "/" + new_id + "/edit"}
         
 class CancelImageEditAction(BaseImageEditorAction):
     implements(IImageEditorAction)
