@@ -14,4 +14,8 @@
 	
    	<include file="profiles.zcml" />
 
+    <utility
+      component=".vocabularies.ImageContentTypeVocabularyFactory"
+      name="plone.app.vocabularies.ImageContentTypes"
+      />
 </configure>

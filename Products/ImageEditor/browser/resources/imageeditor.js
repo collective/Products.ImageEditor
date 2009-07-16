@@ -95,6 +95,14 @@ $(document).ready(function(){
                     params[$(this).attr('name')] = $(this).attr('value');
                 }
             });
+            $("#" + name + "-options select").each(function(){
+                var select = $(this);
+                select.find('option').each(function(){
+                    if(this.selected){
+                        params[select.attr('name')] = $(this).attr('value');
+                    }
+                });
+            });
         }else{
             params = ACTION_PARAMETERS[name]();
         }

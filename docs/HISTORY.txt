@@ -4,6 +4,8 @@ Changelog
 1.1b2
 -----
 * added sepia effect
+* added save as
+* updated styles
 
 1.1b1
 -----

@@ -1,13 +1,5 @@
-from zope.schema.interfaces import ValidationError
-from zope.component import getMultiAdapter
-
-from zope.app.form.interfaces import WidgetInputError
-from zope.app.form.browser.interfaces import \
-    ISourceQueryView, ITerms, IWidgetInputErrorView
 from zope.app.form.browser.widget import SimpleInputWidget
 from zope.app.pagetemplate.viewpagetemplatefile import ViewPageTemplateFile
-
-from plone.app.vocabularies.interfaces import IBrowsableTerm
 
 class SliderWidget(SimpleInputWidget):
     

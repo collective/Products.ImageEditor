@@ -1,3 +1,4 @@
+
 .ui-slider {
     background-color: #E1D9F5;
     width:200px;
@@ -49,9 +50,9 @@ div.image-edit-action{
     background-image: url(++resource++ImageEditor.resources/icons/apply.png);
     padding: 1px 1px 1px 16px;
 	cursor:pointer;
-	border: 1px solid black;
-	background-color: #f1f1f1;
-	margin:1px 5px 3px 0px;
+	border: 2px solid #CEC16E;
+	background-color: #D4DFE4;
+	margin:8px 5px 3px 0px;
 	width:100%;
 }
 
@@ -181,4 +182,9 @@ div#image-editor-controls{
     background-image: url(++resource++ImageEditor.resources/icons/zoom_background.jpg);
     background-repeat: no-repeat;
     background-position: 0% 0px;
+}
+
+.image-edit-apply-button:hover{
+	border: 2px solid #CE8137;
+	background-color: #DCE8ED;
 }

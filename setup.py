@@ -6,7 +6,8 @@ dependencies = [
 ]
 
 #now get plone dependencies
-dependencies.extend([d.strip('\n').strip() for d in open(os.path.join('Products', 'ImageEditor', 'dependencies.txt')).readlines() ])
+dep_file = open(os.path.join('Products', 'ImageEditor', 'dependencies.txt'))
+dependencies.extend([ d.strip('\n').strip() for d in dep_file.readlines() ])
 
 setup(name='Products.ImageEditor',
       version=open(os.path.join("Products", "ImageEditor", "version.txt")).read(),

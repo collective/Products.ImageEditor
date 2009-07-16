@@ -20,6 +20,7 @@
 
     <image:edit-action class=".actions.DropShadowAction" />
 
+    <image:edit-action class=".actions.SaveAsImageEditAction" />
     <image:edit-action class=".actions.SaveImageEditAction" />
     <image:edit-action class=".actions.CancelImageEditAction" />
     <image:edit-action class=".actions.RedoAction" />

@@ -2,11 +2,12 @@ from base import BaseImageEditorAction
 from zope.interface import implements
 from Products.ImageEditor.interfaces.actions import IImageEditorAction
 from options import INoOptions, IBlurOptions, ICompressOptions, IContrastOptions, \
-    IBrightnessOptions, ISharpenOptions, IDropShadowOptions, ISepiaOptions
+    IBrightnessOptions, ISharpenOptions, IDropShadowOptions, ISepiaOptions, ISaveAsOptions
 from zope.formlib import form
 from PIL import Image, ImageFilter, ImageEnhance, ImageOps
 from widgets import SliderWidget
 from Products.CMFCore.utils import getToolByName
+from OFS.interfaces import IFolder
 
 class CropAction(BaseImageEditorAction):
     implements(IImageEditorAction)
@@ -167,6 +168,47 @@ save_reload(IMAGE_INFORMATION);
         
         self.editor.context.reindexObject() #stop image caching on browser
     
+class SaveAsImageEditAction(BaseImageEditorAction):
+    implements(IImageEditorAction)
+
+    options = form.FormFields(ISaveAsOptions)
+    
+    name = "Save As"
+    description = "Save the edited image as another content item."
+    icon = None
+
+    def on_setup(self):
+        return """
+function redirect(data){
+    if(data.previous_action == 'save-as'){
+        window.location = data.new_type_location;
+    }
+}
+on('after_image_reload').accomplish(redirect);
+"""
+
+    def __call__(self, type_to_save_as, *args, **kwargs):
+        """
+        create the new type, pass along the url to the client and then
+        the javascript will redirect the browser
+        """
+        context = self.editor.context
+        container = context.restrictedTraverse(context.getPhysicalPath()[:-1])
+        new_id = orig_id = context.getId() + "-copy"
+        
+        count = 1
+        while new_id in container.objectIds():
+            new_id += orig_id + '-' + str(count)
+            count += 1
+        
+        container.invokeFactory(
+            type_to_save_as,
+            new_id,
+            image = self.editor.get_current_image_data()
+        )
+        
+        return {'new_type_location' : container.absolute_url() + "/" + new_id + "/edit"}
+        
 class CancelImageEditAction(BaseImageEditorAction):
     implements(IImageEditorAction)
 

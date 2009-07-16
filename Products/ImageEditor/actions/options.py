@@ -2,7 +2,6 @@ from zope.component import Interface
 from zope import schema
 from Products.ImageEditor import imageeditor_message_factory as _
 
-
 class INoOptions(Interface):
     """
     when there are no options available....
@@ -137,4 +136,14 @@ class ISepiaOptions(Interface):
         min=0,
         max=255,
         default=192
+    )
+    
+class ISaveAsOptions(Interface):
+    
+    type_to_save_as = schema.Choice(
+        title=_(u"label_type_to_save_as", default=u"Type"),
+        description=_(u"label_description_type_to_save_as",
+            default=u"Content type to save image as."),
+        default="Image",
+        vocabulary="plone.app.vocabularies.ImageContentTypes"
     )

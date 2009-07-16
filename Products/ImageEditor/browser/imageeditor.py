@@ -198,9 +198,12 @@ class ImageEditorActionExecute(BrowserView):
         #get action instance
         action = get_action_class(self.context.action_name)(self.context.context)
         #call instance with params
-        action(**self.get_args_from_request())
+        result = action(**self.get_args_from_request()) or {}
         
-        return json(get_image_information(action.editor))
+        result.update(get_image_information(action.editor))
+        result['previous_action'] = self.context.action_name
+        
+        return json(result)
 
 class ImageEditorUtility(BrowserView):
     """Traversable utility for image editor
