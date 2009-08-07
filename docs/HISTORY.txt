@@ -4,6 +4,7 @@ Changelog
 1.1b3
 -----
 * fixed tests
+* only install collective.js.jquery if plone 3.3 or above
 
 1.1b2
 -----

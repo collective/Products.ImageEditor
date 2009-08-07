@@ -27,18 +27,20 @@ for path in sys.path:
     if 'Products.ImageEditor' in path:
         BASE_DIR = path
 
-import Products.ImageEditor
+import Products.ImageEditor, collective.js.jqueryui
 
 @onsetup
 def setUp():
     fiveconfigure.debug_mode = True
     zcml.load_config('configure.zcml', Products.ImageEditor)
+    zcml.load_config('configure.zcml', collective.js.jqueryui)
     fiveconfigure.debug_mode = False
     ztc.installPackage('Products.ImageEditor')
+    ztc.installPackage('collective.js.jqueryui')
 
 setUp()
 
-ptc.setupPloneSite(products=('Products.ImageEditor',))
+ptc.setupPloneSite(products=('Products.ImageEditor', 'collective.js.jqueryui'))
 
 class ImageEditorTestCase(ptc.PloneTestCase):
     """
