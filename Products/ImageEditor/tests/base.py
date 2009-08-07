@@ -17,6 +17,8 @@ from Products.Five import fiveconfigure
 from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase.layer import PloneSite
 from Products.PloneTestCase.layer import onsetup
+from Products.CMFCore.utils import getToolByName
+from Products.ImageEditor.Extensions import Install
 
 from zope.app import zapi
 from zope.configuration import xmlconfig
@@ -73,6 +75,10 @@ class ImageEditorTestCase(ptc.PloneTestCase):
         im.save(imageData, im.format)
         image.setImage(imageData)
         return image
+    
+    def uninstall(self):
+        getToolByName(self.portal, 'portal_quickinstaller').uninstallProducts(['Products.ImageEditor'])
+        Install.uninstall(self.portal)
     
     def getEditor(self, context):
         return ImageEditorAdapter(context)

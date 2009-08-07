@@ -36,6 +36,16 @@
         compression ="safe" 
         cookable    ="True"
         enabled     ="True" 
+        expression  ="python: here.restrictedTraverse('@@image-editor-utility').should_include(request)" 
+        id          ="++resource++jquery.imgareaselect-0.8.min.js"
+        inline      ="False"
+        remove      ="True"
+        />
+    <javascript 
+        cacheable   ="True" 
+        compression ="safe" 
+        cookable    ="True"
+        enabled     ="True" 
         expression  ="python: here.restrictedTraverse('@@image-editor-utility').should_include(request)"
         id          ="++resource++imageeditor.js" 
         inline      ="False"
