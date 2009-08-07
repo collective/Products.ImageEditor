@@ -1,5 +1,6 @@
 from Products.ImageEditor.interfaces.actions import IImageEditorAction
 from Products.ImageEditor.interfaces.imageeditor import IImageEditorAdapter
+from Products.ImageEditor.adapters.imageeditor import ImageEditorAdapter
 from zope.interface import implements
 from zope.component import adapts
 
@@ -14,7 +15,7 @@ class BaseImageEditorAction:
     icon = None
     
     def __init__(self, image):
-        self.editor = IImageEditorAdapter(image)
+        self.editor = ImageEditorAdapter(image)
         
     def action_parameters(self):
         return False

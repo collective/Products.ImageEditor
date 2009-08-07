@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.1b3
+-----
+* fixed tests
+
 1.1b2
 -----
 * added sepia effect

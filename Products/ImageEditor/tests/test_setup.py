@@ -1,4 +1,3 @@
-import unittest
 from Products.ImageEditor.tests.base import ImageEditorTestCase
 from Products.CMFCore.utils import getToolByName
 from plone.app.viewletmanager.interfaces import IViewletSettingsStorage
@@ -23,6 +22,7 @@ class TestSetup(ImageEditorTestCase):
         self.failUnless('++resource++imageeditor.js' in [js.getId() for js in pjavascripts.getResources()])
 
 def test_suite():
-    suite = unittest.TestSuite()
-    suite.addTest(unittest.makeSuite(TestSetup))
+    from unittest import TestSuite, makeSuite
+    suite = TestSuite()
+    suite.addTest(makeSuite(TestSetup))
     return suite

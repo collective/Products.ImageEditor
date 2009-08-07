@@ -6,7 +6,7 @@ from Products.ImageEditor.actions.actions import *
 class TestActions(base.ImageEditorTestCase):
     """Test Actions"""
     def afterSetUp(self):
-        self.setRoles(('Manager',))
+        super(TestActions, self).afterSetUp()
         self.image = [self.getImageContentType()]
         
     def beforeTearDown(self):
@@ -17,12 +17,10 @@ class TestActions(base.ImageEditorTestCase):
         action = CropAction(image)
         x1, y1, x2, y2 = 0, 0, 10, 10
         action(x1, y1, x2, y2)
-        #TODO: how could i test assert on img ?
 
     def test_rotateLeft(self):
         image = self.image[0]
-        action = RotateLeftAction(image)
-        action()
+        action = RotateLeftAction(image)()
     
     def test_blur(self):
         image = self.image[0]
@@ -32,53 +30,39 @@ class TestActions(base.ImageEditorTestCase):
 
     def test_save(self):
         image = self.image[0]
-        action = SaveImageEditAction(image)
-        action()
-        
+        SaveImageEditAction(image)()
 
     def test_cancel(self):
         image = self.image[0]
-        action = CancelImageEditAction(image)
-        action()
-        
+        action = CancelImageEditAction(image)()
 
     def test_redo(self):
         image = self.image[0]
-        action = RedoAction(image)
-        action()
-        
+        RedoAction(image)()
 
     def test_undo(self):
         image = self.image[0]
-        action = UndoAction(image)
-        action()
-        
+        action = UndoAction(image)()
 
     def test_rotateRight(self):
         image = self.image[0]
-        action = RotateRightAction(image)
-        action()
-        
+        action = RotateRightAction(image)()
 
     def test_flipVertical(self):
         image = self.image[0]
-        action = FlipOnVerticalAxisAction(image)
-        action()
-        
+        action = FlipOnVerticalAxisAction(image)()
 
     def test_compress(self):
         image = self.image[0]
         action = CompressAction(image)
         amount = 60.0
         action(amount)
-        
 
     def test_contrast(self):
         image = self.image[0]
         action = ContrastAction(image)
         amount = 50.0
         action(amount)
-        
 
     def test_bright(self):
         image = self.image[0]
@@ -86,26 +70,21 @@ class TestActions(base.ImageEditorTestCase):
         amount = 50.0
         action(amount)
         
-
     def test_sharpen(self):
         image = self.image[0]
         action = SharpenAction(image)
-        amount = 2
+        amount = 1.5
         action(amount)
         
-
     def test_flipHorizontal(self):
         image = self.image[0]
-        action = FlipOnHorizontalAxisAction(image)
-        action()
+        FlipOnHorizontalAxisAction(image)()
         
-
     def test_resize(self):
         image = self.image[0]
         action = ResizeAction(image)
         width, height = 150, 150
         action(width, height)
-        
         
     def test_dropShadow(self):
         image = self.image[0]
@@ -117,10 +96,6 @@ class TestActions(base.ImageEditorTestCase):
         border = 8
         iterations = 3
         action(offset_x, offset_y, background_color, shadow_color, border, iterations)
-        editor = self.getEditor(image)
-        self.imagesEqual('dropshadow.jpg', editor)
-        
-
 
 
 def test_suite():

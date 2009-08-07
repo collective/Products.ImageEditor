@@ -1,3 +1,4 @@
+import unittest
 import sys
 from cStringIO import StringIO
 
@@ -5,16 +6,37 @@ from PIL import Image
 from PIL import ImageChops
 from PIL import ImageEnhance
 
-from Products.PloneTestCase import PloneTestCase as ptc
 from Products.ImageEditor.adapters.imageeditor import ImageEditorAdapter
+
+from zope.testing import doctestunit
+from zope.component import testing
 from Testing import ZopeTestCase as ztc
 
+from Products.Five import zcml
+from Products.Five import fiveconfigure
+from Products.PloneTestCase import PloneTestCase as ptc
+from Products.PloneTestCase.layer import PloneSite
+from Products.PloneTestCase.layer import onsetup
+
+from zope.app import zapi
+from zope.configuration import xmlconfig
 
 BASE_DIR = ""
 
 for path in sys.path:
     if 'Products.ImageEditor' in path:
         BASE_DIR = path
+
+import Products.ImageEditor
+
+@onsetup
+def setUp():
+    fiveconfigure.debug_mode = True
+    zcml.load_config('configure.zcml', Products.ImageEditor)
+    fiveconfigure.debug_mode = False
+    ztc.installPackage('Products.ImageEditor')
+
+setUp()
 
 ptc.setupPloneSite(products=('Products.ImageEditor',))
 
