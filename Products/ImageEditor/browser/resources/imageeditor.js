@@ -189,8 +189,8 @@ $(document).ready(function(){
         modal: false,
         draggable: true,
         title: "Image",
-        width:window.innerWidth - 270,
-        height:window.innerHeight - 30,
+        width:window.innerWidth - 280,
+        height:window.innerHeight - 40,
         position:[250, 10]
     });
     

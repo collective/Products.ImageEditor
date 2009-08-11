@@ -45,6 +45,9 @@
       </div>
     </div>
       
+    <div id="aspect-ratio-selector">
+      <p>This allows you to specify the aspect ratio in which you edit the image to make it a little easier to get the size you desire.</p>
+    </div>
 
     <div id="kss-spinner">
       <img tal:attributes="src string:${portal_url}/spinner.gif" alt="" />

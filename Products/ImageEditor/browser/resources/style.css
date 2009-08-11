@@ -177,6 +177,6 @@ div#menuHandle{
     overflow:hidden;
 }
 
-#resize-to-fields p{
+#resize-to-fields p, #aspect-ratio-selector p{
     font-size:80%;
 }

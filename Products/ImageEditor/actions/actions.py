@@ -29,26 +29,70 @@ function add_crop(){
         y2: h-h/4
     };
     window.crop_selection = start_selection;
-
-    $('#source-image').imgAreaSelect({
-        onSelectChange: function(image, selection){
-            window.crop_selection = selection;
-            //imageEditor.imagePixels.html(Math.round(selection.x2-selection.x1) + "x" + Math.round(selection.y2-selection.y1));
-        },
-        selectionColor: 'blue',
-        enable: true,
-        border: 2,
-        handles: true,
-        show: true,
-        x1 : start_selection.x1,
-        y1 : start_selection.y1,
-        x2 : start_selection.x2,
-        y2 : start_selection.y2
+    
+    function create_cropper(ratio){
+        var options = {
+            onSelectChange: function(image, selection){
+                window.crop_selection = selection;
+            },
+            selectionColor: 'blue',
+            enable: true,
+            border: 2,
+            handles: true,
+            show: true,
+            x1 : start_selection.x1,
+            y1 : start_selection.y1,
+            x2 : start_selection.x2,
+            y2 : start_selection.y2
+        }
+        if(ratio != null){
+            options.aspectRatio = ratio;
+        }
+        $('#source-image').imgAreaSelect(options);
+    }
+    create_cropper(null);
+    
+    $("#aspect-ratio-selector").dialog({
+        position : 'right',
+        title : "Aspect Ratio",
+        autoOpen:true,
+        resizable:false,
+        modal: false,
+        draggable: true,
+        width:200,
+        buttons : {
+            "Manual" : function(){
+                $('#source-image').imgAreaSelect({ enable: false, hide: true });
+                create_cropper(null);
+            },
+            "3:2" : function(){
+                $('#source-image').imgAreaSelect({ enable: false, hide: true });
+                create_cropper("3:2");
+            },
+            "4:3" : function(){
+                $('#source-image').imgAreaSelect({ enable: false, hide: true });
+                create_cropper("4:3");
+            },
+            "16:9" : function(){
+                $('#source-image').imgAreaSelect({ enable: false, hide: true });
+                create_cropper("16:9");
+            },
+            "5:4" : function(){
+                $('#source-image').imgAreaSelect({ enable: false, hide: true });
+                create_cropper("5:4");
+            },
+            "1:1" : function(){
+                $('#source-image').imgAreaSelect({ enable: false, hide: true });
+                create_cropper("1:1");
+            }
+        }
     });
+    
 }
 
 function remove_crop(){
     $('#source-image').imgAreaSelect({ enable: false, hide: true });
+    $("#aspect-ratio-selector").dialog('destroy');
 }
         
 on('action_button_clicked').accomplish(function(btn){
