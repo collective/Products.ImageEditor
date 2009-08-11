@@ -71,13 +71,6 @@ $(document).ready(function(){
         var image = $("#source-image");
         var image_container = $("#image-container");
 
-        //For some reason IE chokes if you don't reset the width and height
-        image.css('height', '');
-        image.css('width', '');
-
-        //set image height so there is no flickr when image reloads
-        image_container.css('height', data.height + "px");
-
         //remove old, add new image
         image_container.html('<img id="source-image" style="display:none" src="' + data.url + '" />');
         image_container.children().show()
@@ -190,6 +183,39 @@ $(document).ready(function(){
         }
     });
     
+    $("#image-container").dialog({
+        autoOpen:true,
+        resizable:true,
+        modal: false,
+        draggable: true,
+        title: "Image",
+        width:window.innerWidth - 270,
+        height:window.innerHeight - 30,
+        position:[250, 10]
+    });
+    
+    $("#image-editor-controls").dialog({
+        autoOpen:true,
+        resizable:false,
+        modal:false,
+        draggable:true,
+        title: "Actions",
+        width:200,
+        position:[10, 10]
+    });
+    
+    $("#zoom-slider-wrapper").dialog({
+        autoOpen:true,
+        resizable:false,
+        modal:false,
+        draggable:true,
+        title: "Zoom",
+        width:235,
+        height: 100,
+        minHeight: 100,
+        position:['left', 'bottom']
+    });
+    
     $("#zoom-slider").slider({
         min:0,
         max:100,
@@ -207,9 +233,6 @@ $(document).ready(function(){
         }
     });
     
-    $(".slide-in").mouseenter(function(){$(this).css('right', '-5px');});
-    $(".slide-in").mouseleave(function(){$(this).css('right', (-$(this).width()) + "px");});
-    
     on(['after_image_reload', 'editor_loaded']).accomplish(set_status_bar_info);
     on(['after_image_zoom_change', 'after_image_reload']).accomplish(set_image_size_by_percentage);
     on(['editor_loaded', 'after_image_zoom_change']).accomplish(set_image_zoom_labels);
@@ -218,6 +241,9 @@ $(document).ready(function(){
         if(obj.children().size() > 1){
             obj.dialog('close');
         }
+    });
+    on(['before_action_execute']).accomplish(function(name){
+        $('#status-bar-information').html("applying...");
     });
     
     fire('editor_loaded', IMAGE_INFORMATION);

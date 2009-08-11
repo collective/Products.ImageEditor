@@ -81,7 +81,7 @@ div#buttons input{
 	border: 1px solid gray;
 	background-color: #f1f1f1;
     margin:1px 5px 0 0;
-    padding:0 1px 3px 16px;
+    padding:0 0 5px 16px;
 }
 
 div#buttons input:hover, .image-edit-apply-button:hover{
@@ -95,7 +95,7 @@ input.edit-button{
 	cursor:pointer;
 	float:left;
 	width:100%;
-	height:17px;
+	height:20px;
 	margin: 0 0 2px 0;
 }
 
@@ -115,10 +115,15 @@ input.disabled{
     cursor:default;
 }
 #image-container{
-    margin:auto;
+    margin:0;
+    padding:0;
+    width:inherit;
+    height:inherit;
+    max-width:inherit;
+    max-height:inherit;
 }
 img#source-image{
-    margin:auto;
+    margin:3px;
     position:relative;
     top:0px;
     left:0px;
@@ -151,40 +156,27 @@ div#menuHandle{
     color:#f1f1f1;
 }
 
-div#image-editor-controls{
-    background-color:#f9f9f9;
-    border: 2px solid black;
-    width:150px;
-    z-index:1001;
-    padding:3px 3px 3px 30px;
-    position:fixed;
-    margin: auto auto auto 5px;
-    text-align:center;
-    opacity:.9;
-    right:-160px;
-    top:1px;
-    background-image: url(++resource++ImageEditor.resources/icons/actions_background.jpg);
-    background-repeat: no-repeat;
-    background-position: 0% 48%;
-}
-
 #zoom-slider-wrapper{
-    border:1px solid black;
-    padding: 0px 0px 0px 25px;
-    width: 225px;
-    height: 61px;
-    background-color:#f1f1f1;
-    opacity:.9;
-    position:fixed;
-    right:-215px;
-    bottom:0px;
-    z-index:100;
-    background-image: url(++resource++ImageEditor.resources/icons/zoom_background.jpg);
-    background-repeat: no-repeat;
-    background-position: 0% 0px;
+    padding:0;
+    margin:0;
+    height:100px;
 }
 
 .image-edit-apply-button:hover{
 	border: 2px solid #CE8137;
 	background-color: #DCE8ED;
+}
+
+#status-bar-information{
+    text-align:center;
+}
+
+#content{
+    height:0;
+    width:0;
+    overflow:hidden;
+}
+
+#resize-to-fields p{
+    font-size:80%;
 }

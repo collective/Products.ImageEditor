@@ -29,6 +29,22 @@
     <div id="image-container">
       <img id="source-image" tal:attributes="src view/image_url" />
     </div>
+    
+    <div id="resize-to-fields">
+      <p>Allows you to specify a width and height manually to resize the image. 
+        This is sometimes easier to do.  Remember to hit the apply button after though!</p>
+      <div class="edit-option">
+        <label class="formQuestion" for="resize-width">Width</label>
+        <div class="formHelp">The width of the image.</div>
+        <input id="resize-width" class="textType" type="text" value="640" size="10" name="resize-width"/>
+      </div>
+      <div class="edit-option">
+        <label class="formQuestion" for="resize-width">Height</label>
+        <div class="formHelp">The height of the image.</div>
+        <input id="resize-height" class="textType" type="text" value="480" size="10" name="resize-width"/>
+      </div>
+    </div>
+      
 
     <div id="kss-spinner">
       <img tal:attributes="src string:${portal_url}/spinner.gif" alt="" />

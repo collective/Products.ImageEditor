@@ -5,12 +5,13 @@ from zope.interface import implements
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from time import gmtime, strftime
-from Products.ImageEditor.interfaces.imageeditor import *
+from Products.ImageEditor.interfaces.imageeditor import IImageEditorAdapter, \
+     IImageEditorUtility, IImageEditorContext, IImageEditorActionContext
 from Products.CMFCore.utils import getToolByName
 from Products.ImageEditor.meta.zcml import get_actions, get_action_class
 from zope.formlib import form
 from plone.memoize.view import memoize
-from Products.ImageEditor.utils import *
+from Products.ImageEditor.utils import generate_random_url, get_image_information, json
 
 class NewEdit(BrowserView):
     

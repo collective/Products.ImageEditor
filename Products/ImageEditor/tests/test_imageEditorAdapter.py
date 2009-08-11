@@ -3,12 +3,7 @@ from zope.testing import doctestunit
 from zope.component import testing
 from Testing import ZopeTestCase as ztc
 from Products.ImageEditor.tests.base import ImageEditorTestCase
-from cStringIO import StringIO
-import zope.app.publisher.browser
-from Products.Five.testbrowser import Browser
-from PIL import Image, ImageFilter, ImageEnhance
-from cStringIO import StringIO
-from Products.ImageEditor.actions.actions import *
+from Products.ImageEditor.actions import *
 
 class TestAdapter(ImageEditorTestCase):
     """

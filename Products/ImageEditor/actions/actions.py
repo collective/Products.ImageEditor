@@ -423,17 +423,51 @@ class ResizeAction(BaseImageEditorAction):
     def on_setup(self):
         return """
 function add_resize(){
-    $('#source-image').resizable({
-        handles: 'all',
-        animate: true,
-        ghost: true,
-        resize: function(e, ui){
-            //nothing
+    $('#image-container')[0].scrollTop = 5000;
+    $('#image-container')[0].scrollLeft = 5000;
+    
+    function create_resizable(){
+        $('#source-image').resizable({
+            handles: 'all',
+            resize: function(e, ui){
+                //nothing
+            }
+        });
+    }
+    create_resizable();
+    
+    $('#resize-to-fields').dialog({
+        autoOpen:true,
+        resizable:false,
+        modal: false,
+        draggable: true,
+        title: "Manual Resize",
+        zindex: 1002,
+        position: 'right',
+        buttons: {
+            Resize: function() {
+                $('#source-image').resizable('destroy');
+                var width = $('#resize-width').val();
+                var height = $('#resize-height').val();
+                if(isNaN(width) || isNaN(height)){
+                    alert("You must enter a number for the width and height.");
+                }else{
+                    $('#source-image').width(parseInt(width) + "px");
+                    $('#source-image').height(parseInt(height) + "px");
+                }
+                
+                create_resizable();
+            },
+            Close: function() {
+                $(this).dialog('close');
+            }
         }
+        
     });
 }
 function remove_resize(){
     $('#source-image').resizable('destroy');
+    $('#resize-to-fields').dialog('destroy');
 }
 on('action_button_clicked').accomplish(function(btn){
 
