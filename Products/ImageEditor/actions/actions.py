@@ -496,8 +496,10 @@ function add_resize(){
                 if(isNaN(width) || isNaN(height)){
                     alert("You must enter a number for the width and height.");
                 }else{
-                    $('#source-image').width(parseInt(width) + "px");
-                    $('#source-image').height(parseInt(height) + "px");
+                    var zoom = parseFloat(jQuery("#zoom-slider-value").attr('value'));
+                
+                    $('#source-image').width(Math.floor(parseInt(width)*zoom) + "px");
+                    $('#source-image').height(Math.floor(parseInt(height)*zoom) + "px");
                 }
                 
                 create_resizable();
