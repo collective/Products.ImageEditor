@@ -6,6 +6,11 @@
     <include package="collective.js.jquery" />
     <include package="collective.js.jqueryui" />
     
+    <permission
+        id="Products.ImageEditor.edit"
+        title="Product.ImageEditor: Edit Images"
+        />
+    
 	<include package=".meta" />
 	<include package=".actions" />
 	
@@ -13,11 +18,6 @@
 	<include package=".adapters" />
 	
    	<include file="profiles.zcml" />
-
-    <permission
-        id="Products.ImageEditor.edit"
-        title="Product.ImageEditor: Edit Images"
-        />
 
     <utility
       component=".vocabularies.ImageContentTypeVocabularyFactory"
