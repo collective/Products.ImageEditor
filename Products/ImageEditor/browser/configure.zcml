@@ -6,7 +6,7 @@
         for="Products.ATContentTypes.interface.image.IImageContent"
         name="editor"
         class=".imageeditor.NewEdit"
-        permission="cmf.ModifyPortalContent"
+        permission="Products.ImageEditor.edit"
         layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
     />
   	      
@@ -14,7 +14,7 @@
         for="Products.ATContentTypes.interface.image.IImageContent"
         name="currenteditedimage.jpg"
         class=".imageeditor.ShowCurrentEdit"
-        permission="cmf.ModifyPortalContent"
+        permission="Products.ImageEditor.edit"
         layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
     />
 
@@ -30,14 +30,14 @@
     <browser:page 
         name="image-editor"
         for="Products.ATContentTypes.interface.image.IImageContent"
-        permission="cmf.ModifyPortalContent"
+        permission="Products.ImageEditor.edit"
         layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
         class=".imageeditor.ImageEditorContext" 
     />
     <browser:page 
         name="execute"
         for="Products.ImageEditor.interfaces.imageeditor.IImageEditorActionContext"
-        permission="cmf.ModifyPortalContent"
+        permission="Products.ImageEditor.edit"
         layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
         class=".imageeditor.ImageEditorActionExecute" 
     />

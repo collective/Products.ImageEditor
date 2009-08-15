@@ -14,6 +14,11 @@
 	
    	<include file="profiles.zcml" />
 
+    <permission
+        id="Products.ImageEditor.edit"
+        title="Product.ImageEditor: Edit Images"
+        />
+
     <utility
       component=".vocabularies.ImageContentTypeVocabularyFactory"
       name="plone.app.vocabularies.ImageContentTypes"
