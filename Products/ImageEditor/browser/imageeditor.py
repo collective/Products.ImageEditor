@@ -8,12 +8,12 @@ from time import gmtime, strftime
 from Products.ImageEditor.interfaces.imageeditor import IImageEditorAdapter, \
      IImageEditorUtility, IImageEditorContext, IImageEditorActionContext
 from Products.CMFCore.utils import getToolByName
-from Products.ImageEditor.meta.zcml import get_actions, get_action_class
+from Products.ImageEditor.meta.zcml import get_actions, get_action_class, get_action_names
 from zope.formlib import form
 from plone.memoize.view import memoize
 from Products.ImageEditor.utils import generate_random_url, get_image_information, json
 
-class NewEdit(BrowserView):
+class Edit(BrowserView):
     
     template = ViewPageTemplateFile('imageeditor.pt')
     
@@ -145,44 +145,6 @@ class ShowCurrentEdit(BrowserView):
         resp.write(imagedata)
         return ''
     
-    
-class ImageEditorActionContext(SimpleItem):
-    # Implementing IBrowserPublisher tells the Zope 2 publish traverser to pay attention
-    # to the publishTraverse and browserDefault methods.
-    implements(IImageEditorActionContext, IBrowserPublisher)
-    
-    def __init__(self, context, request, action_name):
-        super(ImageEditorActionContext, self).__init__(context, request)
-        self.context = context
-        self.request = request
-        self.action_name = action_name
-
-    def browserDefault(self, request):
-        """ always use the execute view of the action--there is no other.
-        """
-        return self, ('@@execute',)
-
-    def absolute_url(self):
-        return self.context.absolute_url() + "/image-editor/" + self.action_name
-    
-class ImageEditorContext(SimpleItem):
-    # Implementing IBrowserPublisher tells the Zope 2 publish traverser to pay attention
-    # to the publishTraverse and browserDefault methods.
-    implements(IImageEditorContext, IBrowserPublisher)
-        
-    def publishTraverse(self, traverse, action_name):
-        """ Look up the action name whose name matches the next URL and wrap it.
-        """
-        return ImageEditorActionContext(self.context, self.request, action_name).__of__(self)
-
-    def browserDefault(self, request):
-        """ Should never get here!
-        """
-        raise Exception("no action specified")
-
-    def absolute_url(self):
-        return self.context.absolute_url() + "/image-editor"
-    
 class ImageEditorActionExecute(BrowserView):
     
     def get_args_from_request(self):
@@ -195,7 +157,7 @@ class ImageEditorActionExecute(BrowserView):
         return args
         
     
-    def __call__(self):
+    def __call__(self, action):
         #get action instance
         action = get_action_class(self.context.action_name)(self.context.context)
         #call instance with params

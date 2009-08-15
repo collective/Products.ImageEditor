@@ -5,7 +5,7 @@
   	<browser:page
         for="Products.ATContentTypes.interface.image.IImageContent"
         name="editor"
-        class=".imageeditor.NewEdit"
+        class=".imageeditor.Edit"
         permission="Products.ImageEditor.edit"
         layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
     />
