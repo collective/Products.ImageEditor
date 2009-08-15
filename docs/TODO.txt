@@ -1,4 +1,6 @@
-
-* work on editor interface
-
-* better grabber for resize operation
+* image grabber
+* border 
+** border styles
+** size
+** texture
+** etc

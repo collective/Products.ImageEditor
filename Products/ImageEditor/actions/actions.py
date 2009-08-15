@@ -40,6 +40,7 @@ function add_crop(){
             border: 2,
             handles: true,
             show: true,
+            parent: '#image-container',
             x1 : start_selection.x1,
             y1 : start_selection.y1,
             x2 : start_selection.x2,

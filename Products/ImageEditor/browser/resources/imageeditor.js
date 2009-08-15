@@ -204,6 +204,12 @@ $(document).ready(function(){
         position:[10, 10]
     });
     
+    /*
+    
+    Slider Setup
+    
+    */
+    
     $("#zoom-slider-wrapper").dialog({
         autoOpen:true,
         resizable:false,
@@ -233,6 +239,52 @@ $(document).ready(function(){
         }
     });
     
+    /*
+    
+    End Slider Setup
+    
+    */
+    
+    /*
+    
+    Grabber Setup
+    
+    */
+    
+    function add_grabber(){
+        $('#source-image').css('cursor', 'move');
+        $('#source-image').draggable();
+    }
+    
+    function remove_grabber(){
+        $('#source-image').css('cursor', 'default');
+        $('#source-image').draggable('destroy');
+    }
+    
+    on(['editor_loaded', 'after_image_reload']).accomplish(function(data){
+        add_grabber();
+    });
+    
+    on('action_button_clicked').accomplish(function(btn){
+        var action_button_id = $(btn).attr('id');
+        if(action_button_id == "resize-button" || action_button_id == "crop-button"){
+            remove_grabber();
+        }else{
+            add_grabber();
+        }
+    });
+    
+    /*
+    
+    End Grabber Setup
+    
+    */
+    
+    /*
+    
+    events
+    
+    */
     on(['after_image_reload', 'editor_loaded']).accomplish(set_status_bar_info);
     on(['after_image_zoom_change', 'after_image_reload']).accomplish(set_image_size_by_percentage);
     on(['editor_loaded', 'after_image_zoom_change']).accomplish(set_image_zoom_labels);

@@ -57,7 +57,7 @@ div.image-edit-action{
 }
 
 .image-edit-apply-button:hover{
-    border: 1px solid red;
+    border: 2px solid red;
 }
 
 div#options{
@@ -78,7 +78,7 @@ div.edit-option .formQuestion{
 div#buttons input{
     background-repeat: no-repeat;
 	cursor:pointer;
-	border: 1px solid gray;
+	border: 2px solid gray;
 	background-color: #f1f1f1;
     margin:1px 5px 0 0;
     padding:0 0 5px 16px;
@@ -86,7 +86,7 @@ div#buttons input{
 
 div#buttons input:hover, .image-edit-apply-button:hover{
     background-color:white;
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 input.edit-button{
@@ -97,10 +97,6 @@ input.edit-button{
 	width:100%;
 	height:20px;
 	margin: 0 0 2px 0;
-}
-
-input.active{
-    border: 1px solid green;
 }
 
 input.enabled{
@@ -121,12 +117,16 @@ input.disabled{
     height:inherit;
     max-width:inherit;
     max-height:inherit;
+    position:relative;
+    overflow:scroll;
 }
 img#source-image{
     margin:3px;
-    position:relative;
+    text-align:center;
+    position:absolute;
     top:0px;
     left:0px;
+    z-index:0;
 }
 
 div#status-bar{
@@ -179,4 +179,9 @@ div#menuHandle{
 
 #resize-to-fields p, #aspect-ratio-selector p{
     font-size:80%;
+}
+
+div#buttons input.active{
+    border: 2px solid green;
+    
 }

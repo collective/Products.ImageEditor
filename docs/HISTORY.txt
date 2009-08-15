@@ -1,11 +1,13 @@
 Changelog
 =========
 
-1.1b4
+1.2b1
 -----
 * added permission to edit images
 * removed traversable context for editing images--unneeded fanciness
 * manual resize now takes zoom into account
+* fixed cropping bug
+* added grabber
 
 1.1b3
 -----
