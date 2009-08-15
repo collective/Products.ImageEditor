@@ -1,10 +1,19 @@
 Changelog
 =========
 
+1.1b4
+-----
+* added permission to edit images
+* removed traversable context for editing images--unneeded fanciness
+* manual resize now takes zoom into account
+
 1.1b3
 -----
 * fixed tests
 * only install collective.js.jquery if plone 3.3 or above
+* image container, actions and zoom are all in dialog boxes now so it has more of a photoshop feel
+* added manual resize dialog to resize action
+* now have aspect ratios back!
 
 1.1b2
 -----

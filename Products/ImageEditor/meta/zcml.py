@@ -47,6 +47,10 @@ def get_action_class(name):
     else:
         raise Exception("Can't find action %s" % name)
         
+def get_action_names():
+    for name in ACTION_ORDER:
+        yield name
+        
 class ImageEditAction:
 
     def __init__(self, class_, before=None, after=None):

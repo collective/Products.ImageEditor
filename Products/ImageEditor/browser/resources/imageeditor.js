@@ -102,7 +102,7 @@ $(document).ready(function(){
 
         $("#kss-spinner").show()
         $.getJSON(
-            $('base').attr('href') + '/image-editor/' + name, 
+            $('base').attr('href') + '/@@execute?action_name=' + name, 
             params, 
             function(data, status){
                 reload_image(data);

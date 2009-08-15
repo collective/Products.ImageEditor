@@ -147,24 +147,24 @@ class ShowCurrentEdit(BrowserView):
     
 class ImageEditorActionExecute(BrowserView):
     
-    def get_args_from_request(self):
+    def get_args_from_request(self, action):
         args = {}
         
         for key in self.request.keys():
-            if key.startswith(self.context.action_name + "."):
+            if key.startswith(action + "."):
                 args[key.split('.')[1]] = self.request.get(key)
                 
         return args
         
     
-    def __call__(self, action):
+    def __call__(self, action_name):
         #get action instance
-        action = get_action_class(self.context.action_name)(self.context.context)
+        action = get_action_class(action_name)(self.context)
         #call instance with params
-        result = action(**self.get_args_from_request()) or {}
+        result = action(**self.get_args_from_request(action_name)) or {}
         
         result.update(get_image_information(action.editor))
-        result['previous_action'] = self.context.action_name
+        result['previous_action'] = action_name
         
         return json(result)
 

@@ -28,15 +28,8 @@
     />
        
     <browser:page 
-        name="image-editor"
-        for="Products.ATContentTypes.interface.image.IImageContent"
-        permission="Products.ImageEditor.edit"
-        layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
-        class=".imageeditor.ImageEditorContext" 
-    />
-    <browser:page 
         name="execute"
-        for="Products.ImageEditor.interfaces.imageeditor.IImageEditorActionContext"
+        for="Products.ATContentTypes.interface.image.IImageContent"
         permission="Products.ImageEditor.edit"
         layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
         class=".imageeditor.ImageEditorActionExecute" 
