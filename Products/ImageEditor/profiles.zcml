@@ -14,7 +14,7 @@
     
     <genericsetup:registerProfile
         name="uninstall"
-        title="Image Editor"
+        title="Image Editor Uninstall"
         directory="profiles/uninstall"
         description='Uninstall profile for Image Editor.'
         provides="Products.GenericSetup.interfaces.EXTENSION"
