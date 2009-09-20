@@ -18,11 +18,9 @@ Features
 * sepia
 * save as another content type.
 
-Roadmap
-=======
+Roadmap / Proposal
+==================
 
-* I18N
-* get back old UIs
 * Override the Archetype's ImageWidget to add link to the image editor (only in widget edit mode ?)
 * Categorize actions (effects, transformations, colors)
 * Migration from 1.1 to 1.2
