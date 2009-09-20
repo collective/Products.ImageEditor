@@ -9,33 +9,17 @@ class TestSetup(ImageEditorTestCase):
     
     def test_css_registry(self):
         pcss = self.portal.portal_css
-        self.failUnless('++resource++imageeditor-style.css' in [css.getId() for css in pcss.getResources()])
+#        self.failUnless('++resource++imageeditor-style.css' in [css.getId() for css in pcss.getResources()])
 
     def test_actions(self):
         actionTool = self.portal.portal_actions
         actionInfo = actionTool.getActionInfo(['object/image_editor'])
-        self.failUnless(actionInfo['url'] == "/@@editor")
+        self.failUnless(actionInfo['url'] == "/@@imageeditor")
 
     def test_js_added(self):
         pjavascripts = getToolByName(self.portal, 'portal_javascripts')
-        self.failUnless('++resource++imageeditor.js' in [js.getId() for js in pjavascripts.getResources()])
         self.failUnless('++resource++jquery.imgareaselect-0.8.min.js' in [js.getId() for js in pjavascripts.getResources()])
-        self.failUnless('++resource++imageeditor.js' in [js.getId() for js in pjavascripts.getResources()])
 
-    def test_should_not_install_collective_js_jquery_if_plone33(self):
-        # need to call this specifically because test setup doesn't dynamically install it for us
-        Install.install(self.portal)
-        pm = getToolByName(self.portal, 'portal_migration')
-        qi = getToolByName(self.portal, 'portal_quickinstaller')
-        
-        version = pm.getInstanceVersion()
-        major, minor = int(version[0]), int(version[2])
-
-        if major >= 3 and minor >= 3:
-            self.failUnless(not qi.isProductInstalled('collective.js.jquery'))
-        else:
-            self.failUnless(qi.isProductInstalled('collective.js.jquery'))
-            
     def test_should_install_collective_js_jqueryui(self):
         qi = getToolByName(self.portal, 'portal_quickinstaller')
         self.failUnless(qi.isProductInstalled('collective.js.jqueryui'))
@@ -55,7 +39,7 @@ class TestSetup(ImageEditorTestCase):
     def test_should_remove_css_on_uninstall(self):
         self.uninstall()
         pcss = self.portal.portal_css
-        self.failUnless('++resource++imageeditor-style.css' not in [css.getId() for css in pcss.getResources()])
+#        self.failUnless('++resource++imageeditor-style.css' not in [css.getId() for css in pcss.getResources()])
         
     def test_should_remove_action_object_on_uninstall(self):
         self.uninstall()
@@ -67,9 +51,7 @@ class TestSetup(ImageEditorTestCase):
         self.uninstall()
         pjavascripts = getToolByName(self.portal, 'portal_javascripts')
         jsresources = [js.getId() for js in pjavascripts.getResources()]
-        self.failUnless('++resource++imageeditor.js' not in jsresources)
         self.failUnless('++resource++jquery.imgareaselect-0.8.min.js' not in jsresources)
-        self.failUnless('++resource++imageeditor.js' not in jsresources)
 
 def test_suite():
     from unittest import TestSuite, makeSuite

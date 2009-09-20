@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<object name="portal_properties" meta_type="Plone Properties Tool" xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="plone">
+  <object name="imageeditor" meta_type="Plone Property Sheet">
+    <property name="title">Products.ImageEditor properties</property>
+    <property name="editors" type="lines">
+      <element value="alagimp" />
+      <element value="slider" />
+    </property>
+  </object>
+</object>

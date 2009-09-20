@@ -2,14 +2,32 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser">
 
-  	<browser:page
+    <browser:page
         for="Products.ATContentTypes.interface.image.IImageContent"
-        name="editor"
-        class=".imageeditor.Edit"
+        name="imageeditor"
+        class=".base.ImageEditor"
         permission="Products.ImageEditor.edit"
         layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
     />
-  	      
+
+    <browser:page
+        for="Products.ATContentTypes.interface.image.IImageContent"
+        name="imageeditor.alagimp"
+        class=".alagimp.AlaGimp"
+        template="alagimp.pt"
+        permission="Products.ImageEditor.edit"
+        layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
+    />
+
+    <browser:page
+        for="Products.ATContentTypes.interface.image.IImageContent"
+        name="imageeditor.slider"
+        class=".slider.Slider"
+        template="slider.pt"
+        permission="Products.ImageEditor.edit"
+        layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
+    />
+
 	<browser:page
         for="Products.ATContentTypes.interface.image.IImageContent"
         name="currenteditedimage.jpg"
@@ -34,13 +52,9 @@
         layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
         class=".imageeditor.ImageEditorActionExecute" 
     />
-     
-    <browser:resourceDirectory
-        name="ImageEditor.resources"
-        directory="resources"
-    />
 
-    <include file="css.zcml" />
-    <include file="js.zcml" />
-    
+  <browser:resourceDirectory
+    name="imageeditor"
+    directory="resources" />
+
 </configure>

@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="Products.ImageEditor">
+<metal:js fill-slot="javascript_head_slot">
+  <script type="text/javascript" src="" tal:attributes="src string:$portal_url/++resource++imageeditor/imgareaselect-0.8/jquery.imgareaselect-0.8.min.js"></script>
+  <script type="text/javascript" src="" tal:attributes="src string:$portal_url/++resource++imageeditor/slider.js"></script>
+  <script tal:content="structure view/setup_js" />
+  <script tal:content="structure view/custom_action_parameters" />
+  <link href="" type="text/css" rel="stylesheet" tal:attributes="href string:$portal_url/++resource++imageeditor/slider.css"/>
+</metal:js>
+<body>
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main">
+
+    <div id="zoom-slider-wrapper" class="slide-in">
+      <div class="imageeditor-slider" id="zoom-slider">
+        <p>zoom</p>
+        <div class="ui-slider-handle"></div>
+        <input type="hidden" id="zoom-slider-value" name="zoom-slider-value" value="1"/>
+      </div>
+    </div>
+    <div id="image-editor-controls" class="slide-in">
+      <div id="buttons">
+        <input class="edit-button" i18n:attributes="value" tal:repeat="button view/get_buttons"
+        tal:attributes="id button/id; name button/name; value button/value; alt button/alt; style button/style"/>
+      </div>
+      <div id="options" tal:content="structure view/get_options" />
+      <div id="status-bar-information">
+      </div>
+    </div>
+    <div id="image-container">
+      <img id="source-image" tal:attributes="src view/image_url" />
+    </div>
+
+    <div id="kss-spinner">
+      <img tal:attributes="src string:${portal_url}/spinner.gif" alt="" />
+    </div>
+    </tal:main-macro>
+</metal:main>
+</body>
+</html>

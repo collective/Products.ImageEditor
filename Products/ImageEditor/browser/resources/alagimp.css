@@ -1,0 +1,187 @@
+
+.ui-slider {
+    background-color: #E1D9F5;
+    width:200px;
+    margin-top:6px;
+}
+
+.ui-resizable-handle{
+    z-index: 1000;
+}
+
+.ui-slider-handle {
+    background-color: #f9f9f9;
+    border-color:gray;
+}
+
+.ui-slider-handle:hover{
+    border-color:gray;
+}
+
+.imageeditor-slider{
+    margin:20px 15px 10px 10px;
+}
+
+.imageeditor-slider p{
+    padding-left:45%;
+    position:relative;
+    top:-20px;
+}
+div.imageeditor-dialog .imageeditor-slider p{
+    padding-left:45%;
+    top:-20px;
+    font-weight:normal;
+}
+
+.ui-dialog-content {
+    padding:10px;
+}
+
+#portal-column-two, #portal-column-one{
+    display:none;
+}
+
+div.image-edit-action{
+    display:none;
+}
+
+.image-edit-apply-button{
+    background-repeat: no-repeat;
+    background-image: url(++resource++imageeditor/icons/apply.png);
+    padding: 1px 1px 1px 16px;
+	cursor:pointer;
+	border: 2px solid #CEC16E;
+	background-color: #D4DFE4;
+	margin:8px 5px 3px 0px;
+	width:100%;
+}
+
+.image-edit-apply-button:hover{
+    border: 2px solid red;
+}
+
+div#options{
+    padding:5px;
+}
+
+div.edit-option{
+    padding:2px;
+    margin:0px;
+}
+div.edit-option{
+    font-size:10px;
+}    
+div.edit-option .formQuestion{
+    padding-right:5px;
+}
+    
+div#buttons input{
+    background-repeat: no-repeat;
+	cursor:pointer;
+	border: 2px solid gray;
+	background-color: #f1f1f1;
+    margin:1px 5px 0 0;
+    padding:0 0 5px 16px;
+}
+
+div#buttons input:hover, .image-edit-apply-button:hover{
+    background-color:white;
+    border: 2px solid black;
+}
+
+input.edit-button{
+    background-repeat: no-repeat;
+	padding: 0 0 0 10px;
+	cursor:pointer;
+	float:left;
+	width:100%;
+	height:20px;
+	margin: 0 0 2px 0;
+}
+
+input.enabled{
+    background-color:white;
+    border-color:black;
+    cursor:pointer;
+}
+input.disabled{
+    border-color:black;
+    background-color:gray;
+    color:black;
+    cursor:default;
+}
+#image-container{
+    margin:0;
+    padding:0;
+    width:inherit;
+    height:inherit;
+    max-width:inherit;
+    max-height:inherit;
+    position:relative;
+    overflow:scroll;
+}
+img#source-image{
+    margin:3px;
+    text-align:center;
+    position:absolute;
+    top:0px;
+    left:0px;
+    z-index:0;
+}
+
+div#status-bar{
+    width: 100%;
+    height:20px;
+    background-color:gray;
+    border-top:1px solid black;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    text-align:center;
+    margin:auto;
+    padding-top:5px;
+}
+
+div#buttons{
+    width:100%;
+}
+
+div#menuHandle{
+    background-color:black;
+    width:100%;
+    height:18px;
+    margin-bottom:5px;
+    cursor:move;
+    text-align:center;
+    color:#f1f1f1;
+}
+
+#zoom-slider-wrapper{
+    padding:0;
+    margin:0;
+    height:100px;
+}
+
+.image-edit-apply-button:hover{
+	border: 2px solid #CE8137;
+	background-color: #DCE8ED;
+}
+
+#status-bar-information{
+    text-align:center;
+}
+
+#content{
+    height:0;
+    width:0;
+    overflow:hidden;
+}
+
+#resize-to-fields p, #aspect-ratio-selector p{
+    font-size:80%;
+}
+
+div#buttons input.active{
+    border: 2px solid green;
+    
+}

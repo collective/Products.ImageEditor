@@ -5,23 +5,6 @@ def install(portal, reinstall=False):
     pm = getToolByName(portal, 'portal_migration')
     setup_tool = getToolByName(portal, 'portal_setup')
     setup_tool.runAllImportStepsFromProfile('profile-Products.ImageEditor:default')
-    
-    qi = getToolByName(portal, 'portal_quickinstaller')
-    version = pm.getInstanceVersion()
-    major, minor = int(version[0]), int(version[2])
-
-    jq = 'collective.js.jquery'
-    if major >= 3 and minor >= 3:
-        #do not install it
-        pass
-    else:
-        if qi.isProductInstallable(jq) and not qi.isProductInstalled(jq):
-            qi.installProduct(jq)
-
-    ui = 'collective.js.jqueryui'
-    if qi.isProductInstallable(ui) and not qi.isProductInstalled(ui):
-        qi.installProduct(ui)
-
 
 def uninstall(portal, reinstall=False):
     """

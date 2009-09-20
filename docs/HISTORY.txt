@@ -1,5 +1,16 @@
 Changelog
 =========
+1.2b3
+-----
+* add user ability to choose image_editor throw portal_memberdata [toutpt]
+
+1.2b2
+-----
+* add i18n on all actions [toutpt]
+* add french translation [toutpt]
+* add support for multiple editors [toutpt]
+* current editor moved to @@imageeditor.alagimp [toutpt]
+* previous editor moved to @@imageeditor.slider [toutpt]
 
 1.2b1
 -----

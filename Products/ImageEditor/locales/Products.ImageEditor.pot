@@ -1,0 +1,81 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Products.ImageEditor\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: JeanMichel FRANCOIS <jeanmichel.francois@makina-corpus.com>\n"
+"Language-Team: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: fr\n"
+"Language-Name: French\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: Products.ImageEditor\n"
+
+msgid "Image Editor"
+msgstr ""
+
+msgid "Crop"
+msgstr ""
+
+msgid "Resize"
+msgstr ""
+
+msgid "Rotate Left"
+msgstr ""
+
+msgid "Rotate Right"
+msgstr ""
+
+msgid "Flip Vertical"
+msgstr ""
+
+msgid "Flip Horizontally"
+msgstr ""
+
+msgid "Blur"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Contrast"
+msgstr ""
+
+msgid "Brightness"
+msgstr ""
+
+msgid "Sharpen"
+msgstr ""
+
+msgid "Sepia"
+msgstr ""
+
+msgid "Drop Shadow"
+msgstr ""
+
+msgid "Save As"
+msgstr " sous"
+
+msgid "Save"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Redo"
+msgstr ""
+
+msgid "Undo"
+msgstr ""
+
+msgid "zoom"
+msgstr ""
+
+msgid "Products.ImageEditor default profile"
+msgstr ""
+
+msgid "Products.ImageEditor Uninstall profile"
+msgstr ""

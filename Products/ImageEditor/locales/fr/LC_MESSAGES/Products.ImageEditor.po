@@ -1,0 +1,81 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Products.ImageEditor\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: JeanMichel FRANCOIS <jeanmichel.francois@makina-corpus.com>\n"
+"Language-Team: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: fr\n"
+"Language-Name: French\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: Products.ImageEditor\n"
+
+msgid "Image Editor"
+msgstr "Editeur d'image"
+
+msgid "Crop"
+msgstr "Couper"
+
+msgid "Resize"
+msgstr "Redimensionner"
+
+msgid "Rotate Left"
+msgstr "Tourner à gauche"
+
+msgid "Rotate Right"
+msgstr "Tourner à droite"
+
+msgid "Flip Vertical"
+msgstr "Retourner verticallement"
+
+msgid "Flip Horizontally"
+msgstr "Retourner horizontallement"
+
+msgid "Blur"
+msgstr "Flou"
+
+msgid "Compress"
+msgstr "Compresser"
+
+msgid "Contrast"
+msgstr "Contraste"
+
+msgid "Brightness"
+msgstr "Luminosité"
+
+msgid "Sharpen"
+msgstr "Colorier"
+
+msgid "Sepia"
+msgstr "Sépia"
+
+msgid "Drop Shadow"
+msgstr "Ombre"
+
+msgid "Save As"
+msgstr "Sauvegarder sous"
+
+msgid "Save"
+msgstr "Sauvegarder"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Redo"
+msgstr "Annuler"
+
+msgid "Undo"
+msgstr "Refaire"
+
+msgid "zoom"
+msgstr "zoom"
+
+msgid "Products.ImageEditor default profile"
+msgstr "Products.ImageEditor installation par défaut"
+
+msgid "Products.ImageEditor Uninstall profile"
+msgstr "Products.ImageEditor desinstallation"

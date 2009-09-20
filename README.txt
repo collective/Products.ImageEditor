@@ -22,11 +22,15 @@ Roadmap
 =======
 
 * I18N
+* get back old UIs
+* Override the Archetype's ImageWidget to add link to the image editor (only in widget edit mode ?)
+* Categorize actions (effects, transformations, colors)
+* Migration from 1.1 to 1.2
 
 Dependencies
 ============
 
-* collective.js.jquery (profile not applied for Plone >= 3.3)
+* collective.js.jquery
 * collective.js.jqueryui
 
 Contributors

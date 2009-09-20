@@ -16,7 +16,7 @@ class CropAction(BaseImageEditorAction):
     options = form.FormFields(INoOptions)
     name = u"Crop"
     description = u"Crop the image."
-    icon = u"++resource++ImageEditor.resources/icons/stock-selection-intersect-16.png"
+    icon = u"++resource++imageeditor/icons/stock-selection-intersect-16.png"
     
     def on_setup(self):
         return """
@@ -154,7 +154,7 @@ class RotateLeftAction(BaseImageEditorAction):
     name = u"Rotate Left"
     description = u"Rotate the image to the left."
     skip_apply = True
-    icon = u"++resource++ImageEditor.resources/icons/stock-rotate-270-16.png"
+    icon = u"++resource++imageeditor/icons/stock-rotate-270-16.png"
     def __call__(self):
         original = self.editor.get_current_image()
         image = original.rotate(90)
@@ -168,7 +168,7 @@ class BlurAction(BaseImageEditorAction):
     options['amount'].custom_widget = SliderWidget
     name = u"Blur"
     description = u"Blur this image."
-    icon = u"++resource++ImageEditor.resources/icons/stock-tool-blur-16.png"
+    icon = u"++resource++imageeditor/icons/stock-tool-blur-16.png"
     
     def __call__(self, amount):
         image = self.editor.get_current_image()
@@ -186,7 +186,7 @@ class SaveImageEditAction(BaseImageEditorAction):
     name = "Save"
     description = "Save the edited image."
     skip_apply = True
-    icon = u"++resource++ImageEditor.resources/icons/apply.png"
+    icon = u"++resource++imageeditor/icons/apply.png"
     
     def on_setup(self):
         return """
@@ -265,7 +265,7 @@ class CancelImageEditAction(BaseImageEditorAction):
     name = "Cancel"
     description = "Cancel the current edit."
     skip_apply = True
-    icon = u"++resource++ImageEditor.resources/icons/process-stop.png"
+    icon = u"++resource++imageeditor/icons/process-stop.png"
     
     def on_setup(self):
         return """
@@ -295,7 +295,7 @@ class RedoAction(BaseImageEditorAction):
     name = u"Redo"
     description = u"Redo the previous undo action."
     skip_apply = True
-    icon = u"++resource++ImageEditor.resources/icons/edit-redo.png"
+    icon = u"++resource++imageeditor/icons/edit-redo.png"
     
     def on_setup(self):
         return """
@@ -326,7 +326,7 @@ class UndoAction(BaseImageEditorAction):
     name = u"Undo"
     description = u"Go back to the previous change."
     skip_apply = True
-    icon = u"++resource++ImageEditor.resources/icons/edit-undo.png"
+    icon = u"++resource++imageeditor/icons/edit-undo.png"
 
     def on_setup(self):
         return """
@@ -356,7 +356,7 @@ class RotateRightAction(BaseImageEditorAction):
     name = u"Rotate Right"
     description = u"Rotate the image right."
     skip_apply = True
-    icon = u"++resource++ImageEditor.resources/icons/stock-rotate-90-16.png"
+    icon = u"++resource++imageeditor/icons/stock-rotate-90-16.png"
     
     def __call__(self):
         original = self.editor.get_current_image()
@@ -371,7 +371,7 @@ class FlipOnVerticalAxisAction(BaseImageEditorAction):
     name = u"Flip Vertical"
     description = u"Flip the image on vertically."
     skip_apply = True
-    icon = u"++resource++ImageEditor.resources/icons/stock-tool-rotate-16.png"
+    icon = u"++resource++imageeditor/icons/stock-tool-rotate-16.png"
     
     def __call__(self):
         original = self.editor.get_current_image()
@@ -386,7 +386,7 @@ class CompressAction(BaseImageEditorAction):
     options['amount'].custom_widget = SliderWidget
     name = u"Compress"
     description = u"Compress this image to make it lower quality."
-    icon = u"++resource++ImageEditor.resources/icons/stock-template-16.png"
+    icon = u"++resource++imageeditor/icons/stock-template-16.png"
 
     def __call__(self, amount):
         image = self.editor.get_current_image().convert('RGB') # if it is a png, convert it...
@@ -399,7 +399,7 @@ class ContrastAction(BaseImageEditorAction):
     options['amount'].custom_widget = SliderWidget
     name = u"Contrast"
     description = u"Change the contrast of the image."
-    icon = u"++resource++ImageEditor.resources/icons/stock-tool-contrast-16.png"
+    icon = u"++resource++imageeditor/icons/stock-tool-contrast-16.png"
     
     def __call__(self, amount):
         image = self.editor.get_current_image()
@@ -415,7 +415,7 @@ class BrightnessAction(BaseImageEditorAction):
     options['amount'].custom_widget = SliderWidget
     name = u"Brightness"
     description = u"Change the brightness of the image."
-    icon = u"++resource++ImageEditor.resources/icons/stock-tool-brightness-16.png"
+    icon = u"++resource++imageeditor/icons/stock-tool-brightness-16.png"
     
     def __call__(self, amount):
         image = self.editor.get_current_image()
@@ -433,7 +433,7 @@ class SharpenAction(BaseImageEditorAction):
     options['amount'].custom_widget = SliderWidget
     name = u"Sharpen"
     description = u"Sharpen the image."
-    icon = u"++resource++ImageEditor.resources/icons/stock-tool-colorize-16.png"
+    icon = u"++resource++imageeditor/icons/stock-tool-colorize-16.png"
     
     def __call__(self, amount):
         image = self.editor.get_current_image()
@@ -449,7 +449,7 @@ class FlipOnHorizontalAxisAction(BaseImageEditorAction):
     name = u"Flip Horizontally"
     description = u"Flip the image on the horizontal axis."
     skip_apply = True
-    icon = u"++resource++ImageEditor.resources/icons/stock-tool-flip-16.png"
+    icon = u"++resource++imageeditor/icons/stock-tool-flip-16.png"
     
     def __call__(self):
         original = self.editor.get_current_image()
@@ -463,7 +463,7 @@ class ResizeAction(BaseImageEditorAction):
     options = form.FormFields(INoOptions)
     name = u"Resize"
     description = u"Resize the image.."
-    icon = u"++resource++ImageEditor.resources/icons/stock-resize-16.png"
+    icon = u"++resource++imageeditor/icons/stock-resize-16.png"
     
     def on_setup(self):
         return """
@@ -568,7 +568,7 @@ class DropShadowAction(BaseImageEditorAction):
     options = form.FormFields(IDropShadowOptions)
     name = u"Drop Shadow"
     description = u"Adds a drop shadow to the image."
-    icon = u"++resource++ImageEditor.resources/icons/stock-transparency-16.png"
+    icon = u"++resource++imageeditor/icons/stock-transparency-16.png"
     
     def __call__(self, offset_x, offset_y, background_color, shadow_color, border, iterations):
         image = self.editor.get_current_image().convert('RGB') #convert to png if it isn't--shadow won't work without this.

@@ -29,20 +29,22 @@ for path in sys.path:
     if 'Products.ImageEditor' in path:
         BASE_DIR = path
 
-import Products.ImageEditor, collective.js.jqueryui
+import Products.ImageEditor, collective.js.jqueryui, collective.js.jquery
 
 @onsetup
 def setUp():
     fiveconfigure.debug_mode = True
     zcml.load_config('configure.zcml', Products.ImageEditor)
+    zcml.load_config('configure.zcml', collective.js.jquery)
     zcml.load_config('configure.zcml', collective.js.jqueryui)
     fiveconfigure.debug_mode = False
-    ztc.installPackage('Products.ImageEditor')
+    ztc.installProduct('ImageEditor')
+    ztc.installPackage('collective.js.jquery')
     ztc.installPackage('collective.js.jqueryui')
 
 setUp()
 
-ptc.setupPloneSite(products=('Products.ImageEditor', 'collective.js.jqueryui'))
+ptc.setupPloneSite(extension_profiles=('Products.ImageEditor:default',))
 
 class ImageEditorTestCase(ptc.PloneTestCase):
     """
@@ -77,8 +79,7 @@ class ImageEditorTestCase(ptc.PloneTestCase):
         return image
     
     def uninstall(self):
-        getToolByName(self.portal, 'portal_quickinstaller').uninstallProducts(['Products.ImageEditor'])
-        Install.uninstall(self.portal)
+        getToolByName(self.portal, 'portal_quickinstaller').uninstallProducts(['ImageEditor'])
     
     def getEditor(self, context):
         return ImageEditorAdapter(context)

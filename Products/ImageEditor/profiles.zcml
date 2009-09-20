@@ -5,7 +5,7 @@
 
     <genericsetup:registerProfile
         name="default"
-        title="Image Editor"
+        title="Products.ImageEditor default profile"
         directory="profiles/default"
         description='Extension profile ImageEditor.'
         provides="Products.GenericSetup.interfaces.EXTENSION"
@@ -14,7 +14,7 @@
     
     <genericsetup:registerProfile
         name="uninstall"
-        title="Image Editor Uninstall"
+        title="Products.ImageEditor Uninstall profile"
         directory="profiles/uninstall"
         description='Uninstall profile for Image Editor.'
         provides="Products.GenericSetup.interfaces.EXTENSION"

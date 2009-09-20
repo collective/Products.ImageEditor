@@ -1,131 +1,12 @@
 from Products.ATContentTypes.interface.image import IImageContent
-from OFS.SimpleItem import SimpleItem
-from zope.publisher.interfaces.browser import IBrowserPublisher
-from zope.interface import implements
-from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from time import gmtime, strftime
-from Products.ImageEditor.interfaces.imageeditor import IImageEditorAdapter, \
-     IImageEditorUtility, IImageEditorContext, IImageEditorActionContext
 from Products.CMFCore.utils import getToolByName
-from Products.ImageEditor.meta.zcml import get_actions, get_action_class, get_action_names
-from zope.formlib import form
+from Products.Five.browser import BrowserView
+from Products.ImageEditor.interfaces import *
+from Products.ImageEditor.meta.zcml import *
+from Products.ImageEditor.utils import *
 from plone.memoize.view import memoize
-from Products.ImageEditor.utils import generate_random_url, get_image_information, json
-
-class Edit(BrowserView):
-    
-    template = ViewPageTemplateFile('imageeditor.pt')
-    
-    def __init__(self, context, request):
-        super(BrowserView, self).__init__(context, request)
-        
-        self.editor = IImageEditorAdapter(self.context)
-        self.actions = [(name, action.class_(self.context)) for name, action in get_actions()]
-        
-    def get_buttons(self):
-        html = ''
-        
-        for name, action in self.actions:
-            html += """
-<input class="edit-button" 
-       id="%(normal_name)s-button" 
-       type="button" 
-       name="%(normal_name)s"
-       alt="%(title)s"
-       style="background-image: url(%(icon)s);"
-       value="%(name)s" 
-/>
-            """ % {
-                'name' : action.name,
-                'normal_name' : name,
-                'icon' : action.icon,
-                'title' : action.description
-            }
-            
-        return html
-    
-    def get_options(self):
-        html = ''
-        
-        for name, action in self.actions:
-            html += '<div class="image-edit-action" id="%s-options">' % name
-            widgets = form.setUpInputWidgets(
-                action.options, 
-                name,
-                self.context,
-                self.request,
-                ignore_request=True
-            )
-            
-            for widget in widgets:
-                html += """
-<div class="edit-option">
-    <label class="formQuestion" for="%s.%s">%s</label>
-    <div class="formHelp">%s</div>
-    %s
-</div>
-                """ % (
-                    name,
-                    widget.name,
-                    widget.context.title.default,
-                    widget.context.description.default,
-                    widget()
-                )
-            
-            if not action.skip_apply:
-                html += """
-<input type="button" id="%(name)s-apply-button" 
-       class="image-edit-apply-button" name="%(name)s" 
-       value="Apply" 
-/>
-                """ % {'name': name}
-            
-            html += '</div>'
-            
-        return html
-    
-    def setup_js(self):
-        setup_js = []
-        
-        for name, action in self.actions:
-            js = action.on_setup()
-            if js:
-                setup_js.append(js)
-
-        return """
-var IMAGE_INFORMATION = %s;
-(function($){
-$(document).ready(function(){
-
-%s
-
-});
-})(jQuery);
-        """ % (json(get_image_information(self.editor)), '\n'.join(setup_js))
-        
-    def custom_action_parameters(self):
-        params = []
-        
-        for name, action in self.actions:
-            ap = action.action_parameters()
-            if ap:
-                params.append("ACTION_PARAMETERS['%s'] = %s;" % (name, ap))
-        
-        return """
-var ACTION_PARAMETERS = {};
-%s    
-        """ % '\n'.join(params)
-        
-    @memoize
-    def image_url(self):
-        """
-        This is used because sometimes browsers cache images that may have been edited
-        """
-        return generate_random_url(self.context)
-    
-    def __call__(self):
-        return self.template()
+from time import gmtime, strftime
+from zope.interface import implements
 
 class ShowCurrentEdit(BrowserView):
     """
@@ -144,7 +25,8 @@ class ShowCurrentEdit(BrowserView):
         resp.setHeader('Last-Modified', strftime('%a, %d %b %Y %H:%M:%S +0000', gmtime()))
         resp.write(imagedata)
         return ''
-    
+
+
 class ImageEditorActionExecute(BrowserView):
     
     def get_args_from_request(self, action):
@@ -155,7 +37,6 @@ class ImageEditorActionExecute(BrowserView):
                 args[key.split('.')[1]] = self.request.get(key)
                 
         return args
-        
     
     def __call__(self, action_name):
         #get action instance
@@ -167,6 +48,7 @@ class ImageEditorActionExecute(BrowserView):
         result['previous_action'] = action_name
         
         return json(result)
+
 
 class ImageEditorUtility(BrowserView):
     """Traversable utility for image editor
@@ -186,4 +68,4 @@ class ImageEditorUtility(BrowserView):
 
         return IImageContent.providedBy(self.context) and \
                 not pm.isAnonymousUser() and \
-                request.get('ACTUAL_URL').endswith('@@editor')
+                '/@@imageeditor.' in request.get('ACTUAL_URL')
