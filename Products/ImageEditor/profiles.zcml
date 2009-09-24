@@ -5,7 +5,7 @@
 
     <genericsetup:registerProfile
         name="default"
-        title="Products.ImageEditor default profile"
+        title="Image Editor"
         directory="profiles/default"
         description='Extension profile ImageEditor.'
         provides="Products.GenericSetup.interfaces.EXTENSION"

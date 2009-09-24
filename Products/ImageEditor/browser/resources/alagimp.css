@@ -80,8 +80,8 @@ div#buttons input{
 	cursor:pointer;
 	border: 2px solid gray;
 	background-color: #f1f1f1;
-    margin:1px 5px 0 0;
-    padding:0 0 5px 16px;
+    margin:3px 5px 0 0;
+    padding:0 0 3px 16px;
 }
 
 div#buttons input:hover, .image-edit-apply-button:hover{
@@ -94,8 +94,8 @@ input.edit-button{
 	padding: 0 0 0 10px;
 	cursor:pointer;
 	float:left;
-	width:100%;
-	height:20px;
+	width:90%;
+	height:15px;
 	margin: 0 0 2px 0;
 }
 
