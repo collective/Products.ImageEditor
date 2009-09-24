@@ -1,5 +1,10 @@
 Changelog
 =========
+1.2rc1
+------
+* fixed css
+* change install profile title
+
 1.2b3
 -----
 * add user ability to choose image_editor throw portal_memberdata [toutpt]

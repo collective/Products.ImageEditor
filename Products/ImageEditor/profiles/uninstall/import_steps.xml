@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<import-steps>
+
+  <import-step id="Products.ImageEditor.uninstall"
+               version="1"
+               handler="Products.ImageEditor.importexport.uninstall_import"
+               title="Image Editor: Various cleanup to be done when removing the product.">
+
+  </import-step>
+
+</import-steps>

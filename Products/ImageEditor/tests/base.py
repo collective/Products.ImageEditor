@@ -18,7 +18,6 @@ from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase.layer import PloneSite
 from Products.PloneTestCase.layer import onsetup
 from Products.CMFCore.utils import getToolByName
-from Products.ImageEditor.Extensions import Install
 
 from zope.app import zapi
 from zope.configuration import xmlconfig
@@ -79,7 +78,8 @@ class ImageEditorTestCase(ptc.PloneTestCase):
         return image
     
     def uninstall(self):
-        getToolByName(self.portal, 'portal_quickinstaller').uninstallProducts(['ImageEditor'])
+        setup_tool = getToolByName(self.portal, 'portal_setup')
+        setup_tool.runAllImportStepsFromProfile('profile-Products.ImageEditor:uninstall')
     
     def getEditor(self, context):
         return ImageEditorAdapter(context)
@@ -87,20 +87,7 @@ class ImageEditorTestCase(ptc.PloneTestCase):
     def getImageEditorAdapter(self):
         image = self.getImageContentType()
         return ImageEditorAdapter(image)
-       
-    def imagesEqual(self, comparedImageFileName, imageEditor):
-        imageEditor.save_edit()
-        imageEditor.get_current_image().save(self.getImagePath(comparedImageFileName))
-        
-        imgfile = self.getImage(comparedImageFileName)
-        
-        image_diff = ImageChops.difference(imgfile, imageEditor.get_current_image()).getbbox()
-        
-        #self.failUnless(image_diff[0] == 0 and image_diff[1] == 0)
-        
-        #doesn't ever work...  Why aren't images the same??
-        #self.failUnless(image_diff is None)
-        
+               
     def getOriginal(self):
         return self.getImage('original.jpg')
         

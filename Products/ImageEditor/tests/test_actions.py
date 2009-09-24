@@ -96,7 +96,28 @@ class TestActions(base.ImageEditorTestCase):
         border = 8
         iterations = 3
         action(offset_x, offset_y, background_color, shadow_color, border, iterations)
-
+        
+    def test_save_as_image(self):
+        image = self.image[0]
+        action = SaveAsImageEditAction(image)
+        title = "foobar"
+        _type = "Image"
+        res = action(_type, title)
+        
+        self.failUnless(title in self.portal.objectIds())
+        self.failUnless(res['new_type_location'] == "%s/%s/edit" % (self.portal.absolute_url(), title))
+        self.failUnless(self.portal['foobar'].portal_type == "Image")
+    
+    def test_save_as_news_item(self):
+        image = self.image[0]
+        action = SaveAsImageEditAction(image)
+        title = "foobar"
+        _type = "News Item"
+        res = action(_type, title)
+        
+        self.failUnless(title in self.portal.objectIds())
+        self.failUnless(res['new_type_location'] == "%s/%s/edit" % (self.portal.absolute_url(), title))
+        self.failUnless(self.portal['foobar'].portal_type == "News Item")
 
 def test_suite():
     suite = unittest.TestSuite()
