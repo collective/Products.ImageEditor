@@ -5,7 +5,6 @@ from zope.configuration.fields import Tokens, Path, Bool, PythonIdentifier
 from zope.configuration.fields import MessageID
 from zope.schema import Text, TextLine, Id
 from zope.security.zcml import Permission
-from zope.app.component.back35 import LayerField
 from zope.app.publisher.browser.fields import MenuField
 
 from Products.ImageEditor.interfaces.actions import IImageEditorAction
