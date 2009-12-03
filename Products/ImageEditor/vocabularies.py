@@ -9,10 +9,16 @@ from Products.Archetypes.ArchetypeTool import _types as registered_types
 class ImageContentTypeVocabulary(object):
     implements(IVocabularyFactory)
 
-    def __call__(self, context):    
+    def __call__(self, context):
         type_values = registered_types.values()
         impl_image = lambda x : IImageContent.implementedBy(x['klass'])
         image_types = [v['klass'].portal_type for v in type_values if impl_image(v)]
+
+        # remove duplicates when several types have the same content type
+        # even if they are not installed at the same time
+        image_types = []
+        [image_types.append(i) for i in _image_types if not image_types.count(i)]
+
         items = [SimpleTerm(i, i , i) for i in image_types]
         return SimpleVocabulary(items)
 
