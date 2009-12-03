@@ -10,7 +10,7 @@ dep_file = open(os.path.join('Products', 'ImageEditor', 'dependencies.txt'))
 dependencies.extend([ d.strip('\n').strip() for d in dep_file.readlines() ])
 
 setup(name='Products.ImageEditor',
-      version='1.2rc1',
+      version='1.2rc2',
       description="A product that adds an editor tab to ATImage and News Item so you can rotate, flip, blur, compress, contrast, brightness, sharpen, add drop shadows, crop, resize an image.",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),

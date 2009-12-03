@@ -1,11 +1,13 @@
 Changelog
 =========
 
-1.2rc2
-------
+
+1.2rc2 ~ December 3, 2009
+-------------------------
 * fix duplicates when several types have the same content type in
   ImageContentTypeVocabulary, even if they are not installed at the same time
   [Sylvain Boureliou]
+* added brazilian translation
 
 1.2rc1
 ------

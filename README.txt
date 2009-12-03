@@ -34,3 +34,5 @@ Dependencies
 Contributors
 ============
 * Jean-Michel FRANCOIS
+* Davi Lima
+* Sylvain Boureliou
