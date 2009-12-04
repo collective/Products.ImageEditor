@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.2rc3 ~ December 4, 2009
+-------------------------
+* emergency fix for vocabulary as last fix had a syntax error...
+  should have been tested.
+  [vangheem]
 
 1.2rc2 ~ December 3, 2009
 -------------------------

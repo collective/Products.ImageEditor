@@ -16,10 +16,10 @@ class ImageContentTypeVocabulary(object):
 
         # remove duplicates when several types have the same content type
         # even if they are not installed at the same time
-        image_types = []
-        [image_types.append(i) for i in _image_types if not image_types.count(i)]
+        _image_types = []
+        [_image_types.append(i) for i in image_types if image_types.count(i) == 1]
 
-        items = [SimpleTerm(i, i , i) for i in image_types]
+        items = [SimpleTerm(i, i , i) for i in _image_types]
         return SimpleVocabulary(items)
 
 ImageContentTypeVocabularyFactory = ImageContentTypeVocabulary()
