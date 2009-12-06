@@ -1,2 +1,0 @@
-collective.js.jquery
-collective.js.jqueryui
