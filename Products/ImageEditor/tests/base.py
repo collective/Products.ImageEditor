@@ -53,10 +53,16 @@ class ImageEditorTestCase(ptc.PloneTestCase):
         
     def getImageContentType(self):
         try:
-            id = self.portal.invokeFactory(type_name="Image", id="testimage")
+            images_folder = self.portal.invokeFactory(type_name="Folder", id="images_folder")
+        except Exception:
+            images_folder = "images_folder"
+        
+        try:
+            
+            id = self.portal['images_folder'].invokeFactory(type_name="Image", id="testimage")
         except Exception:
             id = 'testimage'
-        image = self.portal[id]
+        image = self.portal[images_folder][id]
         image.setTitle('test')
         #(Pdb) p context.getField('image').get(context)
         #<Image at /plone/bug-mantis-01.png/image>

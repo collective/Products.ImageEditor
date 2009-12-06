@@ -238,24 +238,23 @@ on('after_image_reload').accomplish(redirect);
         create the new type, pass along the url to the client and then
         the javascript will redirect the browser
         """
-        context = self.editor.context
-        portal = getToolByName(context, 'portal_url').getPortalObject()
+        parent = self.editor.context.getParentNode()
         
         new_id = orig_id = queryUtility(IURLNormalizer).normalize(title)
         
         count = 1
-        while new_id in portal.objectIds():
+        while new_id in parent.objectIds():
             new_id = orig_id + "-" + str(count)
             count += count
         
-        portal.invokeFactory(
+        parent.invokeFactory(
             type_to_save_as,
             new_id,
             title = title,
             image = self.editor.get_current_image_data()
         )
         
-        return {'new_type_location' : portal.absolute_url() + "/" + new_id + "/edit"}
+        return {'new_type_location' : parent.absolute_url() + "/" + new_id + "/edit"}
         
 class CancelImageEditAction(BaseImageEditorAction):
     implements(IImageEditorAction)

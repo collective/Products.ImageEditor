@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.2
+---
+* The save as action now saves to the parent of original image
+  instead of to the root of the site.
+  [vangheem]
+
 1.2rc3 ~ December 4, 2009
 -------------------------
 * emergency fix for vocabulary as last fix had a syntax error...
