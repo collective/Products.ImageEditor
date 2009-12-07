@@ -1,0 +1,85 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Products.ImageEditor\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"PO-Revision-Date: 2009-12-05 16:28+0100\n"
+"Last-Translator: Espen Moe-Nilssen <espen@medialog,no>\n"
+"Language-Team: Norwegian <espen@medialog.no>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: no\n"
+"Language-Name: Norsk\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"X-Is-Fallback-For: nb nb-no no-bok\n"
+"Domain: Products.ImageEditor\n"
+"X-Poedit-Language: Norwegian Bokmal\n"
+"X-Poedit-Country: NORWAY\n"
+
+msgid "Image Editor"
+msgstr "billedredigerer"
+
+msgid "Crop"
+msgstr "Beskjær"
+
+msgid "Resize"
+msgstr "Forandre størrelse"
+
+msgid "Rotate Left"
+msgstr "Roter mot venstre"
+
+msgid "Rotate Right"
+msgstr "Roter mot høyre"
+
+msgid "Flip Vertical"
+msgstr "Speilvend vertikalt"
+
+msgid "Flip Horizontally"
+msgstr "Speilvend horisontalt"
+
+msgid "Blur"
+msgstr "Blur"
+
+msgid "Compress"
+msgstr "Komrimer"
+
+msgid "Contrast"
+msgstr "Kontrast"
+
+msgid "Brightness"
+msgstr "Brightness"
+
+msgid "Sharpen"
+msgstr "Skarpstill"
+
+msgid "Sepia"
+msgstr "Sepia"
+
+msgid "Drop Shadow"
+msgstr "Skyggeeffekt"
+
+msgid "Save As"
+msgstr "Lagre som"
+
+msgid "Save"
+msgstr "Lagre"
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Redo"
+msgstr "Gjør om igjen"
+
+msgid "Undo"
+msgstr "Undo"
+
+msgid "zoom"
+msgstr "zoom"
+
+msgid "Products.ImageEditor default profile"
+msgstr "Products.ImageEditor default profil"
+
+msgid "Products.ImageEditor Uninstall profile"
+msgstr "Products.ImageEditor avinstaller"
+
