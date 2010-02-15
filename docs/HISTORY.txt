@@ -3,9 +3,16 @@ Changelog
 
 1.2
 ---
+
 * The save as action now saves to the parent of original image
   instead of to the root of the site.
   [vangheem]
+
+* Clicking the imageeditor tab in IE6/IE7 does not bring up edit dialogs.
+  http://plone.org/products/products-imageeditor/issues/4
+  [Jeff Kunce]
+
+
 
 1.2rc3 ~ December 4, 2009
 -------------------------

@@ -183,14 +183,23 @@ $(document).ready(function(){
         }
     });
     
+    var window_width, window_height;
+    if(window.innerWidth!=undefined){
+        window_width = window.innerWidth;
+        window_height = window.innerHeight;
+    }else{
+        window_width = document.documentElement.clientWidth;
+        window_height = document.documentElement.clientHeight;
+    }    
+    
     $("#image-container").dialog({
         autoOpen:true,
         resizable:true,
         modal: false,
         draggable: true,
         title: "Image",
-        width:window.innerWidth - 280,
-        height:window.innerHeight - 40,
+        width:window_width - 280,
+        height:window_height - 40,
         position:[250, 10]
     });
     
