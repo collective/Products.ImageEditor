@@ -13,7 +13,7 @@ class TestSetup(ImageEditorTestCase):
 
     def test_js_added(self):
         pjavascripts = getToolByName(self.portal, 'portal_javascripts')
-        self.failUnless('++resource++jquery.imgareaselect-0.8.min.js' in [js.getId() for js in pjavascripts.getResources()])
+        self.failUnless('++resource++jquery.imgareaselect-0.8.min.js' not in [js.getId() for js in pjavascripts.getResources()])
 
     def test_should_install_collective_js_jqueryui(self):
         qi = getToolByName(self.portal, 'portal_quickinstaller')

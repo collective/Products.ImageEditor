@@ -12,7 +12,9 @@ Changelog
   http://plone.org/products/products-imageeditor/issues/4
   [Jeff Kunce]
 
-
+* Remove unneeded javascript entry in portal_javascripts and updated
+  uninstall profile
+  [vangheem]
 
 1.2rc3 ~ December 4, 2009
 -------------------------
