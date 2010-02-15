@@ -238,6 +238,9 @@ on('after_image_reload').accomplish(redirect);
         create the new type, pass along the url to the client and then
         the javascript will redirect the browser
         """
+        if not title:
+            title = self.editor.context.Title()
+            
         parent = self.editor.context.getParentNode()
         
         new_id = orig_id = queryUtility(IURLNormalizer).normalize(title)

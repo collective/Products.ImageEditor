@@ -4,6 +4,7 @@ from Products.ATContentTypes.interface.image import IImageContent
 from Products.ImageEditor.interfaces import IImageEditorAdapter
 from PIL import Image, ImageFilter, ImageEnhance
 from cStringIO import StringIO
+from Acquisition import aq_inner
 
 class ImageEditorAdapter(object):
     """context.getField('image').get(context) -> Field Image
@@ -16,7 +17,7 @@ class ImageEditorAdapter(object):
     adapts(IImageContent)
     
     def __init__(self, context):
-        self.context = context
+        self.context = aq_inner(context)
 
         if not hasattr(context, 'stack_pos'):
             self.pos = 0
