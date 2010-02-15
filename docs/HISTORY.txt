@@ -12,6 +12,8 @@ Changelog
   http://plone.org/products/products-imageeditor/issues/4
   [Jeff Kunce]
 
+* added upgrade step for all versions to 1.2.
+
 * Remove unneeded javascript entry in portal_javascripts and updated
   uninstall profile
   [vangheem]

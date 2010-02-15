@@ -19,6 +19,7 @@
 	<include package=".adapters" />
 	
    	<include file="profiles.zcml" />
+	<include file="upgrades.zcml" />
 
     <utility
       component=".vocabularies.ImageContentTypeVocabularyFactory"

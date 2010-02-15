@@ -21,4 +21,13 @@
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     />
 
+	<genericsetup:registerProfile
+        name="upgrade_to_1_2"
+        title="Products.ImageEditor upgrade profile"
+        directory="profiles/upgrade_to_1_2"
+        description='Upgrade to 1.2 profile for Image Editor.'
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    />
+
 </configure>
