@@ -2,7 +2,7 @@ from zope.interface import implements
 from zope.component import adapts
 from Products.ATContentTypes.interface.image import IImageContent
 from Products.ImageEditor.interfaces import IImageEditorAdapter
-from PIL import Image, ImageFilter, ImageEnhance
+from PIL import Image
 from cStringIO import StringIO
 from Acquisition import aq_inner
 

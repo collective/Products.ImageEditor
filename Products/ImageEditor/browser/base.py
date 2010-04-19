@@ -1,6 +1,5 @@
 from plone.memoize.view import memoize
 from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.ImageEditor.interfaces.imageeditor import IImageEditorAdapter
 from Products.ImageEditor.meta.zcml import get_actions
 from Products.ImageEditor.utils import generate_random_url, get_image_information, json

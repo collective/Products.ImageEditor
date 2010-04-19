@@ -1,5 +1,4 @@
 import unittest
-from cStringIO import StringIO
 from Products.ImageEditor.tests import base
 from Products.ImageEditor.actions.actions import *
 
@@ -19,7 +18,7 @@ class TestActions(base.ImageEditorTestCase):
         action(x1, y1, x2, y2)
 
     def test_rotateLeft(self):
-        action = RotateLeftAction(self.image)()
+        RotateLeftAction(self.image)()
     
     def test_blur(self):
         action = BlurAction(self.image)
@@ -30,19 +29,19 @@ class TestActions(base.ImageEditorTestCase):
         SaveImageEditAction(self.image)()
 
     def test_cancel(self):
-        action = CancelImageEditAction(self.image)()
+        CancelImageEditAction(self.image)()
 
     def test_redo(self):
         RedoAction(self.image)()
 
     def test_undo(self):
-        action = UndoAction(self.image)()
+        UndoAction(self.image)()
 
     def test_rotateRight(self):
-        action = RotateRightAction(self.image)()
+        RotateRightAction(self.image)()
 
     def test_flipVertical(self):
-        action = FlipOnVerticalAxisAction(self.image)()
+        FlipOnVerticalAxisAction(self.image)()
 
     def test_compress(self):
         action = CompressAction(self.image)
