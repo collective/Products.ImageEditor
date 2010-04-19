@@ -29,6 +29,9 @@ setup(name='Products.ImageEditor',
         'collective.js.jquery',
         'collective.js.jqueryui'
       ],
+      extras_require = { 'test': [
+        'collective.testcaselayer',
+      ]},
       entry_points="""
       # -*- Entry points: -*-
       """,
