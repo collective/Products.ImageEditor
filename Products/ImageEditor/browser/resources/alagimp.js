@@ -200,7 +200,11 @@ $(document).ready(function(){
         title: "Image",
         width:window_width - 280,
         height:window_height - 40,
-        position:[250, 10]
+        position:[250, 10],
+        close: function(event, ui){
+            $("#image-editor-controls").close();
+            $("#zoom-slider-wrapper").close();
+        },
     });
     
     $("#image-editor-controls").dialog({
@@ -210,7 +214,11 @@ $(document).ready(function(){
         draggable:true,
         title: "Actions",
         width:200,
-        position:[10, 10]
+        position:[10, 10],
+        close: function(event, ui){
+            $("#image-container").close();
+            $("#zoom-slider-wrapper").close();
+        },
     });
     
     /*
@@ -228,7 +236,11 @@ $(document).ready(function(){
         width:235,
         height: 100,
         minHeight: 100,
-        position:['left', 'bottom']
+        position:['left', 'bottom'],
+        close: function(event, ui){
+            $("#image-container").close();
+            $("#image-editor-controls").close();
+        },
     });
     
     $("#zoom-slider").slider({
