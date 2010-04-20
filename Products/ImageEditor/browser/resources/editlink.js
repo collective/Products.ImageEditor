@@ -8,7 +8,10 @@ $(document).ready(function(){
         click(function(event) {
             event.preventDefault();
             var url = window.location.pathname + '/../@@imageeditor.inline';
-            $('#image-editor').load(encodeURI(url));
+            $('#image-editor').load(encodeURI(url), function() {
+                $('.ui-dialog-titlebar-close').attr('href',
+                    window.location.href);
+            });
         });
 
 });
