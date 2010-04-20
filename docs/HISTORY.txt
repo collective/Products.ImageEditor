@@ -4,6 +4,9 @@ Changelog
 1.3 - Unreleased
 ----------------
 
+* Allow invocation of editor directly from Archetypes' image widget.
+  [witsch]
+
 * Move the zoom slider into the actions dialog.
   [witsch]
 
