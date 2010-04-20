@@ -4,7 +4,7 @@ Changelog
 1.3 - Unreleased
 ----------------
 
-* Closing one jquery dialog now closes all.
+* Closing the main editor dialog also closes the controls and zoom slider.
   [witsch]
 
 * Add buildout and update test setup to use `collective.testcaselayer`.

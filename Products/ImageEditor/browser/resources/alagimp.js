@@ -215,9 +215,9 @@ $(document).ready(function(){
         title: "Actions",
         width:200,
         position:[10, 10],
-        close: function(event, ui){
-            $("#image-container").close();
-            $("#zoom-slider-wrapper").close();
+        dialogClass: "image-editor-controls",
+        open: function(event, ui) {
+            $(".image-editor-controls .ui-dialog-titlebar-close").hide();
         },
     });
     
@@ -237,9 +237,9 @@ $(document).ready(function(){
         height: 100,
         minHeight: 100,
         position:['left', 'bottom'],
-        close: function(event, ui){
-            $("#image-container").close();
-            $("#image-editor-controls").close();
+        dialogClass: "zoom-slider-wrapper",
+        open: function(event, ui) {
+            $(".zoom-slider-wrapper .ui-dialog-titlebar-close").hide();
         },
     });
     
