@@ -198,9 +198,9 @@ $(document).ready(function(){
         modal: false,
         draggable: true,
         title: "Image",
-        width:window_width - 280,
+        width:window_width - 250,
         height:window_height - 40,
-        position:[250, 10],
+        position:[225, 10],
         close: function(event, ui){
             $("#image-editor-controls").close();
             $("#zoom-slider-wrapper").close();

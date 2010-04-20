@@ -4,6 +4,9 @@ Changelog
 1.3 - Unreleased
 ----------------
 
+* Move the zoom slider into the actions dialog.
+  [witsch]
+
 * Closing the main editor dialog also closes the controls and zoom slider.
   [witsch]
 
