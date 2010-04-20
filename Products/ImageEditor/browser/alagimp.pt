@@ -21,7 +21,7 @@
     <div id="image-editor-controls" class="slide-in" i18n:domain="Products.ImageEditor">
       <div id="buttons">
         <input class="edit-button" i18n:attributes="value" tal:repeat="button view/get_buttons"
-        tal:attributes="id button/id; name button/name; value button/value; alt button/alt; style button/style"/>
+        tal:attributes="id button/id; name button/name; value button/value; alt button/alt; style button/style | nothing"/>
       </div>
       <div id="options" tal:content="structure view/get_options" />
       <div id="status-bar-information">

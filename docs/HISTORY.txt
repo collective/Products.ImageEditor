@@ -4,6 +4,9 @@ Changelog
 1.3 - Unreleased
 ----------------
 
+* Fix style information for missing action icons.
+  [witsch]
+
 * Allow invocation of editor directly from Archetypes' image widget.
   [witsch]
 

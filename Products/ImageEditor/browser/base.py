@@ -29,13 +29,15 @@ class Base(BrowserView):
     def get_buttons(self):
         buttons = []
         for name, action in self.actions:
-            buttons.append({
+            info = {
                 'id': name + '-button',
                 'value' : action.name,
                 'name' : name,
                 'alt' : action.description,
-                'style' : "background-image: url(%s)"%action.icon
-            })
+            }
+            if action.icon:
+                info['style'] = "background-image: url(%s)" % action.icon
+            buttons.append(info)
         return buttons
 
     def get_options(self):
