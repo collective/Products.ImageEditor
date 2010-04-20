@@ -205,6 +205,7 @@ $(document).ready(function(){
             $("#image-editor-controls").close();
             $("#zoom-slider-wrapper").close();
         },
+        closeOnEscape: false,
     });
     
     $("#image-editor-controls").dialog({
@@ -219,6 +220,7 @@ $(document).ready(function(){
         open: function(event, ui) {
             $(".image-editor-controls .ui-dialog-titlebar-close").hide();
         },
+        closeOnEscape: false,
     });
     
     /*
@@ -241,6 +243,7 @@ $(document).ready(function(){
         open: function(event, ui) {
             $(".zoom-slider-wrapper .ui-dialog-titlebar-close").hide();
         },
+        closeOnEscape: false,
     });
     
     $("#zoom-slider").slider({
