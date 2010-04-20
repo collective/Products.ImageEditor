@@ -229,23 +229,6 @@ $(document).ready(function(){
     
     */
     
-    $("#zoom-slider-wrapper").dialog({
-        autoOpen:true,
-        resizable:false,
-        modal:false,
-        draggable:true,
-        title: "Zoom",
-        width:235,
-        height: 100,
-        minHeight: 100,
-        position:['left', 'bottom'],
-        dialogClass: "zoom-slider-wrapper",
-        open: function(event, ui) {
-            $(".zoom-slider-wrapper .ui-dialog-titlebar-close").hide();
-        },
-        closeOnEscape: false,
-    });
-    
     $("#zoom-slider").slider({
         min:0,
         max:100,
