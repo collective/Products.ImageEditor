@@ -21,7 +21,6 @@ Features
 Roadmap / Proposal
 ==================
 
-* Override the Archetype's ImageWidget to add link to the image editor (only in widget edit mode ?)
 * Categorize actions (effects, transformations, colors)
 
 Dependencies
