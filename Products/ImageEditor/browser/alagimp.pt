@@ -8,10 +8,10 @@
 <metal:js fill-slot="javascript_head_slot">
   <metal:head define-macro="head">
   <link href="" type="text/css" rel="stylesheet" tal:attributes="href string:$portal_url/++resource++imageeditor/alagimp.css"/>
-  <script type="text/javascript" tal:content="structure view/setup_js" />
-  <script type="text/javascript" tal:content="structure view/custom_action_parameters" />
   <script type="text/javascript" src="" tal:attributes="src string:$portal_url/++resource++imageeditor/imgareaselect-0.8/jquery.imgareaselect-0.8.min.js"></script>
   <script type="text/javascript" src="" tal:attributes="src string:$portal_url/++resource++imageeditor/alagimp.js"></script>
+  <script type="text/javascript" tal:content="structure view/setup_js" />
+  <script type="text/javascript" tal:content="structure view/custom_action_parameters" />
   </metal:head>
 </metal:js>
 <body>

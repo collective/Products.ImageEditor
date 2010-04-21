@@ -11,6 +11,7 @@ $(document).ready(function(){
             $('#image-editor').load(encodeURI(url), function() {
                 $('.ui-dialog-titlebar-close').attr('href',
                     window.location.href);
+                fire('editor_loaded', IMAGE_INFORMATION);
             });
         });
 

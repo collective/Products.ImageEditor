@@ -37,6 +37,9 @@ function fire(event, arg){
     }
 }
 
+
+var IMAGE_INFORMATION = { height: "-", width: "-", size: "" };
+
 function set_status_bar_info(){
     (function($){
     $('#status-bar-information').html(
