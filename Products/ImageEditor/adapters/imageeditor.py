@@ -39,7 +39,10 @@ class ImageEditorAdapter(object):
             return self.context.getPrimaryField()
 
     def set_field(self, name):
-        self.storage['fieldname'] = name
+        storage = self.storage
+        if not name == storage.get('fieldname'):
+            storage['fieldname'] = name     # set name before clear
+            self.clear_edits()
 
     def get_image_data(self):
         return str(self.field.get(self.context).data)

@@ -25,7 +25,6 @@ class Base(BrowserView):
         super(BrowserView, self).__init__(context, request)
         self.editor = IImageEditorAdapter(self.context)
         self.editor.set_field(request.get('field'))
-        self.editor.clear_edits()       # clear undo stack on invocation
         self.actions = [(name, action.class_(self.context)) for name, action in get_actions()]
 
     def get_buttons(self):
