@@ -36,7 +36,8 @@ class ImageEditorAdapter(object):
         if fieldname:
             return self.context.getField(fieldname)
         else:
-            return self.context.getPrimaryField()
+            return self.context.getField('image') or \
+                self.context.getPrimaryField()
 
     def set_field(self, name):
         storage = self.storage
