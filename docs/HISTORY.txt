@@ -4,6 +4,10 @@ Changelog
 1.3 - Unreleased
 ----------------
 
+* Add support for multiple image fields on the same object and use sessions
+  to store editing data like the undo stack etc.
+  [witsch]
+
 * Clear undo stack on invocation to avoid stale images after an update and
   prepare multi-field support.
   [witsch]

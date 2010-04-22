@@ -7,7 +7,8 @@ $(document).ready(function(){
         append('&mdash; <a href="">Edit this image</a>').
         click(function(event) {
             event.preventDefault();
-            var url = window.location.pathname + '/../@@imageeditor.inline';
+            var field = $(this).parent()[0].id.replace('archetypes-fieldname-', '')
+            var url = window.location.pathname + '/../@@imageeditor.inline?field=' + field;
             $('#image-editor').load(encodeURI(url), function() {
                 $('.ui-dialog-titlebar-close').attr('href',
                     window.location.href);

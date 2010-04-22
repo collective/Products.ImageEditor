@@ -8,6 +8,7 @@ from Products.ImageEditor.adapters.imageeditor import ImageEditorAdapter
 
 
 ptc.setupPloneSite()
+ptc.utils.setupCoreSessions()
 
 
 class ImageEditorTestCase(ptc.PloneTestCase):
@@ -17,6 +18,9 @@ class ImageEditorTestCase(ptc.PloneTestCase):
 
     def afterSetUp(self):
         self.setRoles(('Manager',))
+        # put SESSION object into REQUEST
+        sdm = self.app.session_data_manager
+        self.app.REQUEST.set('SESSION', sdm.getSessionData())
 
     def getImageContentType(self):
         try:

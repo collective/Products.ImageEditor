@@ -18,18 +18,6 @@ class TestSetup(ImageEditorTestCase):
         qi = getToolByName(self.portal, 'portal_quickinstaller')
         self.failUnless(qi.isProductInstalled('collective.js.jqueryui'))
 
-    def test_should_remove_stack_pos_on_uninstall_profile(self):
-        image = self.getImageContentType()
-        image.stack_pos = 5
-        self.uninstall()
-        self.assertEquals(hasattr(image, 'stack_pos'), False)
-        
-    def test_should_remove_unredostack_on_uninstall_profile(self):
-        image = self.getImageContentType()
-        image.unredostack = 5
-        self.uninstall()
-        self.assertEquals(hasattr(image, 'unredostack'), False)
-        
     def test_should_remove_action_object_on_uninstall_profile(self):
         self.uninstall()
         actionTool = self.portal.portal_actions
