@@ -4,6 +4,10 @@ Changelog
 1.3 - Unreleased
 ----------------
 
+* Clear undo stack on invocation to avoid stale images after an update and
+  prepare multi-field support.
+  [witsch]
+
 * Fix style information for missing action icons.
   [witsch]
 
