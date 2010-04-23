@@ -53,3 +53,6 @@ def upgrade_to_1_2(context):
     context.runAllImportStepsFromProfile(to_1_2_profile)
     context.runAllImportStepsFromProfile(default_profile)
     
+def upgrade_to_1_3(context):
+    context.runImportStepFromProfile(default_profile, 'jsregistry')
+    
