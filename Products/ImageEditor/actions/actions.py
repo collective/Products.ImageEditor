@@ -137,7 +137,6 @@ on('after_image_zoom_change').accomplish(function(params){
     
     def __call__(self, x1, y1, x2, y2):
         image = self.editor.get_current_image()
-        format = image.format
         box = (int(float(x1)), int(float(y1)), int(float(x2)), int(float(y2)))
         new_image = image.crop(box=box)
         new_image.load()
@@ -558,7 +557,6 @@ on('after_image_zoom_change').accomplish(function(params){
     
     def __call__(self, width, height):
         image = self.editor.get_current_image()
-        format = image.format
         size=(int(float(width)), int(float(height)))
         new_image = image.resize(size, Image.ANTIALIAS)
         

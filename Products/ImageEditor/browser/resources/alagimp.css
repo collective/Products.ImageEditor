@@ -1,7 +1,6 @@
 
 .ui-slider {
     background-color: #E1D9F5;
-    width:200px;
     margin-top:6px;
 }
 
@@ -157,9 +156,8 @@ div#menuHandle{
 }
 
 #zoom-slider-wrapper{
-    padding:0;
-    margin:0;
-    height:100px;
+    border-top: 1px #ccc solid;
+    padding: 0.5em 0 0.5em 0;
 }
 
 .image-edit-apply-button:hover{
@@ -169,6 +167,8 @@ div#menuHandle{
 
 #status-bar-information{
     text-align:center;
+    clear: both;
+    padding: 1em 0;
 }
 
 #content{

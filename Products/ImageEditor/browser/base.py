@@ -1,6 +1,5 @@
 from plone.memoize.view import memoize
 from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.ImageEditor.interfaces.imageeditor import IImageEditorAdapter
 from Products.ImageEditor.meta.zcml import get_actions
 from Products.ImageEditor.utils import generate_random_url, get_image_information, json
@@ -25,18 +24,21 @@ class Base(BrowserView):
     def __init__(self, context, request):
         super(BrowserView, self).__init__(context, request)
         self.editor = IImageEditorAdapter(self.context)
+        self.editor.set_field(request.get('field'))
         self.actions = [(name, action.class_(self.context)) for name, action in get_actions()]
 
     def get_buttons(self):
         buttons = []
         for name, action in self.actions:
-            buttons.append({
+            info = {
                 'id': name + '-button',
                 'value' : action.name,
                 'name' : name,
                 'alt' : action.description,
-                'style' : "background-image: url(%s)"%action.icon
-            })
+            }
+            if action.icon:
+                info['style'] = "background-image: url(%s)" % action.icon
+            buttons.append(info)
         return buttons
 
     def get_options(self):

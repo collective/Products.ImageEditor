@@ -1,0 +1,9 @@
+<metal:block use-macro="here/global_defines/macros/defines" />
+
+<tal:def define="v python: here.restrictedTraverse('@@imageeditor.alagimp');
+                 macros python: v.index.macros;">
+  <link href="" type="text/css" rel="stylesheet"
+        tal:attributes="href string:$portal_url/++resource++imageeditor/inline.css"/>
+  <metal:main metal:use-macro="macros/head" />
+  <metal:main metal:use-macro="macros/main" />
+</tal:def>

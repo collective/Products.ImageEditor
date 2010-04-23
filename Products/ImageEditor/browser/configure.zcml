@@ -21,6 +21,15 @@
 
     <browser:page
         for="Products.ATContentTypes.interface.image.IImageContent"
+        name="imageeditor.inline"
+        class=".alagimp.AlaGimp"
+        template="inline.pt"
+        permission="Products.ImageEditor.edit"
+        layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
+    />
+
+    <browser:page
+        for="Products.ATContentTypes.interface.image.IImageContent"
         name="imageeditor.slider"
         class=".slider.Slider"
         template="slider.pt"
@@ -28,7 +37,7 @@
         layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
     />
 
-	<browser:page
+    <browser:page
         for="Products.ATContentTypes.interface.image.IImageContent"
         name="currenteditedimage.jpg"
         class=".imageeditor.ShowCurrentEdit"

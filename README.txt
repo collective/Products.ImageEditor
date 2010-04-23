@@ -21,7 +21,6 @@ Features
 Roadmap / Proposal
 ==================
 
-* Override the Archetype's ImageWidget to add link to the image editor (only in widget edit mode ?)
 * Categorize actions (effects, transformations, colors)
 
 Dependencies
@@ -37,6 +36,7 @@ This product depends on collective.js.jqueryui which is great, but not always re
 
 Contributors
 ============
+* Andreas Zeidler
 * Jean-Michel FRANCOIS
 * Davi Lima
 * Sylvain Boureliou

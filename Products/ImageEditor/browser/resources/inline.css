@@ -1,0 +1,16 @@
+body #content {
+    height: auto;
+    width: auto;
+    overflow: none;
+}
+
+#visual-portal-wrapper {
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+}
+
+#resize-to-fields, #aspect-ratio-selector {
+    display: none;
+}

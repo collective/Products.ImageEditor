@@ -1,7 +1,3 @@
-from Products.PloneTestCase.PloneTestCase import PloneTestCase
-from zope.testing import doctestunit
-from zope.component import testing
-from Testing import ZopeTestCase as ztc
 from Products.ImageEditor.tests.base import ImageEditorTestCase
 from Products.ImageEditor.actions import *
 

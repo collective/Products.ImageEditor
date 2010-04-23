@@ -1,10 +1,13 @@
+from persistent.dict import PersistentDict
+from persistent.list import PersistentList
 from zope.interface import implements
 from zope.component import adapts
 from Products.ATContentTypes.interface.image import IImageContent
 from Products.ImageEditor.interfaces import IImageEditorAdapter
-from PIL import Image, ImageFilter, ImageEnhance
+from PIL import Image
 from cStringIO import StringIO
 from Acquisition import aq_inner
+
 
 class ImageEditorAdapter(object):
     """context.getField('image').get(context) -> Field Image
@@ -19,27 +22,45 @@ class ImageEditorAdapter(object):
     def __init__(self, context):
         self.context = aq_inner(context)
 
-        if not hasattr(context, 'stack_pos'):
-            self.pos = 0
-        if not hasattr(context, 'unredostack'):
-            self.stack = [self.get_image_data()]
+    @property
+    def storage(self):
+        session = self.context.REQUEST.SESSION      # evil! :)
+        if not session.has_key('imageeditor'):
+            session['imageeditor'] = PersistentDict()
+        return session['imageeditor']
+
+    @property
+    def field(self):
+        storage = self.storage
+        fieldname = storage.get('fieldname')
+        if fieldname:
+            return self.context.getField(fieldname)
+        else:
+            return self.context.getField('image') or \
+                self.context.getPrimaryField()
+
+    def set_field(self, name):
+        storage = self.storage
+        if not name == storage.get('fieldname'):
+            storage['fieldname'] = name     # set name before clear
+            self.clear_edits()
 
     def get_image_data(self):
-        data = str(self.context.getField('image').get(self.context))
-        return data
+        return str(self.field.get(self.context).data)
 
-    #UNDO REDO STUFF
+    # UNDO REDO STUFF
     def get_pos(self):
-        return self.context.stack_pos
+        return self.storage.setdefault('position', 0)
     def set_pos(self, value):
-        self.context.stack_pos = value
+        self.storage['position'] = value
     pos = property(get_pos, set_pos)
 
-    def get_stack(self):
-        return self.context.unredostack
-    def set_stack(self, value):
-        self.context.unredostack = value
-    stack = property(get_stack, set_stack)
+    @property
+    def stack(self):
+        stack = self.storage.setdefault('unredostack', PersistentList())
+        if not stack:
+            stack.append(self.get_image_data())
+        return stack
 
     def undo(self):
         if self.can_undo():
@@ -56,19 +77,11 @@ class ImageEditorAdapter(object):
         return self.pos + 1 < len(self.stack)
 
     def clear_edits(self, bottom=None):
-        if hasattr(self.context, 'stack_pos'):
-            delattr(self.context, 'stack_pos')
-
-        if hasattr(self.context, 'unredostack'):
-            delattr(self.context, 'unredostack')
-
-        self.pos = 0
-
         if bottom is None:
             bottom = self.get_image_data()
-
-        self.stack = [bottom]
-
+        stack = self.stack
+        stack[:] = [bottom]
+        self.pos = 0
 
     def do(self, value):
         if self.can_redo():
@@ -81,7 +94,7 @@ class ImageEditorAdapter(object):
     def save_edit(self):
         image_data = self.get_current_image_data()
         
-        field = self.context.getField('image')
+        field = self.field
         mimetype = field.getContentType(self.context)
         filename = field.getFilename(self.context)
         

@@ -6,30 +6,32 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="Products.ImageEditor">
 <metal:js fill-slot="javascript_head_slot">
+  <metal:head define-macro="head">
   <link href="" type="text/css" rel="stylesheet" tal:attributes="href string:$portal_url/++resource++imageeditor/alagimp.css"/>
   <script type="text/javascript" src="" tal:attributes="src string:$portal_url/++resource++imageeditor/imgareaselect-0.8/jquery.imgareaselect-0.8.min.js"></script>
   <script type="text/javascript" src="" tal:attributes="src string:$portal_url/++resource++imageeditor/alagimp.js"></script>
-  <script tal:content="structure view/setup_js" />
-  <script tal:content="structure view/custom_action_parameters" />
+  <script type="text/javascript" tal:content="structure view/setup_js" />
+  <script type="text/javascript" tal:content="structure view/custom_action_parameters" />
+  </metal:head>
 </metal:js>
 <body>
 <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
 
-    <div id="zoom-slider-wrapper" class="slide-in" i18n:domain="Products.ImageEditor">
-      <div class="imageeditor-slider" id="zoom-slider">
-        <p i18n:translate="">zoom</p>
-        <div class="ui-slider-handle"></div>
-        <input type="hidden" id="zoom-slider-value" name="zoom-slider-value" value="1"/>
-      </div>
-    </div>
     <div id="image-editor-controls" class="slide-in" i18n:domain="Products.ImageEditor">
       <div id="buttons">
         <input class="edit-button" i18n:attributes="value" tal:repeat="button view/get_buttons"
-        tal:attributes="id button/id; name button/name; value button/value; alt button/alt; style button/style"/>
+        tal:attributes="id button/id; name button/name; value button/value; alt button/alt; style button/style | nothing"/>
       </div>
       <div id="options" tal:content="structure view/get_options" />
       <div id="status-bar-information">
+      </div>
+      <div id="zoom-slider-wrapper">
+        <div class="imageeditor-slider" id="zoom-slider">
+          <p i18n:translate="">zoom</p>
+          <div class="ui-slider-handle"></div>
+          <input type="hidden" id="zoom-slider-value" name="zoom-slider-value" value="1"/>
+        </div>
       </div>
     </div>
     <div id="image-container">

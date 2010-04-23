@@ -37,6 +37,9 @@ function fire(event, arg){
     }
 }
 
+
+var IMAGE_INFORMATION = { height: "-", width: "-", size: "" };
+
 function set_status_bar_info(){
     (function($){
     $('#status-bar-information').html(
@@ -198,9 +201,14 @@ $(document).ready(function(){
         modal: false,
         draggable: true,
         title: "Image",
-        width:window_width - 280,
+        width:window_width - 250,
         height:window_height - 40,
-        position:[250, 10]
+        position:[225, 10],
+        close: function(event, ui){
+            $("#image-editor-controls").close();
+            $("#zoom-slider-wrapper").close();
+        },
+        closeOnEscape: false,
     });
     
     $("#image-editor-controls").dialog({
@@ -210,7 +218,12 @@ $(document).ready(function(){
         draggable:true,
         title: "Actions",
         width:200,
-        position:[10, 10]
+        position:[10, 10],
+        dialogClass: "image-editor-controls",
+        open: function(event, ui) {
+            $(".image-editor-controls .ui-dialog-titlebar-close").hide();
+        },
+        closeOnEscape: false,
     });
     
     /*
@@ -218,18 +231,6 @@ $(document).ready(function(){
     Slider Setup
     
     */
-    
-    $("#zoom-slider-wrapper").dialog({
-        autoOpen:true,
-        resizable:false,
-        modal:false,
-        draggable:true,
-        title: "Zoom",
-        width:235,
-        height: 100,
-        minHeight: 100,
-        position:['left', 'bottom']
-    });
     
     $("#zoom-slider").slider({
         min:0,
