@@ -42,23 +42,26 @@ class ImageEditorAdapter(object):
 
     def set_field(self, name):
         storage = self.storage
-        if not name == storage.get('fieldname'):
-            storage['fieldname'] = name     # set name before clear
-            self.clear_edits()
+        storage['fieldname'] = name     # set name before clear
+
+    @property
+    def field_data(self):
+        storage = self.storage
+        return storage.setdefault(storage.get('fieldname'), PersistentDict())
 
     def get_image_data(self):
         return str(self.field.get(self.context).data)
 
     # UNDO REDO STUFF
     def get_pos(self):
-        return self.storage.setdefault('position', 0)
+        return self.field_data.setdefault('position', 0)
     def set_pos(self, value):
-        self.storage['position'] = value
+        self.field_data['position'] = value
     pos = property(get_pos, set_pos)
 
     @property
     def stack(self):
-        stack = self.storage.setdefault('unredostack', PersistentList())
+        stack = self.field_data.setdefault('unredostack', PersistentList())
         if not stack:
             stack.append(self.get_image_data())
         return stack
