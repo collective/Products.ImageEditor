@@ -27,14 +27,8 @@ class ImageEditorAdapter(object):
         session = self.context.REQUEST.SESSION      # evil! :)
         if not session.has_key('imageeditor'):
             session['imageeditor'] = PersistentDict()
-        
         editordata = session['imageeditor']
-        uid = self.context.UID()
-        
-        if not editordata.has_key(uid):
-            editordata[uid] = PersistentDict()
-        
-        return editordata[uid]
+        return editordata.setdefault(self.context.UID(), PersistentDict())
 
     @property
     def field(self):
