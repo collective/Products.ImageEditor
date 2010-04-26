@@ -4,6 +4,9 @@ Changelog
 1.4 - Unreleased
 ----------------
 
+* Minor templating fixes for Plone 4 compatibility.
+  [witsch]
+
 * Support per-field undo stacks.
   [witsch]
 

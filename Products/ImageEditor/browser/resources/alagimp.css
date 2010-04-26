@@ -83,6 +83,10 @@ div#buttons input{
     padding:0 0 3px 16px;
 }
 
+body #image-editor-controls {
+    font-size: 10pt;
+}
+
 div#buttons input:hover, .image-edit-apply-button:hover{
     background-color:white;
     border: 2px solid black;
