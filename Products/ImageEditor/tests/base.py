@@ -1,4 +1,4 @@
-from cStringIO import StringIO
+from StringIO import StringIO
 from os.path import dirname, join
 from PIL import Image
 from Products.PloneTestCase import ptc
