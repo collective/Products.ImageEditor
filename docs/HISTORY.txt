@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.4 - Unreleased
-----------------
+1.4 - Released April 27, 2010
+-----------------------------
 
 * Minor templating fixes for Plone 4 compatibility.
   [witsch]
