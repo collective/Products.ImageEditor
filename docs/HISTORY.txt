@@ -4,6 +4,8 @@ Changelog
 1.5 - Unreleased
 ----------------
 
+* Disable "Image Editor" content action/tab by default.
+  [witsch]
 
 1.4 - Released April 27, 2010
 -----------------------------
