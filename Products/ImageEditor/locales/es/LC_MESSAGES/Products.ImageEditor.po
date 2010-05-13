@@ -1,0 +1,81 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Products.ImageEditor\n"
+"POT-Creation-Date: 2010-05-13 16:19 +1\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: Diego Municio <d.municio@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: es\n"
+"Language-Name: Spanish\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: Products.ImageEditor\n"
+
+msgid "Image Editor"
+msgstr "Editor de Imágenes"
+
+msgid "Crop"
+msgstr "Recortar"
+
+msgid "Resize"
+msgstr "Redimensionar"
+
+msgid "Rotate Left"
+msgstr "Girar hacia la Izquierda"
+
+msgid "Rotate Right"
+msgstr "Girar hacia la Derecha"
+
+msgid "Flip Vertical"
+msgstr "Volteo Vertical"
+
+msgid "Flip Horizontally"
+msgstr "Volteo Horizontal"
+
+msgid "Blur"
+msgstr "Desenfoque"
+
+msgid "Compress"
+msgstr "Comprimir"
+
+msgid "Contrast"
+msgstr "Contraste"
+
+msgid "Brightness"
+msgstr "Brillo"
+
+msgid "Sharpen"
+msgstr "Enfocar bordes"
+
+msgid "Sepia"
+msgstr "Sepia"
+
+msgid "Drop Shadow"
+msgstr "Arrojar Sombra"
+
+msgid "Save As"
+msgstr "Guardar como"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Redo"
+msgstr "Rehacer"
+
+msgid "Undo"
+msgstr "Deshacer"
+
+msgid "zoom"
+msgstr "zoom"
+
+msgid "Products.ImageEditor default profile"
+msgstr ""
+
+msgid "Products.ImageEditor Uninstall profile"
+msgstr ""
