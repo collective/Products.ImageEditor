@@ -1,8 +1,4 @@
 <?xml version="1.0"?>
 <metadata>
-    <version>7</version>
-  <dependencies>
-    <dependency>profile-collective.js.jquery:default</dependency>
-    <dependency>profile-collective.js.jqueryui:default</dependency>
-  </dependencies>
+    <version>1.6</version>
 </metadata>

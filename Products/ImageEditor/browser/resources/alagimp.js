@@ -104,14 +104,15 @@ $(document).ready(function(){
         }
 
         $("#kss-spinner").show()
-        $.getJSON(
-            $('base').attr('href') + '/@@execute?action_name=' + name, 
-            params, 
-            function(data, status){
+        $.ajax({
+            url : $('base').attr('href') + '/@@execute?action_name=' + name, 
+            data : params, 
+            success: function(data, status, response){
+                data = eval('(' + data + ')');
                 reload_image(data);
                 $("#kss-spinner").hide()
             }
-        );
+        });
         
         $('div.image-edit-action').hide();
         $('input.active').removeClass('active');

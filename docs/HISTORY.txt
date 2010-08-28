@@ -4,6 +4,8 @@ Changelog
 1.6 - Unreleased
 ----------------
 
+* stop using collective.js.jqueryui
+
 
 1.5 - Released May 5, 2010
 --------------------------

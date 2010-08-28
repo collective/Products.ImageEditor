@@ -6,8 +6,7 @@
 
     <five:registerPackage package="." />
 
-    <include package="collective.js.jquery" />
-    <include package="collective.js.jqueryui" />
+    <include package="collective.javascript.jqueryui" />
     <i18n:registerTranslations directory="locales" />
     <permission
         id="Products.ImageEditor.edit"
