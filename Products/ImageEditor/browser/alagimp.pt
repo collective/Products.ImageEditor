@@ -11,7 +11,7 @@
   <script type="text/javascript" src="" tal:attributes="src string:${context/portal_url}/++resource++collective.javascript.jqueryui/js/jquery-1.4.2.min.js"></script>
   <script type="text/javascript" src="" tal:attributes="src string:${context/portal_url}/++resource++imageeditor/imgareaselect-0.8/jquery.imgareaselect-0.8.min.js"></script>
 	
-	<link href="" type="text/css" rel="stylesheet" tal:attributes="href string:${context/portal_url}/http://localhost:8080/ie/headerImage.jpeg/++resource++collective.javascript.jqueryui/css/ui-lightness/jquery-ui.css"/>
+	<link href="" type="text/css" rel="stylesheet" tal:attributes="href string:${context/portal_url}/http://localhost:8080/ie/headerImage.jpeg/++resource++collective.javascript.jqueryui/css/hot-sneaks/jquery-ui.css"/>
   <script type="text/javascript" src="" tal:attributes="src string:${context/portal_url}/++resource++collective.javascript.jqueryui/js/jquery-ui.min.js"></script>
 
   <script type="text/javascript" src="" tal:attributes="src string:${context/portal_url}/++resource++imageeditor/alagimp.js"></script>

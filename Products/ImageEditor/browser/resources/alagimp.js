@@ -208,6 +208,7 @@ $(document).ready(function(){
         close: function(event, ui){
             $("#image-editor-controls").close();
             $("#zoom-slider-wrapper").close();
+            alert('hi');
         },
         closeOnEscape: false,
     });
@@ -308,6 +309,10 @@ $(document).ready(function(){
     on(['before_action_execute']).accomplish(function(name){
         $('#status-bar-information').html("applying...");
     });
+    on(['editor_loaded']).accomplish(function(data){
+        $('#source-image').attr('src', data.url);
+    });
+    
     
     fire('editor_loaded', IMAGE_INFORMATION);
 });

@@ -107,7 +107,7 @@ input.enabled{
     border-color:black;
     cursor:pointer;
 }
-input.disabled{
+div#buttons input.disabled{
     border-color:black;
     background-color:gray;
     color:black;

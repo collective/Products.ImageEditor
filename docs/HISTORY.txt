@@ -1,10 +1,14 @@
 Changelog
 =========
 
-1.6 - Unreleased
-----------------
+1.6 - Released August 29, 2010
+------------------------------
 
 * stop using collective.js.jqueryui
+  [vangheem]
+
+* fixed some styling issues
+  [vangheem]
 
 
 1.5 - Released May 5, 2010
