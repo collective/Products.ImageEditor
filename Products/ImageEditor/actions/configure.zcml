@@ -1,29 +1,29 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope"
-   	xmlns:image="http://namespaces.zope.org/image"
-    i18n_domain="Products.ImageEditor">
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:image="http://namespaces.zope.org/image"
+  i18n_domain="Products.ImageEditor">
 
-    <image:edit-action class=".actions.CropAction" />
-    <image:edit-action class=".actions.ResizeAction" />
-    
-    <image:edit-action class=".actions.RotateLeftAction" />
-    <image:edit-action class=".actions.RotateRightAction" />
-    <image:edit-action class=".actions.FlipOnVerticalAxisAction" />
-    <image:edit-action class=".actions.FlipOnHorizontalAxisAction" />
-        
-    <image:edit-action class=".actions.BlurAction" />
-    <image:edit-action class=".actions.CompressAction" />
-    <image:edit-action class=".actions.ContrastAction" />
-    <image:edit-action class=".actions.BrightnessAction" />
-    <image:edit-action class=".actions.SharpenAction" />
-    <image:edit-action class=".actions.SepiaAction" />
+  <image:edit-action class=".actions.CropAction" />
+  <image:edit-action class=".actions.ResizeAction" />
+  
+  <image:edit-action class=".actions.RotateLeftAction" />
+  <image:edit-action class=".actions.RotateRightAction" />
+  <image:edit-action class=".actions.FlipOnVerticalAxisAction" />
+  <image:edit-action class=".actions.FlipOnHorizontalAxisAction" />
+      
+  <image:edit-action class=".actions.BlurAction" />
+  <image:edit-action class=".actions.CompressAction" />
+  <image:edit-action class=".actions.ContrastAction" />
+  <image:edit-action class=".actions.BrightnessAction" />
+  <image:edit-action class=".actions.SharpenAction" />
+  <image:edit-action class=".actions.SepiaAction" />
 
-    <image:edit-action class=".actions.DropShadowAction" />
+  <image:edit-action class=".actions.DropShadowAction" />
 
-    <image:edit-action class=".actions.SaveAsImageEditAction" />
-    <image:edit-action class=".actions.SaveImageEditAction" />
-    <image:edit-action class=".actions.CancelImageEditAction" />
-    <image:edit-action class=".actions.RedoAction" />
-    <image:edit-action class=".actions.UndoAction" />
+  <image:edit-action class=".actions.SaveAsImageEditAction" />
+  <image:edit-action class=".actions.SaveImageEditAction" />
+  <image:edit-action class=".actions.CancelImageEditAction" />
+  <image:edit-action class=".actions.RedoAction" />
+  <image:edit-action class=".actions.UndoAction" />
 
 </configure>

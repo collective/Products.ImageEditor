@@ -1,9 +1,7 @@
-<configure
-    xmlns:browser="http://namespaces.zope.org/browser">
+<configure xmlns:browser="http://namespaces.zope.org/browser">
 	
 	<browser:resource
-		name="imageeditor-style.css"
-		file="resources/style.css"
-	/>
+    name="imageeditor-style.css"
+    file="resources/style.css" />
 	
 </configure>

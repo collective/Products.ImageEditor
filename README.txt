@@ -26,8 +26,12 @@ Roadmap / Proposal
 Dependencies
 ============
 
-* collective.javascript.jqueryui
+* collective.js.jqueryui
 
+Warning: on plone3 you should pin the version to 1.7.2.7 because
+of a known bug discused here:
+http://forum.jquery.com/topic/jqueryui-1-8-6-with-jquery-1-3-2-old-one
+http://bugs.jqueryui.com/ticket/6030
 
 Contributors
 ============
