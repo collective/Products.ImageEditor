@@ -27,6 +27,16 @@ class Base(BrowserView):
         self.editor.set_field(request.get('field'))
         self.actions = [(name, action.class_(self.context)) for name, action in get_actions()]
 
+    @memoize
+    @property
+    def jqueryui_installed(self):
+        """
+        if collective.js.jqueryui is installed we don't have to manually
+        include the javascript/css
+        """
+        qi = getToolByName(self.context, 'portal_quickinstaller')
+        return qi.productInstalled('collective.js.jqueryui')
+
     def get_buttons(self):
         buttons = []
         for name, action in self.actions:

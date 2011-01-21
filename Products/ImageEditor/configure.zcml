@@ -1,17 +1,17 @@
 <configure
-  xmlns="http://namespaces.zope.org/zope"
-  xmlns:five="http://namespaces.zope.org/five"
-  xmlns:i18n="http://namespaces.zope.org/i18n"
-  i18n_domain="Products.ImageEditor">
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="Products.ImageEditor">
 
-  <five:registerPackage package="." />
+    <five:registerPackage package="." />
 
-  <include package="collective.js.jqueryui" />
-  <i18n:registerTranslations directory="locales" />
-  
-  <permission
-    id="Products.ImageEditor.edit"
-    title="Product.ImageEditor: Edit Images" />
+    <include package="collective.javascript.jqueryui" />
+    <i18n:registerTranslations directory="locales" />
+    <permission
+        id="Products.ImageEditor.edit"
+        title="Product.ImageEditor: Edit Images"
+        />
     
 	<include package=".meta" />
 	<include package=".actions" />
@@ -19,11 +19,11 @@
 	<include package=".browser" />
 	<include package=".adapters" />
 	
- 	<include file="profiles.zcml" />
+   	<include file="profiles.zcml" />
 	<include file="upgrades.zcml" />
 
-  <utility
-    component=".vocabularies.ImageContentTypeVocabularyFactory"
-    name="plone.app.vocabularies.ImageContentTypes" />
-    
+    <utility
+      component=".vocabularies.ImageContentTypeVocabularyFactory"
+      name="plone.app.vocabularies.ImageContentTypes"
+      />
 </configure>

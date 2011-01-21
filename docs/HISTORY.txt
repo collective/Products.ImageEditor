@@ -1,16 +1,6 @@
 Changelog
 =========
 
-1.6.1 ~ unreleased
-------------------
-
-* use c.js.jqueryui instead of c.javascript.jqueryui
-  don t include javascript by hand in template, let the portal_javascript do its job
-  [toutpt]
-
-* fix tests setup
-  [toutpt]
-
 1.6 - Released August 29, 2010
 ------------------------------
 

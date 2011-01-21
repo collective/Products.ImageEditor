@@ -1,62 +1,73 @@
 <configure
-  xmlns="http://namespaces.zope.org/zope"
-  xmlns:browser="http://namespaces.zope.org/browser">
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
 
-  <browser:page
-    for="Products.ATContentTypes.interface.image.IImageContent"
-    name="imageeditor"
-    class=".base.ImageEditor"
-    permission="Products.ImageEditor.edit"
-    layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer" />
+    <browser:page
+        for="Products.ATContentTypes.interface.image.IImageContent"
+        name="imageeditor"
+        class=".base.ImageEditor"
+        permission="Products.ImageEditor.edit"
+        layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
+    />
 
-  <browser:page
-    for="Products.ATContentTypes.interface.image.IImageContent"
-    name="imageeditor.alagimp"
-    class=".alagimp.AlaGimp"
-    template="alagimp.pt"
-    permission="Products.ImageEditor.edit"
-    layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer" />
+    <browser:page
+        for="Products.ATContentTypes.interface.image.IImageContent"
+        name="imageeditor.alagimp"
+        class=".alagimp.AlaGimp"
+        template="alagimp.pt"
+        permission="Products.ImageEditor.edit"
+        layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
+    />
 
-  <browser:page
-    for="Products.ATContentTypes.interface.image.IImageContent"
-    name="imageeditor.inline"
-    class=".alagimp.AlaGimp"
-    template="inline.pt"
-    permission="Products.ImageEditor.edit"
-    layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer" />
+    <browser:page
+        for="Products.ATContentTypes.interface.image.IImageContent"
+        name="imageeditor.inline"
+        class=".alagimp.AlaGimp"
+        template="inline.pt"
+        permission="Products.ImageEditor.edit"
+        layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
+    />
 
-  <browser:page
-    for="Products.ATContentTypes.interface.image.IImageContent"
-    name="imageeditor.slider"
-    class=".slider.Slider"
-    template="slider.pt"
-    permission="Products.ImageEditor.edit"
-    layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer" />
+    <browser:page
+        for="Products.ATContentTypes.interface.image.IImageContent"
+        name="imageeditor.slider"
+        class=".slider.Slider"
+        template="slider.pt"
+        permission="Products.ImageEditor.edit"
+        layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
+    />
 
-  <browser:page
-    for="Products.ATContentTypes.interface.image.IImageContent"
-    name="currenteditedimage.jpg"
-    class=".imageeditor.ShowCurrentEdit"
-    permission="Products.ImageEditor.edit"
-    layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer" />
+    <browser:page
+        for="Products.ATContentTypes.interface.image.IImageContent"
+        name="currenteditedimage.jpg"
+        class=".imageeditor.ShowCurrentEdit"
+        permission="Products.ImageEditor.edit"
+        layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
+    />
 
-  <browser:page 
-    name="image-editor-utility"
-    for="*"
-    permission="zope2.View"
-    allowed_interface="Products.ImageEditor.interfaces.imageeditor.IImageEditorUtility"
-    layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
-    class=".imageeditor.ImageEditorUtility" />
+    <browser:page 
+        name="image-editor-utility"
+        for="*"
+        permission="zope2.View"
+        allowed_interface="Products.ImageEditor.interfaces.imageeditor.IImageEditorUtility"
+        layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
+        class=".imageeditor.ImageEditorUtility" 
+    />
        
-  <browser:page 
-    name="execute"
-    for="Products.ATContentTypes.interface.image.IImageContent"
-    permission="Products.ImageEditor.edit"
-    layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
-    class=".imageeditor.ImageEditorActionExecute" />
+    <browser:page 
+        name="execute"
+        for="Products.ATContentTypes.interface.image.IImageContent"
+        permission="Products.ImageEditor.edit"
+        layer="Products.ImageEditor.interfaces.imageeditor.IImageEditorLayer"
+        class=".imageeditor.ImageEditorActionExecute" 
+    />
 
   <browser:resourceDirectory
     name="imageeditor"
     directory="resources" />
-
+  
+  <browser:resource
+    name="jqueryui-ie-all.css"
+    file="collective.js.jqueryui." />
+    
 </configure>
