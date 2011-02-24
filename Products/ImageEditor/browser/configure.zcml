@@ -62,12 +62,9 @@
         class=".imageeditor.ImageEditorActionExecute" 
     />
 
-  <browser:resourceDirectory
-    name="imageeditor"
-    directory="resources" />
-  
-  <browser:resource
-    name="jqueryui-ie-all.css"
-    file="collective.js.jqueryui." />
-    
+    <browser:resourceDirectory
+        name="imageeditor"
+        directory="resources"
+    />
+
 </configure>
