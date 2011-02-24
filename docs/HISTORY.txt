@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.7 - unreleased
+----------------
+
+* Updated French translation.
+  Redo and Undo translations were inversed.
+  [vincentfretin]
+
 1.6 - Released August 29, 2010
 ------------------------------
 
