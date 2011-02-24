@@ -4,6 +4,10 @@ Changelog
 1.7 - unreleased
 ----------------
 
+* Keep "Current image" link behaviour untouched.
+  Previously, clicking the "Current image" link opened the editor.
+  [vincentfretin]
+
 * Updated French translation.
   Redo and Undo translations were inversed.
   [vincentfretin]
