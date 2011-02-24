@@ -14,8 +14,7 @@ class Layer(BasePTCLayer):
         fiveconfigure.debug_mode = False
         # initialize packages...
         installPackage('Products.ImageEditor', quiet=True)
-        installPackage('collective.js.jquery', quiet=True)
-        installPackage('collective.js.jqueryui', quiet=True)
+        installPackage('collective.javascript.jqueryui', quiet=True)
         # quick-install...
         self.addProfile('Products.ImageEditor:default')
 
