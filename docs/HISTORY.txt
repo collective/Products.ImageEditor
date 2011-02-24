@@ -4,7 +4,7 @@ Changelog
 1.7 - unreleased
 ----------------
 
-* Keep "Current image" link behaviour untouched.
+* Keep "Current image" link behavior untouched.
   Previously, clicking the "Current image" link opened the editor.
   [vincentfretin]
 

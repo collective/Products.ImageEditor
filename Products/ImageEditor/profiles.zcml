@@ -7,7 +7,7 @@
         name="default"
         title="Image Editor"
         directory="profiles/default"
-        description='Extension profile ImageEditor.'
+        description='Image Editor Support'
         provides="Products.GenericSetup.interfaces.EXTENSION"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     />

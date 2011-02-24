@@ -1,6 +1,7 @@
 from base import BaseImageEditorAction
 from zope.interface import implements
 from Products.ImageEditor.interfaces.actions import IImageEditorAction
+from Products.ImageEditor import imageeditor_message_factory as _
 from options import INoOptions, IBlurOptions, ICompressOptions, IContrastOptions, \
     IBrightnessOptions, ISharpenOptions, IDropShadowOptions, ISepiaOptions, ISaveAsOptions
 from zope.formlib import form
@@ -14,8 +15,8 @@ class CropAction(BaseImageEditorAction):
     implements(IImageEditorAction)
 
     options = form.FormFields(INoOptions)
-    name = u"Crop"
-    description = u"Crop the image."
+    name = _(u"Crop")
+    description = _(u"Crop the image.")
     icon = u"++resource++imageeditor/icons/stock-selection-intersect-16.png"
     
     def on_setup(self):
@@ -150,8 +151,8 @@ class RotateLeftAction(BaseImageEditorAction):
     
     options = form.FormFields(INoOptions)
     
-    name = u"Rotate Left"
-    description = u"Rotate the image to the left."
+    name = _(u"Rotate Left")
+    description = _(u"Rotate the image to the left.")
     skip_apply = True
     icon = u"++resource++imageeditor/icons/stock-rotate-270-16.png"
     def __call__(self):
@@ -165,8 +166,8 @@ class BlurAction(BaseImageEditorAction):
     
     options = form.FormFields(IBlurOptions)
     options['amount'].custom_widget = SliderWidget
-    name = u"Blur"
-    description = u"Blur this image."
+    name = _(u"Blur")
+    description = _(u"Blur this image.")
     icon = u"++resource++imageeditor/icons/stock-tool-blur-16.png"
     
     def __call__(self, amount):
@@ -182,8 +183,8 @@ class SaveImageEditAction(BaseImageEditorAction):
     
     options = form.FormFields(INoOptions)
     
-    name = "Save"
-    description = "Save the edited image."
+    name = _(u"Save")
+    description = _(u"Save the edited image.")
     skip_apply = True
     icon = u"++resource++imageeditor/icons/apply.png"
     
@@ -218,8 +219,8 @@ class SaveAsImageEditAction(BaseImageEditorAction):
 
     options = form.FormFields(ISaveAsOptions)
     
-    name = "Save As"
-    description = "Save the edited image as another content item."
+    name = _(u"Save As")
+    description = _(u"Save the edited image as another content item.")
     icon = None
 
     def on_setup(self):
@@ -263,8 +264,8 @@ class CancelImageEditAction(BaseImageEditorAction):
 
     options = form.FormFields(INoOptions)
 
-    name = "Cancel"
-    description = "Cancel the current edit."
+    name = _(u"Cancel")
+    description = _(u"Cancel the current edit.")
     skip_apply = True
     icon = u"++resource++imageeditor/icons/process-stop.png"
     
@@ -293,8 +294,8 @@ class RedoAction(BaseImageEditorAction):
     implements(IImageEditorAction)
 
     options = form.FormFields(INoOptions)
-    name = u"Redo"
-    description = u"Redo the previous undo action."
+    name = _(u"Redo")
+    description = _(u"Redo the previous undo action.")
     skip_apply = True
     icon = u"++resource++imageeditor/icons/edit-redo.png"
     
@@ -324,8 +325,8 @@ class UndoAction(BaseImageEditorAction):
     implements(IImageEditorAction)
 
     options = form.FormFields(INoOptions)
-    name = u"Undo"
-    description = u"Go back to the previous change."
+    name = _(u"Undo")
+    description = _(u"Go back to the previous change.")
     skip_apply = True
     icon = u"++resource++imageeditor/icons/edit-undo.png"
 
@@ -354,8 +355,8 @@ class RotateRightAction(BaseImageEditorAction):
     implements(IImageEditorAction)
 
     options = form.FormFields(INoOptions)
-    name = u"Rotate Right"
-    description = u"Rotate the image right."
+    name = _(u"Rotate Right")
+    description = _(u"Rotate the image right.")
     skip_apply = True
     icon = u"++resource++imageeditor/icons/stock-rotate-90-16.png"
     
@@ -369,8 +370,8 @@ class FlipOnVerticalAxisAction(BaseImageEditorAction):
     implements(IImageEditorAction)
 
     options = form.FormFields(INoOptions)
-    name = u"Flip Vertical"
-    description = u"Flip the image on vertically."
+    name = _(u"Flip Vertical")
+    description = _(u"Flip the image on vertically.")
     skip_apply = True
     icon = u"++resource++imageeditor/icons/stock-tool-rotate-16.png"
     
@@ -385,8 +386,8 @@ class CompressAction(BaseImageEditorAction):
 
     options = form.FormFields(ICompressOptions)
     options['amount'].custom_widget = SliderWidget
-    name = u"Compress"
-    description = u"Compress this image to make it lower quality."
+    name = _(u"Compress")
+    description = _(u"Compress this image to make it lower quality.")
     icon = u"++resource++imageeditor/icons/stock-template-16.png"
 
     def __call__(self, amount):
@@ -398,8 +399,8 @@ class ContrastAction(BaseImageEditorAction):
     
     options = form.FormFields(IContrastOptions)
     options['amount'].custom_widget = SliderWidget
-    name = u"Contrast"
-    description = u"Change the contrast of the image."
+    name = _(u"Contrast")
+    description = _(u"Change the contrast of the image.")
     icon = u"++resource++imageeditor/icons/stock-tool-contrast-16.png"
     
     def __call__(self, amount):
@@ -414,8 +415,8 @@ class BrightnessAction(BaseImageEditorAction):
     
     options = form.FormFields(IBrightnessOptions)
     options['amount'].custom_widget = SliderWidget
-    name = u"Brightness"
-    description = u"Change the brightness of the image."
+    name = _(u"Brightness")
+    description = _(u"Change the brightness of the image.")
     icon = u"++resource++imageeditor/icons/stock-tool-brightness-16.png"
     
     def __call__(self, amount):
@@ -432,8 +433,8 @@ class SharpenAction(BaseImageEditorAction):
     
     options = form.FormFields(ISharpenOptions)
     options['amount'].custom_widget = SliderWidget
-    name = u"Sharpen"
-    description = u"Sharpen the image."
+    name = _(u"Sharpen")
+    description = _(u"Sharpen the image.")
     icon = u"++resource++imageeditor/icons/stock-tool-colorize-16.png"
     
     def __call__(self, amount):
@@ -447,8 +448,8 @@ class FlipOnHorizontalAxisAction(BaseImageEditorAction):
     implements(IImageEditorAction)
     
     options = form.FormFields(INoOptions)
-    name = u"Flip Horizontally"
-    description = u"Flip the image on the horizontal axis."
+    name = _(u"Flip Horizontally")
+    description = _(u"Flip the image on the horizontal axis.")
     skip_apply = True
     icon = u"++resource++imageeditor/icons/stock-tool-flip-16.png"
     
@@ -462,8 +463,8 @@ class ResizeAction(BaseImageEditorAction):
     implements(IImageEditorAction)
     
     options = form.FormFields(INoOptions)
-    name = u"Resize"
-    description = u"Resize the image.."
+    name = _(u"Resize")
+    description = _(u"Resize the image..")
     icon = u"++resource++imageeditor/icons/stock-resize-16.png"
     
     def on_setup(self):
@@ -566,8 +567,8 @@ class DropShadowAction(BaseImageEditorAction):
     implements(IImageEditorAction)
     
     options = form.FormFields(IDropShadowOptions)
-    name = u"Drop Shadow"
-    description = u"Adds a drop shadow to the image."
+    name = _(u"Drop Shadow")
+    description = _(u"Adds a drop shadow to the image.")
     icon = u"++resource++imageeditor/icons/stock-transparency-16.png"
     
     def __call__(self, offset_x, offset_y, background_color, shadow_color, border, iterations):
@@ -612,8 +613,8 @@ class SepiaAction(BaseImageEditorAction):
     options['green'].custom_widget = SliderWidget
     options['blue'].custom_widget = SliderWidget
     
-    name = u"Sepia"
-    description = u"Applies the sepia effect to the image."
+    name = _(u"Sepia")
+    description = _(u"Applies the sepia effect to the image.")
     icon = None
     
     def make_linear_ramp(self, white):
