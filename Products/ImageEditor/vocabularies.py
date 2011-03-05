@@ -1,8 +1,9 @@
-from zope.app.schema.vocabulary import IVocabularyFactory
 from zope.interface import implements
+from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from Products.ATContentTypes.interface.image import IImageContent
 from Products.Archetypes.ArchetypeTool import _types as registered_types
+
 
 class ImageContentTypeVocabulary(object):
     implements(IVocabularyFactory)
