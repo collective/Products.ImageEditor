@@ -1,4 +1,13 @@
 from Products.CMFCore.utils import getToolByName
+from Products.ImageEditor.upgrades import set_unintrusive_jqueryui_properties
+
+def install(context):
+    
+    if context.readDataFile('Products.ImageEditor.install.txt') is None:
+        return
+        
+    portal = context.getSite()
+    set_unintrusive_jqueryui_properties(portal)
 
 def uninstall_import(context):
     
@@ -9,13 +18,11 @@ def uninstall_import(context):
     catalog = getToolByName(portal, 'portal_catalog')
     
     images = catalog.searchResults(portal_type=["Image"])
-    
     for image in images:
         image = image.getObject()
         
         if hasattr(image, 'stack_pos'):
             delattr(image, 'stack_pos')
-            
         if hasattr(image, 'unredostack'):
             delattr(image, 'unredostack')
             

@@ -3,7 +3,13 @@
 <tal:def define="v python: here.restrictedTraverse('@@imageeditor.alagimp');
                  macros python: v.index.macros;">
   <link href="" type="text/css" rel="stylesheet"
+        tal:attributes="href string:${context/portal_url}/++resource++jquery-ui-themes/sunburst/jquery-ui-1.8.9.custom.css"/>
+  <link href="" type="text/css" rel="stylesheet"
+        tal:attributes="href string:${context/portal_url}/++resource++jquery-ui-themes/sunburst-patch.css"/>
+  <link href="" type="text/css" rel="stylesheet"
         tal:attributes="href string:${context/portal_url}/++resource++imageeditor/inline.css"/>
+              
+  <script type="text/javascript" src="" tal:attributes="src string:${context/portal_url}/++resource++jquery-ui.min.js"></script>
   <metal:main metal:use-macro="macros/head" />
   <metal:main metal:use-macro="macros/main" />
 </tal:def>

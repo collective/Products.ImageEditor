@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<import-steps>
+  <import-step id="Products.ImageEditor.install"
+               version="1"
+               handler="Products.ImageEditor.importexport.install"
+               title="Image Editor: extra install methods.">
+  </import-step>
+</import-steps>

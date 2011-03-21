@@ -26,7 +26,7 @@ Roadmap / Proposal
 Dependencies
 ============
 
-* collective.javascript.jqueryui
+* collective.js.jqueryui
 
 
 Contributors

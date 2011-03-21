@@ -56,3 +56,28 @@ def upgrade_to_1_2(context):
 def upgrade_to_1_3(context):
     context.runImportStepFromProfile(default_profile, 'jsregistry')
     
+ie_views = ['imageeditor', 'imageeditor.alagimp', 'imageeditor.inline', 'imageeditor.slider']
+def set_unintrusive_jqueryui_properties(portal):
+    pprops = getToolByName(portal, 'portal_properties')
+    jq_props = pprops.jqueryui_properties
+    jq_props.global_include = False
+    jq_props.views_and_templates = tuple(set(jq_props.getProperty('views_and_templates', [])) | set(ie_views))
+    
+def upgrade_to_1_7(context):
+    portal = getToolByName(context, 'portal_url').getPortalObject()
+    qi = getToolByName(portal, 'portal_quickinstaller')
+    
+    if not qi.productInstalled('collective.js.jqueryui'):
+        qi.installProduct('collective.js.jqueryui')
+    else:
+        pprops = getToolByName(portal, 'portal_properties')
+        if 'jqueryui_properties' not in pprops.objectIds():
+            from collective.js.jqueryui.upgrades import upgrade_1891_1892
+            upgrade_1891_1892(context)
+        else:
+            set_unintrusive_jqueryui_properties(portal)
+            
+        
+    
+    
+    

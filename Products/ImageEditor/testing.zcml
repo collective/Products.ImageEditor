@@ -3,6 +3,6 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="Products.ImageEditor">
 
-  <include package="collective.javascript.jqueryui" />
+  <include package="collective.js.jqueryui" />
 
 </configure>

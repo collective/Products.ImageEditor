@@ -11,6 +11,13 @@ Changelog
 * Updated French translation.
   Redo and Undo translations were inversed.
   [vincentfretin]
+  
+* move back to collective.js.jqueryui since it now allows you
+  to only show javascript on certain views.
+  [vangheem]
+  
+* plone 4.1 compatible
+
 
 1.6 - Released August 29, 2010
 ------------------------------
