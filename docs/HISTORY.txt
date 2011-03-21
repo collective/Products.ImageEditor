@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.7 - unreleased
+1.7 - 2011-03-21
 ----------------
 
 * Keep "Current image" link behavior untouched.
