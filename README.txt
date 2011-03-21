@@ -1,6 +1,7 @@
 Introduction
 ============
-Once installed this product adds a "Image Editor" link near the image widget.
+Once installed this product adds a "Image Editor" link near the image widget. 
+You can also manually enable an Image Editor button.
 
 Features
 ========
@@ -17,11 +18,6 @@ Features
 * resize
 * sepia
 * save as another content type.
-
-Roadmap / Proposal
-==================
-
-* Categorize actions (effects, transformations, colors)
 
 Dependencies
 ============
