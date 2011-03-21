@@ -67,15 +67,15 @@ def upgrade_to_1_7(context):
     portal = getToolByName(context, 'portal_url').getPortalObject()
     qi = getToolByName(portal, 'portal_quickinstaller')
     
-    if not qi.productInstalled('collective.js.jqueryui'):
+    if not qi.isProductInstalled('collective.js.jqueryui'):
         qi.installProduct('collective.js.jqueryui')
+        set_unintrusive_jqueryui_properties(portal)
     else:
         pprops = getToolByName(portal, 'portal_properties')
         if 'jqueryui_properties' not in pprops.objectIds():
+            # installed, but not upgraded
             from collective.js.jqueryui.upgrades import upgrade_1891_1892
             upgrade_1891_1892(context)
-        else:
-            set_unintrusive_jqueryui_properties(portal)
             
         
     
