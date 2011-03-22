@@ -21,7 +21,7 @@ function on(events){
                 events = [events];
             }
             for(var i = 0; i < events.length; i++){
-                EVENTS[events[i]].handlers.push(fn);   
+                EVENTS[events[i]].handlers.push(fn);
             }
         }
     };
@@ -43,8 +43,8 @@ var IMAGE_INFORMATION = { height: "-", width: "-", size: "" };
 function set_status_bar_info(){
     (function($){
     $('#status-bar-information').html(
-        IMAGE_INFORMATION.size + " " + 
-        IMAGE_INFORMATION.width + "x" + 
+        IMAGE_INFORMATION.size + " " +
+        IMAGE_INFORMATION.width + "x" +
         IMAGE_INFORMATION.height
     );
     })(jQuery);
@@ -52,7 +52,7 @@ function set_status_bar_info(){
 
 function set_image_size_by_percentage(){
     var percentage = parseFloat(jQuery("#zoom-slider-value").attr('value'));
-    
+
     var w = Math.round(IMAGE_INFORMATION.width*percentage);
     var h = Math.round(IMAGE_INFORMATION.height*percentage);
 
@@ -70,7 +70,7 @@ $(document).ready(function(){
     function reload_image(data){
         fire('before_image_reload', data);
         IMAGE_INFORMATION = data;
-        
+
         var image = $("#source-image");
         var image_container = $("#image-container");
 
@@ -84,7 +84,7 @@ $(document).ready(function(){
     function execute(name){
         fire('before_action_execute', name);
         var params = {};
-        
+
         if(ACTION_PARAMETERS[name] == undefined){
             $("#" + name + "-options input").each(function(){
                 if ($(this).attr('type') != "button"){
@@ -105,18 +105,18 @@ $(document).ready(function(){
 
         $("#kss-spinner").show()
         $.ajax({
-            url : $('base').attr('href') + '/@@execute?action_name=' + name, 
-            data : params, 
+            url : $('base').attr('href') + '/@@execute?action_name=' + name,
+            data : params,
             success: function(data, status, response){
                 data = eval('(' + data + ')');
                 reload_image(data);
                 $("#kss-spinner").hide()
             }
         });
-        
+
         $('div.image-edit-action').hide();
         $('input.active').removeClass('active');
-        
+
         fire('after_action_execute', name);
     }
 
@@ -155,14 +155,14 @@ $(document).ready(function(){
         var current_button = $('input.active');
         var new_options = $("#" + action + "-options");
         var new_button = $(this);
-        
+
         if(current_button.attr('id') == new_button.attr('id')){
             return;
         }
-        
+
         if (apply_button.size() > 0){
             var btn = this;
-            
+
             function show_options(){
                 new_options.show();
                 new_options.dialog('open');
@@ -170,7 +170,7 @@ $(document).ready(function(){
                 new_button.addClass('active');
                 fire('action_button_clicked', btn);
             }
-            
+
             if(current_options.size() == 1){
                 //options already down
                 current_options.removeClass('active');
@@ -186,7 +186,7 @@ $(document).ready(function(){
             fire('action_button_clicked', this);
         }
     });
-    
+
     var window_width, window_height;
     if(window.innerWidth!=undefined){
         window_width = window.innerWidth;
@@ -194,8 +194,8 @@ $(document).ready(function(){
     }else{
         window_width = document.documentElement.clientWidth;
         window_height = document.documentElement.clientHeight;
-    }    
-    
+    }
+
     $("#image-container").dialog({
         autoOpen:true,
         resizable:true,
@@ -212,7 +212,7 @@ $(document).ready(function(){
         },
         closeOnEscape: false,
     });
-    
+
     $("#image-editor-controls").dialog({
         autoOpen:true,
         resizable:false,
@@ -227,13 +227,13 @@ $(document).ready(function(){
         },
         closeOnEscape: false,
     });
-    
+
     /*
-    
+
     Slider Setup
-    
+
     */
-    
+
     $("#zoom-slider").slider({
         min:0,
         max:100,
@@ -241,42 +241,42 @@ $(document).ready(function(){
         change: function(e, ui){
             fire('before_image_zoom_change', [percentage, e, ui]);
             var percentage = ui.value;
-            
+
             if(percentage == 100){ percentage = 1; }
             else if(percentage > 9){ percentage = parseFloat('.' + percentage); }
             else{ percentage = parseFloat('.0' + percentage); }
-            
+
             $("#zoom-slider-value").attr('value', percentage);
             fire('after_image_zoom_change', [percentage, e, ui]);
         }
     });
-    
+
     /*
-    
+
     End Slider Setup
-    
+
     */
-    
+
     /*
-    
+
     Grabber Setup
-    
+
     */
-    
+
     function add_grabber(){
         $('#source-image').css('cursor', 'move');
         $('#source-image').draggable();
     }
-    
+
     function remove_grabber(){
         $('#source-image').css('cursor', 'default');
         $('#source-image').draggable('destroy');
     }
-    
+
     on(['editor_loaded', 'after_image_reload']).accomplish(function(data){
         add_grabber();
     });
-    
+
     on('action_button_clicked').accomplish(function(btn){
         var action_button_id = $(btn).attr('id');
         if(action_button_id == "resize-button" || action_button_id == "crop-button"){
@@ -285,17 +285,17 @@ $(document).ready(function(){
             add_grabber();
         }
     });
-    
+
     /*
-    
+
     End Grabber Setup
-    
+
     */
-    
+
     /*
-    
+
     events
-    
+
     */
     on(['after_image_reload', 'editor_loaded']).accomplish(set_status_bar_info);
     on(['after_image_zoom_change', 'after_image_reload']).accomplish(set_image_size_by_percentage);
@@ -312,8 +312,8 @@ $(document).ready(function(){
     on(['editor_loaded']).accomplish(function(data){
         $('#source-image').attr('src', data.url);
     });
-    
-    
+
+
     fire('editor_loaded', IMAGE_INFORMATION);
 });
 })(jQuery);
