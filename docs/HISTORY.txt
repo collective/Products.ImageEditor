@@ -1,6 +1,9 @@
 Changelog
 =========
 
+* Force no cache on ajax so we can use ImageEditor behind a proxy-cache.
+  [thomasdesvenain]
+
 * French translations.
   [thomasdesvenain]
 

@@ -17,7 +17,7 @@ class ShowCurrentEdit(BrowserView):
         self.imageeditor = IImageEditorAdapter(context)
 
     def __call__(self):
-        
+
         resp = self.request.response
         imagedata = self.imageeditor.get_current_image_data()
         resp.setHeader('Content-Type', 'image/jpeg')
@@ -28,25 +28,28 @@ class ShowCurrentEdit(BrowserView):
 
 
 class ImageEditorActionExecute(BrowserView):
-    
+
     def get_args_from_request(self, action):
         args = {}
-        
+
         for key in self.request.keys():
             if key.startswith(action + "."):
                 args[key.split('.')[1]] = self.request.get(key)
-                
+
         return args
-    
+
     def __call__(self, action_name):
         #get action instance
         action = get_action_class(action_name)(self.context)
         #call instance with params
         result = action(**self.get_args_from_request(action_name)) or {}
-        
+
         result.update(get_image_information(action.editor))
         result['previous_action'] = action_name
-        
+
+        resp = self.request.response
+        resp.setHeader('Cache-Control', 'no-cache')
+        resp.setHeader('Pragma', 'no-cache')
         return json(result)
 
 
@@ -58,7 +61,7 @@ class ImageEditorUtility(BrowserView):
     @memoize
     def editable(self):
         pm = getToolByName(self.context, 'portal_membership')
-        
+
         return IImageContent.providedBy(self.context) and not \
                 pm.isAnonymousUser()
 
