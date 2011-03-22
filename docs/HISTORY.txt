@@ -1,6 +1,9 @@
 Changelog
 =========
 
+* On 'image editor' tab view, redirect to base view after close.
+  [thomasdesvenain]
+
 * Force no cache on ajax so we can use ImageEditor behind a proxy-cache.
   [thomasdesvenain]
 
