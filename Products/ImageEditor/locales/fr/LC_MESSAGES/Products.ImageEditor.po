@@ -16,7 +16,7 @@ msgstr ""
 
 #: ../actions/actions.py:571
 msgid "Adds a drop shadow to the image."
-msgstr "Ajouter une ombre à l'image."
+msgstr "Ajouter de l'ombre sur l'image."
 
 #: ../actions/actions.py:617
 msgid "Applies the sepia effect to the image."
