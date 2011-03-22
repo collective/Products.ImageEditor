@@ -16,11 +16,11 @@ msgstr ""
 
 #: ../actions/actions.py:571
 msgid "Adds a drop shadow to the image."
-msgstr ""
+msgstr "Ajouter une ombre à l'image."
 
 #: ../actions/actions.py:617
 msgid "Applies the sepia effect to the image."
-msgstr ""
+msgstr "Applique l'effet sépia sur l'image"
 
 #: ../actions/actions.py:169
 msgid "Blur"
@@ -28,27 +28,27 @@ msgstr "Flou"
 
 #: ../actions/actions.py:170
 msgid "Blur this image."
-msgstr ""
+msgstr "Flouter l'image."
 
 #: ../actions/actions.py:418
 msgid "Brightness"
 msgstr "Luminosité"
 
-#: ../actions/actions.py:267
+#: ../actions/actions.py:267edi
 msgid "Cancel"
 msgstr "Annuler"
 
 #: ../actions/actions.py:268
 msgid "Cancel the current edit."
-msgstr ""
+msgstr "Annuler l'édition en cours."
 
 #: ../actions/actions.py:419
 msgid "Change the brightness of the image."
-msgstr ""
+msgstr "Changer la luminosité de l'image."
 
 #: ../actions/actions.py:403
 msgid "Change the contrast of the image."
-msgstr ""
+msgstr "Changer le contraste de l'image."
 
 #: ../actions/actions.py:389
 msgid "Compress"
@@ -56,7 +56,7 @@ msgstr "Compresser"
 
 #: ../actions/actions.py:390
 msgid "Compress this image to make it lower quality."
-msgstr ""
+msgstr "Compresser l'image pour diminuer la qualité."
 
 #: ../actions/actions.py:402
 msgid "Contrast"
@@ -68,7 +68,7 @@ msgstr "Découper"
 
 #: ../actions/actions.py:19
 msgid "Crop the image."
-msgstr ""
+msgstr "Découper l'image"
 
 #: ../actions/actions.py:570
 msgid "Drop Shadow"
@@ -84,15 +84,15 @@ msgstr "Retourner verticallement"
 
 #: ../actions/actions.py:452
 msgid "Flip the image on the horizontal axis."
-msgstr ""
+msgstr "Retourner horizontalement"
 
 #: ../actions/actions.py:374
 msgid "Flip the image on vertically."
-msgstr ""
+msgstr "Retourner verticalement"
 
 #: ../actions/actions.py:329
 msgid "Go back to the previous change."
-msgstr ""
+msgstr "Annuler le précédent changement."
 
 #: ../profiles/default/actions.xml
 msgid "Image Editor"
@@ -100,7 +100,7 @@ msgstr "Éditeur d'image"
 
 #: profiles.zcml
 msgid "Image Editor Support"
-msgstr ""
+msgstr "Support de l'éditeur d'image"
 
 #: ../actions/actions.py:297
 msgid "Redo"
@@ -108,7 +108,7 @@ msgstr "Refaire"
 
 #: ../actions/actions.py:298
 msgid "Redo the previous undo action."
-msgstr ""
+msgstr "Refaire l'action annulée"
 
 #: ../actions/actions.py:466
 msgid "Resize"
@@ -116,7 +116,7 @@ msgstr "Redimensionner"
 
 #: ../actions/actions.py:467
 msgid "Resize the image.."
-msgstr ""
+msgstr "Taille de l'image"
 
 #: ../actions/actions.py:154
 msgid "Rotate Left"
@@ -128,11 +128,11 @@ msgstr "Rotation à droite"
 
 #: ../actions/actions.py:359
 msgid "Rotate the image right."
-msgstr ""
+msgstr "Rotation de l'image à droite"
 
 #: ../actions/actions.py:155
 msgid "Rotate the image to the left."
-msgstr ""
+msgstr "Rotation de l'image à gauche"
 
 #: ../actions/actions.py:186
 msgid "Save"
@@ -144,11 +144,11 @@ msgstr "Enregistrer sous"
 
 #: ../actions/actions.py:223
 msgid "Save the edited image as another content item."
-msgstr ""
+msgstr "Enregistrer l'image éditée en tant que contenu."
 
 #: ../actions/actions.py:187
 msgid "Save the edited image."
-msgstr ""
+msgstr "Enregistrer l'image éditée."
 
 #: ../actions/actions.py:616
 msgid "Sepia"
@@ -156,11 +156,11 @@ msgstr "Sépia"
 
 #: ../actions/actions.py:436
 msgid "Sharpen"
-msgstr "Colorier"
+msgstr "Netteté de l'image"
 
 #: ../actions/actions.py:437
 msgid "Sharpen the image."
-msgstr ""
+msgstr "Netteté de l'image."
 
 #: ../actions/actions.py:328
 msgid "Undo"
@@ -169,162 +169,162 @@ msgstr "Annuler"
 #. Default: "Choose the level you want to blur the image"
 #: ../actions/options.py:16
 msgid "label_blur_amount_description"
-msgstr ""
+msgstr "Choisissez le niveau de flou"
 
 #. Default: "Blur Amount"
 #: ../actions/options.py:15
 msgid "label_blur_amount_title"
-msgstr ""
+msgstr "Flou"
 
 #. Default: "The Amount the brightness should be adjusted"
 #: ../actions/options.py:49
 msgid "label_brightness_amount_description"
-msgstr ""
+msgstr "Ajustement du niveau de brillance"
 
 #. Default: "Amount"
 #: ../actions/options.py:48
 msgid "label_brightness_amount_title"
-msgstr ""
+msgstr "Niveau de brillance"
 
 #. Default: "How far to compress"
 #: ../actions/options.py:27
 msgid "label_compress_amount_description"
-msgstr ""
+msgstr "Niveau de compression"
 
 #. Default: "Compress Amount"
 #: ../actions/options.py:26
 msgid "label_compress_amount_title"
-msgstr ""
+msgstr "Niveau de compression"
 
 #. Default: "Number between 0 and 100 to set the contrast to."
 #: ../actions/options.py:38
 msgid "label_contrast_amount_description"
-msgstr ""
+msgstr "Niveau de contraste entre 0 et 100."
 
 #. Default: "Amount"
 #: ../actions/options.py:37
 msgid "label_contrast_amount_title"
-msgstr ""
+msgstr "Niveau"
 
 #. Default: "The level for blue to apply for the sepia effect."
 #: ../actions/options.py:134
 msgid "label_description_sepia_blue"
-msgstr ""
+msgstr "Niveau de bleu à appliquer pour l'effet sépia."
 
 #. Default: "The level for green to apply for the sepia effect."
 #: ../actions/options.py:125
 msgid "label_description_sepia_green"
-msgstr ""
+msgstr "Niveau de vert à appliquer pour l'effet sépia."
 
 #. Default: "The level for red to apply for the sepia effect."
 #: ../actions/options.py:116
 msgid "label_description_sepia_red"
-msgstr ""
+msgstr "Niveau de rouge à appliquer pour l'effet sépia."
 
 #. Default: "Title of the content type that is also used to generate its id."
 #: ../actions/options.py:154
 msgid "label_description_title_save_as"
-msgstr ""
+msgstr "Titre du contenu, également utilisé pour générer l'identifiant."
 
 #. Default: "Content type to save image as."
 #: ../actions/options.py:145
 msgid "label_description_type_to_save_as"
-msgstr ""
+msgstr "Type de contenu de l'image."
 
 #. Default: "The hex of the background color to use"
 #: ../actions/options.py:86
 msgid "label_dropshadow_background_color_description"
-msgstr ""
+msgstr "Code hexadécimal de la couleur de fond."
 
 #. Default: "Background color"
 #: ../actions/options.py:85
 msgid "label_dropshadow_background_color_title"
-msgstr ""
+msgstr "Couleur de fond"
 
 #. Default: "How wide the shadow will be."
 #: ../actions/options.py:100
 msgid "label_dropshadow_border_description"
-msgstr ""
+msgstr "Largeur de l'ombre."
 
 #. Default: "Width"
 #: ../actions/options.py:99
 msgid "label_dropshadow_border_title"
-msgstr ""
+msgstr "Largeur"
 
 #. Default: "Affects how heavy the shadow appears."
 #: ../actions/options.py:107
 msgid "label_dropshadow_iterations_description"
-msgstr ""
+msgstr "Intensité de l'ombre"
 
 #. Default: "Softness"
 #: ../actions/options.py:106
 msgid "label_dropshadow_iterations_title"
-msgstr ""
+msgstr "Flou de l'ombre"
 
 #. Default: "The offset the shadow should have on the x axis"
 #: ../actions/options.py:72
 msgid "label_dropshadow_offset_x_description"
-msgstr ""
+msgstr "Offset de l'ombre sur l'axe des abscisses"
 
 #. Default: "Offset X"
 #: ../actions/options.py:71
 msgid "label_dropshadow_offset_x_title"
-msgstr ""
+msgstr "Offset X"
 
 #. Default: "The offset the shadow should have on the y axis"
 #: ../actions/options.py:79
 msgid "label_dropshadow_offset_y_description"
-msgstr ""
+msgstr "Offset de l'ombre sur l'axe des ordonnées"
 
 #. Default: "Offset Y"
 #: ../actions/options.py:78
 msgid "label_dropshadow_offset_y_title"
-msgstr ""
+msgstr "Offset Y"
 
 #. Default: "The hex of the color that will be used for the shadow."
 #: ../actions/options.py:93
 msgid "label_dropshadow_shadow_color_description"
-msgstr ""
+msgstr "Code hexadécimal de la couleur de l'ombre."
 
 #. Default: "Shadow Color"
 #: ../actions/options.py:92
 msgid "label_dropshadow_shadow_color_title"
-msgstr ""
+msgstr "Couleur de l'ombre"
 
 #. Default: "Blue"
 #: ../actions/options.py:133
 msgid "label_sepia_blue"
-msgstr ""
+msgstr "Bleu"
 
 #. Default: "Green"
 #: ../actions/options.py:124
 msgid "label_sepia_green"
-msgstr ""
+msgstr "Vert"
 
 #. Default: "Red"
 #: ../actions/options.py:115
 msgid "label_sepia_red"
-msgstr ""
+msgstr "Rouge"
 
 #. Default: "The amount to sharpen the image"
 #: ../actions/options.py:61
 msgid "label_sharpen_amount_description"
-msgstr ""
+msgstr "Niveau de netteté de l'image"
 
 #. Default: "Amount"
 #: ../actions/options.py:60
 msgid "label_sharpen_amount_title"
-msgstr ""
+msgstr "Netteté"
 
 #. Default: "Title"
 #: ../actions/options.py:153
 msgid "label_title_save_as"
-msgstr ""
+msgstr "Titre"
 
 #. Default: "Type"
 #: ../actions/options.py:144
 msgid "label_type_to_save_as"
-msgstr ""
+msgstr "Type"
 
 #: ../browser/alagimp.pt:36
 msgid "zoom"

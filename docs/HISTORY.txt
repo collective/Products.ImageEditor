@@ -1,6 +1,9 @@
 Changelog
 =========
 
+* French translations.
+  [thomasdesvenain]
+
 * Do not remove jquery ui 'global_include' on install
   not to break third part products using it.
   [thomasdesvenain]
