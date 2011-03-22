@@ -23,6 +23,8 @@ class ShowCurrentEdit(BrowserView):
         resp.setHeader('Content-Type', 'image/jpeg')
         resp.setHeader('Content-Length', len(imagedata))
         resp.setHeader('Last-Modified', strftime('%a, %d %b %Y %H:%M:%S +0000', gmtime()))
+        resp.setHeader('Cache-Control', 'no-cache')
+        resp.setHeader('Pragma', 'no-cache')
         resp.write(imagedata)
         return ''
 
