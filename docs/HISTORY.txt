@@ -1,7 +1,15 @@
 Changelog
 =========
 
-* On 'image editor' tab view, redirect to base view after close.
+1.7 (unreleased)
+----------------
+
+* Fixed 'image editor' tab.
+
+    - on 'image editor' tab view, redirect to base view after close.
+    - 'image editor' tab condition works for non-manager users,
+    - Editor, Site Administrator and Owner have tab permission by default
+
   [thomasdesvenain]
 
 * Force no cache on ajax so we can use ImageEditor behind a proxy-cache.

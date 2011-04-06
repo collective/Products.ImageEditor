@@ -11,7 +11,7 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     />
-    
+
     <genericsetup:registerProfile
         name="uninstall"
         title="Products.ImageEditor Uninstall profile"
@@ -27,7 +27,16 @@
         directory="profiles/upgrade_to_1_2"
         description='Upgrade to 1.2 profile for Image Editor.'
         provides="Products.GenericSetup.interfaces.EXTENSION"
-        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+    />
+
+    <genericsetup:registerProfile
+        name="upgrade_to_1_8"
+        title="Products.ImageEditor upgrade profile"
+        directory="profiles/upgrade_to_1_8"
+        description='Upgrade to 1.8 profile for Image Editor.'
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
     />
 
 </configure>
