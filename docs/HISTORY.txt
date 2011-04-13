@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.7 (unreleased)
+1.8 (2012-04-13)
 ----------------
 
 * Fixed 'image editor' tab.
