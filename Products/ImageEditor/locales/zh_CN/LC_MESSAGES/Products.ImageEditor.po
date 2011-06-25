@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Products.ImageEditor\n"
 "POT-Creation-Date: 2011-02-24 12:17+0000\n"
-"PO-Revision-Date: 2011-06-20 21:45+0800\n"
+"PO-Revision-Date: 2011-06-25 11:36+0800\n"
 "Last-Translator: Jian Aijun <jianaijun@gmail.com>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -19,11 +19,11 @@ msgstr ""
 
 #: ../actions/actions.py:571
 msgid "Adds a drop shadow to the image."
-msgstr ""
+msgstr "给图片添加阴影。"
 
 #: ../actions/actions.py:617
 msgid "Applies the sepia effect to the image."
-msgstr ""
+msgstr "应用怀旧效果。"
 
 #: ../actions/actions.py:169
 msgid "Blur"
@@ -71,11 +71,11 @@ msgstr "剪裁"
 
 #: ../actions/actions.py:19
 msgid "Crop the image."
-msgstr "剪裁这个图片。"
+msgstr "剪裁图片。"
 
 #: ../actions/actions.py:570
 msgid "Drop Shadow"
-msgstr ""
+msgstr "阴影"
 
 #: ../actions/actions.py:451
 msgid "Flip Horizontally"
@@ -87,11 +87,11 @@ msgstr "垂直翻转"
 
 #: ../actions/actions.py:452
 msgid "Flip the image on the horizontal axis."
-msgstr "以水平方向上翻转图片。"
+msgstr "水平翻转图片。"
 
 #: ../actions/actions.py:374
 msgid "Flip the image on vertically."
-msgstr "以垂直方向上翻转图片。"
+msgstr "垂直翻转图片。"
 
 #: ../actions/actions.py:329
 msgid "Go back to the previous change."
@@ -151,11 +151,11 @@ msgstr "保存编辑的图片为另一个内容条目。"
 
 #: ../actions/actions.py:187
 msgid "Save the edited image."
-msgstr "保存已编辑图片"
+msgstr "保存已编辑图片。"
 
 #: ../actions/actions.py:616
 msgid "Sepia"
-msgstr ""
+msgstr "怀旧"
 
 #: ../actions/actions.py:436
 msgid "Sharpen"
@@ -172,7 +172,7 @@ msgstr "撤消"
 #. Default: "Choose the level you want to blur the image"
 #: ../actions/options.py:16
 msgid "label_blur_amount_description"
-msgstr "选择您想要模糊图片的等级"
+msgstr "选择图片模糊的级别"
 
 #. Default: "Blur Amount"
 #: ../actions/options.py:15
@@ -182,72 +182,72 @@ msgstr "模糊量"
 #. Default: "The Amount the brightness should be adjusted"
 #: ../actions/options.py:49
 msgid "label_brightness_amount_description"
-msgstr ""
+msgstr "应调整亮度量"
 
 #. Default: "Amount"
 #: ../actions/options.py:48
 msgid "label_brightness_amount_title"
-msgstr ""
+msgstr "量"
 
 #. Default: "How far to compress"
 #: ../actions/options.py:27
 msgid "label_compress_amount_description"
-msgstr ""
+msgstr "压缩程度"
 
 #. Default: "Compress Amount"
 #: ../actions/options.py:26
 msgid "label_compress_amount_title"
-msgstr ""
+msgstr "压缩量"
 
 #. Default: "Number between 0 and 100 to set the contrast to."
 #: ../actions/options.py:38
 msgid "label_contrast_amount_description"
-msgstr ""
+msgstr "设置对比度 介于 0 和 100 之间。"
 
 #. Default: "Amount"
 #: ../actions/options.py:37
 msgid "label_contrast_amount_title"
-msgstr ""
+msgstr "量"
 
 #. Default: "The level for blue to apply for the sepia effect."
 #: ../actions/options.py:134
 msgid "label_description_sepia_blue"
-msgstr ""
+msgstr "应用怀旧效果的蓝色级别。"
 
 #. Default: "The level for green to apply for the sepia effect."
 #: ../actions/options.py:125
 msgid "label_description_sepia_green"
-msgstr ""
+msgstr "应用怀旧效果的绿色级别。"
 
 #. Default: "The level for red to apply for the sepia effect."
 #: ../actions/options.py:116
 msgid "label_description_sepia_red"
-msgstr ""
+msgstr "应用怀旧效果的红色级别。"
 
 #. Default: "Title of the content type that is also used to generate its id."
 #: ../actions/options.py:154
 msgid "label_description_title_save_as"
-msgstr ""
+msgstr "内容类型的标题也用来生成它的 id。"
 
 #. Default: "Content type to save image as."
 #: ../actions/options.py:145
 msgid "label_description_type_to_save_as"
-msgstr ""
+msgstr "要保存图片的内容类型。"
 
 #. Default: "The hex of the background color to use"
 #: ../actions/options.py:86
 msgid "label_dropshadow_background_color_description"
-msgstr ""
+msgstr "背景颜色的十六进制表示"
 
 #. Default: "Background color"
 #: ../actions/options.py:85
 msgid "label_dropshadow_background_color_title"
-msgstr ""
+msgstr "背景颜色"
 
 #. Default: "How wide the shadow will be."
 #: ../actions/options.py:100
 msgid "label_dropshadow_border_description"
-msgstr ""
+msgstr "阴影的宽度。"
 
 #. Default: "Width"
 #: ../actions/options.py:99
@@ -257,17 +257,17 @@ msgstr "宽"
 #. Default: "Affects how heavy the shadow appears."
 #: ../actions/options.py:107
 msgid "label_dropshadow_iterations_description"
-msgstr ""
+msgstr "应用的阴影显示方式。"
 
 #. Default: "Softness"
 #: ../actions/options.py:106
 msgid "label_dropshadow_iterations_title"
-msgstr ""
+msgstr "羽化"
 
 #. Default: "The offset the shadow should have on the x axis"
 #: ../actions/options.py:72
 msgid "label_dropshadow_offset_x_description"
-msgstr "阴影的偏移量将会在X轴"
+msgstr "阴影的X轴偏移量"
 
 #. Default: "Offset X"
 #: ../actions/options.py:71
@@ -277,7 +277,7 @@ msgstr "偏移 X"
 #. Default: "The offset the shadow should have on the y axis"
 #: ../actions/options.py:79
 msgid "label_dropshadow_offset_y_description"
-msgstr "阴影的偏移量将会在Y轴"
+msgstr "阴影的Y轴偏移量"
 
 #. Default: "Offset Y"
 #: ../actions/options.py:78
@@ -287,7 +287,7 @@ msgstr "偏移 Y"
 #. Default: "The hex of the color that will be used for the shadow."
 #: ../actions/options.py:93
 msgid "label_dropshadow_shadow_color_description"
-msgstr ""
+msgstr "阴影的颜色的十六进制表示。"
 
 #. Default: "Shadow Color"
 #: ../actions/options.py:92
@@ -312,12 +312,12 @@ msgstr "红色"
 #. Default: "The amount to sharpen the image"
 #: ../actions/options.py:61
 msgid "label_sharpen_amount_description"
-msgstr ""
+msgstr "锐化图片的量"
 
 #. Default: "Amount"
 #: ../actions/options.py:60
 msgid "label_sharpen_amount_title"
-msgstr ""
+msgstr "量"
 
 #. Default: "Title"
 #: ../actions/options.py:153
