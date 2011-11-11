@@ -1,6 +1,14 @@
 Changelog
 =========
 
+2.0b1 (unreleased)
+------------------
+
+* provide support for beaker storage instead
+  of using zope session storage
+  [vangheem]
+
+
 1.8 (2012-04-13)
 ----------------
 

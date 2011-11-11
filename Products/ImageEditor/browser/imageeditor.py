@@ -1,12 +1,15 @@
 from Products.ATContentTypes.interface.image import IImageContent
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
-from Products.ImageEditor.interfaces import *
-from Products.ImageEditor.meta.zcml import *
-from Products.ImageEditor.utils import *
+from Products.ImageEditor.interfaces import IImageEditorAdapter
+from Products.ImageEditor.interfaces import IImageEditorUtility
+from Products.ImageEditor.meta.zcml import get_action_class
+from Products.ImageEditor.utils import json
+from Products.ImageEditor.utils import get_image_information
 from plone.memoize.view import memoize
 from time import gmtime, strftime
 from zope.interface import implements
+
 
 class ShowCurrentEdit(BrowserView):
     """
@@ -15,6 +18,7 @@ class ShowCurrentEdit(BrowserView):
     def __init__(self, context, request):
         super(BrowserView, self).__init__(context, request)
         self.imageeditor = IImageEditorAdapter(context)
+        self.imageeditor.set_field(request.get('field', ''))
 
     def __call__(self):
 
@@ -22,7 +26,8 @@ class ShowCurrentEdit(BrowserView):
         imagedata = self.imageeditor.get_current_image_data()
         resp.setHeader('Content-Type', 'image/jpeg')
         resp.setHeader('Content-Length', len(imagedata))
-        resp.setHeader('Last-Modified', strftime('%a, %d %b %Y %H:%M:%S +0000', gmtime()))
+        resp.setHeader('Last-Modified',
+            strftime('%a, %d %b %Y %H:%M:%S +0000', gmtime()))
         resp.write(imagedata)
         return ''
 
