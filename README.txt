@@ -1,7 +1,7 @@
 Introduction
 ============
 Once installed this product adds a "Image Editor" link near the image widget. 
-You can also manually enable an Image Editor button.
+It also provides an Image Editor Button.
 
 Features
 --------

@@ -13,7 +13,7 @@
 			<property name="permissions">
 				<element value="Products.ImageEditor.edit" />
 			</property>
-			<property name="visible">False</property>
+			<property name="visible">True</property>
 		</object>
 	</object>
 </object>
