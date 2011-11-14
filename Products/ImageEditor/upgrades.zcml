@@ -31,12 +31,20 @@
 	/>
 
     <gs:upgradeStep
-    title="Upgrade Products.ImageEditor to 1.8"
-    description="Products.ImageEditor upgrade step"
-    source="*"
-    destination="1.8"
-    handler=".upgrades.upgrade_to_1_8"
-    profile="Products.ImageEditor:default"
-    />
+        title="Upgrade Products.ImageEditor to 1.8"
+        description="Products.ImageEditor upgrade step"
+        source="*"
+        destination="1.8"
+        handler=".upgrades.upgrade_to_1_8"
+        profile="Products.ImageEditor:default"
+        />
+    <gs:upgradeStep
+        title="Upgrade Products.ImageEditor to 2.0"
+        description="Products.ImageEditor upgrade step"
+        source="*"
+        destination="2000"
+        handler=".upgrades.upgrade_to_2_0"
+        profile="Products.ImageEditor:default"
+        />
 
 </configure>

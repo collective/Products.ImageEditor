@@ -4,6 +4,9 @@ from Products.CMFCore.utils import getToolByName
 default_profile = 'profile-Products.ImageEditor:default'
 to_1_2_profile = 'profile-Products.ImageEditor:upgrade_to_1_2'
 to_1_8_profile = 'profile-Products.ImageEditor:upgrade_to_1_8'
+ie_views = ['imageeditor', 'imageeditor.alagimp',
+            'imageeditor.inline', 'imageeditor.slider']
+
 
 def remove_stack_pos_and_unredostack_from_images_in_catalog(catalog):
     images = catalog.searchResults(portal_type=["Image"])
@@ -62,14 +65,14 @@ def upgrade_to_1_3(context):
     context.runImportStepFromProfile(default_profile, 'jsregistry')
 
 
-ie_views = ['imageeditor', 'imageeditor.alagimp', 'imageeditor.inline', 'imageeditor.slider']
 def set_unintrusive_jqueryui_properties(portal, global_include=None):
     pprops = getToolByName(portal, 'portal_properties')
     jq_props = pprops.jqueryui_properties
     if global_include is not None:
         jq_props.global_include = global_include
 
-    jq_props.views_and_templates = tuple(set(jq_props.getProperty('views_and_templates', [])) | set(ie_views))
+    jq_props.views_and_templates = tuple(set(
+        jq_props.getProperty('views_and_templates', [])) | set(ie_views))
 
 
 def upgrade_to_1_7(context):
@@ -90,3 +93,6 @@ def upgrade_to_1_7(context):
 def upgrade_to_1_8(context):
     context.runAllImportStepsFromProfile(to_1_8_profile)
 
+
+def upgrade_to_2_0(context):
+    pass
