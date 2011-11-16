@@ -499,12 +499,18 @@ function add_resize(){
     $('#image-container')[0].scrollLeft = 5000;
 
     function create_resizable(){
-        $('#source-image').resizable({
+        var opts = {
             handles: 'all',
             resize: function(e, ui){
                 //nothing
             }
-        });
+        };
+        var ar = $('#resize-ar');
+        if(ar[0].checked){
+            opts['aspectRatio'] =
+                IMAGE_INFORMATION.width/IMAGE_INFORMATION.height;
+        }
+        $('#source-image').resizable(opts);
     }
     create_resizable();
 
@@ -537,6 +543,10 @@ function add_resize(){
                 $(this).dialog('close');
             }
         }
+    });
+    $('#resize-ar').change(function(){
+        remove_resize();
+        add_resize();
     });
 }
 function remove_resize(){

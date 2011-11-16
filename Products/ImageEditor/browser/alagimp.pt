@@ -52,6 +52,11 @@
         <div class="formHelp">The height of the image.</div>
         <input id="resize-height" class="textType" type="text" value="480" size="10" name="resize-width"/>
       </div>
+      <div class="edit-option">
+        <input id="resize-ar" type="checkbox" checked="true" name="resize-ar"/>
+        <label class="formQuestion" for="resize-ar">Constrain Aspect Ratio</label>
+        <div class="formHelp">Constrain to the current aspect ratio of image.</div>
+      </div>
     </div>
       
     <div id="aspect-ratio-selector">

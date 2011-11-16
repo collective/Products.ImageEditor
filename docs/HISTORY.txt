@@ -1,6 +1,16 @@
 Changelog
 =========
 
+2.1b1 (unreleased)
+------------------
+
+* By default, constrain aspect ratio on resize
+  [vangheem]
+
+* provide button to enable/disable constraining aspect ratio
+  [vangheem]
+
+
 2.0b2 (2011-11-11)
 ------------------
 
