@@ -166,7 +166,7 @@ class ImageEditorAdapter(object):
         stack = self.stack
         if self.can_redo():
             for item in self.stack[(self.pos + 1):len(self.stack)]:
-                stack = stack.remove(item)
+                stack.remove(item)
 
         stack.append(value)
         self.store_stack(stack)
