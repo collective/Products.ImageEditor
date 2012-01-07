@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 from os.path import join
 
-readme = open("README.txt").read()
+readme = open("README.rst").read()
 history = open(join('docs', 'HISTORY.txt')).read()
 
 setup(name='Products.ImageEditor',
