@@ -1,6 +1,12 @@
 Changelog
 =========
 
+Unreleased
+----------
+
+* Updated Spanish translation.
+  [hvelarde]
+
 2.1b2 (2011-12-06)
 ------------------
 
