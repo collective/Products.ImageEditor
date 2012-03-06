@@ -7,6 +7,10 @@ Unreleased
 * Updated Spanish translation.
   [hvelarde]
 
+* German translation added.
+  [timo]
+
+
 2.1b2 (2011-12-06)
 ------------------
 
