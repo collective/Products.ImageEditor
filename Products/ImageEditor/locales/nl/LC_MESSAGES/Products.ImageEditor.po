@@ -1,0 +1,332 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2011-02-24 12:17+0000\n"
+"PO-Revision-Date: 2012-03-20 14:08+0100\n"
+"Last-Translator: Mark van Lent <mark.van.lent@edition1.nl>\n"
+"Language-Team: Edition1 <info@edition1.nl>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: nl\n"
+"Language-Name: Nederlands\n"
+"X-Is-Fallback-For: nl-be nl-nl\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: Products.ImageEditor\n"
+
+#: ../actions/actions.py:571
+msgid "Adds a drop shadow to the image."
+msgstr "Voeg een slagschaduw toe aan de afbeelding."
+
+#: ../actions/actions.py:617
+msgid "Applies the sepia effect to the image."
+msgstr "Past het sepia effect toe op de afbeelding."
+
+#: ../actions/actions.py:169
+msgid "Blur"
+msgstr "Vervagen"
+
+#: ../actions/actions.py:170
+msgid "Blur this image."
+msgstr "Vervaag de afbeelding."
+
+#: ../actions/actions.py:418
+msgid "Brightness"
+msgstr "Helderheid"
+
+#: ../actions/actions.py:267
+msgid "Cancel"
+msgstr "Annuleer"
+
+#: ../actions/actions.py:268
+msgid "Cancel the current edit."
+msgstr "Annuleer de huidige bewerking."
+
+#: ../actions/actions.py:419
+msgid "Change the brightness of the image."
+msgstr "Verander de helderheid van de afbeelding."
+
+#: ../actions/actions.py:403
+msgid "Change the contrast of the image."
+msgstr "Verander het contrast van de afbeelding."
+
+#: ../actions/actions.py:389
+msgid "Compress"
+msgstr "Comprimeren"
+
+#: ../actions/actions.py:390
+msgid "Compress this image to make it lower quality."
+msgstr "Afbeelding comprimeren om de kwaliteit te reduceren."
+
+#: ../actions/actions.py:402
+msgid "Contrast"
+msgstr "Contrast"
+
+#: ../actions/actions.py:18
+msgid "Crop"
+msgstr "Bijsnijden"
+
+#: ../actions/actions.py:19
+msgid "Crop the image."
+msgstr "Snij de afbeelding bij"
+
+#: ../actions/actions.py:570
+msgid "Drop Shadow"
+msgstr "Slagschaduw"
+
+#: ../actions/actions.py:451
+msgid "Flip Horizontally"
+msgstr "Spiegel horizontaal"
+
+#: ../actions/actions.py:373
+msgid "Flip Vertical"
+msgstr "Spiegel verticaal"
+
+#: ../actions/actions.py:452
+msgid "Flip the image on the horizontal axis."
+msgstr "Spiegel de afbeelding over de horizontale as."
+
+#: ../actions/actions.py:374
+msgid "Flip the image on vertically."
+msgstr "Spiegel de afbeeling om de verticale as."
+
+#: ../actions/actions.py:329
+msgid "Go back to the previous change."
+msgstr "Ga terug naar de vorige wijziging."
+
+#: ../profiles/default/actions.xml
+msgid "Image Editor"
+msgstr "Afbeeldingen editor"
+
+#: profiles.zcml
+msgid "Image Editor Support"
+msgstr "Afbeeldingen editor ondersteuning"
+
+#: ../actions/actions.py:297
+msgid "Redo"
+msgstr "Opnieuw uitvoeren"
+
+#: ../actions/actions.py:298
+msgid "Redo the previous undo action."
+msgstr "Voer de laatste ongegaan gemaakte actie opnieuw uit."
+
+#: ../actions/actions.py:466
+msgid "Resize"
+msgstr "Schalen"
+
+#: ../actions/actions.py:467
+msgid "Resize the image.."
+msgstr "Schaal de afbeelding."
+
+#: ../actions/actions.py:154
+msgid "Rotate Left"
+msgstr "Linksom draaien"
+
+#: ../actions/actions.py:358
+msgid "Rotate Right"
+msgstr "Rechtsom draaien"
+
+#: ../actions/actions.py:359
+msgid "Rotate the image right."
+msgstr "Draai de afbeelding rechtsom."
+
+#: ../actions/actions.py:155
+msgid "Rotate the image to the left."
+msgstr "Draai de afgeelding linksom."
+
+#: ../actions/actions.py:186
+msgid "Save"
+msgstr "Opslaan"
+
+#: ../actions/actions.py:222
+msgid "Save As"
+msgstr "Opslaan als"
+
+#: ../actions/actions.py:223
+msgid "Save the edited image as another content item."
+msgstr "Sla de bewerkte afbeelding op als een ander item."
+
+#: ../actions/actions.py:187
+msgid "Save the edited image."
+msgstr "Sla de bewerkte afbeelding op."
+
+#: ../actions/actions.py:616
+msgid "Sepia"
+msgstr "Sepia"
+
+#: ../actions/actions.py:436
+msgid "Sharpen"
+msgstr "Verscherpen"
+
+#: ../actions/actions.py:437
+msgid "Sharpen the image."
+msgstr "Verscherp de afbeelding."
+
+#: ../actions/actions.py:328
+msgid "Undo"
+msgstr "Ongedaan maken"
+
+#. Default: "Choose the level you want to blur the image"
+#: ../actions/options.py:16
+msgid "label_blur_amount_description"
+msgstr "Kies het niveau waarop de afbeelding vervaagd moet worden."
+
+#. Default: "Blur Amount"
+#: ../actions/options.py:15
+msgid "label_blur_amount_title"
+msgstr "Vervagingsniveau"
+
+#. Default: "The Amount the brightness should be adjusted"
+#: ../actions/options.py:49
+msgid "label_brightness_amount_description"
+msgstr "Het niveau van de helderheid"
+
+#. Default: "Amount"
+#: ../actions/options.py:48
+msgid "label_brightness_amount_title"
+msgstr "Niveau"
+
+#. Default: "How far to compress"
+#: ../actions/options.py:27
+msgid "label_compress_amount_description"
+msgstr "De mate van compressie van de afbeelding"
+
+#. Default: "Compress Amount"
+#: ../actions/options.py:26
+msgid "label_compress_amount_title"
+msgstr "Compressieniveau"
+
+#. Default: "Number between 0 and 100 to set the contrast to."
+#: ../actions/options.py:38
+msgid "label_contrast_amount_description"
+msgstr "Getal tussen 0 en 100 om het contrast op in te stellen."
+
+#. Default: "Amount"
+#: ../actions/options.py:37
+msgid "label_contrast_amount_title"
+msgstr "Niveau"
+
+#. Default: "The level for blue to apply for the sepia effect."
+#: ../actions/options.py:134
+msgid "label_description_sepia_blue"
+msgstr "De hoeveelheid blauw voor het sepia effect."
+
+#. Default: "The level for green to apply for the sepia effect."
+#: ../actions/options.py:125
+msgid "label_description_sepia_green"
+msgstr "De hoeveelheid rood voor het sepia effect."
+
+#. Default: "The level for red to apply for the sepia effect."
+#: ../actions/options.py:116
+msgid "label_description_sepia_red"
+msgstr "De hoeveelheid rood voor het sepia effect."
+
+#. Default: "Title of the content type that is also used to generate its id."
+#: ../actions/options.py:154
+msgid "label_description_title_save_as"
+msgstr "De titel van het item. Op basis hiervan wordt ook ID gegenereerd."
+
+#. Default: "Content type to save image as."
+#: ../actions/options.py:145
+msgid "label_description_type_to_save_as"
+msgstr "Het content type van het item dat opgeslagen wordt."
+
+#. Default: "The hex of the background color to use"
+#: ../actions/options.py:86
+msgid "label_dropshadow_background_color_description"
+msgstr "De hexadecimale waarde van de achtergrondkleur."
+
+#. Default: "Background color"
+#: ../actions/options.py:85
+msgid "label_dropshadow_background_color_title"
+msgstr "Achtergrond kleur"
+
+#. Default: "How wide the shadow will be."
+#: ../actions/options.py:100
+msgid "label_dropshadow_border_description"
+msgstr "Breedte van de schaduw."
+
+#. Default: "Width"
+#: ../actions/options.py:99
+msgid "label_dropshadow_border_title"
+msgstr "Breedte"
+
+#. Default: "Affects how heavy the shadow appears."
+#: ../actions/options.py:107
+msgid "label_dropshadow_iterations_description"
+msgstr "Beïnvloedt hoe zwaar de shaduw is."
+
+#. Default: "Softness"
+#: ../actions/options.py:106
+msgid "label_dropshadow_iterations_title"
+msgstr "Zachtheid"
+
+#. Default: "The offset the shadow should have on the x axis"
+#: ../actions/options.py:72
+msgid "label_dropshadow_offset_x_description"
+msgstr "De verschuiving van de schaduw op de X-as."
+
+#. Default: "Offset X"
+#: ../actions/options.py:71
+msgid "label_dropshadow_offset_x_title"
+msgstr "Verschuiving X"
+
+#. Default: "The offset the shadow should have on the y axis"
+#: ../actions/options.py:79
+msgid "label_dropshadow_offset_y_description"
+msgstr "De verschuiving van de schaduw op de Y-as."
+
+#. Default: "Offset Y"
+#: ../actions/options.py:78
+msgid "label_dropshadow_offset_y_title"
+msgstr "Verschuiving Y"
+
+#. Default: "The hex of the color that will be used for the shadow."
+#: ../actions/options.py:93
+msgid "label_dropshadow_shadow_color_description"
+msgstr "De hexadecimale waarde van de kleur die voor de schaduw gebruikt wordt."
+
+#. Default: "Shadow Color"
+#: ../actions/options.py:92
+msgid "label_dropshadow_shadow_color_title"
+msgstr "Kleur van de shaduw"
+
+#. Default: "Blue"
+#: ../actions/options.py:133
+msgid "label_sepia_blue"
+msgstr "Blauw"
+
+#. Default: "Green"
+#: ../actions/options.py:124
+msgid "label_sepia_green"
+msgstr "Groen"
+
+#. Default: "Red"
+#: ../actions/options.py:115
+msgid "label_sepia_red"
+msgstr "Rood"
+
+#. Default: "The amount to sharpen the image"
+#: ../actions/options.py:61
+msgid "label_sharpen_amount_description"
+msgstr "De hoeveelheid waarmee de afbeelding wordt verscherpt."
+
+#. Default: "Amount"
+#: ../actions/options.py:60
+msgid "label_sharpen_amount_title"
+msgstr "Hoeveelheid"
+
+#. Default: "Title"
+#: ../actions/options.py:153
+msgid "label_title_save_as"
+msgstr "Titel"
+
+#. Default: "Type"
+#: ../actions/options.py:144
+msgid "label_type_to_save_as"
+msgstr "Type"
+
+#: ../browser/alagimp.pt:36
+msgid "zoom"
+msgstr "vergroten"

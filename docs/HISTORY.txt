@@ -4,6 +4,9 @@ Changelog
 Unreleased
 ----------
 
+* Add Dutch translations.
+  [markvl]
+
 * Updated Spanish translation.
   [hvelarde]
 
@@ -265,4 +268,3 @@ Unreleased
 ------------------------
 
 * Initial release
-
