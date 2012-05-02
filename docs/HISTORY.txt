@@ -1,8 +1,8 @@
 Changelog
 =========
 
-Unreleased
-----------
+2.1.0 (2012--05-02)
+------------------
 
 * Add Dutch translations.
   [markvl]
@@ -13,6 +13,8 @@ Unreleased
 * German translation added.
   [timo]
 
+* compatible with latest collective.js.jqueryui
+  [garbas]
 
 2.1b2 (2011-12-06)
 ------------------
