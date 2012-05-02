@@ -55,4 +55,4 @@ Contributors
 * Davi Lima
 * Sylvain Boureliou
 * Jeff Kunce
-* Héctor Velarde
+* Hector Velarde
