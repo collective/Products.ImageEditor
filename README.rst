@@ -47,6 +47,13 @@ Then, add environment variables to set the beaker settings::
 The environment variables can be set using the `environment-vars`
 option in plone.recipe.zope2instance buildout configuration.
 
+Diazo
+-----
+
+The following rule in rules.xml will be useful, most likely::
+
+    <!-- ImageEditor -->
+    <notheme css:if-content="#image-editor-controls" />
 
 Contributors
 ------------
