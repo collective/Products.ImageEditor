@@ -1,8 +1,15 @@
 Changelog
 =========
 
-2.1.0 (2012--05-02)
--------------------
+2.1.1 (unreleased)
+------------------
+
+- fix close button in IE issue. Fixes #4
+  [vangheem]
+
+
+2.1.0 (2012-05-02)
+------------------
 
 * Add Dutch translations.
   [markvl]
