@@ -19,6 +19,11 @@
 <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
 
+    <div style="display:none" id="translations">
+      <input id="trans_actions" i18n:attributes="value" value="Actions" />
+      <input id="trans_image" i18n:attributes="value" value="Image" />
+    </div>
+
     <div id="image-editor-controls" class="slide-in" i18n:domain="Products.ImageEditor">
       <div id="buttons">
         <input class="edit-button" i18n:attributes="value" tal:repeat="button view/get_buttons"

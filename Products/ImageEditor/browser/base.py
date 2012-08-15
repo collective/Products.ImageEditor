@@ -6,8 +6,9 @@ from Products.ImageEditor.utils import generate_random_url
 from Products.ImageEditor.utils import get_image_information
 from Products.ImageEditor.utils import json
 from zope.formlib import form
-from Products.ImageEditor import imageeditor_message_factory as _
 from Products.CMFCore.utils import getToolByName
+import zope.i18n
+from Products.ImageEditor import translationstrings as ts
 
 
 class ImageEditor(BrowserView):
@@ -47,9 +48,9 @@ class Base(BrowserView):
         for name, action in self.actions:
             info = {
                 'id': name + '-button',
-                'value': action.name,
-                'name': name,
-                'alt': action.description,
+                'value': zope.i18n.translate(action.name),
+                'name': zope.i18n.translate(name),
+                'alt': zope.i18n.translate(action.description),
             }
             if action.icon:
                 info['style'] = "background-image: url(%s)" % action.icon
@@ -78,8 +79,8 @@ class Base(BrowserView):
                 """ % (
                     name,
                     widget.name,
-                    widget.context.title.default,
-                    widget.context.description.default,
+                    zope.i18n.translate(widget.context.title),
+                    zope.i18n.translate(widget.context.description),
                     widget()
                 )
 
@@ -87,9 +88,9 @@ class Base(BrowserView):
                 html += """
 <input type="button" id="%(name)s-apply-button"
        class="image-edit-apply-button" name="%(name)s"
-       value="Apply"
+       value="%(apply)s"
 />
-                """ % {'name': _(name)}
+                """ % {'name': name, 'apply': zope.i18n.translate(ts.Apply)}
 
             html += '</div>'
 
