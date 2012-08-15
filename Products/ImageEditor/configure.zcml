@@ -26,5 +26,10 @@
     component=".vocabularies.ImageContentTypeVocabularyFactory"
     name="plone.app.vocabularies.ImageContentTypes"
   />
+
+  <subscriber
+    for="Products.ATContentTypes.interface.image.IImageContent
+         Products.Archetypes.interfaces.IObjectEditedEvent"
+    handler=".subscribers.handle_image_edit" />
     
 </configure>

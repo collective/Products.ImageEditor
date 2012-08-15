@@ -101,6 +101,10 @@ class ImageEditorAdapter(object):
     def __init__(self, context, fieldname=''):
         self.context = aq_inner(context)
         self.fieldname = fieldname
+        if fieldname == '':
+            # always set a fieldname so we get keys right
+            field = self.field
+            self.fieldname = field.__name__
         self.storage = getStorage(self.context)
 
     @property
@@ -112,7 +116,8 @@ class ImageEditorAdapter(object):
                 self.context.getPrimaryField()
 
     def set_field(self, name):
-        self.fieldname = name
+        if name != '':
+            self.fieldname = name
 
     def get_image_data(self):
         return str(self.field.get(self.context).data)
@@ -161,6 +166,7 @@ class ImageEditorAdapter(object):
         stack[:] = [bottom]
         self.store_stack(stack)
         self.pos = 0
+        self.storage['clearkey' + self.fieldname] = False
 
     def do(self, value):
         stack = self.stack

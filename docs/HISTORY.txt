@@ -10,6 +10,8 @@ Changelog
 - add translations
   [vangheem]
 
+- after image is changed, it should clear current edits. Fixes #2
+  [vangheem]
 
 2.1.0 (2012-05-02)
 ------------------

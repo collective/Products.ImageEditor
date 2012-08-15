@@ -21,7 +21,6 @@ class ShowCurrentEdit(BrowserView):
         self.imageeditor.set_field(request.get('field', ''))
 
     def __call__(self):
-
         resp = self.request.response
         imagedata = self.imageeditor.get_current_image_data()
         resp.setHeader('Content-Type', 'image/jpeg')
