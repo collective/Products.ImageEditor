@@ -1,7 +1,12 @@
 Changelog
 =========
 
-2.1.1 (unreleased)
+2.1.2 (unreleased)
+------------------
+
+- added norwegian translation [espen]
+
+2.1.1 (2012-08-15)
 ------------------
 
 - fix close button in IE issue. Fixes #4

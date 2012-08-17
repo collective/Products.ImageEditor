@@ -5,7 +5,7 @@ readme = open("README.rst").read()
 history = open(join('docs', 'HISTORY.txt')).read()
 
 setup(name='Products.ImageEditor',
-      version='2.1.0',
+      version='2.1.2',
       description='adds a "Image Editor" link near the image widget '
         ' allowing the user to rotate, flip, '
         'blur, compress, change contrast & brightness, sharpen, add drop '

@@ -1,0 +1,335 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2011-02-24 12:17+0000\n"
+"PO-Revision-Date: 2012-08-15 09:12+0100\n"
+"Last-Translator: Espen Moe-Nilssen <espen@medialog.no>\n"
+"Language-Team: Espen Moe-Nilssen <espen@medialog.no>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: nl\n"
+"Language-Name: Norwegian\n"
+"X-Is-Fallback-For: nl-be nl-nl\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: Products.ImageEditor\n"
+"X-Poedit-Language: Norwegian Bokmal\n"
+"X-Poedit-Country: NORWAY\n"
+
+#: ../actions/actions.py:571
+msgid "Adds a drop shadow to the image."
+msgstr "Legger på en drop shadow effekt på bildet"
+
+#: ../actions/actions.py:617
+msgid "Applies the sepia effect to the image."
+msgstr "Legger på sepia effekt på bildet"
+
+#: ../actions/actions.py:169
+msgid "Blur"
+msgstr "Blur (gjør uskarp)"
+
+#: ../actions/actions.py:170
+msgid "Blur this image."
+msgstr "Blur (gjør dette bildet uskarpt)"
+
+#: ../actions/actions.py:418
+msgid "Brightness"
+msgstr "Brightness (Lysstyrke)"
+
+#: ../actions/actions.py:267
+msgid "Cancel"
+msgstr "Abvbryt"
+
+#: ../actions/actions.py:268
+msgid "Cancel the current edit."
+msgstr "Avbryt redigering"
+
+#: ../actions/actions.py:419
+msgid "Change the brightness of the image."
+msgstr "Forandrer brightness (lysstyrke) på bildet"
+
+#: ../actions/actions.py:403
+msgid "Change the contrast of the image."
+msgstr "Forandrer kontrasten "
+
+#: ../actions/actions.py:389
+msgid "Compress"
+msgstr "Komprimer"
+
+#: ../actions/actions.py:390
+msgid "Compress this image to make it lower quality."
+msgstr "Komprimer bildet for mindre kvalitet og mindre fil"
+
+#: ../actions/actions.py:402
+msgid "Contrast"
+msgstr "Kontrast"
+
+#: ../actions/actions.py:18
+msgid "Crop"
+msgstr "Beskjær"
+
+#: ../actions/actions.py:19
+msgid "Crop the image."
+msgstr "Bekskjær bildet"
+
+#: ../actions/actions.py:570
+msgid "Drop Shadow"
+msgstr "Drop Shadow"
+
+#: ../actions/actions.py:451
+msgid "Flip Horizontally"
+msgstr "Speilvend horisontalt"
+
+#: ../actions/actions.py:373
+msgid "Flip Vertical"
+msgstr "Speilvendt vertikalt"
+
+#: ../actions/actions.py:452
+msgid "Flip the image on the horizontal axis."
+msgstr "Speilvendt bildet rundt horisontal akse"
+
+#: ../actions/actions.py:374
+msgid "Flip the image on vertically."
+msgstr "Speilvendt bildet rundt vertikal akse"
+
+#: ../actions/actions.py:329
+msgid "Go back to the previous change."
+msgstr "Gå tilbake til forige forandring"
+
+#: ../profiles/default/actions.xml
+msgid "Image Editor"
+msgstr "Bildeeditor (redigerer)"
+
+#: profiles.zcml
+msgid "Image Editor Support"
+msgstr "Image Editor Support"
+
+#: ../actions/actions.py:297
+msgid "Redo"
+msgstr "Gjør om"
+
+#: ../actions/actions.py:298
+msgid "Redo the previous undo action."
+msgstr "Gjør om forige action (hendelse)"
+
+#: ../actions/actions.py:466
+msgid "Resize"
+msgstr "Skaler"
+
+#: ../actions/actions.py:467
+msgid "Resize the image.."
+msgstr "Skaler bildet"
+
+#: ../actions/actions.py:154
+msgid "Rotate Left"
+msgstr "Roter mot venstre"
+
+#: ../actions/actions.py:358
+msgid "Rotate Right"
+msgstr "Roter mot høyre"
+
+#: ../actions/actions.py:359
+msgid "Rotate the image right."
+msgstr "Roter bildet til høyre"
+
+#: ../actions/actions.py:155
+msgid "Rotate the image to the left."
+msgstr "Roter bildet til venstre"
+
+#: ../actions/actions.py:186
+msgid "Save"
+msgstr "Lagre"
+
+#: ../actions/actions.py:222
+msgid "Save As"
+msgstr "Lagre som"
+
+#: ../actions/actions.py:223
+msgid "Save the edited image as another content item."
+msgstr "Lagre bildet som et nytt objekt"
+
+#: ../actions/actions.py:187
+msgid "Save the edited image."
+msgstr "Lagre det redigerte bildet"
+
+#: ../actions/actions.py:616
+msgid "Sepia"
+msgstr "Sepia"
+
+#: ../actions/actions.py:436
+msgid "Sharpen"
+msgstr "Skarpstill"
+
+#: ../actions/actions.py:437
+msgid "Sharpen the image."
+msgstr "Skarpstill bildet."
+
+#: ../actions/actions.py:328
+msgid "Undo"
+msgstr "Gjør om"
+
+#. Default: "Choose the level you want to blur the image"
+#: ../actions/options.py:16
+msgid "label_blur_amount_description"
+msgstr "Velg hvor mye du vil still bildet uskarpt"
+
+#. Default: "Blur Amount"
+#: ../actions/options.py:15
+msgid "label_blur_amount_title"
+msgstr "Uskarpstillingsnivå"
+
+#. Default: "The Amount the brightness should be adjusted"
+#: ../actions/options.py:49
+msgid "label_brightness_amount_description"
+msgstr "Hvor mye lysstyrken skal justeres"
+
+#. Default: "Amount"
+#: ../actions/options.py:48
+msgid "label_brightness_amount_title"
+msgstr "Nivå"
+
+#. Default: "How far to compress"
+#: ../actions/options.py:27
+msgid "label_compress_amount_description"
+msgstr "Hvor mye bildet skal komprimeres"
+
+#. Default: "Compress Amount"
+#: ../actions/options.py:26
+msgid "label_compress_amount_title"
+msgstr "Komprimeringsnivå"
+
+#. Default: "Number between 0 and 100 to set the contrast to."
+#: ../actions/options.py:38
+msgid "label_contrast_amount_description"
+msgstr "Nivå (0 til 100) for kontrast"
+
+#. Default: "Amount"
+#: ../actions/options.py:37
+msgid "label_contrast_amount_title"
+msgstr "Nivå"
+
+#. Default: "The level for blue to apply for the sepia effect."
+#: ../actions/options.py:134
+msgid "label_description_sepia_blue"
+msgstr "Mengden blå i sepia effekten."
+
+#. Default: "The level for green to apply for the sepia effect."
+#: ../actions/options.py:125
+msgid "label_description_sepia_green"
+msgstr "Mengden grønn i sepia effekten"
+
+#. Default: "The level for red to apply for the sepia effect."
+#: ../actions/options.py:116
+msgid "label_description_sepia_red"
+msgstr "Mengden rød i sepia effekten."
+
+#. Default: "Title of the content type that is also used to generate its id."
+#: ../actions/options.py:154
+msgid "label_description_title_save_as"
+msgstr "Tittelen på innholdstypen (som også blir brukt til å generere den id)."
+
+#. Default: "Content type to save image as."
+#: ../actions/options.py:145
+msgid "label_description_type_to_save_as"
+msgstr "Innholdstype å lagre bildet som."
+
+#. Default: "The hex of the background color to use"
+#: ../actions/options.py:86
+msgid "label_dropshadow_background_color_description"
+msgstr "Hex verdi for bakgrunnsfargen."
+
+#. Default: "Background color"
+#: ../actions/options.py:85
+msgid "label_dropshadow_background_color_title"
+msgstr "Bakgrunnsfarge."
+
+#. Default: "How wide the shadow will be."
+#: ../actions/options.py:100
+msgid "label_dropshadow_border_description"
+msgstr "Hvor bred skal skyggen være."
+
+#. Default: "Width"
+#: ../actions/options.py:99
+msgid "label_dropshadow_border_title"
+msgstr "Bredde"
+
+#. Default: "Affects how heavy the shadow appears."
+#: ../actions/options.py:107
+msgid "label_dropshadow_iterations_description"
+msgstr "Hvor 'tung/mørk' skyggen skal være"
+
+#. Default: "Softness"
+#: ../actions/options.py:106
+msgid "label_dropshadow_iterations_title"
+msgstr "Mykhet"
+
+#. Default: "The offset the shadow should have on the x axis"
+#: ../actions/options.py:72
+msgid "label_dropshadow_offset_x_description"
+msgstr "Offset for skyggen (x-akse / horisontalt)"
+
+#. Default: "Offset X"
+#: ../actions/options.py:71
+msgid "label_dropshadow_offset_x_title"
+msgstr "Horisontal offset"
+
+#. Default: "The offset the shadow should have on the y axis"
+#: ../actions/options.py:79
+msgid "label_dropshadow_offset_y_description"
+msgstr "Offset for skyggen (y-akse / vertikalt)"
+
+#. Default: "Offset Y"
+#: ../actions/options.py:78
+msgid "label_dropshadow_offset_y_title"
+msgstr "Vertikal offset."
+
+#. Default: "The hex of the color that will be used for the shadow."
+#: ../actions/options.py:93
+msgid "label_dropshadow_shadow_color_description"
+msgstr "Hex verdi for fargen som skal brukes som skygge."
+
+#. Default: "Shadow Color"
+#: ../actions/options.py:92
+msgid "label_dropshadow_shadow_color_title"
+msgstr "Farge på skyggen."
+
+#. Default: "Blue"
+#: ../actions/options.py:133
+msgid "label_sepia_blue"
+msgstr "Blå"
+
+#. Default: "Green"
+#: ../actions/options.py:124
+msgid "label_sepia_green"
+msgstr "Grønn"
+
+#. Default: "Red"
+#: ../actions/options.py:115
+msgid "label_sepia_red"
+msgstr "Rød"
+
+#. Default: "The amount to sharpen the image"
+#: ../actions/options.py:61
+msgid "label_sharpen_amount_description"
+msgstr "Nivå for skarpstilling av bildet"
+
+#. Default: "Amount"
+#: ../actions/options.py:60
+msgid "label_sharpen_amount_title"
+msgstr "Mengde"
+
+#. Default: "Title"
+#: ../actions/options.py:153
+msgid "label_title_save_as"
+msgstr "Tittel"
+
+#. Default: "Type"
+#: ../actions/options.py:144
+msgid "label_type_to_save_as"
+msgstr "Type"
+
+#: ../browser/alagimp.pt:36
+msgid "zoom"
+msgstr "Zomm (forstørrelse)"
+

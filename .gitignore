@@ -9,3 +9,5 @@ downloads/
 eggs/
 parts/
 var/
+
+.DS_Store
