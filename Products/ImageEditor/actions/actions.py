@@ -413,7 +413,10 @@ class CompressAction(BaseImageEditorAction):
     def __call__(self, amount, *args, **kwargs):
         # if it is a png, convert it...
         image = self.editor.get_current_image().convert('RGB')
-        self.editor.set_image(image, quality=float(amount))
+        try:
+            self.editor.set_image(image, quality=float(amount))
+        except TypeError:
+            self.editor.set_image(image, quality=int(amount))
 
 
 class ContrastAction(BaseImageEditorAction):
