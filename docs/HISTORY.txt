@@ -1,12 +1,13 @@
 Changelog
 =========
 
-2.1.2 (unreleased)
+2.1.2 (2012-09-07)
 ------------------
 
 - added norwegian translation [espen]
 
 - fix compress action Fixes #6
+  [vangheem]
 
 
 2.1.1 (2012-08-15)
