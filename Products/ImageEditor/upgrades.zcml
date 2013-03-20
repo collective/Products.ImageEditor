@@ -47,4 +47,13 @@
         profile="Products.ImageEditor:default"
         />
 
+    <gs:upgradeStep
+        title="Upgrade Products.ImageEditor to 2.2"
+        description="Products.ImageEditor upgrade step"
+        source="*"
+        destination="2200"
+        handler=".upgrades.upgrade_to_2_0"
+        profile="Products.ImageEditor:default"
+        />
+
 </configure>

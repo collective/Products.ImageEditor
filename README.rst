@@ -25,6 +25,23 @@ Dependencies
 * collective.js.jqueryui
 
 
+Installation
+------------
+
+*WARNING*
+
+Products.ImageEditor depends on collective.js.jqueryui. The 
+collective.js.jqueryui package changes quite often and those
+changes frequently break Products.ImageEditor. Please read
+the documentation on collective.js.jqueryui to make sure you're
+installing the correct version for the plone you're running.
+Depending on your setup, you might have to install collective.js.jqueryui
+version 1.7, 1.8, 1.9 or 1.10. And depending on those choices,
+you might also have to upgrade plone.app.jquery.
+
+Don't blame me for this...
+
+
 Editor Storage
 --------------
 
@@ -54,6 +71,7 @@ The following rule in rules.xml will be useful, most likely::
 
     <!-- ImageEditor -->
     <notheme css:if-content="#image-editor-controls" />
+
 
 Contributors
 ------------

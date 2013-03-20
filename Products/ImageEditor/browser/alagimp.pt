@@ -5,12 +5,18 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="Products.ImageEditor">
-<metal:js fill-slot="javascript_head_slot">
+<metal:js fill-slot="javascript_head_slot"
+  tal:define="iepath string:${context/portal_url}/++resource++imageeditor;
+              iapath string:${iepath}/jquery.imgareaselect-0.9.10;">
   <metal:head define-macro="head">
-  <link href="" type="text/css" rel="stylesheet" tal:attributes="href string:${context/portal_url}/++resource++imageeditor/alagimp.css"/>
-  <script type="text/javascript" src="" tal:attributes="src string:${context/portal_url}/++resource++imageeditor/imgareaselect-0.8/jquery.imgareaselect-0.8.min.js"></script>
+  <link href="" type="text/css" rel="stylesheet"
+    tal:attributes="href string:${iepath}/alagimp.css"/>
+  <link rel="stylesheet" type="text/css" href="css/imgareaselect-default.css"
+    tal:attributes="href string:${iapath}/css/imgareaselect-default.css"/>
+  <script type="text/javascript" src=""
+    tal:attributes="src string:${iapath}/scripts/jquery.imgareaselect.min.js"></script>
 
-  <script type="text/javascript" src="" tal:attributes="src string:${context/portal_url}/++resource++imageeditor/alagimp.js"></script>
+  <script type="text/javascript" src="" tal:attributes="src string:${iepath}/alagimp.js"></script>
   <script type="text/javascript" tal:content="structure view/setup_js" />
   <script type="text/javascript" tal:content="structure view/custom_action_parameters" />
   </metal:head>

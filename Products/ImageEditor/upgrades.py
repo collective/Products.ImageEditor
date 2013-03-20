@@ -1,4 +1,11 @@
 from Products.CMFCore.utils import getToolByName
+from zope.component import getUtility
+from plone.registry.interfaces import IRegistry
+try:
+    from collective.js.jqueryui.interfaces import IJQueryUIPlugins
+    HAS_NEW_JQUI = True
+except ImportError:
+    HAS_NEW_JQUI = False
 
 
 default_profile = 'profile-Products.ImageEditor:default'
@@ -49,6 +56,29 @@ def remove_visual_editor_tab(portal):
         portal_types.Image._p_changed = 1
 
 
+jqui_plugins = [
+    'ui_widget',
+    'ui_mouse',
+    "ui_position",
+    "ui_draggable",
+    "ui_droppable",
+    "ui_resizable",
+    "ui_selectable",
+    "ui_sortable",
+    "ui_button",
+    "ui_dialog",
+    "ui_slider"
+]
+
+def activate_jqui_plugins():
+    if not HAS_NEW_JQUI:
+        return
+    registry = getUtility(IRegistry)
+    proxy = registry.forInterface(IJQueryUIPlugins)
+    for plugin in jqui_plugins:
+        setattr(proxy, plugin, True)
+
+
 def upgrade_to_1_2(context):
     portal = getToolByName(context, 'portal_url').getPortalObject()
 
@@ -65,29 +95,12 @@ def upgrade_to_1_3(context):
     context.runImportStepFromProfile(default_profile, 'jsregistry')
 
 
-def set_unintrusive_jqueryui_properties(portal, global_include=None):
-    pprops = getToolByName(portal, 'portal_properties')
-    jq_props = pprops.jqueryui_properties
-    if global_include is not None:
-        jq_props.global_include = global_include
-
-    jq_props.views_and_templates = tuple(set(
-        jq_props.getProperty('views_and_templates', [])) | set(ie_views))
-
-
 def upgrade_to_1_7(context):
     portal = getToolByName(context, 'portal_url').getPortalObject()
     qi = getToolByName(portal, 'portal_quickinstaller')
 
     if not qi.isProductInstalled('collective.js.jqueryui'):
         qi.installProduct('collective.js.jqueryui')
-        set_unintrusive_jqueryui_properties(portal, global_include=False)
-    else:
-        pprops = getToolByName(portal, 'portal_properties')
-        if 'jqueryui_properties' not in pprops.objectIds():
-            # installed, but not upgraded
-            from collective.js.jqueryui.upgrades import upgrade_1891_1892
-            upgrade_1891_1892(context)
 
 
 def upgrade_to_1_8(context):
@@ -95,4 +108,4 @@ def upgrade_to_1_8(context):
 
 
 def upgrade_to_2_0(context):
-    pass
+    activate_jqui_plugins()

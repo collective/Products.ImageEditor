@@ -5,7 +5,7 @@ readme = open("README.rst").read()
 history = open(join('docs', 'HISTORY.txt')).read()
 
 setup(name='Products.ImageEditor',
-      version='2.1.3',
+      version='2.2.0',
       description='adds a "Image Editor" link near the image widget '
         ' allowing the user to rotate, flip, '
         'blur, compress, change contrast & brightness, sharpen, add drop '
@@ -15,6 +15,8 @@ setup(name='Products.ImageEditor',
         "Development Status :: 4 - Beta",
         "Framework :: Plone :: 4.0",
         "Framework :: Plone :: 4.1",
+        "Framework :: Plone :: 4.2",
+        "Framework :: Plone :: 4.3",
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Operating System :: OS Independent",
         "Programming Language :: JavaScript",
@@ -33,7 +35,7 @@ setup(name='Products.ImageEditor',
       zip_safe=False,
       install_requires=[
         'setuptools',
-        'collective.js.jqueryui>=1.8.9.2',
+        'collective.js.jqueryui',
       ],
       extras_require={'test': [
         'collective.testcaselayer',

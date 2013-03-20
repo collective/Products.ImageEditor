@@ -44,7 +44,6 @@ function add_crop(){
             onSelectChange: function(image, selection){
                 window.crop_selection = selection;
             },
-            selectionColor: 'blue',
             enable: true,
             border: 2,
             handles: true,
@@ -70,29 +69,29 @@ function add_crop(){
         modal: false,
         draggable: true,
         width:200,
-        buttons : {
+        buttons: {
             "Manual" : function(){
-                $('#source-image').imgAreaSelect({enable: false, hide: true});
+                $('#source-image').imgAreaSelect({enable: false, remove: true, hide: true});
                 create_cropper(null);
             },
             "3:2" : function(){
-                $('#source-image').imgAreaSelect({enable: false, hide: true});
+                $('#source-image').imgAreaSelect({enable: false, remove: true, hide: true});
                 create_cropper("3:2");
             },
             "4:3" : function(){
-                $('#source-image').imgAreaSelect({enable: false, hide: true});
+                $('#source-image').imgAreaSelect({enable: false, remove: true, hide: true});
                 create_cropper("4:3");
             },
             "16:9" : function(){
-                $('#source-image').imgAreaSelect({enable: false, hide: true});
+                $('#source-image').imgAreaSelect({enable: false, remove: true, hide: true});
                 create_cropper("16:9");
             },
             "5:4" : function(){
-                $('#source-image').imgAreaSelect({enable: false, hide: true});
+                $('#source-image').imgAreaSelect({enable: false, remove: true, hide: true});
                 create_cropper("5:4");
             },
             "1:1" : function(){
-                $('#source-image').imgAreaSelect({enable: false, hide: true});
+                $('#source-image').imgAreaSelect({enable: false, remove: true, hide: true});
                 create_cropper("1:1");
             }
         }
@@ -101,7 +100,11 @@ function add_crop(){
 
 function remove_crop(){
     $('#source-image').imgAreaSelect({ enable: false, hide: true });
-    $("#aspect-ratio-selector").dialog('destroy');
+    try{
+        $("#aspect-ratio-selector").dialog('destroy');
+    }catch(e){
+        //nothing
+    }
 }
 
 on('action_button_clicked').accomplish(function(btn){
@@ -553,8 +556,16 @@ function add_resize(){
     });
 }
 function remove_resize(){
-    $('#source-image').resizable('destroy');
-    $('#resize-to-fields').dialog('destroy');
+    try{
+        $('#source-image').resizable('destroy');
+    }catch(e){
+        //nothing
+    }
+    try{
+        $('#resize-to-fields').dialog('destroy');
+    }catch(e){
+        //nothing
+    }
 }
 on('action_button_clicked').accomplish(function(btn){
 

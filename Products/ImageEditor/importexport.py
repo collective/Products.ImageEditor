@@ -1,13 +1,12 @@
 from Products.CMFCore.utils import getToolByName
-from Products.ImageEditor.upgrades import set_unintrusive_jqueryui_properties
+from Products.ImageEditor.upgrades import activate_jqui_plugins
 
-def install(context):
-    
+
+def install(context):    
     if context.readDataFile('Products.ImageEditor.install.txt') is None:
         return
-        
-    portal = context.getSite()
-    set_unintrusive_jqueryui_properties(portal)
+    activate_jqui_plugins()
+
 
 def uninstall_import(context):
     

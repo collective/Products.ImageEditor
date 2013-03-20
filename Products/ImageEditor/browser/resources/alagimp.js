@@ -165,6 +165,7 @@ $(document).ready(function(){
 
             function show_options(){
                 new_options.show();
+                new_options.dialog({});
                 new_options.dialog('open');
                 new_options.addClass('active');
                 new_button.addClass('active');
@@ -268,7 +269,11 @@ $(document).ready(function(){
 
     function remove_grabber(){
         $('#source-image').css('cursor', 'default');
-        $('#source-image').draggable('destroy');
+        try{
+            $('#source-image').draggable('destroy');
+        }catch(e){
+            // nothing
+        }
     }
 
     on(['editor_loaded', 'after_image_reload']).accomplish(function(data){
