@@ -7,7 +7,7 @@
 			i18n:domain="Products.ImageEditor">
 			<property name="title" i18n:translate="">Image Editor</property>
 			<property name="description" i18n:translate=""></property>
-			<property name="url_expr">string:${object_url}/@@imageeditor</property>
+			<property name="url_expr">string:${object_url}/@@imageeditor.alagimp</property>
 			<property name="icon_expr"></property>
 			<property name="available_expr">python:object.restrictedTraverse('@@image-editor-utility').editable()</property>
 			<property name="permissions">

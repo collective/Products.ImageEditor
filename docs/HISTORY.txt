@@ -1,11 +1,18 @@
 Changelog
 =========
 
-2.2.0 (unreleased)
+3.0.0 (unreleased)
 ------------------
+
+- update to work with latest jQuery UI
+  [vangheem]
+
+- remove use of slider image editor variant
+  [vangheem]
 
 - fix to work with latest collective.js.jqueryui
   [vangheem]
+
 
 2.1.3 (2012-10-02)
 ------------------

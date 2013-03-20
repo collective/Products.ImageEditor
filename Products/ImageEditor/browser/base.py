@@ -14,11 +14,9 @@ from Products.ImageEditor import translationstrings as ts
 class ImageEditor(BrowserView):
     """Redirect based on the user preferences"""
     def __call__(self, *args, **kwargs):
-        pm = getToolByName(self.context, 'portal_membership')
-        member = pm.getAuthenticatedMember()
         pref = 'alagimp'
-        if member is not None:
-            pref = member.getProperty('image_editor', 'alagimp')
+        # XXX this is historical...
+        # always redirect to alagimp
         self.request.response.redirect('@@imageeditor.%s' % pref)
         return ''
 
