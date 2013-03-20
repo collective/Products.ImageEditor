@@ -75,7 +75,7 @@ $(document).ready(function(){
         var image_container = $("#image-container");
 
         //remove old, add new image
-        image_container.html('<img id="source-image" style="display:none" src="' + data.url + '" />');
+        image.replaceWith($('<img id="source-image" style="display:none" src="' + data.url + '" />'));
         image_container.children().show()
 
         fire('after_image_reload', data);
@@ -197,21 +197,6 @@ $(document).ready(function(){
         window_height = document.documentElement.clientHeight;
     }
 
-    $("#image-container").dialog({
-        autoOpen:true,
-        resizable:true,
-        modal: false,
-        draggable: true,
-        title: $('#trans_image').val(),
-        width:window_width - 250,
-        height:window_height - 40,
-        position:[225, 10],
-        close: function(event, ui){
-            window.location.href = $('base').attr('href') + '/view';
-        },
-        closeOnEscape: false,
-    });
-
     $("#image-editor-controls").dialog({
         autoOpen:true,
         resizable:false,
@@ -305,8 +290,12 @@ $(document).ready(function(){
     on(['editor_loaded', 'after_image_zoom_change']).accomplish(set_image_zoom_labels);
     on(['after_action_execute']).accomplish(function(name){
         var obj = $("#" + name + "-options");
-        if(obj.children().size() > 1){
-            obj.dialog('close');
+        try{
+            if(obj.dialog('isOpen')){
+                obj.dialog('close');
+            }
+        }catch(e){
+            // pass, will error if not setup yet.
         }
     });
     on(['before_action_execute']).accomplish(function(name){

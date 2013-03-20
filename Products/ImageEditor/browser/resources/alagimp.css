@@ -122,6 +122,14 @@ div#buttons input.disabled{
     max-height:inherit;
     position:relative;
     overflow:scroll;
+    top: 0;
+    left: 230px;
+    height: 99%;
+    width: 75%;
+    position: fixed;
+    z-index:999;
+    background-color: white;
+    border: 3px solid #ddd;
 }
 img#source-image{
     margin:3px;
@@ -188,4 +196,13 @@ div#menuHandle{
 div#buttons input.active{
     border: 2px solid green;
     
+}
+
+#close-editor{
+    float: right;
+    display: block;
+    background-color: #f1f1f1;
+    padding: 5px;
+    border-left: 2px solid #ddd;
+    border-bottom: 2px solid #ddd;
 }

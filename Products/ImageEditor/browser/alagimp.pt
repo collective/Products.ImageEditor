@@ -47,6 +47,8 @@
       </div>
     </div>
     <div id="image-container">
+      <a id="close-editor"
+        tal:attributes="href string:${context/absolute_url}/view">Close Editor</a>
       <img id="source-image" tal:attributes="src view/image_url" />
     </div>
     
