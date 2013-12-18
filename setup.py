@@ -55,8 +55,13 @@ setup(name='Products.ImageEditor',
       ],
       extras_require={'test': [
           'collective.testcaselayer',
+          'plone.api',
+          'plone.app.testing',
+          'plone.browserlayer',
+          'plone.testing',
           'Products.PloneTestCase',
-          'Products.PloneTestCase',
+          'Testing.ZopeTestCase',
+          'unittest2',
       ]},
       entry_points='''
         [z3c.autoinclude.plugin]
