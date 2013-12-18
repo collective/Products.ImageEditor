@@ -60,7 +60,6 @@ setup(name='Products.ImageEditor',
           'plone.browserlayer',
           'plone.testing',
           'Products.PloneTestCase',
-          'Testing.ZopeTestCase',
           'unittest2',
       ]},
       entry_points='''
