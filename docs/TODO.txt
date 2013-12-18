@@ -4,3 +4,5 @@
 ** size
 ** texture
 ** etc
+
+* review @espenmn http://pastebin.com/x1Neq2TY

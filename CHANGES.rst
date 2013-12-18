@@ -4,6 +4,9 @@ Changelog
 3.1.0 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
+- Changed z-index of "image-container". It was blocking the "apply button".
+  [espenmn]
+
 - Fix package distribution by adding dependencies and MANIFEST.in.
   [hvelarde]
 
