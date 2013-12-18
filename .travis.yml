@@ -20,7 +20,9 @@ install:
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-script: bin/test
+script: bin/code-analisys && bin/test
+after_success:
+  - test -v QA && bin/coverage.sh && pip install -q coveralls && coveralls || true
 after_failure:
   - bin/buildout annotate -c travis.cfg
   - firefox -v
