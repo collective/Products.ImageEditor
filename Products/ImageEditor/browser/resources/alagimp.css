@@ -1,4 +1,3 @@
-
 .ui-slider {
     background-color: #E1D9F5;
     margin-top:6px;
@@ -127,7 +126,7 @@ div#buttons input.disabled{
     height: 99%;
     width: 75%;
     position: fixed;
-    z-index:999;
+    z-index:99;
     background-color: white;
     border: 3px solid #ddd;
 }
