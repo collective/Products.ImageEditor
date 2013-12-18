@@ -1,5 +1,14 @@
 Introduction
 ============
+
+.. image:: https://secure.travis-ci.org/collective/Products.ImageEditor.png?branch=master
+    :alt: Travis CI badge
+    :target: http://travis-ci.org/collective/Products.ImageEditor
+
+.. image:: https://coveralls.io/repos/collective/Products.ImageEditor/badge.png?branch=master
+    :alt: Coveralls badge
+    :target: https://coveralls.io/r/collective/Products.ImageEditor
+
 Once installed this product adds a "Image Editor" link near the image widget. 
 It also provides an Image Editor Button.
 
