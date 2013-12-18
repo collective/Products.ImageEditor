@@ -1,6 +1,13 @@
 Changelog
 =========
 
+3.1.0 (unreleased)
+^^^^^^^^^^^^^^^^^^^
+
+- Fix package distribution by adding dependencies and MANIFEST.in.
+  [hvelarde]
+
+
 3.0.0 (2013-03-20)
 ------------------
 

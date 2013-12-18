@@ -1,16 +1,21 @@
-from setuptools import setup, find_packages
-from os.path import join
+# -*- coding:utf-8 -*-
 
-readme = open("README.rst").read()
-history = open(join('docs', 'HISTORY.txt')).read()
+from setuptools import find_packages
+from setuptools import setup
+
+version = '3.1.0.dev0'
+long_description = (
+    open('README.rst').read() + '\n' +
+    open('CHANGES.rst').read()
+)
 
 setup(name='Products.ImageEditor',
-      version='3.0.0',
+      version=version,
       description='adds a "Image Editor" link near the image widget '
         ' allowing the user to rotate, flip, '
         'blur, compress, change contrast & brightness, sharpen, add drop '
         'shadows, crop, resize an image, save as, and apply sepia.',
-      long_description=readme + '\n' + history,
+      long_description=long_description,
       classifiers=[
         "Development Status :: 4 - Beta",
         "Framework :: Plone :: 4.0",
