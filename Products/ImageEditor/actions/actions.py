@@ -418,7 +418,7 @@ class CompressAction(BaseImageEditorAction):
         image = self.editor.get_current_image().convert('RGB')
         try:
             self.editor.set_image(image, quality=float(amount))
-        except TypeError:
+        except TypeError:  # Pillow 2.2 will raise ValueError instead
             self.editor.set_image(image, quality=int(amount))
 
 
